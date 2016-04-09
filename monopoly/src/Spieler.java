@@ -17,6 +17,9 @@ public class Spieler {
 	public int getSpielerNummer(){
 		return spielerNummer;
 	}
+	public void setSpielerNummer(int spielerNummer){
+		this.spielerNummer = spielerNummer;
+	}
 	
 	public int getSpielerPosition(){
 		return spielerPosition;
