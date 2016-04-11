@@ -35,7 +35,7 @@ public class Spielerverwaltung {
 			}
 		}
 	}
-<<<<<<< HEAD
+
 	public Spieler reihenfolge(){
 		if(reihenfolge < spielerListe.size()-1){
 			reihenfolge++;
@@ -45,7 +45,8 @@ public class Spielerverwaltung {
 			reihenfolge++;
 		}
 		return spielerListe.get(reihenfolge);
-=======
+	}
+
 	
 	public int wuerfeln(){
 		int zahl;
@@ -100,6 +101,5 @@ public class Spielerverwaltung {
 			break;
 		}
 		return zahl;
->>>>>>> origin/master
 	}
 }
