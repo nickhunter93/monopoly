@@ -2,7 +2,7 @@
 public class Strasse extends FeldValue {
 	
 	private int kaufpreis, mietpreis, haeuseranzahl;
-	boolean hypotheek;
+	boolean hypotheek, platzFrei;
 	
 	public Strasse(String name, int wert, boolean status, int kaufpreis, int mietpreis, int haeuseranzahl, boolean hypotheek){
 		super(name, wert, status);
@@ -16,8 +16,13 @@ public class Strasse extends FeldValue {
 		this.hypotheek = hypotheek;
 	}
 
-	public void bauHaus(){
-		haeuseranzahl = haeuseranzahl + 1;
+	public boolean bauHaus(){
+		if(haeuseranzahl <= 4){
+			haeuseranzahl = haeuseranzahl + 1;
+			return platzFrei = true;
+		} else{
+			return platzFrei = false;
+		}
 	}
 	
 	public int getKaufpreis(){
