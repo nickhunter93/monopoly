@@ -6,6 +6,8 @@ import java.util.Vector;
 public class Main {
 	public static void main(String[] args) {
 		boolean schleife = true;
+		boolean roundLoop = true;
+		Spieler spieler;
 		Spielverwaltung feldverwaltung = new Spielverwaltung();
 		Spielerverwaltung verwaltung = new Spielerverwaltung();
 		while(schleife){
@@ -60,20 +62,48 @@ public class Main {
 								}
 								str = eingabe.readLine();
 								spielernummer = Integer.parseInt(str);
-								verwaltung.entfernen(spielernummer);
+								str = verwaltung.getSpieler().elementAt(spielernummer-1).getSpielerName();
+								if(verwaltung.entfernen(spielernummer)){
+									System.out.println("Spieler erfolgreich entfernt.");
+									System.out.println("Spieler "+str+" wurde entfernt.");
+								}else{
+									System.out.println("Maximale Spieleranzahl erreicht.");
+								}
 							} catch (IOException e) {
 								e.printStackTrace();
 								System.err.println("Fehler beim entfernen eines Spielers.");
 							}
 						}
 			break;
-			case 3 :	schleife = false;
-						showFeld(feldverwaltung.getFeld().getFeld(),verwaltung.getSpieler());
-						feldverwaltung.move(verwaltung.reihenfolge(), 20);
-						showFeld(feldverwaltung.getFeld().getFeld(),verwaltung.getSpieler());
-						feldverwaltung.move(verwaltung.reihenfolge(), 20);
-						showFeld(feldverwaltung.getFeld().getFeld(),verwaltung.getSpieler());
-						feldverwaltung.move(verwaltung.reihenfolge(), 21);
+			case 3 :	while(schleife){
+							spieler = verwaltung.reihenfolge();
+							while(roundLoop){
+								try {
+									System.out.println("Spieler "+spieler.getSpielerNummer()+" "+spieler.getSpielerName()+" ist dran.");
+									System.out.println("Was wollen Sie tun?");
+									System.out.println("1:Würfeln.");
+									System.out.println("2:Haus bauen.");
+									buffer = eingabe.readLine();
+									auswahl = Integer.parseInt(buffer);
+								} catch (IOException e) {
+									e.printStackTrace();
+									System.out.println("Auswahl fehlerhaft.");
+								} catch (NumberFormatException e){
+									e.printStackTrace();
+									System.out.println("Auswahl fehlerhaft.");
+								}
+								switch(auswahl){
+								case 1:		feldverwaltung.move(spieler, wuerfeln(verwaltung.wuerfeln()));
+											showFeld(feldverwaltung.getFeld().getFeld(),verwaltung.getSpieler());
+											//Straße kaufen / miete zahlen hier einfügen.
+								break;
+								case 2:		//Haus bauen hier einfügen.
+								break;
+								default: 	System.out.println("Keine Gültige Auswahl.");
+											roundLoop = true;
+								}
+							}
+						}
 			break;
 			default:	System.out.println("Keine Gültige Auswahl.");
 			}
@@ -123,5 +153,57 @@ public class Main {
 		System.out.println();
 		System.out.println("|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|");
 	}
+	public static int wuerfeln(int zahl){
+		switch(zahl){
+		case 1: 
+			System.out.println("-------");
+			System.out.println("|     |");
+			System.out.println("|  o  |");
+			System.out.println("|     |");
+			System.out.println("-------");
+		break;
 
+		case 2: 
+			System.out.println("-------");
+			System.out.println("|o    |");
+			System.out.println("|     |");
+			System.out.println("|    o|");
+			System.out.println("-------");
+		break;
+
+		case 3: 
+			System.out.println("-------");
+			System.out.println("| o o |");
+			System.out.println("|     |");
+			System.out.println("|  o  |");
+			System.out.println("-------");
+		break;
+
+		case 4:
+			System.out.println("-------");
+			System.out.println("| o o |");
+			System.out.println("|     |");
+			System.out.println("| o o |");
+			System.out.println("-------");
+		break;
+
+		case 5: 
+			System.out.println("-------");
+			System.out.println("| o o |");
+			System.out.println("|  o  |");
+			System.out.println("| o o |");
+			System.out.println("-------");
+		break;
+
+		case 6: 
+			System.out.println("-------");
+			System.out.println("| o o |");
+			System.out.println("| o o |");
+			System.out.println("| o o |");
+			System.out.println("-------");
+		break;
+	}
+		return zahl;
+	}
 }
+
