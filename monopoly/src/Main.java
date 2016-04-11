@@ -37,7 +37,7 @@ public class Main {
 							try {
 								System.out.println("Geben Sie den Namen an.");
 								name = eingabe.readLine();
-								spielernummer = verwaltung.getSpieler().size();
+								spielernummer = verwaltung.getAllSpieler().size();
 								Spieler player = new Spieler(name,spielernummer+1,0);
 								if(verwaltung.beitreten(player)){
 									System.out.println("Spieler erfolgreich hinzugefügt.");
@@ -57,12 +57,12 @@ public class Main {
 		
 							try {
 								System.out.println("Geben Sie die Spieler Nummer an.");
-								for(int i=0;i<verwaltung.getSpieler().size();i++){
-									System.out.println(verwaltung.getSpieler().get(i).getSpielerNummer()+" :"+verwaltung.getSpieler().get(i).getSpielerName()+".");
+								for(int i=0;i<verwaltung.getAllSpieler().size();i++){
+									System.out.println(verwaltung.getSpieler(i).getSpielerNummer()+" :"+verwaltung.getSpieler(i).getSpielerName()+".");
 								}
 								str = eingabe.readLine();
 								spielernummer = Integer.parseInt(str);
-								str = verwaltung.getSpieler().elementAt(spielernummer-1).getSpielerName();
+								str = verwaltung.getSpieler(spielernummer-1).getSpielerName();
 								if(verwaltung.entfernen(spielernummer)){
 									System.out.println("Spieler erfolgreich entfernt.");
 									System.out.println("Spieler "+str+" wurde entfernt.");
@@ -94,7 +94,7 @@ public class Main {
 								}
 								switch(auswahl){
 								case 1:		feldverwaltung.move(spieler, wuerfeln(verwaltung.wuerfeln()));
-											showFeld(feldverwaltung.getFeld().getFeld(),verwaltung.getSpieler());
+											showFeld(feldverwaltung.getFeld(),verwaltung.getAllSpieler());
 											//Straße kaufen / miete zahlen hier einfügen.
 								break;
 								case 2:		//Haus bauen hier einfügen.
@@ -108,7 +108,7 @@ public class Main {
 			default:	System.out.println("Keine Gültige Auswahl.");
 			}
 		}
-		showFeld(feldverwaltung.getFeld().getFeld(),verwaltung.getSpieler());
+		showFeld(feldverwaltung.getFeld(),verwaltung.getAllSpieler());
 	}
 	public static void showFeld(FeldValue[] feld,Vector<Spieler> spieler){
 		int[] arrayLinks =  {35,34,33,32,31,30,29,28};

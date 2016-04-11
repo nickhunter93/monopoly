@@ -19,7 +19,13 @@ public class Spielverwaltung {
 			spieler.setSpielerPosition(position);
 		}
 	}
-	public Spielfeld getFeld(){
-		return feld;
+	public FeldValue[] getFeld(){
+		return feld.getFeld();
+	}
+	public boolean bauHaus(int position){
+		return feld.bauHaus(position);	
+	}
+	public int getHaeuseranzahl(int position){
+		return feld.getHaeuseranzahl(position);
 	}
 }

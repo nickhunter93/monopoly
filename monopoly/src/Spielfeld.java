@@ -1,9 +1,9 @@
 
 public class Spielfeld {
-	private FeldValue[] feld;
+	private Strasse[] feld;
 	private int fieldSize = 36;
 	public Spielfeld(){
-		feld = new FeldValue[fieldSize];
+		feld = new Strasse[fieldSize];
 		for (int i=0;i<fieldSize;i++){
 			feld[i] = new Strasse("test",2000,true,2000,500,0, false);
 		}
@@ -13,5 +13,11 @@ public class Spielfeld {
 	}
 	public FeldValue[] getFeld(){
 		return feld;
+	}
+	public boolean bauHaus(int position){
+		return feld[position].bauHaus();
+	}
+	public int getHaeuseranzahl(int position){
+		return feld[position].getHaeuseranzahl();
 	}
 }

@@ -7,10 +7,12 @@ public class Spielerverwaltung {
 	public Spielerverwaltung(){
 		reihenfolge = -1;
 	}
-	public Vector<Spieler> getSpieler(){
+	public Vector<Spieler> getAllSpieler(){
 		return spielerListe;
 	}
-	
+	public Spieler getSpieler(int i){
+		return spielerListe.get(i);
+	}
 	public boolean beitreten(Spieler spieler){
 		if(!spielerListe.isEmpty()){
 			if(spielerListe.lastElement().getSpielerNummer()<6){
