@@ -28,7 +28,7 @@ public class Strasse extends FeldValue {
 		return(name + "\n" +
 	    "Kaufpreis: " + kaufpreis + " EUR" + "\n" +
 		"Mietpreis: " + mietpreis + " EUR/Monat" + "\n" +
-	    "Häuseranzahl: " + haeuseranzahl + "\n" +
+	    "HÃ¤useranzahl: " + haeuseranzahl + "\n" +
 		"Status: " + feldStatus
 		);
 	}

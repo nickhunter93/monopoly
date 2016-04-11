@@ -6,15 +6,6 @@ import java.util.Vector;
 public class Main {
 	public static void main(String[] args) {
 
-		//Feld[][] spielfeld = new Feld[7][1];
-		//spielfeld[0][0] = new Feld<Spieler>(new Spieler("Fabian", 1, 10));
-		//spielfeld[1][0] = new Feld<Strasse>(new Strasse("Teststrasse", 2, true, 250000, 1300, 0));
-		//spielfeld[2][0] = new Feld<Strasse>(new Strasse("Teststrasse", 3, true, 250000, 1300, 0));
-		//spielfeld[3][0] = new Feld<Strasse>(new Strasse("Teststrasse", 4, true, 250000, 1300, 0));
-		//spielfeld[4][0] = new Feld<Strasse>(new Strasse("Teststrasse", 5, true, 250000, 1300, 0));
-		//spielfeld[5][0] = new Feld<Aktion>(new Aktion("Gefängnis", 6, true, "Gehe ins Gefängnis. Du musst 3 Runden aussetzen."));
-		//spielfeld[6][0] = new Feld<Strasse>(new Strasse("Teststrasse", 7, true, 250000, 1300, 0));
-		
 		//for(int i = 0; i < spielfeld.length; i++){
 			//for(int j = 0; j < spielfeld[i].length; j++){
 				//System.out.println("--------------------------------");
@@ -30,7 +21,7 @@ public class Main {
 			int auswahl = 0;
 			BufferedReader eingabe = new BufferedReader(new InputStreamReader(System.in));
 			try{
-			System.out.println("Menü:");
+			System.out.println("MenÃ¼:");
 			System.out.println("1:Beitreten.");
 			System.out.println("2:Entfernen.");
 			System.out.println("3:Spiel starten.");
@@ -38,10 +29,10 @@ public class Main {
 			auswahl = Integer.parseInt(buffer);
 			}catch(IOException e ){
 				e.printStackTrace();
-				System.err.println("Menü Auswahl fehlerhaft.");
+				System.err.println("MenÃ¼ Auswahl fehlerhaft.");
 				auswahl = 0;
 			}catch(NumberFormatException e){
-					System.err.println("Menü Auswahl fehlerhaft.");
+					System.err.println("MenÃ¼ Auswahl fehlerhaft.");
 					auswahl = 0;
 			}
 			switch(auswahl){
@@ -55,13 +46,13 @@ public class Main {
 								spielernummer = verwaltung.getSpieler().size();
 								Spieler player = new Spieler(name,spielernummer+1,0);
 								if(verwaltung.beitreten(player)){
-									System.out.println("Spieler erfolgreich hinzugefügt.");
+									System.out.println("Spieler " + (spielernummer+1) + " von 6 erfolgreich hinzugefÃ¼gt.");
 								}else{
 									System.out.println("Maximale Spieleranzahl erreicht.");
 								}
 							} catch (IOException e) {
 								e.printStackTrace();
-								System.err.println("Fehler beim Hinzufügen eines neuen Spielers.");
+								System.err.println("Fehler beim HinzufÃ¼gen eines neuen Spielers.");
 							}
 						}
 			break;			
@@ -77,6 +68,8 @@ public class Main {
 								str = eingabe.readLine();
 								spielernummer = Integer.parseInt(str);
 								verwaltung.entfernen(spielernummer);
+								System.out.println("Spieler " + spielernummer + " wurde erfolgreich entfernt.");
+								
 							} catch (IOException e) {
 								e.printStackTrace();
 								System.err.println("Fehler beim entfernen eines Spielers.");
@@ -91,7 +84,7 @@ public class Main {
 						showFeld(feldverwaltung.getFeld().getFeld(),verwaltung.getSpieler());
 						feldverwaltung.move(verwaltung.reihenfolge(), 21);
 			break;
-			default:	System.out.println("Keine Gültige Auswahl.");
+			default:	System.out.println("Keine GÃ¼ltige Auswahl.");
 			}
 		}
 		showFeld(feldverwaltung.getFeld().getFeld(),verwaltung.getSpieler());
@@ -138,6 +131,7 @@ public class Main {
 		}
 		System.out.println();
 		System.out.println("|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|");
+
 	}
 
 }
