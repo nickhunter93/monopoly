@@ -16,8 +16,8 @@ public class Strasse extends FeldValue {
 		this.hypotheek = hypotheek;
 	}
 
-	public int bauHaus(){
-		return (haeuseranzahl + 1);
+	public void bauHaus(){
+		haeuseranzahl = haeuseranzahl + 1;
 	}
 	
 	public int getKaufpreis(){
