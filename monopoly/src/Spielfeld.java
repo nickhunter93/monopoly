@@ -8,6 +8,9 @@ public class Spielfeld {
 			feld[i] = new Strasse("test",2000,true,2000,500,0);
 		}
 	}
+	public int getFieldSize(){
+		return fieldSize;
+	}
 	public FeldValue[] getFeld(){
 		return feld;
 	}

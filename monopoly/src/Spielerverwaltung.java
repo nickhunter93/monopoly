@@ -1,9 +1,11 @@
 import java.util.Vector;
 
 public class Spielerverwaltung {
+	private int reihenfolge;
+	
 	private Vector<Spieler> spielerListe = new Vector<Spieler>();
 	public Spielerverwaltung(){
-		
+		reihenfolge = -1;
 	}
 	public Vector<Spieler> getSpieler(){
 		return spielerListe;
@@ -30,5 +32,12 @@ public class Spielerverwaltung {
 				}
 			}
 		}
+	}
+	public Spieler reihenfolge(){
+		if(reihenfolge < spielerListe.size()){
+			reihenfolge++;
+		}
+		else reihenfolge = -1;
+		return spielerListe.get(reihenfolge);
 	}
 }

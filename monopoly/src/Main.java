@@ -23,7 +23,7 @@ public class Main {
 			//}
 		//}
 		boolean schleife = true;
-		Spielfeld feld = new Spielfeld();
+		Spielverwaltung feldverwaltung = new Spielverwaltung();
 		Spielerverwaltung verwaltung = new Spielerverwaltung();
 		while(schleife){
 			String buffer;
@@ -88,7 +88,7 @@ public class Main {
 			default:	System.out.println("Keine Gültige Auswahl.");
 			}
 		}
-		showFeld(feld.getFeld(),verwaltung.getSpieler());
+		showFeld(feldverwaltung.getFeld().getFeld(),verwaltung.getSpieler());
 	}
 	public static void showFeld(FeldValue[] feld,Vector<Spieler> spieler){
 		System.out.println("|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|");

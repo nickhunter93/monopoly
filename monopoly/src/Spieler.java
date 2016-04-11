@@ -24,6 +24,9 @@ public class Spieler {
 	public int getSpielerPosition(){
 		return spielerPosition;
 	}
+	public void setSpielerPosition(int spielerPosition){
+		this.spielerPosition = spielerPosition;
+	}
 	
 	public String toString(){
 		return("Spieler " + spielerNummer + "\n" + spielerName + " befindet sich auf Feld " + spielerPosition);
