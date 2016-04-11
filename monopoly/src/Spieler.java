@@ -28,12 +28,4 @@ public class Spieler {
 	public String toString(){
 		return("Spieler " + spielerNummer + "\n" + spielerName + " befindet sich auf Feld " + spielerPosition);
 	}
-	
-	public void beitreten(){
-		
-	}
-	
-	public void austreten(){
-		
-	}
 }

@@ -8,6 +8,7 @@ public class Spielerverwaltung {
 	public Vector<Spieler> getSpieler(){
 		return spielerListe;
 	}
+	
 	public boolean beitreten(Spieler spieler){
 		if(!spielerListe.isEmpty()){
 			if(spielerListe.lastElement().getSpielerNummer()<6){
@@ -21,6 +22,7 @@ public class Spielerverwaltung {
 			return true;
 		}
 	}
+	
 	public void entfernen(int spielerNummer){
 		for(int i = 0;i < spielerListe.size();i++){
 			if(spielerListe.get(i).getSpielerNummer() == spielerNummer){
@@ -30,5 +32,60 @@ public class Spielerverwaltung {
 				}
 			}
 		}
+	}
+	
+	public int wuerfeln(){
+		int zahl;
+		zahl = (int)(Math.random() * 6) + 1;
+		switch(zahl){
+			case 1: 
+				System.out.println("-------");
+				System.out.println("|     |");
+				System.out.println("|  o  |");
+				System.out.println("|     |");
+				System.out.println("-------");
+			break;
+
+			case 2: 
+				System.out.println("-------");
+				System.out.println("|o    |");
+				System.out.println("|     |");
+				System.out.println("|    o|");
+				System.out.println("-------");
+			break;
+
+			case 3: 
+				System.out.println("-------");
+				System.out.println("| o o |");
+				System.out.println("|     |");
+				System.out.println("|  o  |");
+				System.out.println("-------");
+			break;
+
+			case 4:
+				System.out.println("-------");
+				System.out.println("| o o |");
+				System.out.println("|     |");
+				System.out.println("| o o |");
+				System.out.println("-------");
+			break;
+
+			case 5: 
+				System.out.println("-------");
+				System.out.println("| o o |");
+				System.out.println("|  o  |");
+				System.out.println("| o o |");
+				System.out.println("-------");
+			break;
+
+			case 6: 
+				System.out.println("-------");
+				System.out.println("| o o |");
+				System.out.println("| o o |");
+				System.out.println("| o o |");
+				System.out.println("-------");
+			break;
+		}
+		return zahl;
 	}
 }
