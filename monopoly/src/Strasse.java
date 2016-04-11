@@ -2,14 +2,23 @@
 public class Strasse extends FeldValue {
 	
 	private int kaufpreis, mietpreis, haeuseranzahl;
+	boolean hypotheek;
 	
-	public Strasse(String name, int wert, boolean status, int kaufpreis, int mietpreis, int haeuseranzahl){
+	public Strasse(String name, int wert, boolean status, int kaufpreis, int mietpreis, int haeuseranzahl, boolean hypotheek){
 		super(name, wert, status);
 		this.kaufpreis = kaufpreis;
 		this.mietpreis = mietpreis;
 		this.haeuseranzahl = haeuseranzahl;
+		this.hypotheek = hypotheek;
 	}
 	
+	public void setHypotheek(boolean hypotheek){
+		this.hypotheek = hypotheek;
+	}
+
+	public int bauHaus(){
+		return (haeuseranzahl + 1);
+	}
 	
 	public int getKaufpreis(){
 		return kaufpreis;
