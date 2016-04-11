@@ -83,7 +83,13 @@ public class Main {
 							}
 						}
 			break;
-			case 3 :
+			case 3 :	schleife = false;
+						showFeld(feldverwaltung.getFeld().getFeld(),verwaltung.getSpieler());
+						feldverwaltung.move(verwaltung.reihenfolge(), 20);
+						showFeld(feldverwaltung.getFeld().getFeld(),verwaltung.getSpieler());
+						feldverwaltung.move(verwaltung.reihenfolge(), 20);
+						showFeld(feldverwaltung.getFeld().getFeld(),verwaltung.getSpieler());
+						feldverwaltung.move(verwaltung.reihenfolge(), 21);
 			break;
 			default:	System.out.println("Keine Gültige Auswahl.");
 			}
@@ -91,6 +97,8 @@ public class Main {
 		showFeld(feldverwaltung.getFeld().getFeld(),verwaltung.getSpieler());
 	}
 	public static void showFeld(FeldValue[] feld,Vector<Spieler> spieler){
+		int[] arrayLinks =  {35,34,33,32,31,30,29,28};
+		int[] arrayRechts = {10,11,12,13,14,15,16,17};
 		System.out.println("|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|");
 		System.out.print("|");
 		for(int i = 0;i<10;i++){
@@ -103,23 +111,24 @@ public class Main {
 		}
 		System.out.println();
 		System.out.println("|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|");
-		for(int i=10;i<26;i= i + 2){
+		for(int i=0;i<arrayLinks.length;i++){
 			int anzahl=0;
-			for(Spieler k:spieler)
-				if (k.getSpielerPosition() == i) {
+			for(Spieler k:spieler){
+				if (k.getSpielerPosition() == arrayLinks[i]) {
 					anzahl = anzahl+1;
 				}
+			}
 			int anzahl2=0;
 			for(Spieler k:spieler)
-				if (k.getSpielerPosition() == i+1) {
+				if (k.getSpielerPosition() == arrayRechts[i]) {
 					anzahl2 = anzahl2+1;
 				}
 			System.out.println("|  "+anzahl+"  |                                               |  "+anzahl2+"  |");
-			if(i!=24)System.out.println("|-----|                                               |-----|");
+			if(i!=arrayLinks.length-1)System.out.println("|-----|                                               |-----|");
 		}
 		System.out.println("|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|");
 		System.out.print("|");
-		for(int i = 26;i<36;i++){
+		for(int i = 27;i>17;i--){
 			int anzahl=0;
 			for(Spieler k:spieler)
 			if (k.getSpielerPosition() == i) {

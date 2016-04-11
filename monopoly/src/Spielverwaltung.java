@@ -10,7 +10,7 @@ public class Spielverwaltung {
 		}else{
 			int position = spieler.getSpielerPosition();
 			for(int i = 0;i<zugweite;i++){
-				if(position<feld.getFieldSize()){
+				if(position<feld.getFieldSize()-1){
 					position++;
 				}else{
 					position = 0;

@@ -34,10 +34,13 @@ public class Spielerverwaltung {
 		}
 	}
 	public Spieler reihenfolge(){
-		if(reihenfolge < spielerListe.size()){
+		if(reihenfolge < spielerListe.size()-1){
 			reihenfolge++;
 		}
-		else reihenfolge = -1;
+		else {
+			reihenfolge = -1;
+			reihenfolge++;
+		}
 		return spielerListe.get(reihenfolge);
 	}
 }
