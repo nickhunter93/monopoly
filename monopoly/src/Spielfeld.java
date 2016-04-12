@@ -5,13 +5,13 @@ public class Spielfeld {
 	public Spielfeld(){
 		feld = new Strasse[fieldSize];
 		for (int i=0;i<fieldSize;i++){
-			feld[i] = new Strasse("test",2000,true,2000,500,0, false);
+			feld[i] = new Strasse("test",2000,500,false);
 		}
 	}
 	public int getFieldSize(){
 		return fieldSize;
 	}
-	public FeldValue[] getFeld(){
+	public Strasse[] getFeld(){
 		return feld;
 	}
 	public boolean bauHaus(int position){

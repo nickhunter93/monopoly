@@ -38,7 +38,7 @@ public class Main {
 								System.out.println("Geben Sie den Namen an.");
 								name = eingabe.readLine();
 								spielernummer = verwaltung.getAllSpieler().size();
-								Spieler player = new Spieler(name,spielernummer+1,0);
+								Spieler player = new Spieler(name,spielernummer+1,0,2000);
 								if(verwaltung.beitreten(player)){
 									System.out.println("Spieler erfolgreich hinzugefügt.");
 									System.out.println("Spieler " + (spielernummer+1) + " von 6 erfolgreich hinzugefügt.");
@@ -77,6 +77,7 @@ public class Main {
 			break;
 			case 3 :	while(schleife){
 							spieler = verwaltung.reihenfolge();
+							roundLoop = true;
 							while(roundLoop){
 								try {
 									System.out.println("Spieler "+spieler.getSpielerNummer()+" "+spieler.getSpielerName()+" ist dran.");
@@ -87,15 +88,26 @@ public class Main {
 									auswahl = Integer.parseInt(buffer);
 								} catch (IOException e) {
 									e.printStackTrace();
+									auswahl = 0;
 									System.out.println("Auswahl fehlerhaft.");
 								} catch (NumberFormatException e){
 									e.printStackTrace();
+									auswahl = 0;
 									System.out.println("Auswahl fehlerhaft.");
 								}
 								switch(auswahl){
 								case 1:		feldverwaltung.move(spieler, wuerfeln(verwaltung.wuerfeln()));
 											showFeld(feldverwaltung.getFeld(),verwaltung.getAllSpieler());
 											//Straße kaufen / miete zahlen hier einfügen.
+											if(feldverwaltung.getBesitzer(spieler.getSpielerPosition()) != -1){
+												System.out.println("Wollen Sie die Strasse kaufen?");
+												buffer = eingabe.readLine();
+												auswahl = Integer.parseInt(buffer) ;
+												if()
+												System.out.println(feldverwaltung.kaufStrasse(spieler) ? "Kauf erfolgrein" : "Kauf fehlgeschlagen");
+											}else{
+												spieler.setSpielerBudget(spieler.getSpielerBudget() - feldverwaltung.miete(spieler.getSpielerPosition()));
+											}
 								break;
 								case 2:		//Haus bauen hier einfügen.
 								break;

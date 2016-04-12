@@ -1,17 +1,18 @@
 
 public class Strasse extends FeldValue {
 	
-	private int kaufpreis, mietpreis, haeuseranzahl;
+	private int kaufpreis, mietpreis, haeuseranzahl,besitzer;
 	boolean hypotheek;
 	
-	public Strasse(String name, int wert, boolean status, int kaufpreis, int mietpreis, int haeuseranzahl, boolean hypotheek){
-		super(name, wert, status);
+	public Strasse(String name, int kaufpreis, int mietpreis, boolean hypotheek){
+		super(name);
 		this.kaufpreis = kaufpreis;
 		this.mietpreis = mietpreis;
-		this.haeuseranzahl = haeuseranzahl;
+		this.haeuseranzahl = 0;
 		this.hypotheek = hypotheek;
+		this.besitzer = -1;
 	}
-	
+
 	public void setHypotheek(boolean hypotheek){
 		this.hypotheek = hypotheek;
 	}
@@ -23,6 +24,14 @@ public class Strasse extends FeldValue {
 		} else{
 			return false;
 		}
+	}
+	
+	public int getBesitzer(){
+		return besitzer;
+	}
+	
+	public void setBesitzer(int besitzer){
+		this.besitzer = besitzer;
 	}
 	
 	public int getKaufpreis(){
@@ -38,12 +47,11 @@ public class Strasse extends FeldValue {
 	}
 	
 	public String toString(){
-		String feldStatus = status ? "Spieler auf dem Feld" : "Feld ist frei";
 		return(name + "\n" +
 	    "Kaufpreis: " + kaufpreis + " EUR" + "\n" +
 		"Mietpreis: " + mietpreis + " EUR/Monat" + "\n" +
 	    "Häuseranzahl: " + haeuseranzahl + "\n" +
-		"Status: " + feldStatus
+		"Status: "
 		);
 	}
 }

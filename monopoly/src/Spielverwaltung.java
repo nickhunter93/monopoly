@@ -19,6 +19,21 @@ public class Spielverwaltung {
 			spieler.setSpielerPosition(position);
 		}
 	}
+	public int getBesitzer(int position){
+		return feld.getFeld()[position].getBesitzer();
+	}
+	public int miete(int position){
+		return feld.getFeld()[position].getMietpreis();
+	}
+	public boolean kaufStrasse(Spieler spieler){
+		if(feld.getFeld()[spieler.getSpielerPosition()].getBesitzer() == -1 && spieler.getSpielerBudget() - feld.getFeld()[spieler.getSpielerPosition()].getKaufpreis() >= 0){
+			feld.getFeld()[spieler.getSpielerPosition()].setBesitzer(spieler.getSpielerNummer());
+			spieler.setSpielerBudget(spieler.getSpielerBudget()-feld.getFeld()[spieler.getSpielerPosition()].getKaufpreis());
+			return true;
+		}
+		
+		return false;
+	}
 	public FeldValue[] getFeld(){
 		return feld.getFeld();
 	}
