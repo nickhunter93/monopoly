@@ -1,4 +1,7 @@
+package monopoly.local.domain;
 import java.util.Vector;
+
+import monopoly.local.valueobjects.Spieler;
 
 public class Spielerverwaltung {
 	private int reihenfolge;
@@ -39,8 +42,9 @@ public class Spielerverwaltung {
 		return true;
 	}
 	
-	public void mieteZahlen(int miete, int spielerNummer){
-		spielerListe.get(spielerNummer).setSpielerBudget(spielerListe.get(spielerNummer).getSpielerBudget()+miete);
+	public void mieteZahlen(int miete, Spieler vermieter, Spieler mieter){
+		if(vermieter.getSpielerNummer() != 99)
+		vermieter.setSpielerBudget(vermieter.getSpielerBudget()+miete);
 	}
 
 	public Spieler reihenfolge(){

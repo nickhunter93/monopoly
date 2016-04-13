@@ -1,10 +1,20 @@
+package monopoly.local.ui.cui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Vector;
 
-public class Main {
+import monopoly.local.domain.Spielerverwaltung;
+import monopoly.local.domain.Spielverwaltung;
+import monopoly.local.valueobjects.Feld;
+import monopoly.local.valueobjects.Spieler;
+
+public class MonopolyCUI {
 	public static void main(String[] args) {
+		
+		// MonopolyCUI-Objekt erzeugen
+		// ... starten
+		
 		boolean schleife = true;
 		boolean roundLoop = true;
 		Spieler spieler;
@@ -95,11 +105,13 @@ public class Main {
 									System.out.println("Auswahl fehlerhaft.");
 								}
 								switch(auswahl){
-								case 1:		feldverwaltung.move(spieler, wuerfeln(verwaltung.wuerfeln()));
+								case 1:		int anzahl = verwaltung.wuerfeln();
+											wuerfelAnzeigen(anzahl);
+											feldverwaltung.move(spieler, anzahl);
 											showFeld(feldverwaltung.getFeld(),verwaltung.getAllSpieler());
 											System.out.println("Sie befinden sich auf der Straße : "+feldverwaltung.getStrasseName(spieler.getSpielerPosition()));
 											//Straße kaufen / miete zahlen hier einfügen.
-											if(feldverwaltung.getBesitzer(spieler.getSpielerPosition()) == -1){
+											if (feldverwaltung.getBesitzer(spieler.getSpielerPosition()) ==  null){
 												boolean loop = true;
 												do{
 													System.out.println("Wollen Sie die Strasse kaufen?");
@@ -128,10 +140,10 @@ public class Main {
 												}while(loop == true);
 												
 											}else{
-												spieler.setSpielerBudget(spieler.getSpielerBudget() - feldverwaltung.miete(spieler.getSpielerPosition()));
+												spieler.setSpielerBudget(spieler.getSpielerBudget() - feldverwaltung.miete(spieler.getSpielerPosition().getNummer()));
 												//int miete = verwaltung.getSpieler(spieler.getSpielerPosition()).getSpielerBudget() - feldverwaltung.miete(spieler.getSpielerPosition());
 												//verwaltung.getAllSpieler().get(feldverwaltung.getBesitzer(spieler.getSpielerPosition())).setSpielerBudget(miete);
-												verwaltung.mieteZahlen(feldverwaltung.miete(spieler.getSpielerPosition()), feldverwaltung.getBesitzer(spieler.getSpielerPosition()));
+												verwaltung.mieteZahlen(feldverwaltung.miete(spieler.getSpielerPosition().getNummer()), feldverwaltung.getBesitzer(spieler.getSpielerPosition().getNummer()));
 												System.out.println("Ihr Budget beträgt jetzt = "+spieler.getSpielerBudget());
 											}
 											roundLoop=false;
@@ -160,7 +172,7 @@ public class Main {
 		}
 		showFeld(feldverwaltung.getFeld(),verwaltung.getAllSpieler());
 	}
-	public static void showFeld(FeldValue[] feld,Vector<Spieler> spieler){
+	public static void showFeld(Feld[] feld,Vector<Spieler> spieler){
 		int[] arrayLinks =  {35,34,33,32,31,30,29,28};
 		int[] arrayRechts = {10,11,12,13,14,15,16,17};
 		System.out.println("|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|");
@@ -203,7 +215,7 @@ public class Main {
 		System.out.println();
 		System.out.println("|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|");
 	}
-	public static int wuerfeln(int zahl){
+	public static int wuerfelAnzeigen(int zahl){
 		switch(zahl){
 		case 1: 
 			System.out.println("-------");

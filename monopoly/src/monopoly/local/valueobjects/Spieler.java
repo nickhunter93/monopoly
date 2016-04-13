@@ -1,10 +1,12 @@
+package monopoly.local.valueobjects;
 
 public class Spieler {
 	
 	private String spielerName;
-	private int spielerNummer, spielerPosition, budget;
+	private Feld spielerPosition;
+	private int spielerNummer, budget;
 	
-	public Spieler(String spielerName, int spielerNummer, int spielerPosition, int budget){
+	public Spieler(String spielerName, int spielerNummer, Feld spielerPosition, int budget){
 		this.spielerName = spielerName;
 		this.spielerNummer = spielerNummer;
 		this.spielerPosition = spielerPosition;
@@ -30,10 +32,10 @@ public class Spieler {
 		this.spielerNummer = spielerNummer;
 	}
 	
-	public int getSpielerPosition(){
+	public Feld getSpielerPosition(){
 		return spielerPosition;
 	}
-	public void setSpielerPosition(int spielerPosition){
+	public void setSpielerPosition(Feld spielerPosition){
 		this.spielerPosition = spielerPosition;
 	}
 	

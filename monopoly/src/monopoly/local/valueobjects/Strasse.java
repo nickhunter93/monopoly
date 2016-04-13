@@ -1,36 +1,44 @@
+package monopoly.local.valueobjects;
 
-public class Strasse extends FeldValue {
+public class Strasse extends Feld {
 	
-	private int kaufpreis, mietpreis, haeuseranzahl,besitzer;
+	private int kaufpreis, mietpreis, haeuseranzahl,hauspreis;
+	private Spieler besitzer;
 	boolean hypothek;
 	
-	public Strasse(String name, int kaufpreis, int mietpreis, boolean hypothek){
-		super(name);
+	public Strasse(String name, int kaufpreis, int mietpreis, boolean hypothek,int nr){
+		super(name,nr);
 		this.kaufpreis = kaufpreis;
 		this.mietpreis = mietpreis;
 		this.haeuseranzahl = 0;
+		this.hauspreis = 250;
 		this.hypothek = hypothek;
-		this.besitzer = 1;
+		this.besitzer = null;
 	}
 
 	public void setHypothek(boolean hypothek){
 		this.hypothek = hypothek;
 	}
 
-	public boolean bauHaus(){
+	public boolean bauHaus(Spieler spieler){
 		if(haeuseranzahl <= 4){
 			haeuseranzahl++;
+			if(haeuseranzahl < 4){
+				spieler.setSpielerBudget(spieler.getSpielerBudget()-hauspreis);
+			}else{
+				spieler.setSpielerBudget(spieler.getSpielerBudget()-(2*hauspreis));
+			}
 			return true;
 		} else{
 			return false;
 		}
 	}
 	
-	public int getBesitzer(){
+	public Spieler getBesitzer(){
 		return besitzer;
 	}
 	
-	public void setBesitzer(int besitzer){
+	public void setBesitzer(Spieler besitzer){
 		this.besitzer = besitzer;
 	}
 	
@@ -40,7 +48,7 @@ public class Strasse extends FeldValue {
 	
 	public int getMietpreis(){
 		double faktor = haeuseranzahl*0.2;
-		int preis = (int) (mietpreis * faktor+1);
+		int preis = (int) (mietpreis * (faktor+1));
 		return preis;
 	}
 	
