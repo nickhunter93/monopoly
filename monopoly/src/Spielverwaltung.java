@@ -19,6 +19,9 @@ public class Spielverwaltung {
 			spieler.setSpielerPosition(position);
 		}
 	}
+	public String getStrasseName(int position){
+		return feld.getFeld()[position].getName();
+	}
 	public int getBesitzer(int position){
 		return feld.getFeld()[position].getBesitzer();
 	}

@@ -7,6 +7,8 @@ public class Spielfeld {
 		for (int i=0;i<fieldSize;i++){
 			feld[i] = new Strasse("test",2000,500,false);
 		}
+		feld[0] = new Strasse("Los",0,-2000,false);
+		feld[0].setBesitzer(99);
 	}
 	public int getFieldSize(){
 		return fieldSize;

@@ -38,6 +38,10 @@ public class Spielerverwaltung {
 		}
 		return true;
 	}
+	
+	public void mieteZahlen(int miete, int spielerNummer){
+		spielerListe.get(spielerNummer).setSpielerBudget(spielerListe.get(spielerNummer).getSpielerBudget()+miete);
+	}
 
 	public Spieler reihenfolge(){
 		if(reihenfolge < spielerListe.size()-1){
@@ -50,6 +54,15 @@ public class Spielerverwaltung {
 		return spielerListe.get(reihenfolge);
 	}
 
+	public Vector<Spieler> checkPleite(){
+		Vector<Spieler> v = new Vector<Spieler>();
+		for (Spieler spieler:spielerListe){
+			if(spieler.getSpielerBudget() < 0){
+				v.addElement(spieler);
+			}
+		}
+		return v;
+	}
 	
 	public int wuerfeln(){
 		int zahl;

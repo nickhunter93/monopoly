@@ -10,7 +10,7 @@ public class Strasse extends FeldValue {
 		this.mietpreis = mietpreis;
 		this.haeuseranzahl = 0;
 		this.hypothek = hypothek;
-		this.besitzer = -1;
+		this.besitzer = 1;
 	}
 
 	public void setHypothek(boolean hypothek){
@@ -39,7 +39,9 @@ public class Strasse extends FeldValue {
 	}
 	
 	public int getMietpreis(){
-		return mietpreis;
+		double faktor = haeuseranzahl*0.2;
+		int preis = (int) (mietpreis * faktor+1);
+		return preis;
 	}
 	
 	public int getHaeuseranzahl(){

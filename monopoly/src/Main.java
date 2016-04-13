@@ -40,7 +40,6 @@ public class Main {
 								spielernummer = verwaltung.getAllSpieler().size();
 								Spieler player = new Spieler(name,spielernummer+1,0,2000);
 								if(verwaltung.beitreten(player)){
-									System.out.println("Spieler erfolgreich hinzugefügt.");
 									System.out.println("Spieler " + (spielernummer+1) + " von 6 erfolgreich hinzugefügt.");
 								}else{
 									System.out.println("Maximale Spieleranzahl erreicht.");
@@ -64,10 +63,9 @@ public class Main {
 								spielernummer = Integer.parseInt(str);
 								str = verwaltung.getSpieler(spielernummer-1).getSpielerName();
 								if(verwaltung.entfernen(spielernummer)){
-									System.out.println("Spieler erfolgreich entfernt.");
 									System.out.println("Spieler "+str+" wurde entfernt.");
 								}else{
-									System.out.println("Maximale Spieleranzahl erreicht.");
+									System.out.println("Kein Spieler mit der Nummer gefunden.");
 								}
 							} catch (IOException e) {
 								e.printStackTrace();
@@ -78,7 +76,7 @@ public class Main {
 			case 3 :	while(schleife){
 							spieler = verwaltung.reihenfolge();
 							roundLoop = true;
-							while(roundLoop){
+							do{
 								try {
 									System.out.println("Spieler "+spieler.getSpielerNummer()+" "+spieler.getSpielerName()+" ist dran.");
 									System.out.println("Was wollen Sie tun?");
@@ -86,6 +84,7 @@ public class Main {
 									System.out.println("2:Haus bauen.");
 									buffer = eingabe.readLine();
 									auswahl = Integer.parseInt(buffer);
+									
 								} catch (IOException e) {
 									e.printStackTrace();
 									auswahl = 0;
@@ -98,26 +97,60 @@ public class Main {
 								switch(auswahl){
 								case 1:		feldverwaltung.move(spieler, wuerfeln(verwaltung.wuerfeln()));
 											showFeld(feldverwaltung.getFeld(),verwaltung.getAllSpieler());
+											System.out.println("Sie befinden sich auf der Straße : "+feldverwaltung.getStrasseName(spieler.getSpielerPosition()));
 											//Straße kaufen / miete zahlen hier einfügen.
-											if(feldverwaltung.getBesitzer(spieler.getSpielerPosition()) != -1){
-												System.out.println("Wollen Sie die Strasse kaufen?");
-												try {
-													buffer = eingabe.readLine();
-													auswahl = Integer.parseInt(buffer) ;
-												} catch (IOException e) {
-													e.printStackTrace();
-												}
+											if(feldverwaltung.getBesitzer(spieler.getSpielerPosition()) == -1){
+												boolean loop = true;
+												do{
+													System.out.println("Wollen Sie die Strasse kaufen?");
+													System.out.println("'y' für Ja/ 'n' für Nein.");
+													char check = 'k';
+													try {
+														buffer = eingabe.readLine();
+														if(buffer.length() != 0){
+															check = buffer.charAt(0);
+														}else {
+															check = 'k';
+														}
+														 
+													} catch (IOException e) {
+														e.printStackTrace();
+													}
+													if(check == 'y' || check == 'Y'){
+														System.out.println(feldverwaltung.kaufStrasse(spieler) ? "Kauf erfolgreich" : "Kauf fehlgeschlagen");
+														loop = false;
+													}else if(check == 'n' || check == 'N'){
+														loop = false;
+													} else {
+														loop = true;
+														System.out.println("Eingabe Fehlerhaft.");
+													}
+												}while(loop == true);
 												
-												/*if()
-												System.out.println(feldverwaltung.kaufStrasse(spieler) ? "Kauf erfolgrein" : "Kauf fehlgeschlagen");
 											}else{
 												spieler.setSpielerBudget(spieler.getSpielerBudget() - feldverwaltung.miete(spieler.getSpielerPosition()));
-											*/}
+												//int miete = verwaltung.getSpieler(spieler.getSpielerPosition()).getSpielerBudget() - feldverwaltung.miete(spieler.getSpielerPosition());
+												//verwaltung.getAllSpieler().get(feldverwaltung.getBesitzer(spieler.getSpielerPosition())).setSpielerBudget(miete);
+												verwaltung.mieteZahlen(feldverwaltung.miete(spieler.getSpielerPosition()), feldverwaltung.getBesitzer(spieler.getSpielerPosition()));
+												System.out.println("Ihr Budget beträgt jetzt = "+spieler.getSpielerBudget());
+											}
+											roundLoop=false;
 								break;
 								case 2:		//Haus bauen hier einfügen.
 								break;
 								default: 	System.out.println("Keine Gültige Auswahl.");
 											roundLoop = true;
+								}
+							}while(roundLoop);
+							if(!verwaltung.checkPleite().isEmpty()){
+								for(Spieler player:verwaltung.checkPleite()){
+									verwaltung.entfernen(player.getSpielerNummer());
+								}
+								schleife = false;
+							}else{}
+							if(verwaltung.getAllSpieler().size() == 1){
+								for(Spieler player:verwaltung.getAllSpieler()){
+									System.out.println("Der Gewinner ist : "+player.getSpielerName());
 								}
 							}
 						}
