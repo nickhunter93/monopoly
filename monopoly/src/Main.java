@@ -101,13 +101,18 @@ public class Main {
 											//Straße kaufen / miete zahlen hier einfügen.
 											if(feldverwaltung.getBesitzer(spieler.getSpielerPosition()) != -1){
 												System.out.println("Wollen Sie die Strasse kaufen?");
-												buffer = eingabe.readLine();
-												auswahl = Integer.parseInt(buffer) ;
-												if()
+												try {
+													buffer = eingabe.readLine();
+													auswahl = Integer.parseInt(buffer) ;
+												} catch (IOException e) {
+													e.printStackTrace();
+												}
+												
+												/*if()
 												System.out.println(feldverwaltung.kaufStrasse(spieler) ? "Kauf erfolgrein" : "Kauf fehlgeschlagen");
 											}else{
 												spieler.setSpielerBudget(spieler.getSpielerBudget() - feldverwaltung.miete(spieler.getSpielerPosition()));
-											}
+											*/}
 								break;
 								case 2:		//Haus bauen hier einfügen.
 								break;
