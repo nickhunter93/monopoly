@@ -24,8 +24,11 @@ public class Spielfeld {
 		int newPosition = position.getNummer()+zugweite;
 		return feld[newPosition];
 	}
+	public Feld[] getSpielfeld(){
+		return this.feld;
+	}
 	public Feld getFeld(Feld position){
-		for(Feld feld:feld){
+		for(Feld feld:this.feld){
 			if(feld.equals(position)){
 				return feld;
 			}
@@ -34,9 +37,9 @@ public class Spielfeld {
 	}
 	public int[] getYourStreets(Spieler spieler){
 		Vector<Strasse> vec = new Vector<Strasse>();
-		for(Feld field : feld){
-			if(field.getClass().isInstance(Strasse.class)){
-				vec.addElement((Strasse)field);
+		for(Feld feld : this.feld){
+			if(feld.getClass().isInstance(Strasse.class)){
+				vec.addElement((Strasse)feld);
 			}
 		}
 		if(!vec.isEmpty()){
