@@ -4,9 +4,9 @@ public class Aktion extends Feld	 {
 	
 	private String aktion;
 	
-	public Aktion(String name, int wert, boolean status, String aktion){
+	public Aktion(String name, int wert, boolean status, String aktion,int nr){
 //		super(name, wert, status);
-		super(name);
+		super(name,nr);
 		this.aktion = aktion;
 	}
 	

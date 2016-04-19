@@ -1,5 +1,7 @@
 package monopoly.local.valueobjects;
 
+import java.util.Vector;
+
 public class Spielfeld {
 	private Feld[] feld;
 	private int fieldSize = 36;
@@ -14,6 +16,14 @@ public class Spielfeld {
 	public int getFieldSize(){
 		return fieldSize;
 	}
+	public Feld getLos(){
+		return feld[0];
+	}
+	public Feld getPosition(Spieler spieler,int zugweite){
+		Feld position = spieler.getSpielerPosition();
+		int newPosition = position.getNummer()+zugweite;
+		return feld[newPosition];
+	}
 	public Feld getFeld(Feld position){
 		for(Feld feld:feld){
 			if(feld.equals(position)){
@@ -22,10 +32,32 @@ public class Spielfeld {
 		}
 		return null;
 	}
+	public int[] getYourStreets(Spieler spieler){
+		Vector<Strasse> vec = new Vector<Strasse>();
+		for(Feld field : feld){
+			if(field.getClass().isInstance(Strasse.class)){
+				vec.addElement((Strasse)field);
+			}
+		}
+		if(!vec.isEmpty()){
+			int [] StrassenNummer = new int[vec.size()];
+			for (int i=0;i<vec.size();i++){
+				StrassenNummer[i] = vec.elementAt(i).getNummer();
+			}
+			return StrassenNummer;
+		}
+		return null;
+	}
 	public boolean bauHaus(int position,Spieler spieler){
-		return feld[position].bauHaus(spieler);
+		if(feld[position].getClass().isInstance(Strasse.class)){
+			return ((Strasse)feld[position]).bauHaus(spieler);
+		}
+		return false;
 	}
 	public int getHaeuseranzahl(int position){
-		return feld[position].getHaeuseranzahl();
+		if (feld[position].getClass().isInstance(Strasse.class)){
+		return ((Strasse)feld[position]).getHaeuseranzahl();
+		}
+		return -1;
 	}
 }
