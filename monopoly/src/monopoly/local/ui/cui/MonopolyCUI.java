@@ -111,7 +111,7 @@ public class MonopolyCUI {
 											showFeld(feldverwaltung.getSpielfeld(),verwaltung.getAllSpieler());
 											System.out.println("Sie befinden sich auf der Straße : "+feldverwaltung.getStrasseName(spieler));
 											//Straße kaufen / miete zahlen hier einfügen.
-											if (feldverwaltung.getBesitzer(spieler.getSpielerPosition()) ==  null){
+											if (feldverwaltung.getBesitzer(spieler.getSpielerPosition()).getSpielerNummer() ==  99){
 												boolean loop = true;
 												do{
 													System.out.println("Wollen Sie die Strasse kaufen?");
@@ -141,8 +141,6 @@ public class MonopolyCUI {
 												
 											}else{
 												spieler.setSpielerBudget(spieler.getSpielerBudget() - feldverwaltung.miete(spieler));
-												//int miete = verwaltung.getSpieler(spieler.getSpielerPosition()).getSpielerBudget() - feldverwaltung.miete(spieler.getSpielerPosition());
-												//verwaltung.getAllSpieler().get(feldverwaltung.getBesitzer(spieler.getSpielerPosition())).setSpielerBudget(miete);
 												verwaltung.mieteZahlen(feldverwaltung.miete(spieler), feldverwaltung.getBesitzer(spieler.getSpielerPosition()),spieler);
 												System.out.println("Ihr Budget beträgt jetzt = "+spieler.getSpielerBudget());
 											}

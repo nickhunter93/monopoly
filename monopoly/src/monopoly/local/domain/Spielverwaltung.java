@@ -19,7 +19,7 @@ public class Spielverwaltung {
 				if(position<feld.getFieldSize()-1){
 					position++;
 				}else{
-					if (feld.getLos().getClass().isInstance(Strasse.class)){
+					if (feld.getLos() instanceof Strasse){
 						spieler.setSpielerBudget(spieler.getSpielerBudget()-((Strasse)feld.getLos()).getMietpreis());
 						position = -spieler.getSpielerPosition().getNummer();
 					}
@@ -36,7 +36,7 @@ public class Spielverwaltung {
 	}
 	public Spieler getBesitzer(Feld position){
 		Spieler besitzer = null;
-		if(feld.getFeld(position).getClass().isInstance(Strasse.class)){
+		if(position instanceof Strasse){
 			besitzer = ((Strasse) position).getBesitzer();
 		}
 		return besitzer;
@@ -52,7 +52,7 @@ public class Spielverwaltung {
 	public boolean kaufStrasse(Spieler spieler){
 		Strasse strasse;
 		Feld position = spieler.getSpielerPosition();
-		if(position.getClass().isInstance(Strasse.class)){
+		if(position instanceof Strasse){
 			strasse = (Strasse)position;
 		
 			Spieler besitzer = strasse.getBesitzer();
