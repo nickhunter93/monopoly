@@ -1,7 +1,7 @@
 package monopoly.local.valueobjects;
 
 public class Spielfeld {
-	private Strasse[] feld;
+	private Feld[] feld;
 	private int fieldSize = 36;
 	public Spielfeld(){
 		feld = new Strasse[fieldSize];
@@ -9,13 +9,18 @@ public class Spielfeld {
 			feld[i] = new Strasse("test",2000,50,false,i);
 		}
 		feld[0] = new Strasse("Los",0,-2000,false,0);
-		feld[0].setBesitzer(new Spieler("Bank", 99, null, -1));
+		((Strasse)feld[0]).setBesitzer(new Spieler("Bank", 99, null, -1));
 	}
 	public int getFieldSize(){
 		return fieldSize;
 	}
-	public Feld getFeld(int nr){
-		return feld[nr];
+	public Feld getFeld(Feld position){
+		for(Feld feld:feld){
+			if(feld.equals(position)){
+				return feld;
+			}
+		}
+		return null;
 	}
 	public boolean bauHaus(int position,Spieler spieler){
 		return feld[position].bauHaus(spieler);

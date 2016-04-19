@@ -2,6 +2,7 @@ package monopoly.local.domain;
 import monopoly.local.valueobjects.Feld;
 import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Spielfeld;
+import monopoly.local.valueobjects.Strasse;
 
 public class Spielverwaltung {
 	private Spielfeld feld;
@@ -18,8 +19,10 @@ public class Spielverwaltung {
 				if(position<feld.getFieldSize()-1){
 					position++;
 				}else{
-					spieler.setSpielerBudget(spieler.getSpielerBudget()-feld.getFeld(0).getMietpreis());
-					position = 0;
+					if (feld.getFeld(0).getClass().isInstance(Strasse.class)){
+						spieler.setSpielerBudget(spieler.getSpielerBudget()-((Strasse)feld.getFeld(0)).getMietpreis());
+						position = 0;
+					}
 				}
 			}
 			Feld newPosition = feld.getFeld(position);
@@ -29,14 +32,26 @@ public class Spielverwaltung {
 	public String getStrasseName(int position){
 		return feld.getFeld(position).getName();
 	}
-	public Spieler getBesitzer(int position){
-		return feld.getFeld(position).getBesitzer();
+	public Spieler getBesitzer(Feld position){
+		Spieler besitzer = null;
+		if(feld.getFeld(position).getClass().isInstance(Strasse.class)){
+			besitzer = ((Strasse) position).getBesitzer();
+		}
+		return besitzer;
 	}
 	public int miete(int position){
-		return feld.getFeld(position).getMietpreis();
+		Strasse strasse = null;
+		if(feld.getClass().isInstance(Strasse.class)){
+			strasse =((Strasse)feld.getFeld(position));
+		}
+		return strasse.getMietpreis();
 	}
 	public boolean kaufStrasse(Spieler spieler){
-		if(feld.getFeld(spieler.getSpielerPosition().getNummer()).getBesitzer() == null && spieler.getSpielerBudget() - feld.getFeld(spieler.getSpielerPosition().getNummer()).getKaufpreis() >= 0){
+		Strasse strasse;
+		if(feld.getClass().isInstance(Strasse.class)){
+			strasse = (Strasse)spieler.getSpielerPosition();
+		}
+		if( strasse.getBesitzer() == null && spieler.getSpielerBudget() - feld.getFeld(spieler.getSpielerPosition().getNummer()).getKaufpreis() >= 0){
 			feld.getFeld(spieler.getSpielerPosition().getNummer()).setBesitzer(spieler);
 			spieler.setSpielerBudget(spieler.getSpielerBudget()-feld.getFeld(spieler.getSpielerPosition().getNummer()).getKaufpreis());
 			return true;

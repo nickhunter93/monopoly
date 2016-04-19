@@ -43,4 +43,13 @@ public class Feld {
 	public void setNummer(int nummer) {
 		this.nummer = nummer;
 	}
+	
+	public boolean equals(Feld feld){
+		if(feld.getName().equals(this.name)){
+			if(feld.getNummer() == this.nummer){
+				return true;
+			}
+		}
+		return false;
+	}
 }
