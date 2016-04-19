@@ -70,6 +70,12 @@ public class Spielverwaltung {
 		
 		return false;
 	}
+	public Feld getLos(){
+		return feld.getLos();
+	}
+	public Feld[] getSpielfeld(){
+		return feld.getSpielfeld();
+	}
 	public Feld getFeld(Spieler spieler){
 		Feld position = spieler.getSpielerPosition();
 		return feld.getFeld(position);

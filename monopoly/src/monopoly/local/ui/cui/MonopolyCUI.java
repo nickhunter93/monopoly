@@ -48,7 +48,7 @@ public class MonopolyCUI {
 								System.out.println("Geben Sie den Namen an.");
 								name = eingabe.readLine();
 								spielernummer = verwaltung.getAllSpieler().size();
-								Spieler player = new Spieler(name,spielernummer+1,0,2000);
+								Spieler player = new Spieler(name,spielernummer+1,feldverwaltung.getLos(),2000);
 								if(verwaltung.beitreten(player)){
 									System.out.println("Spieler " + (spielernummer+1) + " von 6 erfolgreich hinzugefügt.");
 								}else{
@@ -108,8 +108,8 @@ public class MonopolyCUI {
 								case 1:		int anzahl = verwaltung.wuerfeln();
 											wuerfelAnzeigen(anzahl);
 											feldverwaltung.move(spieler, anzahl);
-											showFeld(feldverwaltung.getFeld(),verwaltung.getAllSpieler());
-											System.out.println("Sie befinden sich auf der Straße : "+feldverwaltung.getStrasseName(spieler.getSpielerPosition()));
+											showFeld(feldverwaltung.getSpielfeld(),verwaltung.getAllSpieler());
+											System.out.println("Sie befinden sich auf der Straße : "+feldverwaltung.getStrasseName(spieler));
 											//Straße kaufen / miete zahlen hier einfügen.
 											if (feldverwaltung.getBesitzer(spieler.getSpielerPosition()) ==  null){
 												boolean loop = true;
@@ -140,10 +140,10 @@ public class MonopolyCUI {
 												}while(loop == true);
 												
 											}else{
-												spieler.setSpielerBudget(spieler.getSpielerBudget() - feldverwaltung.miete(spieler.getSpielerPosition().getNummer()));
+												spieler.setSpielerBudget(spieler.getSpielerBudget() - feldverwaltung.miete(spieler));
 												//int miete = verwaltung.getSpieler(spieler.getSpielerPosition()).getSpielerBudget() - feldverwaltung.miete(spieler.getSpielerPosition());
 												//verwaltung.getAllSpieler().get(feldverwaltung.getBesitzer(spieler.getSpielerPosition())).setSpielerBudget(miete);
-												verwaltung.mieteZahlen(feldverwaltung.miete(spieler.getSpielerPosition().getNummer()), feldverwaltung.getBesitzer(spieler.getSpielerPosition().getNummer()));
+												verwaltung.mieteZahlen(feldverwaltung.miete(spieler), feldverwaltung.getBesitzer(spieler.getSpielerPosition()),spieler);
 												System.out.println("Ihr Budget beträgt jetzt = "+spieler.getSpielerBudget());
 											}
 											roundLoop=false;
@@ -170,7 +170,7 @@ public class MonopolyCUI {
 			default:	System.out.println("Keine Gültige Auswahl.");
 			}
 		}
-		showFeld(feldverwaltung.getFeld(),verwaltung.getAllSpieler());
+		showFeld(feldverwaltung.getSpielfeld(),verwaltung.getAllSpieler());
 	}
 	public static void showFeld(Feld[] feld,Vector<Spieler> spieler){
 		int[] arrayLinks =  {35,34,33,32,31,30,29,28};
@@ -180,7 +180,7 @@ public class MonopolyCUI {
 		for(int i = 0;i<10;i++){
 			int anzahl=0;
 			for(Spieler k:spieler)
-				if (k.getSpielerPosition() == i) {
+				if (k.getSpielerPosition().getNummer() == i) {
 					anzahl = anzahl+1;
 				}
 			System.out.print("  "+anzahl+"  |");
@@ -190,13 +190,13 @@ public class MonopolyCUI {
 		for(int i=0;i<arrayLinks.length;i++){
 			int anzahl=0;
 			for(Spieler k:spieler){
-				if (k.getSpielerPosition() == arrayLinks[i]) {
+				if (k.getSpielerPosition().getNummer() == arrayLinks[i]) {
 					anzahl = anzahl+1;
 				}
 			}
 			int anzahl2=0;
 			for(Spieler k:spieler)
-				if (k.getSpielerPosition() == arrayRechts[i]) {
+				if (k.getSpielerPosition().getNummer() == arrayRechts[i]) {
 					anzahl2 = anzahl2+1;
 				}
 			System.out.println("|  "+anzahl+"  |                                               |  "+anzahl2+"  |");
@@ -207,7 +207,7 @@ public class MonopolyCUI {
 		for(int i = 27;i>17;i--){
 			int anzahl=0;
 			for(Spieler k:spieler)
-			if (k.getSpielerPosition() == i) {
+			if (k.getSpielerPosition().getNummer() == i) {
 				anzahl = anzahl+1;
 				}
 			System.out.print("  "+anzahl+"  |");
