@@ -5,6 +5,7 @@ import java.util.Vector;
 public class Spielfeld {
 	private Feld[] feld;
 	private int fieldSize = 36;
+	
 	public Spielfeld(){
 		feld = new Strasse[fieldSize];
 		for (int i=0;i<fieldSize;i++){
@@ -14,20 +15,25 @@ public class Spielfeld {
 		feld[0] = new Strasse("Los",0,-2000,false,0);
 		((Strasse)feld[0]).setBesitzer(new Spieler("Bank", 99, null, -1));
 	}
+	
 	public int getFieldSize(){
 		return fieldSize;
 	}
+	
 	public Feld getLos(){
 		return feld[0];
 	}
+	
 	public Feld getPosition(Spieler spieler,int zugweite){
 		Feld position = spieler.getSpielerPosition();
 		int newPosition = position.getNummer()+zugweite;
 		return feld[newPosition];
 	}
+	
 	public Feld[] getSpielfeld(){
 		return this.feld;
 	}
+	
 	public Feld getFeld(Feld position){
 		for(Feld feld:this.feld){
 			if(feld.equals(position)){
@@ -36,11 +42,16 @@ public class Spielfeld {
 		}
 		return null;
 	}
+	
 	public int[] getYourStreets(Spieler spieler){
 		Vector<Strasse> vec = new Vector<Strasse>();
 		for(Feld feld : this.feld){
 			if(feld instanceof Strasse){
-				vec.addElement((Strasse)feld);
+				Strasse strasse = (Strasse)feld;
+				Spieler besitzer = strasse.getBesitzer();
+				if(besitzer.equals(spieler)){
+					vec.addElement(strasse);
+				}
 			}
 		}
 		if(!vec.isEmpty()){
@@ -52,16 +63,19 @@ public class Spielfeld {
 		}
 		return null;
 	}
+	
 	public boolean bauHaus(int position,Spieler spieler){
 		if(feld[position] instanceof Strasse){
 			return ((Strasse)feld[position]).bauHaus(spieler);
 		}
 		return false;
 	}
+	
 	public int getHaeuseranzahl(int position){
 		if (feld[position] instanceof Strasse){
 		return ((Strasse)feld[position]).getHaeuseranzahl();
 		}
 		return -1;
 	}
+
 }

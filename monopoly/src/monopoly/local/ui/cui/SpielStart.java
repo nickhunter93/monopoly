@@ -93,7 +93,12 @@ public class SpielStart {
 								}
 								roundLoop=false;
 					break;
-					case 2:		//Haus bauen hier einfügen.
+					case 2:		int[] StrassenNummer = feldverwaltung.getYourStreets(spieler);
+								if(StrassenNummer != null){
+									
+								}else{
+									System.out.println("Sie besitzen keine Straßen.");
+								}
 					break;
 					default: 	System.out.println("Keine Gültige Auswahl.");
 								roundLoop = true;
