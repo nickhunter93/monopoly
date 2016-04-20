@@ -47,7 +47,7 @@ public class SpielStart {
 						System.out.println("Auswahl fehlerhaft.");
 					}
 					switch(auswahl){
-					case 1:		int anzahl = 2;//verwaltung.wuerfeln();
+					case 1:		int anzahl = verwaltung.wuerfeln();
 								wuerfelAnzeigen(anzahl);
 								feldverwaltung.move(spieler, anzahl);
 								showFeld(feldverwaltung.getSpielfeld(),verwaltung.getAllSpieler());
