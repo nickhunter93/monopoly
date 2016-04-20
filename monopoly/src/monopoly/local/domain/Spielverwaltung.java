@@ -44,7 +44,7 @@ public class Spielverwaltung {
 	public int miete(Spieler spieler){
 		Strasse strasse = null;
 		Feld position = spieler.getSpielerPosition();
-		if(position.getClass().isInstance(Strasse.class)){
+		if(position instanceof Strasse){
 			strasse =((Strasse)position);
 		}
 		return strasse.getMietpreis();

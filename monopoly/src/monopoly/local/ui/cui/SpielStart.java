@@ -30,7 +30,11 @@ public class SpielStart {
 				roundLoop = true;
 				do{
 					try {
+						System.out.println();
+						System.out.println();
+						System.out.println();
 						System.out.println("Spieler "+spieler.getSpielerNummer()+" "+spieler.getSpielerName()+" ist dran.");
+						System.out.println("Ihr Budget beträgt : "+spieler.getSpielerBudget());
 						System.out.println("Was wollen Sie tun?");
 						System.out.println("1:Würfeln.");
 						System.out.println("2:Haus bauen.");
@@ -47,7 +51,7 @@ public class SpielStart {
 						System.out.println("Auswahl fehlerhaft.");
 					}
 					switch(auswahl){
-					case 1:		int anzahl = 2;//verwaltung.wuerfeln();
+					case 1:		int anzahl = verwaltung.wuerfeln();
 								wuerfelAnzeigen(anzahl);
 								feldverwaltung.move(spieler, anzahl);
 								showFeld(feldverwaltung.getSpielfeld(),verwaltung.getAllSpieler());
@@ -72,6 +76,7 @@ public class SpielStart {
 										}
 										if(check == 'y' || check == 'Y'){
 											System.out.println(feldverwaltung.kaufStrasse(spieler) ? "Kauf erfolgreich" : "Kauf fehlgeschlagen");
+											System.out.println(spieler.getSpielerName()+" ihr Budget beträgt : "+spieler.getSpielerBudget());
 											loop = false;
 										}else if(check == 'n' || check == 'N'){
 											loop = false;
