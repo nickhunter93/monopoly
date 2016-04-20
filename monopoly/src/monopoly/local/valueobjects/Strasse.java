@@ -15,18 +15,47 @@ public class Strasse extends Feld {
 		this.hypothek = hypothek;
 		this.besitzer = null;
 	}
-
-	public void setHypothek(boolean hypothek){
-		this.hypothek = hypothek;
+	
+	public boolean getHypothek(){
+		return this.hypothek;
+	}
+	
+	public String switchHypothek(){
+		int budget = besitzer.getSpielerBudget();
+		int wert = kaufpreis / 2;
+		if(!hypothek){
+			budget = budget + wert;
+			besitzer.setSpielerBudget(budget);
+			this.hypothek = true;
+			return "Hypothek wurde aufgenommen.";
+		}else{
+			if(budget - wert >= 0){
+				budget = budget - wert;
+				besitzer.setSpielerBudget(budget);
+				this.hypothek = false;
+				return "Hypothek wurde bezahlt.";
+			}else{
+				return "Hypothek konnte nicht bezahlt werden.";
+			}
+		}
 	}
 
 	public boolean bauHaus(Spieler spieler){
+		int budget = spieler.getSpielerBudget();
 		if(haeuseranzahl <= 4){
 			haeuseranzahl++;
 			if(haeuseranzahl < 4){
-				spieler.setSpielerBudget(spieler.getSpielerBudget()-hauspreis);
+				if(budget-hauspreis >= 0){
+					spieler.setSpielerBudget(budget-hauspreis);
+				}else {
+					return false;
+				}
 			}else{
-				spieler.setSpielerBudget(spieler.getSpielerBudget()-(2*hauspreis));
+				if((budget - (2*hauspreis)) >= 0){
+					spieler.setSpielerBudget(budget-(2*hauspreis));
+				}else {
+					return false;
+				}
 			}
 			return true;
 		} else{

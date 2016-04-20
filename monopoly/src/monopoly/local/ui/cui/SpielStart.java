@@ -9,6 +9,7 @@ import monopoly.local.domain.Spielerverwaltung;
 import monopoly.local.domain.Spielverwaltung;
 import monopoly.local.valueobjects.Feld;
 import monopoly.local.valueobjects.Spieler;
+import monopoly.local.valueobjects.Strasse;
 
 public class SpielStart {
 	private boolean schleife = true;
@@ -38,6 +39,7 @@ public class SpielStart {
 						System.out.println("Was wollen Sie tun?");
 						System.out.println("1:Würfeln.");
 						System.out.println("2:Haus bauen.");
+						System.out.println("3:Hypothek aufnehmen.");
 						buffer = eingabe.readLine();
 						auswahl = Integer.parseInt(buffer);
 						
@@ -50,6 +52,7 @@ public class SpielStart {
 						auswahl = 0;
 						System.out.println("Auswahl fehlerhaft.");
 					}
+					Strasse[] yourStreets = feldverwaltung.getYourStreets(spieler);
 					switch(auswahl){
 					case 1:		int anzahl = verwaltung.wuerfeln();
 								wuerfelAnzeigen(anzahl);
@@ -93,12 +96,92 @@ public class SpielStart {
 								}
 								roundLoop=false;
 					break;
-					case 2:		int[] StrassenNummer = feldverwaltung.getYourStreets(spieler);
-								if(StrassenNummer != null){
-									
+					case 2:		
+								if(yourStreets != null){
+									for(Strasse strasse : yourStreets){
+										int nr = strasse.getNummer();
+										String strassenName = feldverwaltung.getFeldName(nr);
+										int hausAnzahl = feldverwaltung.getHaeuseranzahl(nr);
+										System.out.print(nr+" : "+strassenName+" hat "+hausAnzahl);
+										if(hausAnzahl == 1){
+											System.out.println(" Haus.");
+										}else{
+											System.out.println(" Häuser.");
+										}
+									}
+									try{
+										System.out.println("Geben Sie die Straßen-Nummer, ein auf der Sie ein Haus bauen möchten.");
+										buffer = eingabe.readLine();
+										auswahl = Integer.parseInt(buffer);
+										boolean pruefen = false;
+										for(Strasse strasse : yourStreets){
+											int nr = strasse.getNummer();
+											if(auswahl == nr){
+												pruefen = true;
+											}
+										}
+										if(pruefen){
+											if(feldverwaltung.bauHaus(auswahl, spieler)){
+												System.out.println("Das Haus wurde erfolgreich gebaut.");
+											}else{
+												System.out.println("Haus konnte nicht gebaut werden.");
+											}
+										}else{
+											System.out.println("Die Strasse existiert nicht oder Sie sind nicht ihr Besitzer.");
+										}
+										
+									} catch (IOException e) {
+										e.printStackTrace();
+										auswahl = 0;
+										System.out.println("Auswahl fehlerhaft.");
+									} catch (NumberFormatException e){
+										e.printStackTrace();
+										auswahl = 0;
+										System.out.println("Auswahl fehlerhaft.");
+									}
 								}else{
 									System.out.println("Sie besitzen keine Straßen.");
 								}
+							
+								roundLoop = true;
+					break;
+					case 3: 	if(yourStreets != null){
+									for(Strasse strasse : yourStreets){
+										int nr = strasse.getNummer();
+										String strassenName = feldverwaltung.getFeldName(nr);
+										System.out.println(nr+" : "+strassenName+" hat Hypothek aufgenommen : "+strasse.getHypothek());
+									}
+									try{
+										System.out.println("Geben Sie die Straßen-Nummer, ein auf der Sie die Hypothek ändern wollen.");
+										buffer = eingabe.readLine();
+										auswahl = Integer.parseInt(buffer);
+										boolean pruefen = false;
+										for(Strasse strasse : yourStreets){
+											int nr = strasse.getNummer();
+											if(auswahl == nr){
+												pruefen = true;
+											}
+										}
+										if(pruefen){
+											String str = feldverwaltung.switchHypothek(auswahl);
+											System.out.println(str);
+										}else{
+											System.out.println("Die Strasse existiert nicht oder Sie sind nicht ihr Besitzer.");
+										}
+										
+									} catch (IOException e) {
+										e.printStackTrace();
+										auswahl = 0;
+										System.out.println("Auswahl fehlerhaft.");
+									} catch (NumberFormatException e){
+										e.printStackTrace();
+										auswahl = 0;
+										System.out.println("Auswahl fehlerhaft.");
+									}
+								}else{
+									System.out.println("Sie besitzen keine Straßen.");
+								}
+								roundLoop = true;
 					break;
 					default: 	System.out.println("Keine Gültige Auswahl.");
 								roundLoop = true;
@@ -106,13 +189,17 @@ public class SpielStart {
 				}while(roundLoop);
 				if(!verwaltung.checkPleite().isEmpty()){
 					for(Spieler player:verwaltung.checkPleite()){
+						Strasse[] yourStreets = feldverwaltung.getYourStreets(player);
+						for(Strasse strasse : yourStreets){
+							strasse.setBesitzer(new Spieler("Bank", 99, null, -1));
+						}
 						verwaltung.entfernen(player.getSpielerNummer());
 					}
-					schleife = false;
 				}else{}
 				if(verwaltung.getAllSpieler().size() == 1){
 					for(Spieler player:verwaltung.getAllSpieler()){
 						System.out.println("Der Gewinner ist : "+player.getSpielerName());
+						schleife = false;
 					}
 				}
 			}
