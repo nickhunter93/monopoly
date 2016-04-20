@@ -1,26 +1,67 @@
 package monopoly.local.valueobjects;
 
+import java.util.Vector;
+
 public class Spielfeld {
-	private Strasse[] feld;
+	private Feld[] feld;
 	private int fieldSize = 36;
 	public Spielfeld(){
 		feld = new Strasse[fieldSize];
 		for (int i=0;i<fieldSize;i++){
 			feld[i] = new Strasse("test",2000,50,false,i);
+			((Strasse)feld[i]).setBesitzer(new Spieler("Bank", 99, null, -1));
 		}
 		feld[0] = new Strasse("Los",0,-2000,false,0);
-		feld[0].setBesitzer(new Spieler("Bank", 99, null, -1));
+		((Strasse)feld[0]).setBesitzer(new Spieler("Bank", 99, null, -1));
 	}
 	public int getFieldSize(){
 		return fieldSize;
 	}
-	public Feld getFeld(int nr){
-		return feld[nr];
+	public Feld getLos(){
+		return feld[0];
+	}
+	public Feld getPosition(Spieler spieler,int zugweite){
+		Feld position = spieler.getSpielerPosition();
+		int newPosition = position.getNummer()+zugweite;
+		return feld[newPosition];
+	}
+	public Feld[] getSpielfeld(){
+		return this.feld;
+	}
+	public Feld getFeld(Feld position){
+		for(Feld feld:this.feld){
+			if(feld.equals(position)){
+				return feld;
+			}
+		}
+		return null;
+	}
+	public int[] getYourStreets(Spieler spieler){
+		Vector<Strasse> vec = new Vector<Strasse>();
+		for(Feld feld : this.feld){
+			if(feld instanceof Strasse){
+				vec.addElement((Strasse)feld);
+			}
+		}
+		if(!vec.isEmpty()){
+			int [] StrassenNummer = new int[vec.size()];
+			for (int i=0;i<vec.size();i++){
+				StrassenNummer[i] = vec.elementAt(i).getNummer();
+			}
+			return StrassenNummer;
+		}
+		return null;
 	}
 	public boolean bauHaus(int position,Spieler spieler){
-		return feld[position].bauHaus(spieler);
+		if(feld[position] instanceof Strasse){
+			return ((Strasse)feld[position]).bauHaus(spieler);
+		}
+		return false;
 	}
 	public int getHaeuseranzahl(int position){
-		return feld[position].getHaeuseranzahl();
+		if (feld[position] instanceof Strasse){
+		return ((Strasse)feld[position]).getHaeuseranzahl();
+		}
+		return -1;
 	}
 }
