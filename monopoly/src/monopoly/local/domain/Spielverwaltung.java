@@ -11,18 +11,19 @@ public class Spielverwaltung {
 	}
 	
 	public void move(Spieler spieler,int zugweite){
-		if(feld.getFieldSize()>spieler.getSpielerPosition().getNummer()+zugweite){
+		int spielerPosition = spieler.getSpielerPosition().getNummer();
+		if(feld.getFieldSize()>spielerPosition+zugweite){
 			Feld newPosition = feld.getPosition(spieler, zugweite);
 			spieler.setSpielerPosition(newPosition);
 		}else{
-			int position = spieler.getSpielerPosition().getNummer();
+			int position = spielerPosition;
 			for(int i = 0;i<zugweite;i++){
 				if(position<feld.getFieldSize()-1){
 					position++;
 				}else{
 					if (feld.getLos() instanceof Strasse){
 						spieler.setSpielerBudget(spieler.getSpielerBudget()-((Strasse)feld.getLos()).getMietpreis());
-						position = -spieler.getSpielerPosition().getNummer();
+						position = -spielerPosition;
 					}
 				}
 			}
@@ -41,6 +42,10 @@ public class Spielverwaltung {
 			besitzer = ((Strasse) position).getBesitzer();
 		}
 		return besitzer;
+	}
+
+	public String switchHypothek(int position){
+		return feld.switchHypothek(position);
 	}
 	
 	public int miete(Spieler spieler){
@@ -82,6 +87,10 @@ public class Spielverwaltung {
 		return feld.getSpielfeld();
 	}
 	
+	public String getFeldName(int nr){
+		return feld.getFeldName(nr);
+	}
+	
 	public Feld getFeld(Spieler spieler){
 		Feld position = spieler.getSpielerPosition();
 		return feld.getFeld(position);
@@ -91,7 +100,7 @@ public class Spielverwaltung {
 		return feld.bauHaus(position,spieler);	
 	}
 	
-	public int[] getYourStreets(Spieler spieler){
+	public Strasse[] getYourStreets(Spieler spieler){
 		return feld.getYourStreets(spieler);
 	}
 	

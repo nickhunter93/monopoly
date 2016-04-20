@@ -13,7 +13,15 @@ public class Spielfeld {
 			((Strasse)feld[i]).setBesitzer(new Spieler("Bank", 99, null, -1));
 		}
 		feld[0] = new Strasse("Los",0,-2000,false,0);
-		((Strasse)feld[0]).setBesitzer(new Spieler("Bank", 99, null, -1));
+		((Strasse)feld[0]).setBesitzer(new Spieler("Bank", 98, null, -1));
+	}
+	
+	public String switchHypothek(int position){
+		if(feld[position] instanceof Strasse){
+			Strasse strasse = (Strasse)feld[position];
+			return strasse.switchHypothek();
+		}
+		return "Strasse nicht gefunden.";
 	}
 	
 	public int getFieldSize(){
@@ -34,6 +42,10 @@ public class Spielfeld {
 		return this.feld;
 	}
 	
+	public String getFeldName(int nr){
+		return feld[nr].getName();
+	}
+	
 	public Feld getFeld(Feld position){
 		for(Feld feld:this.feld){
 			if(feld.equals(position)){
@@ -43,7 +55,7 @@ public class Spielfeld {
 		return null;
 	}
 	
-	public int[] getYourStreets(Spieler spieler){
+	public Strasse[] getYourStreets(Spieler spieler){
 		Vector<Strasse> vec = new Vector<Strasse>();
 		for(Feld feld : this.feld){
 			if(feld instanceof Strasse){
@@ -55,11 +67,11 @@ public class Spielfeld {
 			}
 		}
 		if(!vec.isEmpty()){
-			int [] StrassenNummer = new int[vec.size()];
+			Strasse [] yourStreets = new Strasse[vec.size()];
 			for (int i=0;i<vec.size();i++){
-				StrassenNummer[i] = vec.elementAt(i).getNummer();
+				yourStreets[i] = vec.elementAt(i);
 			}
-			return StrassenNummer;
+			return yourStreets;
 		}
 		return null;
 	}
