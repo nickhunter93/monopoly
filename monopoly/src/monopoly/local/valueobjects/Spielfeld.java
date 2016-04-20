@@ -6,6 +6,12 @@ public class Spielfeld {
 	private Feld[] feld;
 	private int fieldSize = 36;
 	
+	/**
+	 * Konstruktor der Klasse Spielfeld
+	 * erstellt ein Spielfeld, 
+	 * bestimmt das Feld [0] das Losfeld ist, 
+	 * zum Start des Spieles alle Straßen niemandem gehören
+	 */
 	public Spielfeld(){
 		feld = new Strasse[fieldSize];
 		for (int i=0;i<fieldSize;i++){
@@ -16,6 +22,12 @@ public class Spielfeld {
 		((Strasse)feld[0]).setBesitzer(new Spieler("Bank", 98, null, -1));
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param position
+	 * @return
+	 */
 	public String switchHypothek(int position){
 		if(feld[position] instanceof Strasse){
 			Strasse strasse = (Strasse)feld[position];
@@ -24,28 +36,51 @@ public class Spielfeld {
 		return "Strasse nicht gefunden.";
 	}
 	
+	/** 
+	 * @return: gibt die Anzahl der Felder als int zurück 
+	 */
 	public int getFieldSize(){
 		return fieldSize;
 	}
 	
+	/**
+	 * @return: gibt das Losfeld zurück
+	 */
 	public Feld getLos(){
 		return feld[0];
 	}
 	
+	/**
+	 * ändert die Position des Spielers
+	 * 
+	 * @param spieler
+	 * @param zugweite
+	 * @return: gibt die neue Position des Spielers zurück
+	 */
 	public Feld getPosition(Spieler spieler,int zugweite){
 		Feld position = spieler.getSpielerPosition();
 		int newPosition = position.getNummer()+zugweite;
 		return feld[newPosition];
 	}
 	
+	/**
+	 * @return: gibt das aktuelle Feld zurück
+	 */
 	public Feld[] getSpielfeld(){
 		return this.feld;
 	}
 	
+	/**
+	 * @return gibt den Namen des Feldes anhand der Feldnummer zurück
+	 */
 	public String getFeldName(int nr){
 		return feld[nr].getName();
 	}
 	
+	/**
+	 * @param position: die Position eines Feldes
+	 * @return: gibt ein Feld anhand der Feldposition zurück
+	 */
 	public Feld getFeld(Feld position){
 		for(Feld feld:this.feld){
 			if(feld.equals(position)){
@@ -54,7 +89,12 @@ public class Spielfeld {
 		}
 		return null;
 	}
-	
+
+	/**
+	 * 
+	 * @param spieler
+	 * @return: gibt einen Vektor mit Straßen zurück die einem Spieler gehören
+	 */
 	public Strasse[] getYourStreets(Spieler spieler){
 		Vector<Strasse> vec = new Vector<Strasse>();
 		for(Feld feld : this.feld){
@@ -76,13 +116,18 @@ public class Spielfeld {
 		return null;
 	}
 	
+	/**
+	 * baut ein Haus auf einer Straße  
+	 */
 	public boolean bauHaus(int position,Spieler spieler){
 		if(feld[position] instanceof Strasse){
 			return ((Strasse)feld[position]).bauHaus(spieler);
 		}
 		return false;
 	}
-	
+	/**
+	 * @return gibt die Häuseranzahl auf einer Straße als int zurück
+	 */
 	public int getHaeuseranzahl(int position){
 		if (feld[position] instanceof Strasse){
 		return ((Strasse)feld[position]).getHaeuseranzahl();
