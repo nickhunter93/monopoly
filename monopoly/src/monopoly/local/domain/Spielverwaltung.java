@@ -9,6 +9,7 @@ public class Spielverwaltung {
 	public Spielverwaltung(){
 		feld = new Spielfeld();
 	}
+	
 	public void move(Spieler spieler,int zugweite){
 		if(feld.getFieldSize()>spieler.getSpielerPosition().getNummer()+zugweite){
 			Feld newPosition = feld.getPosition(spieler, zugweite);
@@ -41,6 +42,7 @@ public class Spielverwaltung {
 		}
 		return besitzer;
 	}
+	
 	public int miete(Spieler spieler){
 		Strasse strasse = null;
 		Feld position = spieler.getSpielerPosition();
@@ -49,6 +51,7 @@ public class Spielverwaltung {
 		}
 		return strasse.getMietpreis();
 	}
+	
 	public boolean kaufStrasse(Spieler spieler){
 		Strasse strasse;
 		Feld position = spieler.getSpielerPosition();
@@ -70,20 +73,30 @@ public class Spielverwaltung {
 		
 		return false;
 	}
+	
 	public Feld getLos(){
 		return feld.getLos();
 	}
+	
 	public Feld[] getSpielfeld(){
 		return feld.getSpielfeld();
 	}
+	
 	public Feld getFeld(Spieler spieler){
 		Feld position = spieler.getSpielerPosition();
 		return feld.getFeld(position);
 	}
+	
 	public boolean bauHaus(int position,Spieler spieler){
 		return feld.bauHaus(position,spieler);	
 	}
+	
+	public int[] getYourStreets(Spieler spieler){
+		return feld.getYourStreets(spieler);
+	}
+	
 	public int getHaeuseranzahl(int position){
 		return feld.getHaeuseranzahl(position);
 	}
+	
 }

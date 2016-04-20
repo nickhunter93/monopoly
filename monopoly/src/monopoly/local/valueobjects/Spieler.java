@@ -42,4 +42,13 @@ public class Spieler {
 	public String toString(){
 		return("Spieler " + spielerNummer + "\n" + spielerName + " befindet sich auf Feld " + spielerPosition);
 	}
+	
+	public boolean equals(Spieler spieler){
+		if(this.spielerName.equals(spieler.getSpielerName())){
+			if(this.spielerNummer == spieler.getSpielerNummer()){
+				return true;
+			}
+		}
+		return false;
+	}
 }
