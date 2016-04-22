@@ -23,7 +23,7 @@ public class Spielfeld {
 	}
 	
 	/**
-	 * 
+	 * setzt den Wert der Hypthek für die Straße an der Stelle position neu
 	 * 
 	 * @param position
 	 * @return

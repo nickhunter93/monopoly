@@ -34,7 +34,7 @@ public class Strasse extends Feld {
 	
 	/**
 	 * setzt den Wert der Hypothek neu wenn sie aufgenommen oder bezahlt wurde
-	 * gibt einen String mit entsprechendem Text zurück
+	 * gibt einen String mit entsprechendem Text zurück 
 	 */
 	public String switchHypothek(){
 		int budget = besitzer.getSpielerBudget();

@@ -7,15 +7,33 @@ public class Spielerverwaltung {
 	private int reihenfolge;
 	
 	private Vector<Spieler> spielerListe = new Vector<Spieler>();
+	
+	/**
+	 * Konstruktor der Klasse Spielerverwaltung
+	 */
 	public Spielerverwaltung(){
 		reihenfolge = -1;
 	}
+	
+	/**
+	 * @return: gibt alle Spieler in einem Vektor zurück
+	 */
 	public Vector<Spieler> getAllSpieler(){
 		return spielerListe;
 	}
+	
+	/**
+	 * @return: gibt einen Spieler an einer bestimmten Stelle i aus
+	 */
 	public Spieler getSpieler(int i){
 		return spielerListe.get(i);
 	}
+	
+	/**
+	 * fügt einen Spieler der spielerListe hinzu 
+	 * 
+	 * @return
+	 */
 	public boolean beitreten(Spieler spieler){
 		if(!spielerListe.isEmpty()){
 			if(spielerListe.lastElement().getSpielerNummer()<6){
@@ -30,6 +48,13 @@ public class Spielerverwaltung {
 		}
 	}
 	
+	/**
+	 * entfernt einen Spieler anhand seiner spielerNummer aus der spielerListe
+	 * und lässt die nächten Spieler aufrücken die hinter ihm in der Liste standen
+	 * 
+	 * @param spielerNummer
+	 * @return
+	 */
 	public boolean entfernen(int spielerNummer){
 		for(int i = 0;i < spielerListe.size();i++){
 			if(spielerListe.get(i).getSpielerNummer() == spielerNummer){
@@ -42,11 +67,20 @@ public class Spielerverwaltung {
 		return true;
 	}
 	
+	/**
+	 * 
+	 * @param miete: Geldbetrag den der Spieler zahlen muss
+	 * @param vermieter: Spieler der das Geld erhält
+	 * @param mieter: SPieler der das Geld zahlt
+	 */
 	public void mieteZahlen(int miete, Spieler vermieter, Spieler mieter){
 		if(vermieter.getSpielerNummer() != 99)
 		vermieter.setSpielerBudget(vermieter.getSpielerBudget()+miete);
 	}
 
+	/**
+	 * @return: 
+	 */
 	public Spieler reihenfolge(){
 		if(reihenfolge < spielerListe.size()-1){
 			reihenfolge++;
@@ -58,6 +92,9 @@ public class Spielerverwaltung {
 		return spielerListe.get(reihenfolge);
 	}
 
+	/**
+	 * @return: gibt einen Vektor mit den Spielern zurück die Pleite sind
+	 */
 	public Vector<Spieler> checkPleite(){
 		Vector<Spieler> v = new Vector<Spieler>();
 		for (Spieler spieler:spielerListe){
@@ -68,6 +105,9 @@ public class Spielerverwaltung {
 		return v;
 	}
 	
+	/**
+	 * @return: gibt eine zufällige int Zahl zwischen 1 und 6 aus
+	 */
 	public int wuerfeln(){
 		int zahl;
 		zahl = (int)(Math.random() * 6) + 1;
