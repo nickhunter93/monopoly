@@ -4,29 +4,29 @@ import java.util.Vector;
 import monopoly.local.valueobjects.Spieler;
 
 public class Spielerverwaltung {
-	private int reihenfolge;
+	private int order;
 	
-	private Vector<Spieler> spielerListe = new Vector<Spieler>();
+	private Vector<Spieler> playerList = new Vector<Spieler>();
 	
 	/**
 	 * Konstruktor der Klasse Spielerverwaltung
 	 */
 	public Spielerverwaltung(){
-		reihenfolge = -1;
+		order = -1;
 	}
 	
 	/**
 	 * @return: gibt alle Spieler in einem Vektor zurück
 	 */
 	public Vector<Spieler> getAllSpieler(){
-		return spielerListe;
+		return playerList;
 	}
 	
 	/**
 	 * @return: gibt einen Spieler an einer bestimmten Stelle i aus
 	 */
 	public Spieler getSpieler(int i){
-		return spielerListe.get(i);
+		return playerList.get(i);
 	}
 	
 	/**
@@ -34,16 +34,16 @@ public class Spielerverwaltung {
 	 * 
 	 * @return
 	 */
-	public boolean beitreten(Spieler spieler){
-		if(!spielerListe.isEmpty()){
-			if(spielerListe.lastElement().getSpielerNummer()<6){
-				this.spielerListe.add(spieler);
+	public boolean beitreten(Spieler player){
+		if(!playerList.isEmpty()){
+			if(playerList.lastElement().getSpielerNummer()<6){
+				this.playerList.add(player);
 				return true;
 			}else{
 				return false;
 			}
 		}else{
-			this.spielerListe.add(spieler);
+			this.playerList.add(player);
 			return true;
 		}
 	}
@@ -52,15 +52,15 @@ public class Spielerverwaltung {
 	 * entfernt einen Spieler anhand seiner spielerNummer aus der spielerListe
 	 * und lässt die nächten Spieler aufrücken die hinter ihm in der Liste standen
 	 * 
-	 * @param spielerNummer
+	 * @param playerNumber
 	 * @return
 	 */
-	public boolean entfernen(int spielerNummer){
-		for(int i = 0;i < spielerListe.size();i++){
-			if(spielerListe.get(i).getSpielerNummer() == spielerNummer){
-				spielerListe.remove(i);
-				for(int k = 0;k<spielerListe.size();k++){
-					spielerListe.get(k).setSpielerNummer(k+1);
+	public boolean entfernen(int playerNumber){
+		for(int i = 0;i < playerList.size();i++){
+			if(playerList.get(i).getSpielerNummer() == playerNumber){
+				playerList.remove(i);
+				for(int k = 0;k<playerList.size();k++){
+					playerList.get(k).setSpielerNummer(k+1);
 				}
 			}
 		}
@@ -73,23 +73,23 @@ public class Spielerverwaltung {
 	 * @param vermieter: Spieler der das Geld erhält
 	 * @param mieter: SPieler der das Geld zahlt
 	 */
-	public void mieteZahlen(int miete, Spieler vermieter, Spieler mieter){
-		if(vermieter.getSpielerNummer() != 99)
-		vermieter.setSpielerBudget(vermieter.getSpielerBudget()+miete);
+	public void mieteZahlen(int rent, Spieler landlord, Spieler renter){
+		if(landlord.getSpielerNummer() != 99)
+		landlord.setSpielerBudget(landlord.getSpielerBudget()+rent);
 	}
 
 	/**
 	 * @return: 
 	 */
 	public Spieler reihenfolge(){
-		if(reihenfolge < spielerListe.size()-1){
-			reihenfolge++;
+		if(order < playerList.size()-1){
+			order++;
 		}
 		else {
-			reihenfolge = -1;
-			reihenfolge++;
+			order = -1;
+			order++;
 		}
-		return spielerListe.get(reihenfolge);
+		return playerList.get(order);
 	}
 
 	/**
@@ -97,9 +97,9 @@ public class Spielerverwaltung {
 	 */
 	public Vector<Spieler> checkPleite(){
 		Vector<Spieler> v = new Vector<Spieler>();
-		for (Spieler spieler:spielerListe){
-			if(spieler.getSpielerBudget() < 0){
-				v.addElement(spieler);
+		for (Spieler player:playerList){
+			if(player.getSpielerBudget() < 0){
+				v.addElement(player);
 			}
 		}
 		return v;
@@ -109,9 +109,9 @@ public class Spielerverwaltung {
 	 * @return: gibt eine zufällige int Zahl zwischen 1 und 6 aus
 	 */
 	public int wuerfeln(){
-		int zahl;
-		zahl = (int)(Math.random() * 6) + 1;
+		int number;
+		number = (int)(Math.random() * 6) + 1;
 		
-		return zahl;
+		return number;
 	}
 }

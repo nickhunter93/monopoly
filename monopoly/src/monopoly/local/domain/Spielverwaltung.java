@@ -5,13 +5,13 @@ import monopoly.local.valueobjects.Spielfeld;
 import monopoly.local.valueobjects.Strasse;
 
 public class Spielverwaltung {
-	private Spielfeld feld;
+	private Spielfeld field;
 	
 	/**
 	 * Konstruktor der Klasse Spielverwaltung
 	 */
 	public Spielverwaltung(){
-		feld = new Spielfeld();
+		field = new Spielfeld();
 	}
 	
 	/**
@@ -20,35 +20,35 @@ public class Spielverwaltung {
 	 * @param spieler: 
 	 * @param zugweite: int Zahl wie viele Felder der Spieler gehen darf
 	 */
-	public void move(Spieler spieler,int zugweite){
-		int spielerPosition = spieler.getSpielerPosition().getNummer();
-		if(feld.getFieldSize()>spielerPosition+zugweite){
-			Feld newPosition = feld.getPosition(spieler, zugweite);
-			spieler.setSpielerPosition(newPosition);
+	public void move(Spieler player,int steps){
+		int playerPosition = player.getSpielerPosition().getNummer();
+		if(field.getFieldSize()>playerPosition+steps){
+			Feld newPosition = field.getPosition(player, steps);
+			player.setSpielerPosition(newPosition);
 		}else{
-			int position = spielerPosition;
-			for(int i = 0;i<zugweite;i++){
-				if(position<feld.getFieldSize()-1){
+			int position = playerPosition;
+			for(int i = 0;i<steps;i++){
+				if(position<field.getFieldSize()-1){
 					position++;
 				}else{
-					if (feld.getLos() instanceof Strasse){
-						spieler.setSpielerBudget(spieler.getSpielerBudget()-((Strasse)feld.getLos()).getMietpreis());
-						position = -spielerPosition;
+					if (field.getLos() instanceof Strasse){
+						player.setSpielerBudget(player.getSpielerBudget()-((Strasse)field.getLos()).getMietpreis());
+						position = -playerPosition;
 					}
 				}
 			}
-			Feld newPosition = feld.getPosition(spieler, position);
-			spieler.setSpielerPosition(newPosition);
+			Feld newPosition = field.getPosition(player, position);
+			player.setSpielerPosition(newPosition);
 		}
 	}
 	
 	/**
 	 * 
-	 * @param spieler
+	 * @param player
 	 * @return: gibt den Namen der Straße an dem sich der Spieler befindet als String zurück
 	 */
-	public String getStrasseName(Spieler spieler){
-		Feld position = spieler.getSpielerPosition();
+	public String getStrasseName(Spieler player){
+		Feld position = player.getSpielerPosition();
 		String name = position.getName();
 		return name;
 	}
@@ -59,11 +59,11 @@ public class Spielverwaltung {
 	 * @return: gibt den Besitzer des Feldes zurück auf der Spieler sich befindet
 	 */
 	public Spieler getBesitzer(Feld position){
-		Spieler besitzer = null;
+		Spieler owner = null;
 		if(position instanceof Strasse){
-			besitzer = ((Strasse) position).getBesitzer();
+			owner = ((Strasse) position).getBesitzer();
 		}
-		return besitzer;
+		return owner;
 	}
 
 	/**
@@ -71,40 +71,40 @@ public class Spielverwaltung {
 	 * durch den Aufruf der switchHypthek-Funktion in der Klasse Spielfeld 
 	 */
 	public String switchHypothek(int position){
-		return feld.switchHypothek(position);
+		return field.switchHypothek(position);
 	}
 	
 	/**
 	 * 
-	 * @param spieler
+	 * @param player
 	 * @return: gibt den Mietpreis der Straße zurück auf welcher der Spieler sich befindet
 	 */
-	public int miete(Spieler spieler){
-		Strasse strasse = null;
-		Feld position = spieler.getSpielerPosition();
+	public int miete(Spieler player){
+		Strasse street = null;
+		Feld position = player.getSpielerPosition();
 		if(position instanceof Strasse){
-			strasse =((Strasse)position);
+			street =((Strasse)position);
 		}
-		return strasse.getMietpreis();
+		return street.getMietpreis();
 	}
 	
 	/**
 	 * setzt den Besitzer der Straße auf den Spieler der die Straße gekauft hat
 	 * und zieht dem Spieler das Geld für die Straße aus seinem Budget ab
 	 */
-	public boolean kaufStrasse(Spieler spieler){
-		Strasse strasse;
-		Feld position = spieler.getSpielerPosition();
+	public boolean kaufStrasse(Spieler player){
+		Strasse street;
+		Feld position = player.getSpielerPosition();
 		if(position instanceof Strasse){
-			strasse = (Strasse)position;
-			Spieler besitzer = strasse.getBesitzer();
-			int spielerNummer = besitzer.getSpielerNummer();
-			int budget = spieler.getSpielerBudget();
-			int subtrahend = strasse.getKaufpreis();
-			int differenz = budget - subtrahend;
-			if( spielerNummer == 99 && differenz >= 0){
-				strasse.setBesitzer(spieler);
-				spieler.setSpielerBudget(differenz);
+			street = (Strasse)position;
+			Spieler owner = street.getBesitzer();
+			int playerNumber = owner.getSpielerNummer();
+			int budget = player.getSpielerBudget();
+			int subtrahend = street.getKaufpreis();
+			int difference = budget - subtrahend;
+			if( playerNumber == 99 && difference >= 0){
+				street.setBesitzer(player);
+				player.setSpielerBudget(difference);
 				return true;
 			}
 		}
@@ -117,7 +117,7 @@ public class Spielverwaltung {
 	 * @return: gibt das Losfeld zurück 
 	 */
 	public Feld getLos(){
-		return feld.getLos();
+		return field.getLos();
 	}
 	
 	/**
@@ -125,47 +125,47 @@ public class Spielverwaltung {
 	 * @return
 	 */
 	public Feld[] getSpielfeld(){
-		return feld.getSpielfeld();
+		return field.getSpielfeld();
 	}
 	
 	/**
 	 * @return: gibt den Feldnamen anhand einer Nummer zurück
 	 */
 	public String getFeldName(int nr){
-		return feld.getFeldName(nr);
+		return field.getFeldName(nr);
 	}
 	
 	/**
 	 * @return: gibt das Feld zurück an dem sich der Spieler befindet
 	 */
-	public Feld getFeld(Spieler spieler){
-		Feld position = spieler.getSpielerPosition();
-		return feld.getFeld(position);
+	public Feld getFeld(Spieler player){
+		Feld position = player.getSpielerPosition();
+		return field.getFeld(position);
 	}
 	
 	/**
 	 * baut ein Haus an der Stelle position 
 	 * 
 	 * @param position
-	 * @param spieler
+	 * @param player
 	 * @return: gibt das Feld mit dem dazu gebauten Haus zurück
 	 */
-	public boolean bauHaus(int position,Spieler spieler){
-		return feld.bauHaus(position,spieler);	
+	public boolean bauHaus(int position,Spieler player){
+		return field.bauHaus(position,player);	
 	}
 	
 	/**
 	 * @return: gibt die Straßen zurück die einem Spieler gehören
 	 */
-	public Strasse[] getYourStreets(Spieler spieler){
-		return feld.getYourStreets(spieler);
+	public Strasse[] getYourStreets(Spieler player){
+		return field.getYourStreets(player);
 	}
 	
 	/**
 	 * @return: gibt die Anzahl der Häuser zurück die auf einem Feld stehen
 	 */
 	public int getHaeuseranzahl(int position){
-		return feld.getHaeuseranzahl(position);
+		return field.getHaeuseranzahl(position);
 	}
 	
 }

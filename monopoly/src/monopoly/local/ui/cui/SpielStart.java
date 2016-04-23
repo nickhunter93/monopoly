@@ -12,23 +12,23 @@ import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Strasse;
 
 public class SpielStart {
-	private boolean schleife = true;
+	private boolean loop = true;
 	private boolean roundLoop = true;
-	private Spieler spieler;
+	private Spieler player;
 	private String buffer;
-	private int auswahl;
-	private Spielverwaltung feldverwaltung;
-	private Spielerverwaltung verwaltung;
+	private int choise;
+	private Spielverwaltung fieldManagement;
+	private Spielerverwaltung management;
 	
 	/**
 	 * Konstruktor der Klasse SpielStart
 	 * 
-	 * @param feldverwaltung
-	 * @param verwaltung
+	 * @param fieldManagement
+	 * @param management
 	 */
-	public SpielStart(Spielverwaltung feldverwaltung , Spielerverwaltung verwaltung){
-		this.feldverwaltung = feldverwaltung;
-		this.verwaltung = verwaltung;
+	public SpielStart(Spielverwaltung fieldManagement , Spielerverwaltung management){
+		this.fieldManagement = fieldManagement;
+		this.management = management;
 	}
 	
 	/**
@@ -43,48 +43,48 @@ public class SpielStart {
 	 * case 3: der Spieler nimmt wenn es möglich ist eine Hypothek auf und setzt wenn es möglich ist seine Runde fort
 	 */
 	public void start(){
-			BufferedReader eingabe = new BufferedReader(new InputStreamReader(System.in));
-			while(schleife){
-				spieler = verwaltung.reihenfolge();
+			BufferedReader intake = new BufferedReader(new InputStreamReader(System.in));
+			while(loop){
+				player = management.reihenfolge();
 				roundLoop = true;
 				do{
 					try {
 						System.out.println();
 						System.out.println();
 						System.out.println();
-						System.out.println("Spieler "+spieler.getSpielerNummer()+" "+spieler.getSpielerName()+" ist dran.");
-						System.out.println("Ihr Budget beträgt : "+spieler.getSpielerBudget());
+						System.out.println("Spieler "+player.getSpielerNummer()+" "+player.getSpielerName()+" ist dran.");
+						System.out.println("Ihr Budget beträgt : "+player.getSpielerBudget());
 						System.out.println("Was wollen Sie tun?");
 						System.out.println("1:Würfeln.");
 						System.out.println("2:Haus bauen.");
 						System.out.println("3:Hypothek aufnehmen.");
-						buffer = eingabe.readLine();
-						auswahl = Integer.parseInt(buffer);
+						buffer = intake.readLine();
+						choise = Integer.parseInt(buffer);
 						
 					} catch (IOException e) {
 						e.printStackTrace();
-						auswahl = 0;
+						choise = 0;
 						System.out.println("Auswahl fehlerhaft.");
 					} catch (NumberFormatException e){
 						e.printStackTrace();
-						auswahl = 0;
+						choise = 0;
 						System.out.println("Auswahl fehlerhaft.");
 					}
-					Strasse[] yourStreets = feldverwaltung.getYourStreets(spieler);
-					switch(auswahl){
-					case 1:		int anzahl = verwaltung.wuerfeln();
-								wuerfelAnzeigen(anzahl);
-								feldverwaltung.move(spieler, anzahl);
-								showFeld(feldverwaltung.getSpielfeld(),verwaltung.getAllSpieler());
-								System.out.println("Sie befinden sich auf der Straße : "+feldverwaltung.getStrasseName(spieler));
-								if (feldverwaltung.getBesitzer(spieler.getSpielerPosition()).getSpielerNummer() ==  99){
+					Strasse[] yourStreets = fieldManagement.getYourStreets(player);
+					switch(choise){
+					case 1:		int number = management.wuerfeln();
+								wuerfelAnzeigen(number);
+								fieldManagement.move(player, number);
+								showFeld(fieldManagement.getSpielfeld(),management.getAllSpieler());
+								System.out.println("Sie befinden sich auf der Straße : "+fieldManagement.getStrasseName(player));
+								if (fieldManagement.getBesitzer(player.getSpielerPosition()).getSpielerNummer() ==  99){
 									boolean loop = true;
 									do{
 										System.out.println("Wollen Sie die Strasse kaufen?");
 										System.out.println("'y' für Ja/ 'n' für Nein.");
 										char check = 'k';
 										try {
-											buffer = eingabe.readLine();
+											buffer = intake.readLine();
 											if(buffer.length() != 0){
 												check = buffer.charAt(0);
 											}else {
@@ -95,8 +95,8 @@ public class SpielStart {
 											e.printStackTrace();
 										}
 										if(check == 'y' || check == 'Y'){
-											System.out.println(feldverwaltung.kaufStrasse(spieler) ? "Kauf erfolgreich" : "Kauf fehlgeschlagen");
-											System.out.println(spieler.getSpielerName()+" ihr Budget beträgt : "+spieler.getSpielerBudget());
+											System.out.println(fieldManagement.kaufStrasse(player) ? "Kauf erfolgreich" : "Kauf fehlgeschlagen");
+											System.out.println(player.getSpielerName()+" ihr Budget beträgt : "+player.getSpielerBudget());
 											loop = false;
 										}else if(check == 'n' || check == 'N'){
 											loop = false;
@@ -107,20 +107,20 @@ public class SpielStart {
 									}while(loop == true);
 									
 								}else{
-									spieler.setSpielerBudget(spieler.getSpielerBudget() - feldverwaltung.miete(spieler));
-									verwaltung.mieteZahlen(feldverwaltung.miete(spieler), feldverwaltung.getBesitzer(spieler.getSpielerPosition()),spieler);
-									System.out.println("Ihr Budget beträgt jetzt = "+spieler.getSpielerBudget());
+									player.setSpielerBudget(player.getSpielerBudget() - fieldManagement.miete(player));
+									management.mieteZahlen(fieldManagement.miete(player), fieldManagement.getBesitzer(player.getSpielerPosition()),player);
+									System.out.println("Ihr Budget beträgt jetzt = "+player.getSpielerBudget());
 								}
 								roundLoop=false;
 					break;
 					case 2:		
 								if(yourStreets != null){
-									for(Strasse strasse : yourStreets){
-										int nr = strasse.getNummer();
-										String strassenName = feldverwaltung.getFeldName(nr);
-										int hausAnzahl = feldverwaltung.getHaeuseranzahl(nr);
-										System.out.print(nr+" : "+strassenName+" hat "+hausAnzahl);
-										if(hausAnzahl == 1){
+									for(Strasse steet : yourStreets){
+										int nr = steet.getNummer();
+										String streetName = fieldManagement.getFeldName(nr);
+										int houseNumber = fieldManagement.getHaeuseranzahl(nr);
+										System.out.print(nr+" : "+streetName+" hat "+houseNumber);
+										if(houseNumber == 1){
 											System.out.println(" Haus.");
 										}else{
 											System.out.println(" Häuser.");
@@ -128,17 +128,17 @@ public class SpielStart {
 									}
 									try{
 										System.out.println("Geben Sie die Straßen-Nummer, ein auf der Sie ein Haus bauen möchten.");
-										buffer = eingabe.readLine();
-										auswahl = Integer.parseInt(buffer);
-										boolean pruefen = false;
-										for(Strasse strasse : yourStreets){
-											int nr = strasse.getNummer();
-											if(auswahl == nr){
-												pruefen = true;
+										buffer = intake.readLine();
+										choise = Integer.parseInt(buffer);
+										boolean test = false;
+										for(Strasse street : yourStreets){
+											int nr = street.getNummer();
+											if(choise == nr){
+												test = true;
 											}
 										}
-										if(pruefen){
-											if(feldverwaltung.bauHaus(auswahl, spieler)){
+										if(test){
+											if(fieldManagement.bauHaus(choise, player)){
 												System.out.println("Das Haus wurde erfolgreich gebaut.");
 											}else{
 												System.out.println("Haus konnte nicht gebaut werden.");
@@ -149,11 +149,11 @@ public class SpielStart {
 										
 									} catch (IOException e) {
 										e.printStackTrace();
-										auswahl = 0;
+										choise = 0;
 										System.out.println("Auswahl fehlerhaft.");
 									} catch (NumberFormatException e){
 										e.printStackTrace();
-										auswahl = 0;
+										choise = 0;
 										System.out.println("Auswahl fehlerhaft.");
 									}
 								}else{
@@ -163,24 +163,24 @@ public class SpielStart {
 								roundLoop = true;
 					break;
 					case 3: 	if(yourStreets != null){
-									for(Strasse strasse : yourStreets){
-										int nr = strasse.getNummer();
-										String strassenName = feldverwaltung.getFeldName(nr);
-										System.out.println(nr+" : "+strassenName+" hat Hypothek aufgenommen : "+strasse.getHypothek());
+									for(Strasse street : yourStreets){
+										int nr = street.getNummer();
+										String streetName = fieldManagement.getFeldName(nr);
+										System.out.println(nr+" : "+streetName+" hat Hypothek aufgenommen : "+street.getHypothek());
 									}
 									try{
 										System.out.println("Geben Sie die Straßen-Nummer, ein auf der Sie die Hypothek ändern wollen.");
-										buffer = eingabe.readLine();
-										auswahl = Integer.parseInt(buffer);
-										boolean pruefen = false;
-										for(Strasse strasse : yourStreets){
-											int nr = strasse.getNummer();
-											if(auswahl == nr){
-												pruefen = true;
+										buffer = intake.readLine();
+										choise = Integer.parseInt(buffer);
+										boolean test = false;
+										for(Strasse street : yourStreets){
+											int nr = street.getNummer();
+											if(choise == nr){
+												test = true;
 											}
 										}
-										if(pruefen){
-											String str = feldverwaltung.switchHypothek(auswahl);
+										if(test){
+											String str = fieldManagement.switchHypothek(choise);
 											System.out.println(str);
 										}else{
 											System.out.println("Die Strasse existiert nicht oder Sie sind nicht ihr Besitzer.");
@@ -188,11 +188,11 @@ public class SpielStart {
 										
 									} catch (IOException e) {
 										e.printStackTrace();
-										auswahl = 0;
+										choise = 0;
 										System.out.println("Auswahl fehlerhaft.");
 									} catch (NumberFormatException e){
 										e.printStackTrace();
-										auswahl = 0;
+										choise = 0;
 										System.out.println("Auswahl fehlerhaft.");
 									}
 								}else{
@@ -204,19 +204,19 @@ public class SpielStart {
 								roundLoop = true;
 					}
 				}while(roundLoop);
-				if(!verwaltung.checkPleite().isEmpty()){
-					for(Spieler player:verwaltung.checkPleite()){
-						Strasse[] yourStreets = feldverwaltung.getYourStreets(player);
+				if(!management.checkPleite().isEmpty()){
+					for(Spieler player:management.checkPleite()){
+						Strasse[] yourStreets = fieldManagement.getYourStreets(player);
 						for(Strasse strasse : yourStreets){
 							strasse.setBesitzer(new Spieler("Bank", 99, null, -1));
 						}
-						verwaltung.entfernen(player.getSpielerNummer());
+						management.entfernen(player.getSpielerNummer());
 					}
 				}else{}
-				if(verwaltung.getAllSpieler().size() == 1){
-					for(Spieler player:verwaltung.getAllSpieler()){
+				if(management.getAllSpieler().size() == 1){
+					for(Spieler player:management.getAllSpieler()){
 						System.out.println("Der Gewinner ist : "+player.getSpielerName());
-						schleife = false;
+						loop = false;
 					}
 				}
 			}
@@ -225,48 +225,48 @@ public class SpielStart {
 	/**
 	 * gibt das Spielfeld mit den Spielern auf der Konsole aus
 	 * 
-	 * @param feld
-	 * @param spieler
+	 * @param field
+	 * @param player
 	 */
-	public static void showFeld(Feld[] feld,Vector<Spieler> spieler){
-		int[] arrayLinks =  {35,34,33,32,31,30,29,28};
-		int[] arrayRechts = {10,11,12,13,14,15,16,17};
+	public static void showFeld(Feld[] field,Vector<Spieler> player){
+		int[] arrayLeft =  {35,34,33,32,31,30,29,28};
+		int[] arrayRight = {10,11,12,13,14,15,16,17};
 		System.out.println("|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|");
 		System.out.print("|");
 		for(int i = 0;i<10;i++){
-			int anzahl=0;
-			for(Spieler k:spieler)
+			int number=0;
+			for(Spieler k:player)
 				if (k.getSpielerPosition().getNummer() == i) {
-					anzahl = anzahl+1;
+					number = number+1;
 				}
-			System.out.print("  "+anzahl+"  |");
+			System.out.print("  "+number+"  |");
 		}
 		System.out.println();
 		System.out.println("|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|");
-		for(int i=0;i<arrayLinks.length;i++){
-			int anzahl=0;
-			for(Spieler k:spieler){
-				if (k.getSpielerPosition().getNummer() == arrayLinks[i]) {
-					anzahl = anzahl+1;
+		for(int i=0;i<arrayLeft.length;i++){
+			int number=0;
+			for(Spieler k:player){
+				if (k.getSpielerPosition().getNummer() == arrayLeft[i]) {
+					number = number+1;
 				}
 			}
-			int anzahl2=0;
-			for(Spieler k:spieler)
-				if (k.getSpielerPosition().getNummer() == arrayRechts[i]) {
-					anzahl2 = anzahl2+1;
+			int number2=0;
+			for(Spieler k:player)
+				if (k.getSpielerPosition().getNummer() == arrayRight[i]) {
+					number2 = number2+1;
 				}
-			System.out.println("|  "+anzahl+"  |                                               |  "+anzahl2+"  |");
-			if(i!=arrayLinks.length-1)System.out.println("|-----|                                               |-----|");
+			System.out.println("|  "+number+"  |                                               |  "+number2+"  |");
+			if(i!=arrayLeft.length-1)System.out.println("|-----|                                               |-----|");
 		}
 		System.out.println("|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|");
 		System.out.print("|");
 		for(int i = 27;i>17;i--){
-			int anzahl=0;
-			for(Spieler k:spieler)
+			int number=0;
+			for(Spieler k:player)
 			if (k.getSpielerPosition().getNummer() == i) {
-				anzahl = anzahl+1;
+				number = number+1;
 				}
-			System.out.print("  "+anzahl+"  |");
+			System.out.print("  "+number+"  |");
 		}
 		System.out.println();
 		System.out.println("|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|");
@@ -275,11 +275,11 @@ public class SpielStart {
 	/**
 	 * gibt die gewürfelte Zahl auf der Konsole aus
 	 * 
-	 * @param zahl
+	 * @param number
 	 * @return
 	 */
-	public int wuerfelAnzeigen(int zahl){
-		switch(zahl){
+	public int wuerfelAnzeigen(int number){
+		switch(number){
 		case 1: 
 			System.out.println("-------");
 			System.out.println("|     |");
@@ -328,6 +328,6 @@ public class SpielStart {
 			System.out.println("-------");
 		break;
 	}
-		return zahl;
+		return number;
 	}
 }

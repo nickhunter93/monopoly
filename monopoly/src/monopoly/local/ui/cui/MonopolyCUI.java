@@ -23,40 +23,40 @@ public class MonopolyCUI {
 		// MonopolyCUI-Objekt erzeugen
 		// ... starten
 		
-		boolean schleife = true;
-		Spielverwaltung feldverwaltung = new Spielverwaltung();
-		Spielerverwaltung verwaltung = new Spielerverwaltung();
-		while(schleife){
+		boolean loop = true;
+		Spielverwaltung fielManagement = new Spielverwaltung();
+		Spielerverwaltung management = new Spielerverwaltung();
+		while(loop){
 			String buffer;
-			int auswahl = 0;
-			BufferedReader eingabe = new BufferedReader(new InputStreamReader(System.in));
+			int choise = 0;
+			BufferedReader intake = new BufferedReader(new InputStreamReader(System.in));
 			try{
 			System.out.println("Menü:");
 			System.out.println("1:Beitreten.");
 			System.out.println("2:Entfernen.");
 			System.out.println("3:Spiel starten.");
-			buffer = eingabe.readLine();
-			auswahl = Integer.parseInt(buffer);
+			buffer = intake.readLine();
+			choise = Integer.parseInt(buffer);
 			}catch(IOException e ){
 				e.printStackTrace();
 				System.err.println("Menü Auswahl fehlerhaft.");
-				auswahl = 0;
+				choise = 0;
 			}catch(NumberFormatException e){
 					System.err.println("Menü Auswahl fehlerhaft.");
-					auswahl = 0;
+					choise = 0;
 			}
-			switch(auswahl){
+			switch(choise){
 			case 1 : 	if(true){
 							String name;
-							int spielernummer;
+							int playerNumber;
 					
 							try {
 								System.out.println("Geben Sie den Namen an.");
-								name = eingabe.readLine();
-								spielernummer = verwaltung.getAllSpieler().size();
-								Spieler player = new Spieler(name,spielernummer+1,feldverwaltung.getLos(),2000);
-								if(verwaltung.beitreten(player)){
-									System.out.println("Spieler " + (spielernummer+1) + " von 6 erfolgreich hinzugefügt.");
+								name = intake.readLine();
+								playerNumber = management.getAllSpieler().size();
+								Spieler player = new Spieler(name,playerNumber+1,fielManagement.getLos(),2000);
+								if(management.beitreten(player)){
+									System.out.println("Spieler " + (playerNumber+1) + " von 6 erfolgreich hinzugefügt.");
 								}else{
 									System.out.println("Maximale Spieleranzahl erreicht.");
 								}
@@ -68,17 +68,17 @@ public class MonopolyCUI {
 			break;			
 			case 2 :	if(true){
 							String str;
-							int spielernummer;
+							int playerNumber;
 		
 							try {
 								System.out.println("Geben Sie die Spieler Nummer an.");
-								for(int i=0;i<verwaltung.getAllSpieler().size();i++){
-									System.out.println(verwaltung.getSpieler(i).getSpielerNummer()+" :"+verwaltung.getSpieler(i).getSpielerName()+".");
+								for(int i=0;i<management.getAllSpieler().size();i++){
+									System.out.println(management.getSpieler(i).getSpielerNummer()+" :"+management.getSpieler(i).getSpielerName()+".");
 								}
-								str = eingabe.readLine();
-								spielernummer = Integer.parseInt(str);
-								str = verwaltung.getSpieler(spielernummer-1).getSpielerName();
-								if(verwaltung.entfernen(spielernummer)){
+								str = intake.readLine();
+								playerNumber = Integer.parseInt(str);
+								str = management.getSpieler(playerNumber-1).getSpielerName();
+								if(management.entfernen(playerNumber)){
 									System.out.println("Spieler "+str+" wurde entfernt.");
 								}else{
 									System.out.println("Kein Spieler mit der Nummer gefunden.");
@@ -89,8 +89,8 @@ public class MonopolyCUI {
 							}
 						}
 			break;
-			case 3 :	SpielStart spiel = new SpielStart(feldverwaltung,verwaltung);
-						spiel.start();
+			case 3 :	SpielStart game = new SpielStart(fielManagement,management);
+						game.start();
 			break;
 			default:	System.out.println("Keine Gültige Auswahl.");
 			}
