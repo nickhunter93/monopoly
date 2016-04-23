@@ -31,11 +31,13 @@ public class Spielverwaltung {
 			spieler.setSpielerPosition(newPosition);
 		}
 	}
+	
 	public String getStrasseName(Spieler spieler){
 		Feld position = spieler.getSpielerPosition();
 		String name = position.getName();
 		return name;
 	}
+	
 	public Spieler getBesitzer(Feld position){
 		Spieler besitzer = null;
 		if(position instanceof Strasse){
@@ -55,6 +57,15 @@ public class Spielverwaltung {
 			strasse =((Strasse)position);
 		}
 		return strasse.getMietpreis();
+	}
+	
+	public int preis(Spieler spieler){
+		Strasse strasse = null;
+		Feld position = spieler.getSpielerPosition();
+		if(position instanceof Strasse){
+			strasse =((Strasse)position);
+		}
+		return strasse.getKaufpreis();
 	}
 	
 	public boolean kaufStrasse(Spieler spieler){

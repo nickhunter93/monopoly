@@ -9,7 +9,7 @@ public class Spielfeld {
 	public Spielfeld(){
 		feld = new Strasse[fieldSize];
 		for (int i=0;i<fieldSize;i++){
-			feld[i] = new Strasse("test",2000,50,false,i);
+			feld[i] = new Strasse("Teststrasse",2000,50,false,i);
 			((Strasse)feld[i]).setBesitzer(new Spieler("Bank", 99, null, -1));
 		}
 		feld[0] = new Strasse("Los",0,-2000,false,0);

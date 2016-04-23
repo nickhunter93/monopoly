@@ -35,9 +35,9 @@ public class SpielStart {
 						System.out.println();
 						System.out.println();
 						System.out.println("Spieler "+spieler.getSpielerNummer()+" "+spieler.getSpielerName()+" ist dran.");
-						System.out.println("Ihr Budget beträgt : "+spieler.getSpielerBudget());
+						System.out.println("Ihr Budget betrï¿½gt : "+spieler.getSpielerBudget());
 						System.out.println("Was wollen Sie tun?");
-						System.out.println("1:Würfeln.");
+						System.out.println("1:Wï¿½rfeln.");
 						System.out.println("2:Haus bauen.");
 						System.out.println("3:Hypothek aufnehmen.");
 						buffer = eingabe.readLine();
@@ -58,13 +58,17 @@ public class SpielStart {
 								wuerfelAnzeigen(anzahl);
 								feldverwaltung.move(spieler, anzahl);
 								showFeld(feldverwaltung.getSpielfeld(),verwaltung.getAllSpieler());
-								System.out.println("Sie befinden sich auf der Straße : "+feldverwaltung.getStrasseName(spieler));
-								//Straße kaufen / miete zahlen hier einfügen.
+								System.out.println("Sie befinden sich auf der Straï¿½e : "+feldverwaltung.getStrasseName(spieler));
+								System.out.print("Mietpreis : "+feldverwaltung.miete(spieler));
+								System.out.print(" / Kaufpreis : "+feldverwaltung.preis(spieler));
+								System.out.print(" / Aktuelles Budget : "+spieler.getSpielerBudget());
+								System.out.println("");
+								//Straï¿½e kaufen / miete zahlen hier einfï¿½gen.
 								if (feldverwaltung.getBesitzer(spieler.getSpielerPosition()).getSpielerNummer() ==  99){
 									boolean loop = true;
 									do{
 										System.out.println("Wollen Sie die Strasse kaufen?");
-										System.out.println("'y' für Ja/ 'n' für Nein.");
+										System.out.println("'y' fï¿½r Ja/ 'n' fï¿½r Nein.");
 										char check = 'k';
 										try {
 											buffer = eingabe.readLine();
@@ -79,7 +83,8 @@ public class SpielStart {
 										}
 										if(check == 'y' || check == 'Y'){
 											System.out.println(feldverwaltung.kaufStrasse(spieler) ? "Kauf erfolgreich" : "Kauf fehlgeschlagen");
-											System.out.println(spieler.getSpielerName()+" ihr Budget beträgt : "+spieler.getSpielerBudget());
+											System.out.println("Kosten: -" + feldverwaltung.preis(spieler));
+											System.out.println(spieler.getSpielerName()+" ihr Budget betrï¿½gt : "+spieler.getSpielerBudget());
 											loop = false;
 										}else if(check == 'n' || check == 'N'){
 											loop = false;
@@ -92,7 +97,7 @@ public class SpielStart {
 								}else{
 									spieler.setSpielerBudget(spieler.getSpielerBudget() - feldverwaltung.miete(spieler));
 									verwaltung.mieteZahlen(feldverwaltung.miete(spieler), feldverwaltung.getBesitzer(spieler.getSpielerPosition()),spieler);
-									System.out.println("Ihr Budget beträgt jetzt = "+spieler.getSpielerBudget());
+									System.out.println("Ihr Budget betrï¿½gt jetzt = "+spieler.getSpielerBudget());
 								}
 								roundLoop=false;
 					break;
@@ -106,11 +111,11 @@ public class SpielStart {
 										if(hausAnzahl == 1){
 											System.out.println(" Haus.");
 										}else{
-											System.out.println(" Häuser.");
+											System.out.println(" Hï¿½user.");
 										}
 									}
 									try{
-										System.out.println("Geben Sie die Straßen-Nummer, ein auf der Sie ein Haus bauen möchten.");
+										System.out.println("Geben Sie die Straï¿½en-Nummer, ein auf der Sie ein Haus bauen mï¿½chten.");
 										buffer = eingabe.readLine();
 										auswahl = Integer.parseInt(buffer);
 										boolean pruefen = false;
@@ -140,7 +145,7 @@ public class SpielStart {
 										System.out.println("Auswahl fehlerhaft.");
 									}
 								}else{
-									System.out.println("Sie besitzen keine Straßen.");
+									System.out.println("Sie besitzen keine Straï¿½en.");
 								}
 							
 								roundLoop = true;
@@ -152,7 +157,7 @@ public class SpielStart {
 										System.out.println(nr+" : "+strassenName+" hat Hypothek aufgenommen : "+strasse.getHypothek());
 									}
 									try{
-										System.out.println("Geben Sie die Straßen-Nummer, ein auf der Sie die Hypothek ändern wollen.");
+										System.out.println("Geben Sie die Straï¿½en-Nummer, ein auf der Sie die Hypothek ï¿½ndern wollen.");
 										buffer = eingabe.readLine();
 										auswahl = Integer.parseInt(buffer);
 										boolean pruefen = false;
@@ -179,11 +184,11 @@ public class SpielStart {
 										System.out.println("Auswahl fehlerhaft.");
 									}
 								}else{
-									System.out.println("Sie besitzen keine Straßen.");
+									System.out.println("Sie besitzen keine Straï¿½en.");
 								}
 								roundLoop = true;
 					break;
-					default: 	System.out.println("Keine Gültige Auswahl.");
+					default: 	System.out.println("Keine Gï¿½ltige Auswahl.");
 								roundLoop = true;
 					}
 				}while(roundLoop);
