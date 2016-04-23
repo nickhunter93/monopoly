@@ -3,7 +3,7 @@ package monopoly.local.valueobjects;
 import java.util.Vector;
 
 public class Spielfeld {
-	private Feld[] feld;
+	private Feld[] field;
 	private int fieldSize = 36;
 	
 	/**
@@ -13,13 +13,13 @@ public class Spielfeld {
 	 * zum Start des Spieles alle Straßen niemandem gehören
 	 */
 	public Spielfeld(){
-		feld = new Strasse[fieldSize];
+		field = new Strasse[fieldSize];
 		for (int i=0;i<fieldSize;i++){
-			feld[i] = new Strasse("test",2000,50,false,i);
-			((Strasse)feld[i]).setBesitzer(new Spieler("Bank", 99, null, -1));
+			field[i] = new Strasse("test",2000,50,false,i);
+			((Strasse)field[i]).setBesitzer(new Spieler("Bank", 99, null, -1));
 		}
-		feld[0] = new Strasse("Los",0,-2000,false,0);
-		((Strasse)feld[0]).setBesitzer(new Spieler("Bank", 98, null, -1));
+		field[0] = new Strasse("Los",0,-2000,false,0);
+		((Strasse)field[0]).setBesitzer(new Spieler("Bank", 98, null, -1));
 	}
 	
 	/**
@@ -29,9 +29,9 @@ public class Spielfeld {
 	 * @return
 	 */
 	public String switchHypothek(int position){
-		if(feld[position] instanceof Strasse){
-			Strasse strasse = (Strasse)feld[position];
-			return strasse.switchHypothek();
+		if(field[position] instanceof Strasse){
+			Strasse street = (Strasse)field[position];
+			return street.switchHypothek();
 		}
 		return "Strasse nicht gefunden.";
 	}
@@ -47,34 +47,34 @@ public class Spielfeld {
 	 * @return: gibt das Losfeld zurück
 	 */
 	public Feld getLos(){
-		return feld[0];
+		return field[0];
 	}
 	
 	/**
 	 * ändert die Position des Spielers
 	 * 
-	 * @param spieler
-	 * @param zugweite
+	 * @param player
+	 * @param steps
 	 * @return: gibt die neue Position des Spielers zurück
 	 */
-	public Feld getPosition(Spieler spieler,int zugweite){
-		Feld position = spieler.getSpielerPosition();
-		int newPosition = position.getNummer()+zugweite;
-		return feld[newPosition];
+	public Feld getPosition(Spieler player,int steps){
+		Feld position = player.getSpielerPosition();
+		int newPosition = position.getNummer()+steps;
+		return field[newPosition];
 	}
 	
 	/**
 	 * @return: gibt das aktuelle Feld zurück
 	 */
 	public Feld[] getSpielfeld(){
-		return this.feld;
+		return this.field;
 	}
 	
 	/**
 	 * @return gibt den Namen des Feldes anhand der Feldnummer zurück
 	 */
 	public String getFeldName(int nr){
-		return feld[nr].getName();
+		return field[nr].getName();
 	}
 	
 	/**
@@ -82,9 +82,9 @@ public class Spielfeld {
 	 * @return: gibt ein Feld anhand der Feldposition zurück
 	 */
 	public Feld getFeld(Feld position){
-		for(Feld feld:this.feld){
-			if(feld.equals(position)){
-				return feld;
+		for(Feld field:this.field){
+			if(field.equals(position)){
+				return field;
 			}
 		}
 		return null;
@@ -92,17 +92,17 @@ public class Spielfeld {
 
 	/**
 	 * 
-	 * @param spieler
+	 * @param player
 	 * @return: gibt einen Vektor mit Straßen zurück die einem Spieler gehören
 	 */
-	public Strasse[] getYourStreets(Spieler spieler){
+	public Strasse[] getYourStreets(Spieler player){
 		Vector<Strasse> vec = new Vector<Strasse>();
-		for(Feld feld : this.feld){
-			if(feld instanceof Strasse){
-				Strasse strasse = (Strasse)feld;
-				Spieler besitzer = strasse.getBesitzer();
-				if(besitzer.equals(spieler)){
-					vec.addElement(strasse);
+		for(Feld field : this.field){
+			if(field instanceof Strasse){
+				Strasse street = (Strasse)field;
+				Spieler owner = street.getBesitzer();
+				if(owner.equals(player)){
+					vec.addElement(street);
 				}
 			}
 		}
@@ -119,9 +119,9 @@ public class Spielfeld {
 	/**
 	 * baut ein Haus auf einer Straße  
 	 */
-	public boolean bauHaus(int position,Spieler spieler){
-		if(feld[position] instanceof Strasse){
-			return ((Strasse)feld[position]).bauHaus(spieler);
+	public boolean bauHaus(int position,Spieler player){
+		if(field[position] instanceof Strasse){
+			return ((Strasse)field[position]).bauHaus(player);
 		}
 		return false;
 	}
@@ -129,8 +129,8 @@ public class Spielfeld {
 	 * @return gibt die Häuseranzahl auf einer Straße als int zurück
 	 */
 	public int getHaeuseranzahl(int position){
-		if (feld[position] instanceof Strasse){
-		return ((Strasse)feld[position]).getHaeuseranzahl();
+		if (field[position] instanceof Strasse){
+		return ((Strasse)field[position]).getHaeuseranzahl();
 		}
 		return -1;
 	}

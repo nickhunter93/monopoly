@@ -2,22 +2,22 @@ package monopoly.local.valueobjects;
 
 public class Spieler {
 	
-	private String spielerName;
-	private Feld spielerPosition;
-	private int spielerNummer, budget;
+	private String playerName;
+	private Feld playerPosition;
+	private int playerNumber, budget;
 	
 	/**
 	 * Konstruktor der Klasse Spieler
 	 * 
-	 * @param spielerName: Name des Spielers
-	 * @param spielerNummer: Nummer die der Spieler besitzt
-	 * @param spielerPosition: Position des Spielers
+	 * @param playerName: Name des Spielers
+	 * @param playerNumber: Nummer die der Spieler besitzt
+	 * @param playerPosition: Position des Spielers
 	 * @param budget: der Geldbetrag den der Spieler besitzt
 	 */
-	public Spieler(String spielerName, int spielerNummer, Feld spielerPosition, int budget){
-		this.spielerName = spielerName;
-		this.spielerNummer = spielerNummer;
-		this.spielerPosition = spielerPosition;
+	public Spieler(String playerName, int playerNumber, Feld playerPosition, int budget){
+		this.playerName = playerName;
+		this.playerNumber = playerNumber;
+		this.playerPosition = playerPosition;
 		this.budget = budget;
 	}
 	
@@ -25,7 +25,7 @@ public class Spieler {
 	 * @return: gibt den NAmen des Spielers als String zurück
 	 */
 	public String getSpielerName(){
-		return spielerName;
+		return playerName;
 	}
 	
 	/**
@@ -46,44 +46,44 @@ public class Spieler {
 	 * @return: gibt die Nummer des Spielers zurück
 	 */
 	public int getSpielerNummer(){
-		return spielerNummer;
+		return playerNumber;
 	}
 	
 	/**
 	 * setzt die Nummer des Spielers neu
 	 */
-	public void setSpielerNummer(int spielerNummer){
-		this.spielerNummer = spielerNummer;
+	public void setSpielerNummer(int playerNumber){
+		this.playerNumber = playerNumber;
 	}
 	
 	/**
 	 * @return: gibt die Spielerposition zurück
 	 */
 	public Feld getSpielerPosition(){
-		return spielerPosition;
+		return playerPosition;
 	}
 	
 	/**
 	 * setzt die Spielerposition neu
 	 */
-	public void setSpielerPosition(Feld spielerPosition){
-		this.spielerPosition = spielerPosition;
+	public void setSpielerPosition(Feld playerPosition){
+		this.playerPosition = playerPosition;
 	}
 	
 	/**
 	 * wandelt die Spielernummer, den Spielernamen und die Position des Spielers in einen String um
 	 */
 	public String toString(){
-		return("Spieler " + spielerNummer + "\n" + spielerName + " befindet sich auf Feld " + spielerPosition);
+		return("Spieler " + playerNumber + "\n" + playerName + " befindet sich auf Feld " + playerPosition);
 	}
 	
 	/**
 	 * Methode die bestimmt wann ein Spieler gleich ist
 	 * gleich wenn: die Spielernamen und die Spielernummern übereinstimmen
 	 */
-	public boolean equals(Spieler spieler){
-		if(this.spielerName.equals(spieler.getSpielerName())){
-			if(this.spielerNummer == spieler.getSpielerNummer()){
+	public boolean equals(Spieler player){
+		if(this.playerName.equals(player.getSpielerName())){
+			if(this.playerNumber == player.getSpielerNummer()){
 				return true;
 			}
 		}

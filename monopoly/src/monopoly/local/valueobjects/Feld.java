@@ -20,7 +20,7 @@ package monopoly.local.valueobjects;
 public class Feld {
 	
 	protected String name;
-	protected int nummer;
+	protected int number;
 
 	/**
 	 * Konstruktor der Klasse Feld
@@ -31,7 +31,7 @@ public class Feld {
 	public Feld(String name, int nr) {
 		super();
 		this.name = name;
-		this.nummer = nr;
+		this.number = nr;
 	}
 
 	/**
@@ -52,23 +52,23 @@ public class Feld {
 	 * @return nummer: gibt die Feldnummer zurück
 	 */
 	public int getNummer() {
-		return nummer;
+		return number;
 	}
 
 	/**
 	 * @param nummer: setzt die Feldnummer neu
 	 */
-	public void setNummer(int nummer) {
-		this.nummer = nummer;
+	public void setNummer(int number) {
+		this.number = number;
 	}
 	
 	/**
 	 * Methode die bestimmt wann ein Feld gleich ist
 	 * dann gleich wenn: der Feldname und die Feldnummer übereinstimmen
 	 */
-	public boolean equals(Feld feld){
-		if(feld.getName().equals(this.name)){
-			if(feld.getNummer() == this.nummer){
+	public boolean equals(Feld field){
+		if(field.getName().equals(this.name)){
+			if(field.getNummer() == this.number){
 				return true;
 			}
 		}

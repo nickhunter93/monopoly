@@ -2,27 +2,27 @@ package monopoly.local.valueobjects;
 
 public class Strasse extends Feld {
 	
-	private int kaufpreis, mietpreis, haeuseranzahl,hauspreis;
-	private Spieler besitzer;
+	private int buyPrice, rent, houseNumber,housePrize;
+	private Spieler owner;
 	boolean hypothek;
 	
 	/**
 	 * Konstrucktor der Klasse Strasse
 	 * 
 	 * @param name: der Name der Straße
-	 * @param kaufpreis: der Preis für den man dei Straße kaufen kann
-	 * @param mietpreis: der Mietpreis den man bezhalt wenn die Straße sschon gekauft wurde
+	 * @param prize: der Preis für den man dei Straße kaufen kann
+	 * @param rent: der Mietpreis den man bezhalt wenn die Straße sschon gekauft wurde
 	 * @param hypothek: der Wert für die Hypothek der Straße
 	 * @param nr: die Nummer der Straße
 	 */
-	public Strasse(String name, int kaufpreis, int mietpreis, boolean hypothek,int nr){
+	public Strasse(String name, int prize, int rent, boolean hypothek,int nr){
 		super(name,nr);
-		this.kaufpreis = kaufpreis;
-		this.mietpreis = mietpreis;
-		this.haeuseranzahl = 0;
-		this.hauspreis = 250;
+		this.buyPrice = prize;
+		this.rent = rent;
+		this.houseNumber = 0;
+		this.housePrize = 250;
 		this.hypothek = hypothek;
-		this.besitzer = null;
+		this.owner = null;
 	}
 	
 	/**
@@ -37,17 +37,17 @@ public class Strasse extends Feld {
 	 * gibt einen String mit entsprechendem Text zurück 
 	 */
 	public String switchHypothek(){
-		int budget = besitzer.getSpielerBudget();
-		int wert = kaufpreis / 2;
+		int budget = owner.getSpielerBudget();
+		int value = buyPrice / 2;
 		if(!hypothek){
-			budget = budget + wert;
-			besitzer.setSpielerBudget(budget);
+			budget = budget + value;
+			owner.setSpielerBudget(budget);
 			this.hypothek = true;
 			return "Hypothek wurde aufgenommen.";
 		}else{
-			if(budget - wert >= 0){
-				budget = budget - wert;
-				besitzer.setSpielerBudget(budget);
+			if(budget - value >= 0){
+				budget = budget - value;
+				owner.setSpielerBudget(budget);
 				this.hypothek = false;
 				return "Hypothek wurde bezahlt.";
 			}else{
@@ -60,19 +60,19 @@ public class Strasse extends Feld {
 	 * baut ein Haus auf der Straße wenn der Spieler ausreichend Geld besitzt 
 	 * und es noch möglich ist Häuser zu bauen
 	 */
-	public boolean bauHaus(Spieler spieler){
-		int budget = spieler.getSpielerBudget();
-		if(haeuseranzahl <= 4){
-			haeuseranzahl++;
-			if(haeuseranzahl < 4){
-				if(budget-hauspreis >= 0){
-					spieler.setSpielerBudget(budget-hauspreis);
+	public boolean bauHaus(Spieler player){
+		int budget = player.getSpielerBudget();
+		if(houseNumber <= 4){
+			houseNumber++;
+			if(houseNumber < 4){
+				if(budget-housePrize >= 0){
+					player.setSpielerBudget(budget-housePrize);
 				}else {
 					return false;
 				}
 			}else{
-				if((budget - (2*hauspreis)) >= 0){
-					spieler.setSpielerBudget(budget-(2*hauspreis));
+				if((budget - (2*housePrize)) >= 0){
+					player.setSpielerBudget(budget-(2*housePrize));
 				}else {
 					return false;
 				}
@@ -87,14 +87,14 @@ public class Strasse extends Feld {
 	 * @return: gibt den Besitzer als einen Spieler zurück
 	 */
 	public Spieler getBesitzer(){
-		return besitzer;
+		return owner;
 	}
 	
 	/**
 	 * setzt den Besitzer neu 
 	 */
-	public void setBesitzer(Spieler besitzer){
-		this.besitzer = besitzer;
+	public void setBesitzer(Spieler owner){
+		this.owner = owner;
 	}
 	
 	/**
@@ -102,23 +102,23 @@ public class Strasse extends Feld {
 	 * @return: gibt den Kaufpreis der Straße zurück
 	 */
 	public int getKaufpreis(){
-		return kaufpreis;
+		return buyPrice;
 	}
 	
 	/**
 	 * @return: gibt den Mietpreis einer Straße zurück
 	 */
 	public int getMietpreis(){
-		double faktor = haeuseranzahl*0.2;
-		int preis = (int) (mietpreis * (faktor+1));
-		return preis;
+		double factor = houseNumber*0.2;
+		int price = (int) (rent * (factor+1));
+		return price;
 	}
 	
 	/**
 	 * @return: gibt die Anzahl der Häuser zurück die auf der Straße stehen
 	 */
 	public int getHaeuseranzahl(){
-		return haeuseranzahl;
+		return houseNumber;
 	}
 	
 	/**
@@ -126,9 +126,9 @@ public class Strasse extends Feld {
 	 */
 	public String toString(){
 		return(name + "\n" +
-	    "Kaufpreis: " + kaufpreis + " EUR" + "\n" +
-		"Mietpreis: " + mietpreis + " EUR/Monat" + "\n" +
-	    "HÃ¤useranzahl: " + haeuseranzahl + "\n" +
+	    "Kaufpreis: " + buyPrice + " EUR" + "\n" +
+		"Mietpreis: " + rent + " EUR/Monat" + "\n" +
+	    "HÃ¤useranzahl: " + houseNumber + "\n" +
 		"Status: "
 		);
 	}
