@@ -27,7 +27,7 @@ public class Strasse extends Feld {
 			budget = budget + wert;
 			besitzer.setSpielerBudget(budget);
 			this.hypothek = true;
-			return "Hypothek wurde aufgenommen.";
+			return "Hypothek im Wert von " + wert + " auf Straße " + getName() + " wurde aufgenommen.";
 		}else{
 			if(budget - wert >= 0){
 				budget = budget - wert;

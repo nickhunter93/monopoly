@@ -151,13 +151,18 @@ public class SpielStart {
 								roundLoop = true;
 					break;
 					case 3: 	if(yourStreets != null){
-									for(Strasse strasse : yourStreets){
-										int nr = strasse.getNummer();
-										String strassenName = feldverwaltung.getFeldName(nr);
-										System.out.println(nr+" : "+strassenName+" hat Hypothek aufgenommen : "+strasse.getHypothek());
-									}
+									//for(Strasse strasse : yourStreets){
+										//int nr = strasse.getNummer();
+										//String strassenName = feldverwaltung.getFeldName(nr);
+										System.out.println("Liste der Straßen, die sich in ihrem Besitz befinden:");
+										for(Strasse s : yourStreets){
+											System.out.print("Name: " + s.getName() + " | Hypothek: " + (s.getHypothek()? " Hypothek aufgenommen" : " Keine Hypothek") + " | Nr: " + s.getNummer());
+											System.out.println(" ");
+										}
+										//System.out.println(nr+" : "+strassenName+" hat Hypothek aufgenommen : "+strasse.getHypothek());
+									//}
 									try{
-										System.out.println("Geben Sie die Stra�en-Nummer, ein auf der Sie die Hypothek �ndern wollen.");
+										System.out.println("Geben Sie die Stra�en-Nummer ein, auf der Sie die Hypothek �ndern wollen.");
 										buffer = eingabe.readLine();
 										auswahl = Integer.parseInt(buffer);
 										boolean pruefen = false;
