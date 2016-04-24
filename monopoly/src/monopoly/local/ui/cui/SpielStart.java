@@ -97,6 +97,7 @@ public class SpielStart {
 								}else{
 									spieler.setSpielerBudget(spieler.getSpielerBudget() - feldverwaltung.miete(spieler));
 									verwaltung.mieteZahlen(feldverwaltung.miete(spieler), feldverwaltung.getBesitzer(spieler.getSpielerPosition()),spieler);
+									System.out.println("Sie mussten " + feldverwaltung.miete(spieler) + " Miete an " + feldverwaltung.getBesitzer(spieler.getSpielerPosition()).getSpielerName() + " zahlen.");
 									System.out.println("Ihr Budget betr�gt jetzt = "+spieler.getSpielerBudget());
 								}
 								roundLoop=false;
