@@ -133,7 +133,7 @@ public class SpielStart {
 											}
 										}
 										
-										if(pruefen && (feldverwaltung.getHaeuseranzahl(spieler.getSpielerPosition().getNummer()) <= 4)){
+										if(pruefen && (feldverwaltung.getHaeuseranzahl(spieler.getSpielerPosition().getNummer()) < 5)){
 											if(feldverwaltung.bauHaus(auswahl, spieler)){
 												System.out.println("Das Haus wurde erfolgreich gebaut.");
 											}
