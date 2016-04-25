@@ -42,7 +42,7 @@ public class Strasse extends Feld {
 
 	public boolean bauHaus(Spieler spieler){
 		int budget = spieler.getSpielerBudget();
-		if(haeuseranzahl <= 4){
+		if(haeuseranzahl < 4){
 			haeuseranzahl++;
 			if(haeuseranzahl < 4){
 				if(budget-hauspreis >= 0){

@@ -108,20 +108,20 @@ public class SpielStart {
 										int nr = strasse.getNummer();
 										String strassenName = feldverwaltung.getFeldName(nr);
 										int hausAnzahl = feldverwaltung.getHaeuseranzahl(nr);
-										if(hausAnzahl < 4){
+										
 										System.out.print(nr+" : "+strassenName+" hat "+hausAnzahl);
-										} else{
-											System.out.print(nr+" : "+strassenName+" hat "+hausAnzahl + " Häuser.");
-										}
+										
 										if(hausAnzahl == 1){
-											System.out.println(" Haus.");
+											System.out.print(" Haus.");
 										}else if(hausAnzahl == 0 || (hausAnzahl > 1 && hausAnzahl < 4)){
-											System.out.println(" H�user.");
+											System.out.print(" H�user.");
 										}else if(hausAnzahl == 4){
-											System.out.println("  Auf dieser Straße kann nun ein Hotel gebaut werden.");
+											System.out.print(" Häuser. Auf dieser Straße kann jetzt ein Hotel gebaut werden.");
 										}
+										System.out.println(" ");
 									}
 									try{
+										System.out.println(" ");
 										System.out.println("Geben Sie die Stra�en-Nummer, ein auf der Sie ein Haus bauen m�chten.");
 										buffer = eingabe.readLine();
 										auswahl = Integer.parseInt(buffer);
@@ -132,16 +132,19 @@ public class SpielStart {
 												pruefen = true;
 											}
 										}
-										if(pruefen && (feldverwaltung.getHaeuseranzahl(spieler.getSpielerPosition().getNummer()) < 4)){
+										
+										if(pruefen && (feldverwaltung.getHaeuseranzahl(spieler.getSpielerPosition().getNummer()) <= 4)){
 											if(feldverwaltung.bauHaus(auswahl, spieler)){
 												System.out.println("Das Haus wurde erfolgreich gebaut.");
-											}else{
-												System.out.println("Haus konnte nicht gebaut werden.");
 											}
-										}else if(pruefen == false){
-											System.out.println("Die Strasse existiert nicht oder Sie sind nicht ihr Besitzer.");
-										} else if(pruefen && (feldverwaltung.getHaeuseranzahl(spieler.getSpielerPosition().getNummer())) > 3){
-											System.out.println("Maximale Anzahl an Häusern für diese Straße erreicht.");
+										}
+										
+										else if(pruefen == false){
+												System.out.println("Die Strasse existiert nicht oder Sie sind nicht ihr Besitzer.");
+										} 
+										
+										else if(pruefen && (feldverwaltung.getHaeuseranzahl(spieler.getSpielerPosition().getNummer()) > 4)){
+												System.out.println("Maximale Anzahl an Häusern für diese Straße erreicht.");
 										}
 										
 									} catch (IOException e) {
@@ -165,7 +168,7 @@ public class SpielStart {
 										//String strassenName = feldverwaltung.getFeldName(nr);
 										System.out.println("Liste der Straßen, die sich in ihrem Besitz befinden:");
 										for(Strasse s : yourStreets){
-											System.out.print("Name: " + s.getName() + " | Hypothek: " + (s.getHypothek()? " Hypothek aufgenommen" : " Keine Hypothek") + " | Nr: " + s.getNummer());
+											System.out.print("Name: " + s.getName() + " | Hypothek: " + (s.getHypothek()? " Hypothek zurückzahlen" : " Keine Hypothek") + " | Nr: " + s.getNummer());
 											System.out.println(" ");
 										}
 										//System.out.println(nr+" : "+strassenName+" hat Hypothek aufgenommen : "+strasse.getHypothek());
