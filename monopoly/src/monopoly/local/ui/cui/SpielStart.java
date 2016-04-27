@@ -44,11 +44,9 @@ public class SpielStart {
 						auswahl = Integer.parseInt(buffer);
 						
 					} catch (IOException e) {
-						e.printStackTrace();
 						auswahl = 0;
 						System.out.println("Auswahl fehlerhaft.");
 					} catch (NumberFormatException e){
-						e.printStackTrace();
 						auswahl = 0;
 						System.out.println("Auswahl fehlerhaft.");
 					}
