@@ -79,7 +79,7 @@ public class SpielStart {
 										} catch (IOException e) {
 											e.printStackTrace();
 										}
-										if(check == 'y' || check == 'Y'){
+										if(check == 'y' || check == 'Y' || check == 'j' || check == 'J'){
 											System.out.println(feldverwaltung.kaufStrasse(spieler) ? "Kauf erfolgreich" : "Kauf fehlgeschlagen");
 											System.out.println("Kosten: -" + feldverwaltung.preis(spieler));
 											System.out.println(spieler.getSpielerName()+" ihr Budget betr�gt : "+spieler.getSpielerBudget());
