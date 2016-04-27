@@ -20,6 +20,8 @@ public class Spielfeld {
 		}
 		feld[0] = new Strasse("Los",0,-2000,false,0);
 		((Strasse)feld[0]).setBesitzer(new Spieler("Bank", 98, null, -1));
+		
+		//feld[9] = new Jail("Gefängnis",9);
 	}
 	
 	/**
