@@ -85,8 +85,13 @@ public class Menue {
 							}
 						}
 			break;
-			case 3 :	SpielStart spiel = new SpielStart(feldverwaltung,spielerverwaltung);
-						spiel.start();
+			case 3 :	int spielerAnzahl = spielerverwaltung.getAllSpieler().size();
+						if(spielerAnzahl >= 2){
+							SpielStart spiel = new SpielStart(feldverwaltung,spielerverwaltung);
+							spiel.start();
+						}else{
+							System.out.println("Es gibt nicht genügend Spieler (min. 2).");
+						}
 			break;
 			default:	System.out.println("Keine Gültige Auswahl.");
 			}
