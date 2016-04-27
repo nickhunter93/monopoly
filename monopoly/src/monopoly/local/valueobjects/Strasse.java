@@ -121,6 +121,10 @@ public class Strasse extends Feld {
 		return haeuseranzahl;
 	}
 	
+	public int getHauspreis(){
+		return this.hauspreis;
+	}
+	
 	/**
 	 * wandelt den Kaufpreis, den Mietpreis, die Häuseranzahl und den Status in einen String um
 	 */
