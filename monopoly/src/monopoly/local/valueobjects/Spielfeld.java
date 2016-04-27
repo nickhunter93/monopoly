@@ -50,6 +50,13 @@ public class Spielfeld {
 	}
 	
 	/**
+	 * 
+	 */
+	public Feld getJail(){
+		return feld[9];
+	}
+	
+	/**
 	 * ändert die Position des Spielers
 	 * 
 	 * @param player

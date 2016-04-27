@@ -1,5 +1,6 @@
 package monopoly.local.domain;
 import monopoly.local.valueobjects.Feld;
+import monopoly.local.valueobjects.Jail;
 import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Spielfeld;
 import monopoly.local.valueobjects.Strasse;
@@ -74,7 +75,11 @@ public class Spielverwaltung {
 		return feld.switchHypothek(position);
 	}
 	
-	
+	/**
+	 * 
+	 * @param player
+	 * @return: gibt den Mietpreis der Straße zurück auf welcher der Spieler sich befindet
+	 */
 	public int miete(Spieler spieler){
 		Strasse strasse = null;
 		Feld position = spieler.getSpielerPosition();
@@ -86,8 +91,8 @@ public class Spielverwaltung {
 	
 	/**
 	 * 
-	 * @param player
-	 * @return: gibt den Mietpreis der Straße zurück auf welcher der Spieler sich befindet
+	 * @param spieler
+	 * @return: gibt den Kaufpreis der Strasse zurueck
 	 */
 	public int preis(Spieler spieler){
 		Strasse strasse = null;
@@ -129,6 +134,14 @@ public class Spielverwaltung {
 	 */
 	public Feld getLos(){
 		return feld.getLos();
+	}
+	
+	/**
+	 * 
+	 * @return: gibt das Gefängnisfeld zurueck
+	 */
+	public Feld getJail(){
+		return feld.getJail();
 	}
 	
 	/**
@@ -177,6 +190,19 @@ public class Spielverwaltung {
 	 */
 	public int getHaeuseranzahl(int position){
 		return feld.getHaeuseranzahl(position);
+	}
+	
+	/**
+	 * 
+	 */
+	public boolean isInJail(Spieler spieler){
+		Feld feld = spieler.getSpielerPosition();
+		if(feld instanceof Jail ){
+			Jail jail = (Jail)feld;
+			return jail.isPlayerIn(spieler);
+		}
+		
+		return false;
 	}
 	
 }
