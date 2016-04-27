@@ -2,14 +2,15 @@ package monopoly.local.valueobjects;
 
 import java.util.Vector;
 
-public class Gemeinschaftskarten {
-	
+public class Ereigniskarte {
+
 private Vector<Karte> deck;
-	
-	public Gemeinschaftskarten(){
+
+	public Ereigniskarte(){
 		deck  = new Vector<Karte>();
 		for(int i = 0; i < 16; i++){
-			deck.add(new Karte(i, "Beschreibung","Titel"));
+			deck.add(new Karte(i, "Beschreibung","Titel", new SpezialAktion()));
 		}
 	}
+
 }

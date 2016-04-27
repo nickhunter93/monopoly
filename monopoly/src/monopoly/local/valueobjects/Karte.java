@@ -4,7 +4,6 @@ public class Karte {
 	
 	private int id;
 	private String beschreibung, titel;
-	private Aktion aktion;
 	
 	public Karte(int id, String beschreibung, String titel){
 		this.setId(id);
