@@ -1,6 +1,6 @@
 package monopoly.local.valueobjects;
 
-public class Aktion extends Feld	 {
+public abstract class Aktion /* extends Feld */	 {
 	
 	private String aktion;
 	
@@ -8,23 +8,25 @@ public class Aktion extends Feld	 {
 	 * Konstruktor der Klasse Aktion
 	 * erbt von Feld
 	 * 
-	 * @param name: Name des Feldes welches übergeben wird
+	 * @param name: Name des Feldes welches ï¿½bergeben wird
 	 * @param wert: 
 	 * @param status: 
 	 * @param aktion: 
-	 * @param nr: Nummer des Feldes welches übergeben wurde
+	 * @param nr: Nummer des Feldes welches ï¿½bergeben wurde
 	 */
-	public Aktion(String name, int wert, boolean status, String aktion,int nr){
+	public Aktion(){
 //		super(name, wert, status);
-		super(name,nr);
-		this.aktion = aktion;
-	}
-	
-	/**
-	 * gibt den Aktionsnamen als String aus 
-	 */
-	public String toString(){
-		return(name + "\n" + aktion);
+		//super(name,nr);
+		this.setAktion(aktion);
 	}
 
+	public abstract void ausfuehren();
+
+	public String getAktion() {
+		return aktion;
+	}
+
+	public void setAktion(String aktion) {
+		this.aktion = aktion;
+	}
 }
