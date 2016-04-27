@@ -66,7 +66,10 @@ public class Menue {
 							try {
 								System.out.println("Geben Sie die Spieler Nummer an.");
 								for(int i=0;i<spielerverwaltung.getAllSpieler().size();i++){
-									System.out.println(spielerverwaltung.getSpieler(i).getSpielerNummer()+" :"+spielerverwaltung.getSpieler(i).getSpielerName()+".");
+									Spieler spieler = spielerverwaltung.getSpieler(i);
+									int spielerNummer = spieler.getSpielerNummer();
+									String spielerName = spieler.getSpielerName();
+									System.out.println(spielerNummer+" :"+spielerName+".");
 								}
 								str = eingabe.readLine();
 								spielernummer = Integer.parseInt(str);
