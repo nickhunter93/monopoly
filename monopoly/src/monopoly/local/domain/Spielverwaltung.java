@@ -13,7 +13,7 @@ public class Spielverwaltung {
 	public void move(Spieler spieler,int zugweite){
 		int spielerPosition = spieler.getSpielerPosition().getNummer();
 		if(feld.getFieldSize()>spielerPosition+zugweite){
-			Feld newPosition = feld.getPosition(spieler, zugweite);
+			Feld newPosition = feld.setPosition(spieler, zugweite);
 			spieler.setSpielerPosition(newPosition);
 		}else{
 			int position = spielerPosition;
@@ -27,7 +27,7 @@ public class Spielverwaltung {
 					}
 				}
 			}
-			Feld newPosition = feld.getPosition(spieler, position);
+			Feld newPosition = feld.setPosition(spieler, position);
 			spieler.setSpielerPosition(newPosition);
 		}
 	}

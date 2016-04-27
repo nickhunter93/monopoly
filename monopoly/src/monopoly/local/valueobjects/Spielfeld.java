@@ -10,7 +10,7 @@ public class Spielfeld {
 	 * Konstruktor der Klasse Spielfeld
 	 * erstellt ein Spielfeld, 
 	 * bestimmt das Feld [0] das Losfeld ist, 
-	 * zum Start des Spieles alle Straßen niemandem gehören
+	 * zum Start des Spieles alle Straßen gehören niemandem
 	 */
 	public Spielfeld(){
 		feld = new Strasse[fieldSize];
@@ -23,10 +23,7 @@ public class Spielfeld {
 	}
 	
 	/**
-	 * Konstruktor der Klasse Spielfeld
-	 * erstellt ein Spielfeld, 
-	 * bestimmt das Feld [0] das Losfeld ist, 
-	 * zum Start des Spieles alle Straßen niemandem gehören
+	 * setzt den Wert der Hypothek an der Stelle Position.
 	 */
 	public String switchHypothek(int position){
 		if(feld[position] instanceof Strasse){
@@ -57,7 +54,7 @@ public class Spielfeld {
 	 * @param steps
 	 * @return: gibt die neue Position des Spielers zurück
 	 */
-	public Feld getPosition(Spieler spieler,int zugweite){
+	public Feld setPosition(Spieler spieler,int zugweite){
 		Feld position = spieler.getSpielerPosition();
 		int newPosition = position.getNummer()+zugweite;
 		return feld[newPosition];
