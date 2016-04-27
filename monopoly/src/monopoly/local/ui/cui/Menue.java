@@ -20,9 +20,6 @@ public class Menue {
 		feldverwaltung = new Spielverwaltung();
 		this.menueOefnen();
 	}
-<<<<<<< HEAD
-
-=======
 	
 	/**
 	 * startet eine Schleife die das Auswahlmenü auf der Konsole ausgibt und die Eingaben des 
@@ -31,7 +28,6 @@ public class Menue {
 	 * case 2: löscht wenn es möglich ist einen Spieler
 	 * case 3: startet ein neues Spiel
 	 */
->>>>>>> origin/master
 	public void menueOefnen(){
 		boolean schleife = true;
 		while(schleife){
