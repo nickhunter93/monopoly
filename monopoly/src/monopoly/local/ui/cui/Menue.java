@@ -11,12 +11,27 @@ import monopoly.local.valueobjects.Spieler;
 public class Menue {
 	Spielerverwaltung spielerverwaltung;
 	Spielverwaltung feldverwaltung;
+	
+	/**
+	 * Main Methode in der Klasse Menue
+	 */
 	public Menue(){
 		spielerverwaltung = new Spielerverwaltung();
 		feldverwaltung = new Spielverwaltung();
 		this.menueOefnen();
 	}
+<<<<<<< HEAD
 
+=======
+	
+	/**
+	 * startet eine Schleife die das Auswahlmenü auf der Konsole ausgibt und die Eingaben des 
+	 * Spielers ließt 
+	 * case 1: fügt wenn es möglich ist ein Spieler hinzu 
+	 * case 2: löscht wenn es möglich ist einen Spieler
+	 * case 3: startet ein neues Spiel
+	 */
+>>>>>>> origin/master
 	public void menueOefnen(){
 		boolean schleife = true;
 		while(schleife){

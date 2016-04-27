@@ -19,11 +19,26 @@ public class SpielStart {
 	private int auswahl;
 	private Spielverwaltung feldverwaltung;
 	private Spielerverwaltung verwaltung;
+	
+	/**
+	 * Konstruktor der Klasse SpielStart
+	 */
 	public SpielStart(Spielverwaltung feldverwaltung , Spielerverwaltung verwaltung){
 		this.feldverwaltung = feldverwaltung;
 		this.verwaltung = verwaltung;
 	}
 	
+	/**
+	 * startet die Spielschleife die das Auswahlmenü im Spiel auf der Konsole ausgibt
+	 * und die Ausgaben des Spielers ließt 
+	 * das Spiel wird beendet wenn alle bis auf ein Spieler pleite sind, der Gewinner wird auf der Konsole ausgegeben
+	 *   
+	 * case 1: der Spieler würfelt und wird um die Augenzahl weiter gesetzt, ist die Straße käuflich kann der Spieler
+	 * entscheiden ob er die Straße kaufen möchte, ist die Straße bereits verkauft zahlt der Spieler miete
+	 * case 2: der Spieler baut wenn es möglich ist ein Haus auf einer Straße und 
+	 * kann wenn es möglich ist seine Runde vortsetzen
+	 * case 3: der Spieler nimmt wenn es möglich ist eine Hypothek auf und setzt wenn es möglich ist seine Runde fort
+	 */
 	public void start(){
 			BufferedReader eingabe = new BufferedReader(new InputStreamReader(System.in));
 			while(schleife){
@@ -225,6 +240,9 @@ public class SpielStart {
 			}
 		}
 	
+	/**
+	 * gibt das Spielfeld mit den Spielern auf der Konsole aus
+	 */
 	public static void showFeld(Feld[] feld,Vector<Spieler> spieler){
 		int[] arrayLinks =  {35,34,33,32,31,30,29,28};
 		int[] arrayRechts = {10,11,12,13,14,15,16,17};
@@ -269,6 +287,9 @@ public class SpielStart {
 		System.out.println("|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|");
 	}
 	
+	/**
+	 * gibt die gewürfelte Zahl auf der Konsole aus
+	 */
 	public int wuerfelAnzeigen(int zahl){
 		switch(zahl){
 		case 1: 
