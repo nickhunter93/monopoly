@@ -122,7 +122,7 @@ public class Spielverwaltung {
 	
 	/**
 	 * 
-	 * @return
+	 * @return: gibt das Spielfeld zurück
 	 */
 	public Feld[] getSpielfeld(){
 		return field.getSpielfeld();

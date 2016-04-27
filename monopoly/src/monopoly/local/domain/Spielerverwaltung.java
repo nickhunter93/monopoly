@@ -79,7 +79,10 @@ public class Spielerverwaltung {
 	}
 
 	/**
-	 * @return: 
+	 * durchläuft die Liste mit Spielern und gibt jeweils einen zurück
+	 * springt an den Anfang wenn das Ende der SpielerListe erreicht ist
+	 * 
+	 * @return: gibt die Reihenfolge der Spieler zurück 
 	 */
 	public Spieler reihenfolge(){
 		if(order < playerList.size()-1){
