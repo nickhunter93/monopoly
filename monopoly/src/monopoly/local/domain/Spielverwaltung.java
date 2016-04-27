@@ -6,12 +6,19 @@ import monopoly.local.valueobjects.Strasse;
 
 public class Spielverwaltung {
 	private Spielfeld feld;
+	
+	/**
+	 * Konstruktor der Klasse Spielverwaltung
+	 */
 	public Spielverwaltung(){
 		feld = new Spielfeld();
 	}
 	
 	/**
-	 * Konstruktor der Klasse Spielverwaltung
+	 * bewegt den Spieler um "Zugweite" nach vorne
+	 * 
+	 * @param spieler: 
+	 * @param zugweite: int Zahl wie viele Felder der Spieler gehen darf
 	 */
 	public void move(Spieler spieler,int zugweite){
 		int spielerPosition = spieler.getSpielerPosition().getNummer();
@@ -36,10 +43,9 @@ public class Spielverwaltung {
 	}
 	
 	/**
-	 * bewegt den Spieler um "Zugweite" nach vorne
 	 * 
-	 * @param spieler: 
-	 * @param zugweite: int Zahl wie viele Felder der Spieler gehen darf
+	 * @param player
+	 * @return: gibt den Namen der Straße an dem sich der Spieler befindet als String zurück
 	 */
 	public String getStrasseName(Spieler spieler){
 		Feld position = spieler.getSpielerPosition();
@@ -49,8 +55,8 @@ public class Spielverwaltung {
 	
 	/**
 	 * 
-	 * @param player
-	 * @return: gibt den Namen der Straße an dem sich der Spieler befindet als String zurück
+	 * @param position
+	 * @return: gibt den Besitzer des Feldes zurück auf der Spieler sich befindet
 	 */
 	public Spieler getBesitzer(Feld position){
 		Spieler besitzer = null;
@@ -61,18 +67,14 @@ public class Spielverwaltung {
 	}
 
 	/**
-	 * 
-	 * @param position
-	 * @return: gibt den Besitzer des Feldes zurück auf der Spieler sich befindet
+	 * setzt den Wert der Hypothek einer Straße neu 
+	 * durch den Aufruf der switchHypthek-Funktion in der Klasse Spielfeld 
 	 */
 	public String switchHypothek(int position){
 		return feld.switchHypothek(position);
 	}
 	
-	/**
-	 * setzt den Wert der Hypothek einer Straße neu 
-	 * durch den Aufruf der switchHypthek-Funktion in der Klasse Spielfeld 
-	 */
+	
 	public int miete(Spieler spieler){
 		Strasse strasse = null;
 		Feld position = spieler.getSpielerPosition();

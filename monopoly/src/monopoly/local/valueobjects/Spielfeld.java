@@ -13,7 +13,7 @@ public class Spielfeld {
 	 * zum Start des Spieles alle Straßen gehören niemandem
 	 */
 	public Spielfeld(){
-		feld = new Strasse[fieldSize];
+		feld = new Feld [fieldSize];
 		for (int i=0;i<fieldSize;i++){
 			feld[i] = new Strasse("Teststrasse",800,480,false,i);
 			((Strasse)feld[i]).setBesitzer(new Spieler("Bank", 99, null, -1));
@@ -21,7 +21,7 @@ public class Spielfeld {
 		feld[0] = new Strasse("Los",0,-2000,false,0);
 		((Strasse)feld[0]).setBesitzer(new Spieler("Bank", 98, null, -1));
 		
-		//feld[9] = new Jail("Gefängnis",9);
+		feld[9] = new Jail("Gefängnis",9);
 	}
 	
 	/**
