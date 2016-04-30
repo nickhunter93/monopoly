@@ -1,10 +1,12 @@
 package monopoly.local.domain;
 import java.util.Vector;
 
+import monopoly.local.valueobjects.Jail;
 import monopoly.local.valueobjects.Spieler;
 
 public class Spielerverwaltung {
 	private int reihenfolge;
+	private Jail jail;
 	
 	/**
 	 * Konstruktor der Klasse Spielerverwaltung
@@ -115,5 +117,12 @@ public class Spielerverwaltung {
 		zahl = (int)(Math.random() * 6) + 1;
 		
 		return zahl;
+	}
+	
+	/**
+	 * befreit einen Spieler der im Gefaengnis ist
+	 */
+	public void release(Spieler spieler){
+		jail.release(spieler);
 	}
 }

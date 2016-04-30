@@ -193,7 +193,7 @@ public class Spielverwaltung {
 	}
 	
 	/**
-	 * 
+	 * prüft ob ein Spieler im Gefaengnis ist
 	 */
 	public boolean isInJail(Spieler spieler){
 		Feld feld = spieler.getSpielerPosition();

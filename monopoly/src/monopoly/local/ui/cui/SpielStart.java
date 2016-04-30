@@ -34,7 +34,7 @@ public class SpielStart {
 	 * das Spiel wird beendet wenn alle bis auf ein Spieler pleite sind, der Gewinner wird auf der Konsole ausgegeben
 	 *   
 	 * case 1: der Spieler würfelt und wird um die Augenzahl weiter gesetzt, ist die Straße käuflich kann der Spieler
-	 * entscheiden ob er die Straße kaufen möchte, ist die Straße bereits verkauft zahlt der Spieler miete
+	 * entscheiden ob er die Straße kaufen möchte, ist die Straße bereits verkauft zahlt der Spieler Miete
 	 * case 2: der Spieler baut wenn es möglich ist ein Haus auf einer Straße und 
 	 * kann wenn es möglich ist seine Runde vortsetzen
 	 * case 3: der Spieler nimmt wenn es möglich ist eine Hypothek auf und setzt wenn es möglich ist seine Runde fort
@@ -69,62 +69,66 @@ public class SpielStart {
 				switch(auswahl){
 				case 1:		//pruefe ob im Gefaengnis 
 					boolean inJail = false;
-					if(spieler.getSpielerPosition()== feldverwaltung.getJail()){
-						if(feldverwaltung.isInJail(spieler)){
-							inJail = false; 
+					if(feldverwaltung.isInJail(spieler)){
+						int anzahl = verwaltung.wuerfeln();
+						if(anzahl == 6){
+							verwaltung.release(spieler);
+							inJail = false;
 						}
 						else{
 							inJail = true;
+							roundLoop=false;
 						}
 					}
-					else{}
-					int anzahl = verwaltung.wuerfeln();
-					wuerfelAnzeigen(anzahl);
-					feldverwaltung.move(spieler, anzahl);
-					showFeld(feldverwaltung.getSpielfeld(),verwaltung.getAllSpieler());
-					System.out.println("Sie befinden sich auf der Straï¿½e : "+feldverwaltung.getStrasseName(spieler));
-					System.out.print("Mietpreis : "+feldverwaltung.miete(spieler));
-					System.out.print(" / Kaufpreis : "+feldverwaltung.preis(spieler));
-					System.out.print(" / Aktuelles Budget : "+spieler.getSpielerBudget());
-					System.out.println("");
-					//Straï¿½e kaufen / miete zahlen hier einfï¿½gen.
-					if (feldverwaltung.getBesitzer(spieler.getSpielerPosition()).getSpielerNummer() ==  99){
-						boolean loop = true;
-						do{
-							System.out.println("Wollen Sie die Strasse kaufen?");
-							System.out.println("'y' fï¿½r Ja/ 'n' fï¿½r Nein.");
-							char check = 'k';
-							try {
-								buffer = eingabe.readLine();
-								if(buffer.length() != 0){
-									check = buffer.charAt(0);
-								}else {
-									check = 'k';
+					else{
+						int anzahl = verwaltung.wuerfeln();
+						wuerfelAnzeigen(anzahl);
+						feldverwaltung.move(spieler, anzahl);
+						showFeld(feldverwaltung.getSpielfeld(),verwaltung.getAllSpieler());
+						System.out.println("Sie befinden sich auf der Straï¿½e : "+feldverwaltung.getStrasseName(spieler));
+						System.out.print("Mietpreis : "+feldverwaltung.miete(spieler));
+						System.out.print(" / Kaufpreis : "+feldverwaltung.preis(spieler));
+						System.out.print(" / Aktuelles Budget : "+spieler.getSpielerBudget());
+						System.out.println("");
+						//Straï¿½e kaufen / miete zahlen hier einfï¿½gen.
+						if (feldverwaltung.getBesitzer(spieler.getSpielerPosition()).getSpielerNummer() ==  99){
+							boolean loop = true;
+							do{
+								System.out.println("Wollen Sie die Strasse kaufen?");
+								System.out.println("'y' fï¿½r Ja/ 'n' fï¿½r Nein.");
+								char check = 'k';
+								try {
+									buffer = eingabe.readLine();
+									if(buffer.length() != 0){
+										check = buffer.charAt(0);
+									}else {
+										check = 'k';
+									}
+
+								} catch (IOException e) {
+									e.printStackTrace();
 								}
+								if(check == 'y' || check == 'Y' || check == 'j' || check == 'J'){
+									System.out.println(feldverwaltung.kaufStrasse(spieler) ? "Kauf erfolgreich" : "Kauf fehlgeschlagen");
+									System.out.println("Kosten: -" + feldverwaltung.preis(spieler));
+									System.out.println(spieler.getSpielerName()+" ihr Budget betrï¿½gt : "+spieler.getSpielerBudget());
+									loop = false;
+								}else if(check == 'n' || check == 'N'){
+									loop = false;
+								} else {
+									loop = true;
+									System.out.println("Eingabe Fehlerhaft.");
+								}
+							}while(loop == true);
 
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-							if(check == 'y' || check == 'Y' || check == 'j' || check == 'J'){
-								System.out.println(feldverwaltung.kaufStrasse(spieler) ? "Kauf erfolgreich" : "Kauf fehlgeschlagen");
-								System.out.println("Kosten: -" + feldverwaltung.preis(spieler));
-								System.out.println(spieler.getSpielerName()+" ihr Budget betrï¿½gt : "+spieler.getSpielerBudget());
-								loop = false;
-							}else if(check == 'n' || check == 'N'){
-								loop = false;
-							} else {
-								loop = true;
-								System.out.println("Eingabe Fehlerhaft.");
-							}
-						}while(loop == true);
-
-					}else{
-						spieler.setSpielerBudget(spieler.getSpielerBudget() - feldverwaltung.miete(spieler));
-						verwaltung.mieteZahlen(feldverwaltung.miete(spieler), feldverwaltung.getBesitzer(spieler.getSpielerPosition()),spieler);
-						System.out.println("Sie mussten " + feldverwaltung.miete(spieler) + " Miete an " + feldverwaltung.getBesitzer(spieler.getSpielerPosition()).getSpielerName() + " zahlen.");
-						System.out.println("Ihr Budget betrï¿½gt jetzt = "+spieler.getSpielerBudget());
+						}else{
+							spieler.setSpielerBudget(spieler.getSpielerBudget() - feldverwaltung.miete(spieler));
+							verwaltung.mieteZahlen(feldverwaltung.miete(spieler), feldverwaltung.getBesitzer(spieler.getSpielerPosition()),spieler);
+							System.out.println("Sie mussten " + feldverwaltung.miete(spieler) + " Miete an " + feldverwaltung.getBesitzer(spieler.getSpielerPosition()).getSpielerName() + " zahlen.");
+							System.out.println("Ihr Budget betrï¿½gt jetzt = "+spieler.getSpielerBudget());
+						}
+						roundLoop=false;
 					}
-					roundLoop=false;
 					break;
 				case 2:		
 					if(yourStreets != null){
