@@ -32,7 +32,7 @@ Teststrasse
 0
 f
 250
-3
+99
 
 Teststrasse
 4
@@ -41,7 +41,7 @@ Teststrasse
 0
 f
 250
-2
+99
 
 Teststrasse
 5
@@ -90,7 +90,7 @@ Teststrasse
 0
 f
 250
-1
+99
 
 Teststrasse
 11

@@ -1,6 +1,9 @@
 package monopoly.local.valueobjects;
 
+import java.io.IOException;
 import java.util.Vector;
+
+import monopoly.local.persistenz.PersistenzLaden;
 
 public class Spielfeld {
 	private Feld[] feld;
@@ -13,15 +16,23 @@ public class Spielfeld {
 	 * zum Start des Spieles alle Straßen gehören niemandem
 	 */
 	public Spielfeld(){
-		feld = new Feld [fieldSize];
-		for (int i=0;i<fieldSize;i++){
-			feld[i] = new Strasse("Teststrasse",800,480,false,i);
-			((Strasse)feld[i]).setBesitzer(new Spieler("Bank", 99, null, -1));
-		}
-		feld[0] = new Strasse("Los",0,-2000,false,0);
-		((Strasse)feld[0]).setBesitzer(new Spieler("Bank", 98, null, -1));
+//		feld = new Feld [fieldSize];
+//		for (int i=0;i<fieldSize;i++){
+//			feld[i] = new Strasse("Teststrasse",800,480,false,i);
+//			((Strasse)feld[i]).setBesitzer(new Spieler("Bank", 99, null, -1));
+//		}
+//		feld[0] = new Strasse("Los",0,-2000,false,0);
+//		((Strasse)feld[0]).setBesitzer(new Spieler("Bank", 98, null, -1));
+//		
+//		feld[9] = new Jail("Gefängnis",9);
 		
-		feld[9] = new Jail("Gefängnis",9);
+		PersistenzLaden test = new PersistenzLaden();
+		try {
+			Feld[] feld = test.loadDefaulField();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**

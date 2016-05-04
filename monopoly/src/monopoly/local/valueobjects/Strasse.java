@@ -125,6 +125,14 @@ public class Strasse extends Feld {
 		return this.hauspreis;
 	}
 	
+	public void setHaeuseranzahl(int haeuseranzahl){
+		this.haeuseranzahl = haeuseranzahl;
+	}
+	
+	public void setHauspreis(int hauspreis){
+		this.hauspreis = hauspreis;
+	}
+	
 	/**
 	 * wandelt den Kaufpreis, den Mietpreis, die Häuseranzahl und den Status in einen String um
 	 */

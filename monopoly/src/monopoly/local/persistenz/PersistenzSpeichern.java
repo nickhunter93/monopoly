@@ -29,6 +29,7 @@ public class PersistenzSpeichern {
 
 	public void saveSpieler(Vector<Spieler> spielerListe) throws IOException{
 		speicher = new BufferedWriter(new FileWriter("saveSpieler.txt"));
+		speicher.newLine();
 		for(Spieler spieler:spielerListe){
 			speicher.write(spieler.getSpielerName());
 			speicher.newLine();
@@ -44,8 +45,9 @@ public class PersistenzSpeichern {
 
 	}
 
-	public void saveFeld(Feld[] spielfeld) throws IOException{
+	public void saveDefaultFeld(Feld[] spielfeld) throws IOException{
 		speicher = new BufferedWriter(new FileWriter("saveFeld.txt"));
+		speicher.newLine();
 		for(Feld feld:spielfeld){
 			if(feld instanceof Strasse){
 				Strasse strasse = (Strasse)feld;
@@ -62,6 +64,40 @@ public class PersistenzSpeichern {
 				speicher.write(strasse.getHypothek() ? "w":"f");
 				speicher.newLine();
 				speicher.write(strasse.getHauspreis()+"");
+				speicher.newLine();
+				speicher.write(strasse.getBesitzer().getSpielerNummer()+"");
+				speicher.newLine();
+				speicher.newLine();
+			}
+			if(feld instanceof Jail){
+				Jail jail = (Jail)feld;
+				speicher.write(jail.getName());
+				speicher.newLine();
+				speicher.write(jail.getNummer()+"");
+				speicher.newLine();
+				for(Spieler spieler:jail.getInsassen()){
+					speicher.write(spieler.getSpielerNummer());
+					speicher.newLine();
+				}
+				
+				speicher.newLine();
+				speicher.newLine();
+			}
+		}
+		speicher.close();
+	}
+	
+	public void saveFeld(Feld[] spielfeld) throws IOException{
+		speicher = new BufferedWriter(new FileWriter("saveFeld.txt"));
+		speicher.newLine();
+		for(Feld feld:spielfeld){
+			if(feld instanceof Strasse){
+				Strasse strasse = (Strasse)feld;
+				speicher.write(strasse.getNummer()+"");
+				speicher.newLine();
+				speicher.write(strasse.getHaeuseranzahl()+"");
+				speicher.newLine();
+				speicher.write(strasse.getHypothek() ? "w":"f");
 				speicher.newLine();
 				speicher.write(strasse.getBesitzer().getSpielerNummer()+"");
 				speicher.newLine();
