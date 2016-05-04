@@ -61,10 +61,17 @@ public class Spielfeld {
 	}
 	
 	/**
-	 * 
+	 * gibt das Gefaengnisfeld zurueck
 	 */
 	public Feld getJail(){
 		return feld[9];
+	}
+	
+	/**
+	 * gibt das "Gehe ins Gefängnis"-Feld zurueck
+	 */
+	public Feld getToJail(){
+		return feld[99];
 	}
 	
 	/**
