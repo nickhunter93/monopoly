@@ -29,6 +29,8 @@ public class PersistenzSpeichern {
 
 	public void saveSpieler(Vector<Spieler> spielerListe) throws IOException{
 		speicher = new BufferedWriter(new FileWriter("saveSpieler.txt"));
+		int anzahl = spielerListe.size();
+		speicher.write(anzahl+"");
 		speicher.newLine();
 		for(Spieler spieler:spielerListe){
 			speicher.write(spieler.getSpielerName());
@@ -93,7 +95,7 @@ public class PersistenzSpeichern {
 		for(Feld feld:spielfeld){
 			if(feld instanceof Strasse){
 				Strasse strasse = (Strasse)feld;
-				speicher.write(strasse.getNummer()+"");
+				speicher.write(strasse.getName());
 				speicher.newLine();
 				speicher.write(strasse.getHaeuseranzahl()+"");
 				speicher.newLine();
@@ -106,8 +108,6 @@ public class PersistenzSpeichern {
 			if(feld instanceof Jail){
 				Jail jail = (Jail)feld;
 				speicher.write(jail.getName());
-				speicher.newLine();
-				speicher.write(jail.getNummer()+"");
 				speicher.newLine();
 				for(Spieler spieler:jail.getInsassen()){
 					speicher.write(spieler.getSpielerNummer());

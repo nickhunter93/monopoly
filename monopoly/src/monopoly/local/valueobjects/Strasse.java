@@ -32,6 +32,10 @@ public class Strasse extends Feld {
 		return this.hypothek;
 	}
 	
+	public void setHypothek(boolean hypothek){
+		this.hypothek = hypothek;
+	}
+	
 	/**
 	 * setzt den Wert der Hypothek neu wenn sie aufgenommen oder bezahlt wurde
 	 * gibt einen String mit entsprechendem Text zurück 

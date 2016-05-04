@@ -4,7 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Vector;
 
+import monopoly.local.domain.Spielerverwaltung;
+import monopoly.local.domain.Spielverwaltung;
 import monopoly.local.ui.cui.SpielStart;
 import monopoly.local.valueobjects.Feld;
 import monopoly.local.valueobjects.Jail;
@@ -18,7 +21,80 @@ public class PersistenzLaden {
 	}
 	
 	public SpielStart loadAll(){
-		return null;
+		try {
+			Spielerverwaltung verwaltung = new Spielerverwaltung();
+			Spielverwaltung feldverwaltung = new Spielverwaltung();
+			
+			Feld[] feld = feldverwaltung.getSpielfeld();
+			
+			Vector<Spieler> spielerListe;
+			spielerListe = this.loadSpieler(feld);
+			
+			this.loadField(spielerListe, feld);
+			
+			verwaltung.setAllSpieler(spielerListe);
+			
+			SpielStart start = new SpielStart(feldverwaltung,verwaltung);
+			return start;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+		
+	}
+	
+	public Vector<Spieler> loadSpieler(Feld[] feld) throws IOException{
+		
+		laden = new BufferedReader(new FileReader("saveSpieler"));
+		int spieleranzahl = Integer.parseInt(laden.readLine());
+		Vector<Spieler> spielerListe = new Vector<Spieler>();
+		
+		for(int i = 0 ; i < spieleranzahl ; i++){
+			String str = laden.readLine();
+			int budget = Integer.parseInt(laden.readLine());
+			int nummer = Integer.parseInt(laden.readLine());
+			int position = Integer.parseInt(laden.readLine());
+			Spieler spieler = new Spieler(str,nummer,feld[position],budget);
+			laden.readLine();
+			spielerListe.add(spieler);
+		}
+		return spielerListe;
+		
+	}
+	
+	public void loadField(Vector<Spieler> spielerListe,Feld[] feld)throws IOException{
+		laden = new BufferedReader(new FileReader("defaultFeld.txt"));
+		laden.readLine();
+		for(int i = 0 ; i<36 ; i++){
+			String str = laden.readLine();
+			if(str.equals("Los")){
+				
+				laden.readLine();
+				laden.readLine();
+				laden.readLine();
+				
+				laden.readLine();
+				
+			}else if(str.equals("Gefängnis")){
+				laden.readLine();
+				feld[i] = new Jail(str,i);
+				laden.readLine();
+				laden.readLine();
+			}else{
+				int hausanzahl = Integer.parseInt(laden.readLine());
+				boolean hypothek = laden.readLine().equals("w") ? true : false;
+				int besitzer = Integer.parseInt(laden.readLine());
+				((Strasse)feld[i]).setHaeuseranzahl(hausanzahl);
+				((Strasse)feld[i]).setHypothek(hypothek);
+				for(Spieler spieler:spielerListe){
+					if (spieler.getSpielerNummer() == besitzer){
+						((Strasse)feld[i]).setBesitzer(spieler);
+					}
+				}
+				
+			}
+		}
+		laden.close();
 	}
 	
 	public Feld[] loadDefaulField()throws IOException{
@@ -66,6 +142,7 @@ public class PersistenzLaden {
 				laden.readLine();
 			}
 		}
+		laden.close();
 		return feld;
 	}
 }

@@ -28,7 +28,7 @@ public class Spielfeld {
 		
 		PersistenzLaden test = new PersistenzLaden();
 		try {
-			Feld[] feld = test.loadDefaulField();
+			feld = test.loadDefaulField();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,6 +85,10 @@ public class Spielfeld {
 	 */
 	public Feld[] getSpielfeld(){
 		return this.feld;
+	}
+	
+	public void setSpielfeld(Feld[] feld){
+		this.feld = feld;
 	}
 	
 	/**

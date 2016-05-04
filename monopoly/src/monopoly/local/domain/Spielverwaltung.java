@@ -152,6 +152,10 @@ public class Spielverwaltung {
 		return feld.getSpielfeld();
 	}
 	
+	public void setSpielfeld(Feld[] feld){
+		this.feld.setSpielfeld(feld);
+	}
+	
 	/**
 	 * @return: gibt den Feldnamen anhand einer Nummer zurück
 	 */

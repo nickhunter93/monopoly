@@ -23,6 +23,10 @@ public class Spielerverwaltung {
 		return spielerListe;
 	}
 	
+	public void setAllSpieler(Vector<Spieler> spielerListe){
+		this.spielerListe = spielerListe;
+	}
+	
 	/**
 	 * @return: gibt einen Spieler an einer bestimmten Stelle i aus
 	 */

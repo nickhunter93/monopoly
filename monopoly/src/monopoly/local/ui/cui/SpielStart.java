@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import monopoly.local.domain.Spielerverwaltung;
 import monopoly.local.domain.Spielverwaltung;
+import monopoly.local.persistenz.PersistenzSpeichern;
 import monopoly.local.valueobjects.Feld;
 import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Strasse;
@@ -237,6 +238,8 @@ public class SpielStart {
 				roundLoop = true;
 				}
 			}while(roundLoop);
+			PersistenzSpeichern test = new PersistenzSpeichern();
+			test.saveAll(verwaltung.getAllSpieler(), feldverwaltung.getSpielfeld());
 			if(!verwaltung.checkPleite().isEmpty()){
 				for(Spieler player:verwaltung.checkPleite()){
 					Strasse[] yourStreets = feldverwaltung.getYourStreets(player);
