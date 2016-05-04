@@ -146,6 +146,13 @@ public class Spielverwaltung {
 	
 	/**
 	 * 
+	 */
+	public Feld getToJail(){
+		return feld.getToJail();
+	}
+	
+	/**
+	 * 
 	 * @return: gibt das Spielfeld zurück
 	 */
 	public Feld[] getSpielfeld(){

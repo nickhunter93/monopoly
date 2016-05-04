@@ -3,10 +3,12 @@ import java.util.Vector;
 
 import monopoly.local.valueobjects.Jail;
 import monopoly.local.valueobjects.Spieler;
+import monopoly.local.valueobjects.ToJail;
 
 public class Spielerverwaltung {
 	private int reihenfolge;
 	private Jail jail;
+	private ToJail toJail;
 	
 	/**
 	 * Konstruktor der Klasse Spielerverwaltung
@@ -128,5 +130,12 @@ public class Spielerverwaltung {
 	 */
 	public void release(Spieler spieler){
 		jail.release(spieler);
+	}
+	
+	/**
+	 * schickt einen Spieler ins Gefängnis
+	 */
+	public void toJail(Spieler player){
+		toJail.getToJail(player);
 	}
 }

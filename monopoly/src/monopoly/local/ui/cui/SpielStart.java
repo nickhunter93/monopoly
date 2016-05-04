@@ -85,6 +85,9 @@ public class SpielStart {
 						int anzahl = verwaltung.wuerfeln();
 						wuerfelAnzeigen(anzahl);
 						feldverwaltung.move(spieler, anzahl);
+						if(spieler.getSpielerPosition() == feldverwaltung.getToJail()){
+							verwaltung.toJail(spieler);
+						}
 						showFeld(feldverwaltung.getSpielfeld(),verwaltung.getAllSpieler());
 						System.out.println("Sie befinden sich auf der Stra�e : "+feldverwaltung.getStrasseName(spieler));
 						System.out.print("Mietpreis : "+feldverwaltung.miete(spieler));

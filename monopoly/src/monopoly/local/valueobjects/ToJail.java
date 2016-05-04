@@ -2,8 +2,8 @@ package monopoly.local.valueobjects;
 
 public class ToJail extends Feld {
 
-	Jail jail;
-	Spielfeld field;
+	private Jail jail;
+	private Spielfeld field;
 	
 	/**
 	 * Konstruktor der Klasse ToJail 
