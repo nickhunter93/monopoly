@@ -7,6 +7,9 @@ import monopoly.local.valueobjects.Strasse;
 
 public class Spielverwaltung {
 	private Spielfeld feld;
+	private Spielerverwaltung spieler;
+	
+	private Turn aktuellerTurn;
 /*	
 	private Turn aktuellerTurn;
 	
@@ -24,8 +27,9 @@ public class Spielverwaltung {
 	/**
 	 * Konstruktor der Klasse Spielverwaltung
 	 */
-	public Spielverwaltung(){
+	public Spielverwaltung(Spielerverwaltung spieler){
 		feld = new Spielfeld();
+		this.spieler = spieler;
 	}
 	
 	/**
@@ -161,7 +165,7 @@ public class Spielverwaltung {
 	 * 
 <<<<<<< Updated upstream
 	 */
-	public Feld getToJail(){
+	public Feld getToJailField(){
 		return feld.getToJail();
 	}
 	
@@ -231,6 +235,52 @@ public class Spielverwaltung {
 		}
 		
 		return false;
+	}
+	
+	/**
+	 * @return: gibt eine zuf�llige int Zahl zwischen 1 und 6 aus
+	 */
+	public int wuerfeln(){
+		int zahl;
+		zahl = (int)(Math.random() * 6) + 1;
+		
+		return zahl;
+	}
+	
+	public void checkPleite(){
+		if(!spieler.checkPleite().isEmpty()){
+			for(Spieler player:spieler.checkPleite()){
+				Strasse[] yourStreets = this.getYourStreets(player);
+				for(Strasse strasse : yourStreets){
+					strasse.setBesitzer(new Spieler("Bank", 99, null, -1));
+				}
+				spieler.entfernen(player.getSpielerNummer());
+			}
+		}else{}
+	}
+	
+	
+	public Turn getTurn() {
+		return aktuellerTurn;
+	}
+
+	public void nextTurn() {
+		if(aktuellerTurn.phase == 4){
+		aktuellerTurn.werIstDran = spieler.reihenfolge();// index
+		aktuellerTurn.phase = 1;
+		}
+		else{
+			aktuellerTurn.phase++;
+		}
+	}
+
+	public class Turn {
+		Spieler werIstDran;
+		int phase; // - enum Verwendung
+		
+		public Spieler getWerIstDran(){
+			return this.werIstDran;
+		}
 	}
 	
 }

@@ -19,7 +19,7 @@ public class Spielerverwaltung {
 	}
 	
 	/**
-	 * @return: gibt alle Spieler in einem Vektor zurück
+	 * @return: gibt alle Spieler in einem Vektor zurï¿½ck
 	 */
 	public Vector<Spieler> getAllSpieler(){
 		return spielerListe;
@@ -37,7 +37,7 @@ public class Spielerverwaltung {
 	}
 	
 	/**
-	 * fügt einen Spieler der spielerListe hinzu 
+	 * fï¿½gt einen Spieler der spielerListe hinzu 
 	 * 
 	 * @return
 	 */
@@ -57,7 +57,7 @@ public class Spielerverwaltung {
 	
 	/**
 	 * entfernt einen Spieler anhand seiner spielerNummer aus der spielerListe
-	 * und lässt die nächten Spieler aufrücken die hinter ihm in der Liste standen
+	 * und lï¿½sst die nï¿½chten Spieler aufrï¿½cken die hinter ihm in der Liste standen
 	 * 
 	 * @param playerNumber
 	 * @return
@@ -77,7 +77,7 @@ public class Spielerverwaltung {
 	/**
 	 * 
 	 * @param miete: Geldbetrag den der Spieler zahlen muss
-	 * @param vermieter: Spieler der das Geld erhält
+	 * @param vermieter: Spieler der das Geld erhï¿½lt
 	 * @param mieter: SPieler der das Geld zahlt
 	 */
 	public void mieteZahlen(int miete, Spieler vermieter, Spieler mieter){
@@ -86,10 +86,10 @@ public class Spielerverwaltung {
 	}
 
 	/**
-	 * durchläuft die Liste mit Spielern und gibt jeweils einen zurück
+	 * durchlï¿½uft die Liste mit Spielern und gibt jeweils einen zurï¿½ck
 	 * springt an den Anfang wenn das Ende der SpielerListe erreicht ist
 	 * 
-	 * @return: gibt die Reihenfolge der Spieler zurück 
+	 * @return: gibt die Reihenfolge der Spieler zurï¿½ck 
 	 */
 	public Spieler reihenfolge(){
 		if(reihenfolge < spielerListe.size()-1){
@@ -99,11 +99,12 @@ public class Spielerverwaltung {
 			reihenfolge = -1;
 			reihenfolge++;
 		}
+//		reihenfolge = (reihenfolge+1) % spielerListe.size();
 		return spielerListe.get(reihenfolge);
 	}
 
 	/**
-	 * @return: gibt einen Vektor mit den Spielern zurück die Pleite sind
+	 * @return: gibt einen Vektor mit den Spielern zurï¿½ck die Pleite sind
 	 */
 	public Vector<Spieler> checkPleite(){
 		Vector<Spieler> v = new Vector<Spieler>();
@@ -115,15 +116,6 @@ public class Spielerverwaltung {
 		return v;
 	}
 	
-	/**
-	 * @return: gibt eine zufällige int Zahl zwischen 1 und 6 aus
-	 */
-	public int wuerfeln(){
-		int zahl;
-		zahl = (int)(Math.random() * 6) + 1;
-		
-		return zahl;
-	}
 	
 	/**
 	 * befreit einen Spieler der im Gefaengnis ist
@@ -133,7 +125,7 @@ public class Spielerverwaltung {
 	}
 	
 	/**
-	 * schickt einen Spieler ins Gefängnis
+	 * schickt einen Spieler ins Gefï¿½ngnis
 	 */
 	public void toJail(Spieler player){
 		toJail.getToJail(player);

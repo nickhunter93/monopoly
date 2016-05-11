@@ -23,7 +23,7 @@ public class PersistenzLaden {
 	public SpielStart loadAll(){
 		try {
 			Spielerverwaltung verwaltung = new Spielerverwaltung();
-			Spielverwaltung feldverwaltung = new Spielverwaltung();
+			Spielverwaltung feldverwaltung = new Spielverwaltung(verwaltung);
 			
 			Feld[] feld = feldverwaltung.getSpielfeld();
 			

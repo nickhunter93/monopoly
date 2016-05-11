@@ -12,17 +12,17 @@ import monopoly.local.persistenz.PersistenzSpeichern;
 import monopoly.local.valueobjects.Spieler;
 
 public class Menue {
-	private Spielerverwaltung spielerverwaltung;
-	private Spielverwaltung feldverwaltung;
+	private Spielerverwaltung spieler;
+	private Spielverwaltung logik;
 	private Monopoly monopoly;
 	
 	/**
 	 * Main Methode in der Klasse Menue
 	 */
 	public Menue(){
-		monopoly = new Monopoly();
-		spielerverwaltung = new Spielerverwaltung();
-		feldverwaltung = new Spielverwaltung();
+		spieler = new Spielerverwaltung();
+		logik = new Spielverwaltung(spieler);
+		monopoly = new Monopoly(logik,spieler);
 		this.menueOefnen();
 	}
 	
@@ -63,9 +63,9 @@ public class Menue {
 				try {
 					System.out.println("Geben Sie den Namen an.");
 					name = eingabe.readLine();
-					spielernummer = spielerverwaltung.getAllSpieler().size();
-					Spieler player = new Spieler(name,spielernummer+1,feldverwaltung.getLos(),2000);
-					if(spielerverwaltung.beitreten(player)){
+					spielernummer = spieler.getAllSpieler().size();
+					Spieler player = new Spieler(name,spielernummer+1,logik.getLos(),2000);
+					if(spieler.beitreten(player)){
 						System.out.println("Spieler " + (spielernummer+1) + " von 6 erfolgreich hinzugef�gt.");
 					}else{
 						System.out.println("Maximale Spieleranzahl erreicht.");
@@ -82,16 +82,16 @@ public class Menue {
 
 				try {
 					System.out.println("Geben Sie die Spieler Nummer an.");
-					for(int i=0;i<spielerverwaltung.getAllSpieler().size();i++){
-						Spieler spieler = spielerverwaltung.getSpieler(i);
+					for(int i=0;i<spieler.getAllSpieler().size();i++){
+						Spieler spieler = this.spieler.getSpieler(i);
 						int spielerNummer = spieler.getSpielerNummer();
 						String spielerName = spieler.getSpielerName();
 						System.out.println(spielerNummer+" :"+spielerName+".");
 					}
 					str = eingabe.readLine();
 					spielernummer = Integer.parseInt(str);
-					str = spielerverwaltung.getSpieler(spielernummer-1).getSpielerName();
-					if(spielerverwaltung.entfernen(spielernummer)){
+					str = spieler.getSpieler(spielernummer-1).getSpielerName();
+					if(spieler.entfernen(spielernummer)){
 						System.out.println("Spieler "+str+" wurde entfernt.");
 					}else{
 						System.out.println("Kein Spieler mit der Nummer gefunden.");
@@ -102,9 +102,9 @@ public class Menue {
 				}
 			}
 			break;
-			case 3 :	int spielerAnzahl = spielerverwaltung.getAllSpieler().size();
+			case 3 :	int spielerAnzahl = spieler.getAllSpieler().size();
 			if(spielerAnzahl >= 2){
-				SpielStart spiel = new SpielStart(feldverwaltung,spielerverwaltung);
+				SpielStart spiel = new SpielStart(logik,spieler);
 				spiel.start();
 			}else{
 				System.out.println("Es gibt nicht gen�gend Spieler (min. 2).");

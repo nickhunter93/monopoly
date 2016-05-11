@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Vector;
 
+import monopoly.local.domain.Monopoly;
 import monopoly.local.domain.Spielerverwaltung;
 import monopoly.local.domain.Spielverwaltung;
+import monopoly.local.domain.Spielverwaltung.Turn;
 import monopoly.local.persistenz.PersistenzSpeichern;
 import monopoly.local.valueobjects.Feld;
 import monopoly.local.valueobjects.Spieler;
@@ -18,15 +20,13 @@ public class SpielStart {
 	private Spieler spieler;
 	private String buffer;
 	private int auswahl;
-	private Spielverwaltung feldverwaltung;
-	private Spielerverwaltung verwaltung;
+	private Monopoly monopoly;
 
 	/**
 	 * Konstruktor der Klasse SpielStart
 	 */
-	public SpielStart(Spielverwaltung feldverwaltung , Spielerverwaltung verwaltung){
-		this.feldverwaltung = feldverwaltung;
-		this.verwaltung = verwaltung;
+	public SpielStart(Spielverwaltung logik , Spielerverwaltung spieler){
+		this.monopoly = new Monopoly(logik,spieler);
 	}
 
 	/**
@@ -43,7 +43,8 @@ public class SpielStart {
 	public void start(){
 		BufferedReader eingabe = new BufferedReader(new InputStreamReader(System.in));
 		while(schleife){
-			spieler = verwaltung.reihenfolge();
+			Turn aktuellerTurn = monopoly.getTurn();
+			spieler = aktuellerTurn.getWerIstDran();
 			roundLoop = true;
 			do{
 				try {
@@ -67,91 +68,33 @@ public class SpielStart {
 					auswahl = 0;
 					System.out.println("Auswahl fehlerhaft.");
 				}
-				Strasse[] yourStreets = feldverwaltung.getYourStreets(spieler);
+				Strasse[] yourStreets = monopoly.getYourStreets(spieler);
 				switch(auswahl){
 				case 1:		//pruefe ob im Gefaengnis 
-					boolean inJail = false;
-					if(feldverwaltung.isInJail(spieler)){
-						int anzahl = verwaltung.wuerfeln();
-						if(anzahl == 6){
-							verwaltung.release(spieler);
-							inJail = false;
-						}
-						else{
-							inJail = true;
-							roundLoop=false;
-						}
-					}
-					else{
-						int anzahl = verwaltung.wuerfeln();
+					
+					
+						int anzahl = monopoly.wuerfel();
 						wuerfelAnzeigen(anzahl);
-						feldverwaltung.move(spieler, anzahl);
-						if(spieler.getSpielerPosition() == feldverwaltung.getToJail()){
-							verwaltung.toJail(spieler);
-						}
-						showFeld(feldverwaltung.getSpielfeld(),verwaltung.getAllSpieler());
-						System.out.println("Sie befinden sich auf der Stra�e : "+feldverwaltung.getStrasseName(spieler));
+						monopoly.move(spieler, anzahl);
+						showFeld(monopoly.getSpielfeld(),monopoly.getAllSpieler());
+						System.out.println("Sie befinden sich auf der Stra�e : "+monopoly.getStrasseName(spieler));
 						
-						if(feldverwaltung.getBesitzer(spieler.getSpielerPosition()).getSpielerNummer() == spieler.getSpielerNummer()){
+						if(monopoly.getBesitzer(spieler.getSpielerPosition()).getSpielerNummer() == spieler.getSpielerNummer()){
 							System.out.println("Diese Straße gehört Ihnen bereits.");
 						} else{
-						System.out.print("Mietpreis : "+feldverwaltung.miete(spieler));
-						System.out.print(" / Kaufpreis : "+feldverwaltung.preis(spieler));
+						System.out.print("Mietpreis : "+monopoly.miete(spieler));
 						System.out.print(" / Aktuelles Budget : "+spieler.getSpielerBudget());
 						System.out.println("");
 						}
-						
-						//Stra�e kaufen / miete zahlen hier einf�gen.
-						if (feldverwaltung.getBesitzer(spieler.getSpielerPosition()).getSpielerNummer() ==  99){
-							boolean loop = true;
-							do{
-								System.out.println("Wollen Sie die Strasse kaufen?");
-								System.out.println("'y' f�r Ja/ 'n' f�r Nein.");
-								char check = 'k';
-								try {
-									buffer = eingabe.readLine();
-									if(buffer.length() != 0){
-										check = buffer.charAt(0);
-									}else {
-										check = 'k';
-									}
-
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-								if(check == 'y' || check == 'Y' || check == 'j' || check == 'J'){
-									System.out.println(feldverwaltung.kaufStrasse(spieler) ? "Kauf erfolgreich" : "Kauf fehlgeschlagen");
-									System.out.println("Kosten: -" + feldverwaltung.preis(spieler));
-									System.out.println(spieler.getSpielerName()+" ihr Budget betr�gt : "+spieler.getSpielerBudget());
-									loop = false;
-								}else if(check == 'n' || check == 'N'){
-									loop = false;
-								} else {
-									loop = true;
-									System.out.println("Eingabe Fehlerhaft.");
-								}
-							}while(loop == true);
-
-						}else{
-							
-							if(feldverwaltung.getBesitzer(spieler.getSpielerPosition()).getSpielerNummer() == spieler.getSpielerNummer()){
-								System.out.println("Sie mussten keine Miete zahlen.");
-							} else{
-							spieler.setSpielerBudget(spieler.getSpielerBudget() - feldverwaltung.miete(spieler));
-							verwaltung.mieteZahlen(feldverwaltung.miete(spieler), feldverwaltung.getBesitzer(spieler.getSpielerPosition()),spieler);
-							System.out.println("Sie mussten " + feldverwaltung.miete(spieler) + " Miete an " + feldverwaltung.getBesitzer(spieler.getSpielerPosition()).getSpielerName() + " zahlen.");
-							System.out.println("Ihr Budget betr�gt jetzt = "+spieler.getSpielerBudget());
-							}
-						}
 						roundLoop=false;
-					}
+					
 					break;
 				case 2:		
 					if(yourStreets != null){
 						for(Strasse strasse : yourStreets){
 							int nr = strasse.getNummer();
-							String strassenName = feldverwaltung.getFeldName(nr);
-							int hausAnzahl = feldverwaltung.getHaeuseranzahl(nr);
+							String strassenName = monopoly.getFeldName(nr);
+							int hausAnzahl = monopoly.getHaeuseranzahl(nr);
 
 							System.out.print(nr+" : "+strassenName+" hat "+hausAnzahl);
 
@@ -177,8 +120,8 @@ public class SpielStart {
 								}
 							}
 
-							if(pruefen && (feldverwaltung.getHaeuseranzahl(spieler.getSpielerPosition().getNummer()) < 5)){
-								if(feldverwaltung.bauHaus(auswahl, spieler)){
+							if(pruefen && (monopoly.getHaeuseranzahl(spieler.getSpielerPosition().getNummer()) < 5)){
+								if(monopoly.bauHaus(auswahl, spieler)){
 									System.out.println("Das Haus wurde erfolgreich gebaut.");
 								}
 							}
@@ -187,7 +130,7 @@ public class SpielStart {
 								System.out.println("Die Strasse existiert nicht oder Sie sind nicht ihr Besitzer.");
 							} 
 
-							else if(pruefen && (feldverwaltung.getHaeuseranzahl(spieler.getSpielerPosition().getNummer()) > 4)){
+							else if(pruefen && (monopoly.getHaeuseranzahl(spieler.getSpielerPosition().getNummer()) > 4)){
 								System.out.println("Maximale Anzahl an Häusern für diese Straße erreicht.");
 							}
 
@@ -229,7 +172,7 @@ public class SpielStart {
 							}
 						}
 						if(pruefen){
-							String str = feldverwaltung.switchHypothek(auswahl);
+							String str = monopoly.switchHypothek(auswahl);
 							System.out.println(str);
 						}else{
 							System.out.println("Die Strasse existiert nicht oder Sie sind nicht ihr Besitzer.");
@@ -253,24 +196,16 @@ public class SpielStart {
 				case 4 :	
 					System.out.println("Spielstand erfolgreich gespeichert.");
 					PersistenzSpeichern speichern = new PersistenzSpeichern();
-					speichern.saveAll(verwaltung.getAllSpieler(), feldverwaltung.getSpielfeld());
+					speichern.saveAll(monopoly.getAllSpieler(), monopoly.getSpielfeld());
 				break;
 				
 				default: 	System.out.println("Keine G�ltige Auswahl.");
 				roundLoop = true;
 				}
 			}while(roundLoop);
-			if(!verwaltung.checkPleite().isEmpty()){
-				for(Spieler player:verwaltung.checkPleite()){
-					Strasse[] yourStreets = feldverwaltung.getYourStreets(player);
-					for(Strasse strasse : yourStreets){
-						strasse.setBesitzer(new Spieler("Bank", 99, null, -1));
-					}
-					verwaltung.entfernen(player.getSpielerNummer());
-				}
-			}else{}
-			if(verwaltung.getAllSpieler().size() == 1){
-				for(Spieler player:verwaltung.getAllSpieler()){
+			monopoly.checkPleite();
+			if(monopoly.getAllSpieler().size() == 1){
+				for(Spieler player:monopoly.getAllSpieler()){
 					System.out.println("Der Gewinner ist : "+player.getSpielerName());
 					schleife = false;
 				}
@@ -381,3 +316,46 @@ public class SpielStart {
 		return zahl;
 	}
 }
+
+////Stra�e kaufen / miete zahlen hier einf�gen.
+//if (feldverwaltung.getBesitzer(spieler.getSpielerPosition()).getSpielerNummer() ==  99){
+//	boolean loop = true;
+//	do{
+//		System.out.println("Wollen Sie die Strasse kaufen?");
+//		System.out.println("'y' f�r Ja/ 'n' f�r Nein.");
+//		char check = 'k';
+//		try {
+//			buffer = eingabe.readLine();
+//			if(buffer.length() != 0){
+//				check = buffer.charAt(0);
+//			}else {
+//				check = 'k';
+//			}
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		if(check == 'y' || check == 'Y' || check == 'j' || check == 'J'){
+//			System.out.println(feldverwaltung.kaufStrasse(spieler) ? "Kauf erfolgreich" : "Kauf fehlgeschlagen");
+//			System.out.println("Kosten: -" + feldverwaltung.preis(spieler));
+//			System.out.println(spieler.getSpielerName()+" ihr Budget betr�gt : "+spieler.getSpielerBudget());
+//			loop = false;
+//		}else if(check == 'n' || check == 'N'){
+//			loop = false;
+//		} else {
+//			loop = true;
+//			System.out.println("Eingabe Fehlerhaft.");
+//		}
+//	}while(loop == true);
+//
+//}else{
+//	
+//	if(feldverwaltung.getBesitzer(spieler.getSpielerPosition()).getSpielerNummer() == spieler.getSpielerNummer()){
+//		System.out.println("Sie mussten keine Miete zahlen.");
+//	} else{
+//	spieler.setSpielerBudget(spieler.getSpielerBudget() - feldverwaltung.miete(spieler));
+//	verwaltung.mieteZahlen(feldverwaltung.miete(spieler), feldverwaltung.getBesitzer(spieler.getSpielerPosition()),spieler);
+//	System.out.println("Sie mussten " + feldverwaltung.miete(spieler) + " Miete an " + feldverwaltung.getBesitzer(spieler.getSpielerPosition()).getSpielerName() + " zahlen.");
+//	System.out.println("Ihr Budget betr�gt jetzt = "+spieler.getSpielerBudget());
+//	}
+//}
