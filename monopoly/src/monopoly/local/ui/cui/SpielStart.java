@@ -56,6 +56,7 @@ public class SpielStart {
 					System.out.println("1:W�rfeln.");
 					System.out.println("2:Haus bauen.");
 					System.out.println("3:Hypothek aufnehmen.");
+					System.out.println("4:Spielstand speichern.");
 					buffer = eingabe.readLine();
 					auswahl = Integer.parseInt(buffer);
 
@@ -248,12 +249,17 @@ public class SpielStart {
 				}
 				roundLoop = true;
 				break;
+				
+				case 4 :	
+					System.out.println("Spielstand erfolgreich gespeichert.");
+					PersistenzSpeichern speichern = new PersistenzSpeichern();
+					speichern.saveAll(verwaltung.getAllSpieler(), feldverwaltung.getSpielfeld());
+				break;
+				
 				default: 	System.out.println("Keine G�ltige Auswahl.");
 				roundLoop = true;
 				}
 			}while(roundLoop);
-			PersistenzSpeichern test = new PersistenzSpeichern();
-			test.saveAll(verwaltung.getAllSpieler(), feldverwaltung.getSpielfeld());
 			if(!verwaltung.checkPleite().isEmpty()){
 				for(Spieler player:verwaltung.checkPleite()){
 					Strasse[] yourStreets = feldverwaltung.getYourStreets(player);

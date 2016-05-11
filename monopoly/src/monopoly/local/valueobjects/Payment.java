@@ -3,14 +3,14 @@ package monopoly.local.valueobjects;
 import monopoly.local.domain.Spielverwaltung;
 import monopoly.local.domain.Spielerverwaltung;
 
-public class Zahlung extends SpezialAktion {
+public class Payment extends SpezialAktion {
 	
 	private int betrag;
 	private Spielverwaltung feldverwaltung;
 	private Spielerverwaltung verwaltung;
 	private Strasse[] yourStreets;
 	
-	public Zahlung(int betrag) {
+	public Payment(int betrag) {
 		this.setBetrag(betrag);
 	}
 

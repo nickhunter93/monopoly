@@ -41,8 +41,7 @@ public class Menue {
 				System.out.println("1:Beitreten.");
 				System.out.println("2:Entfernen.");
 				System.out.println("3:Spiel starten.");
-				System.out.println("4:Spielstand speichern.");
-				System.out.println("5:Spielstand laden.");
+				System.out.println("4:Spielstand laden.");
 				buffer = eingabe.readLine();
 				auswahl = Integer.parseInt(buffer);
 			}catch(IOException e ){
@@ -110,14 +109,11 @@ public class Menue {
 			break;
 			
 			case 4 :	
-				PersistenzSpeichern speichern = new PersistenzSpeichern();
-				speichern.saveAll(spielerverwaltung.getAllSpieler(), feldverwaltung.getSpielfeld());
-			break;
-			
-			case 5 :	
+				System.out.println("Spielstand erfolgreich geladen.");
 				PersistenzLaden laden = new PersistenzLaden();
 				SpielStart spiel = laden.loadAll();
 				spiel.start();
+				
 			break;
 			default:	System.out.println("Keine G�ltige Auswahl.");
 			}

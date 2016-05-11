@@ -76,7 +76,7 @@ public class PersistenzLaden {
 				laden.readLine();
 				
 			}else if(str.equals("Gefï¿½ngnis")){
-				feld[i] = new Jail("Gefängnis",i);
+				feld[i] = new Jail("Gefï¿½ngnis",i);
 				laden.readLine();
 				laden.readLine();
 			}else{
@@ -119,7 +119,7 @@ public class PersistenzLaden {
 				laden.readLine();
 				laden.readLine();
 				
-			}else if(str.equals("Gefängnis")){
+			}else if(str.equals("Gefï¿½ngnis")){
 				laden.readLine();
 				feld[i] = new Jail(str,i);
 				laden.readLine();
