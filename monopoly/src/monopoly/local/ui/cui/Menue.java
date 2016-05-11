@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import monopoly.local.domain.Monopoly;
 import monopoly.local.domain.Spielerverwaltung;
 import monopoly.local.domain.Spielverwaltung;
 import monopoly.local.persistenz.PersistenzLaden;
@@ -11,13 +12,15 @@ import monopoly.local.persistenz.PersistenzSpeichern;
 import monopoly.local.valueobjects.Spieler;
 
 public class Menue {
-	Spielerverwaltung spielerverwaltung;
-	Spielverwaltung feldverwaltung;
+	private Spielerverwaltung spielerverwaltung;
+	private Spielverwaltung feldverwaltung;
+	private Monopoly monopoly;
 	
 	/**
 	 * Main Methode in der Klasse Menue
 	 */
 	public Menue(){
+		monopoly = new Monopoly();
 		spielerverwaltung = new Spielerverwaltung();
 		feldverwaltung = new Spielverwaltung();
 		this.menueOefnen();
@@ -110,8 +113,9 @@ public class Menue {
 			
 			case 4 :	
 				System.out.println("Spielstand erfolgreich geladen.");
-				PersistenzLaden laden = new PersistenzLaden();
-				SpielStart spiel = laden.loadAll();
+//				PersistenzLaden laden = new PersistenzLaden();
+//				SpielStart spiel = laden.loadAll();
+				SpielStart spiel = monopoly.spielStandLaden("test");
 				spiel.start();
 				
 			break;

@@ -7,7 +7,20 @@ import monopoly.local.valueobjects.Strasse;
 
 public class Spielverwaltung {
 	private Spielfeld feld;
+/*	
+	private Turn aktuellerTurn;
 	
+	enum Phase { DICE, IN_JAIL, OUT_OF_Jail, BUY, ... }
+	public class Turn {
+		Spieler werIstDran;
+		int phase; // - enum Verwendung
+	}
+	Turn getTurn();
+	... cui macht aktion auf Monopoly
+	(Monopoly verÃ¤ndert Spielzustand -> Phase)
+	- entweder: Aktion gibt _immer_ Turn-Objekt
+	- oder: CUI fragt nach Aktion: getTurn() und dann: switch (turnObjekt) case DICE: ... case JAIL: ...
+	*/
 	/**
 	 * Konstruktor der Klasse Spielverwaltung
 	 */
@@ -154,7 +167,7 @@ public class Spielverwaltung {
 	
 	/**
 	 * 
-	 * @return: gibt das Spielfeld zurück
+	 * @return: gibt das Spielfeld zurï¿½ck
 =======
 	 * @return: gibt das Spielfeld zurï¿½ck
 >>>>>>> Stashed changes
