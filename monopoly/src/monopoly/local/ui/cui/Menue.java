@@ -116,7 +116,8 @@ public class Menue {
 			
 			case 5 :	
 				PersistenzLaden laden = new PersistenzLaden();
-				laden.loadAll();
+				SpielStart spiel = laden.loadAll();
+				spiel.start();
 			break;
 			default:	System.out.println("Keine G�ltige Auswahl.");
 			}

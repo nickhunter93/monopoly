@@ -1,11 +1,11 @@
 2
-fabian
+Nico
 1200
 1
 6
 
-nico
-1200
+Fabian
+2000
 2
-4
+0
 

@@ -37,7 +37,7 @@ public class PersistenzLaden {
 			SpielStart start = new SpielStart(feldverwaltung,verwaltung);
 			return start;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("FEHLER BEIM LADEN");
 			return null;
 		}
 		
@@ -45,7 +45,7 @@ public class PersistenzLaden {
 	
 	public Vector<Spieler> loadSpieler(Feld[] feld) throws IOException{
 		
-		laden = new BufferedReader(new FileReader("saveSpieler"));
+		laden = new BufferedReader(new FileReader("saveSpieler.txt"));
 		int spieleranzahl = Integer.parseInt(laden.readLine());
 		Vector<Spieler> spielerListe = new Vector<Spieler>();
 		
@@ -63,7 +63,7 @@ public class PersistenzLaden {
 	}
 	
 	public void loadField(Vector<Spieler> spielerListe,Feld[] feld)throws IOException{
-		laden = new BufferedReader(new FileReader("defaultFeld.txt"));
+		laden = new BufferedReader(new FileReader("saveFeld.txt"));
 		laden.readLine();
 		for(int i = 0 ; i<36 ; i++){
 			String str = laden.readLine();
@@ -75,9 +75,8 @@ public class PersistenzLaden {
 				
 				laden.readLine();
 				
-			}else if(str.equals("Gefängnis")){
-				laden.readLine();
-				feld[i] = new Jail(str,i);
+			}else if(str.equals("Gefï¿½ngnis")){
+				feld[i] = new Jail("Gefängnis",i);
 				laden.readLine();
 				laden.readLine();
 			}else{
@@ -91,6 +90,7 @@ public class PersistenzLaden {
 						((Strasse)feld[i]).setBesitzer(spieler);
 					}
 				}
+				laden.readLine();
 				
 			}
 		}

@@ -65,7 +65,7 @@ public class Spielfeld {
 	 * gibt das Gefaengnisfeld zurueck
 	 */
 	public Feld getJail(){
-		return feld[9];
+		return feld[18];
 	}
 	
 	/**
@@ -73,7 +73,7 @@ public class Spielfeld {
 	 * gibt das "Gehe ins Gef�ngnis"-Feld zurueck
 	 */
 	public Feld getToJail(){
-		return feld[99];
+		return feld[10];
 	}
 	
 	/**
