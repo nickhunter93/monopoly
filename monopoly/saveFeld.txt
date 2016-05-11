@@ -17,7 +17,12 @@ f
 Teststrasse
 0
 f
-3
+99
+
+Teststrasse
+0
+f
+2
 
 Teststrasse
 0
@@ -39,12 +44,7 @@ Teststrasse
 f
 99
 
-Teststrasse
-0
-f
-99
-
-Gefängnis
+Gefï¿½ngnis
 
 
 Teststrasse

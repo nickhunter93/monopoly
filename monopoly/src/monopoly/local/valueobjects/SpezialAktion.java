@@ -1,5 +1,7 @@
 package monopoly.local.valueobjects;
 
+//Diese Klasse hatte Herr Teschke im Labor erstellt.
+
 public class SpezialAktion extends Aktion {
 
 	public SpezialAktion() {
@@ -8,7 +10,7 @@ public class SpezialAktion extends Aktion {
 
 	@Override
 	public void ausfuehren() {
-		// TODO Auto-generated method stub
+
 
 	}
 

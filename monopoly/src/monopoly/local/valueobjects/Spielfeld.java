@@ -13,7 +13,7 @@ public class Spielfeld {
 	 * Konstruktor der Klasse Spielfeld
 	 * erstellt ein Spielfeld, 
 	 * bestimmt das Feld [0] das Losfeld ist, 
-	 * zum Start des Spieles alle Straßen gehören niemandem
+	 * zum Start des Spieles alle Straï¿½en gehï¿½ren niemandem
 	 */
 	public Spielfeld(){
 //		feld = new Feld [fieldSize];
@@ -24,7 +24,7 @@ public class Spielfeld {
 //		feld[0] = new Strasse("Los",0,-2000,false,0);
 //		((Strasse)feld[0]).setBesitzer(new Spieler("Bank", 98, null, -1));
 //		
-//		feld[9] = new Jail("Gefängnis",9);
+//		feld[9] = new Jail("Gefï¿½ngnis",9);
 		
 		PersistenzLaden test = new PersistenzLaden();
 		try {
@@ -33,6 +33,7 @@ public class Spielfeld {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		feld[9] = new Jail("Gefï¿½ngnis",9);
 	}
 	
 	/**
@@ -47,14 +48,14 @@ public class Spielfeld {
 	}
 	
 	/** 
-	 * @return: gibt die Anzahl der Felder als int zurück 
+	 * @return: gibt die Anzahl der Felder als int zurï¿½ck 
 	 */
 	public int getFieldSize(){
 		return fieldSize;
 	}
 	
 	/**
-	 * @return: gibt das Losfeld zurück
+	 * @return: gibt das Losfeld zurï¿½ck
 	 */
 	public Feld getLos(){
 		return feld[0];
@@ -68,18 +69,22 @@ public class Spielfeld {
 	}
 	
 	/**
-	 * gibt das "Gehe ins Gefängnis"-Feld zurueck
+<<<<<<< Updated upstream
+	 * gibt das "Gehe ins Gefï¿½ngnis"-Feld zurueck
 	 */
 	public Feld getToJail(){
 		return feld[99];
 	}
 	
 	/**
-	 * ändert die Position des Spielers
+	 * ï¿½ndert die Position des Spielers
+=======
+	 * ï¿½ndert die Position des Spielers
+>>>>>>> Stashed changes
 	 * 
 	 * @param player
 	 * @param steps
-	 * @return: gibt die neue Position des Spielers zurück
+	 * @return: gibt die neue Position des Spielers zurï¿½ck
 	 */
 	public Feld setPosition(Spieler spieler,int zugweite){
 		Feld position = spieler.getSpielerPosition();
@@ -88,7 +93,7 @@ public class Spielfeld {
 	}
 	
 	/**
-	 * @return: gibt das aktuelle Feld zurück
+	 * @return: gibt das aktuelle Feld zurï¿½ck
 	 */
 	public Feld[] getSpielfeld(){
 		return this.feld;
@@ -99,7 +104,7 @@ public class Spielfeld {
 	}
 	
 	/**
-	 * @return gibt den Namen des Feldes anhand der Feldnummer zurück
+	 * @return gibt den Namen des Feldes anhand der Feldnummer zurï¿½ck
 	 */
 	public String getFeldName(int nr){
 		return feld[nr].getName();
@@ -107,7 +112,7 @@ public class Spielfeld {
 	
 	/**
 	 * @param position: die Position eines Feldes
-	 * @return: gibt ein Feld anhand der Feldposition zurück
+	 * @return: gibt ein Feld anhand der Feldposition zurï¿½ck
 	 */
 	public Feld getFeld(Feld position){
 		for(Feld feld:this.feld){
@@ -121,7 +126,7 @@ public class Spielfeld {
 	/**
 	 * 
 	 * @param player
-	 * @return: gibt einen Vektor mit Straßen zurück die einem Spieler gehören
+	 * @return: gibt einen Vektor mit Straï¿½en zurï¿½ck die einem Spieler gehï¿½ren
 	 */
 	public Strasse[] getYourStreets(Spieler spieler){
 		Vector<Strasse> vec = new Vector<Strasse>();
@@ -145,7 +150,7 @@ public class Spielfeld {
 	}
 	
 	/**
-	 * baut ein Haus auf einer Straße  
+	 * baut ein Haus auf einer Straï¿½e  
 	 */
 	public boolean bauHaus(int position,Spieler spieler){
 		if(feld[position] instanceof Strasse){
@@ -155,7 +160,7 @@ public class Spielfeld {
 	}
 	
 	/**
-	 * @return gibt die Häuseranzahl auf einer Straße als int zurück
+	 * @return gibt die Hï¿½useranzahl auf einer Straï¿½e als int zurï¿½ck
 	 */
 	public int getHaeuseranzahl(int position){
 		if (feld[position] instanceof Strasse){

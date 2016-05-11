@@ -46,7 +46,7 @@ public class Spielverwaltung {
 	/**
 	 * 
 	 * @param player
-	 * @return: gibt den Namen der Straße an dem sich der Spieler befindet als String zurück
+	 * @return: gibt den Namen der Straï¿½e an dem sich der Spieler befindet als String zurï¿½ck
 	 */
 	public String getStrasseName(Spieler spieler){
 		Feld position = spieler.getSpielerPosition();
@@ -57,7 +57,7 @@ public class Spielverwaltung {
 	/**
 	 * 
 	 * @param position
-	 * @return: gibt den Besitzer des Feldes zurück auf der Spieler sich befindet
+	 * @return: gibt den Besitzer des Feldes zurï¿½ck auf der Spieler sich befindet
 	 */
 	public Spieler getBesitzer(Feld position){
 		Spieler besitzer = null;
@@ -68,7 +68,7 @@ public class Spielverwaltung {
 	}
 
 	/**
-	 * setzt den Wert der Hypothek einer Straße neu 
+	 * setzt den Wert der Hypothek einer Straï¿½e neu 
 	 * durch den Aufruf der switchHypthek-Funktion in der Klasse Spielfeld 
 	 */
 	public String switchHypothek(int position){
@@ -78,7 +78,7 @@ public class Spielverwaltung {
 	/**
 	 * 
 	 * @param player
-	 * @return: gibt den Mietpreis der Straße zurück auf welcher der Spieler sich befindet
+	 * @return: gibt den Mietpreis der Straï¿½e zurï¿½ck auf welcher der Spieler sich befindet
 	 */
 	public int miete(Spieler spieler){
 		Strasse strasse = null;
@@ -104,8 +104,8 @@ public class Spielverwaltung {
 	}
 	
 	/**
-	 * setzt den Besitzer der Straße auf den Spieler der die Straße gekauft hat
-	 * und zieht dem Spieler das Geld für die Straße aus seinem Budget ab
+	 * setzt den Besitzer der Straï¿½e auf den Spieler der die Straï¿½e gekauft hat
+	 * und zieht dem Spieler das Geld fï¿½r die Straï¿½e aus seinem Budget ab
 	 */
 	public boolean kaufStrasse(Spieler spieler){
 		Strasse strasse;
@@ -130,7 +130,7 @@ public class Spielverwaltung {
 	}
 	
 	/**
-	 * @return: gibt das Losfeld zurück 
+	 * @return: gibt das Losfeld zurï¿½ck 
 	 */
 	public Feld getLos(){
 		return feld.getLos();
@@ -138,7 +138,7 @@ public class Spielverwaltung {
 	
 	/**
 	 * 
-	 * @return: gibt das Gefängnisfeld zurueck
+	 * @return: gibt das Gefï¿½ngnisfeld zurueck
 	 */
 	public Feld getJail(){
 		return feld.getJail();
@@ -146,6 +146,7 @@ public class Spielverwaltung {
 	
 	/**
 	 * 
+<<<<<<< Updated upstream
 	 */
 	public Feld getToJail(){
 		return feld.getToJail();
@@ -154,6 +155,9 @@ public class Spielverwaltung {
 	/**
 	 * 
 	 * @return: gibt das Spielfeld zurück
+=======
+	 * @return: gibt das Spielfeld zurï¿½ck
+>>>>>>> Stashed changes
 	 */
 	public Feld[] getSpielfeld(){
 		return feld.getSpielfeld();
@@ -164,14 +168,14 @@ public class Spielverwaltung {
 	}
 	
 	/**
-	 * @return: gibt den Feldnamen anhand einer Nummer zurück
+	 * @return: gibt den Feldnamen anhand einer Nummer zurï¿½ck
 	 */
 	public String getFeldName(int nr){
 		return feld.getFeldName(nr);
 	}
 	
 	/**
-	 * @return: gibt das Feld zurück an dem sich der Spieler befindet
+	 * @return: gibt das Feld zurï¿½ck an dem sich der Spieler befindet
 	 */
 	public Feld getFeld(Spieler spieler){
 		Feld position = spieler.getSpielerPosition();
@@ -183,28 +187,28 @@ public class Spielverwaltung {
 	 * 
 	 * @param position
 	 * @param player
-	 * @return: gibt das Feld mit dem dazu gebauten Haus zurück
+	 * @return: gibt das Feld mit dem dazu gebauten Haus zurï¿½ck
 	 */
 	public boolean bauHaus(int position,Spieler spieler){
 		return feld.bauHaus(position,spieler);	
 	}
 	
 	/**
-	 * @return: gibt die Straßen zurück die einem Spieler gehören
+	 * @return: gibt die Straï¿½en zurï¿½ck die einem Spieler gehï¿½ren
 	 */
 	public Strasse[] getYourStreets(Spieler spieler){
 		return feld.getYourStreets(spieler);
 	}
 	
 	/**
-	 * @return: gibt die Anzahl der Häuser zurück die auf einem Feld stehen
+	 * @return: gibt die Anzahl der Hï¿½user zurï¿½ck die auf einem Feld stehen
 	 */
 	public int getHaeuseranzahl(int position){
 		return feld.getHaeuseranzahl(position);
 	}
 	
 	/**
-	 * prüft ob ein Spieler im Gefaengnis ist
+	 * prï¿½ft ob ein Spieler im Gefaengnis ist
 	 */
 	public boolean isInJail(Spieler spieler){
 		Feld feld = spieler.getSpielerPosition();

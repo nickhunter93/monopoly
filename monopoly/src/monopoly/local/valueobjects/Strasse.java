@@ -9,11 +9,11 @@ public class Strasse extends Feld {
 	/**
 	 * Konstrucktor der Klasse Strasse
 	 * 
-	 * @param name: der Name der Straße
-	 * @param prize: der Preis für den man dei Straße kaufen kann
-	 * @param rent: der Mietpreis den man bezhalt wenn die Straße sschon gekauft wurde
-	 * @param hypothek: der Wert für die Hypothek der Straße
-	 * @param nr: die Nummer der Straße
+	 * @param name: der Name der Straï¿½e
+	 * @param prize: der Preis fï¿½r den man dei Straï¿½e kaufen kann
+	 * @param rent: der Mietpreis den man bezhalt wenn die Straï¿½e sschon gekauft wurde
+	 * @param hypothek: der Wert fï¿½r die Hypothek der Straï¿½e
+	 * @param nr: die Nummer der Straï¿½e
 	 */
 	public Strasse(String name, int kaufpreis, int mietpreis, boolean hypothek,int nr){
 		super(name,nr);
@@ -26,7 +26,7 @@ public class Strasse extends Feld {
 	}
 	
 	/**
-	 * @return: gibt den Wert der Hypothek als boolean-Wert zurück
+	 * @return: gibt den Wert der Hypothek als boolean-Wert zurï¿½ck
 	 */
 	public boolean getHypothek(){
 		return this.hypothek;
@@ -38,7 +38,7 @@ public class Strasse extends Feld {
 	
 	/**
 	 * setzt den Wert der Hypothek neu wenn sie aufgenommen oder bezahlt wurde
-	 * gibt einen String mit entsprechendem Text zurück 
+	 * gibt einen String mit entsprechendem Text zurï¿½ck 
 	 */
 	public String switchHypothek(){
 		int budget = besitzer.getSpielerBudget();
@@ -61,8 +61,8 @@ public class Strasse extends Feld {
 	}
 
 	/**
-	 * baut ein Haus auf der Straße wenn der Spieler ausreichend Geld besitzt 
-	 * und es noch möglich ist Häuser zu bauen
+	 * baut ein Haus auf der Straï¿½e wenn der Spieler ausreichend Geld besitzt 
+	 * und es noch mï¿½glich ist Hï¿½user zu bauen
 	 */
 	public boolean bauHaus(Spieler spieler){
 		int budget = spieler.getSpielerBudget();
@@ -88,7 +88,7 @@ public class Strasse extends Feld {
 	}
 	
 	/** 
-	 * @return: gibt den Besitzer als einen Spieler zurück
+	 * @return: gibt den Besitzer als einen Spieler zurï¿½ck
 	 */
 	public Spieler getBesitzer(){
 		return besitzer;
@@ -103,14 +103,14 @@ public class Strasse extends Feld {
 	
 	/**
 	 * 
-	 * @return: gibt den Kaufpreis der Straße zurück
+	 * @return: gibt den Kaufpreis der Straï¿½e zurï¿½ck
 	 */
 	public int getKaufpreis(){
 		return kaufpreis;
 	}
 	
 	/**
-	 * @return: gibt den Mietpreis einer Straße zurück
+	 * @return: gibt den Mietpreis einer Straï¿½e zurï¿½ck
 	 */
 	public int getMietpreis(){
 		double faktor = haeuseranzahl*0.2;
@@ -119,7 +119,7 @@ public class Strasse extends Feld {
 	}
 	
 	/**
-	 * @return: gibt die Anzahl der Häuser zurück die auf der Straße stehen
+	 * @return: gibt die Anzahl der Hï¿½user zurï¿½ck die auf der Straï¿½e stehen
 	 */
 	public int getHaeuseranzahl(){
 		return haeuseranzahl;
@@ -138,7 +138,7 @@ public class Strasse extends Feld {
 	}
 	
 	/**
-	 * wandelt den Kaufpreis, den Mietpreis, die Häuseranzahl und den Status in einen String um
+	 * wandelt den Kaufpreis, den Mietpreis, die Hï¿½useranzahl und den Status in einen String um
 	 */
 	public String toString(){
 		return(name + "\n" +

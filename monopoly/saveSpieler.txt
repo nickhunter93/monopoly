@@ -1,16 +1,11 @@
-3
-Nico
+2
+fabian
 1200
 1
-5
-
-Fabian
-2000
-2
 6
 
-Lydia
+nico
 1200
-3
-3
+2
+4
 

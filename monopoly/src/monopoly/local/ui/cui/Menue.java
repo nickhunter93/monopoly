@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 
 import monopoly.local.domain.Spielerverwaltung;
 import monopoly.local.domain.Spielverwaltung;
+import monopoly.local.persistenz.PersistenzLaden;
+import monopoly.local.persistenz.PersistenzSpeichern;
 import monopoly.local.valueobjects.Spieler;
 
 public class Menue {
@@ -22,10 +24,10 @@ public class Menue {
 	}
 	
 	/**
-	 * startet eine Schleife die das Auswahlmenü auf der Konsole ausgibt und die Eingaben des 
-	 * Spielers ließt 
-	 * case 1: fügt wenn es möglich ist ein Spieler hinzu 
-	 * case 2: löscht wenn es möglich ist einen Spieler
+	 * startet eine Schleife die das Auswahlmenï¿½ auf der Konsole ausgibt und die Eingaben des 
+	 * Spielers lieï¿½t 
+	 * case 1: fï¿½gt wenn es mï¿½glich ist ein Spieler hinzu 
+	 * case 2: lï¿½scht wenn es mï¿½glich ist einen Spieler
 	 * case 3: startet ein neues Spiel
 	 */
 	public void menueOefnen(){
@@ -35,18 +37,20 @@ public class Menue {
 			int auswahl = 0;
 			BufferedReader eingabe = new BufferedReader(new InputStreamReader(System.in));
 			try{
-				System.out.println("Menü:");
+				System.out.println("Menï¿½:");
 				System.out.println("1:Beitreten.");
 				System.out.println("2:Entfernen.");
 				System.out.println("3:Spiel starten.");
+				System.out.println("4:Spielstand speichern.");
+				System.out.println("5:Spielstand laden.");
 				buffer = eingabe.readLine();
 				auswahl = Integer.parseInt(buffer);
 			}catch(IOException e ){
 				e.printStackTrace();
-				System.err.println("Menü Auswahl fehlerhaft.");
+				System.err.println("Menï¿½ Auswahl fehlerhaft.");
 				auswahl = 0;
 			}catch(NumberFormatException e){
-				System.err.println("Menü Auswahl fehlerhaft.");
+				System.err.println("Menï¿½ Auswahl fehlerhaft.");
 				auswahl = 0;
 			}
 			switch(auswahl){
@@ -60,13 +64,13 @@ public class Menue {
 					spielernummer = spielerverwaltung.getAllSpieler().size();
 					Spieler player = new Spieler(name,spielernummer+1,feldverwaltung.getLos(),2000);
 					if(spielerverwaltung.beitreten(player)){
-						System.out.println("Spieler " + (spielernummer+1) + " von 6 erfolgreich hinzugefügt.");
+						System.out.println("Spieler " + (spielernummer+1) + " von 6 erfolgreich hinzugefï¿½gt.");
 					}else{
 						System.out.println("Maximale Spieleranzahl erreicht.");
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
-					System.err.println("Fehler beim Hinzufügen eines neuen Spielers.");
+					System.err.println("Fehler beim Hinzufï¿½gen eines neuen Spielers.");
 				}
 			}
 			break;			
@@ -101,10 +105,20 @@ public class Menue {
 				SpielStart spiel = new SpielStart(feldverwaltung,spielerverwaltung);
 				spiel.start();
 			}else{
-				System.out.println("Es gibt nicht genügend Spieler (min. 2).");
+				System.out.println("Es gibt nicht genï¿½gend Spieler (min. 2).");
 			}
 			break;
-			default:	System.out.println("Keine Gültige Auswahl.");
+			
+			case 4 :	
+				PersistenzSpeichern speichern = new PersistenzSpeichern();
+				speichern.saveAll(spielerverwaltung.getAllSpieler(), feldverwaltung.getSpielfeld());
+			break;
+			
+			case 5 :	
+				PersistenzLaden laden = new PersistenzLaden();
+				laden.loadAll();
+			break;
+			default:	System.out.println("Keine Gï¿½ltige Auswahl.");
 			}
 		}
 	}
