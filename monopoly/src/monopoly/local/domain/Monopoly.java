@@ -83,4 +83,25 @@ public class Monopoly {
 	public void checkPleite(){
 		logik.checkPleite();
 	}
+
+	public void mieteZahlen(int miete, Spieler besitzer, Spieler mieter) {
+		spieler.mieteZahlen(miete, besitzer, mieter);
+	}
+
+	public boolean kaufStrasse(Spieler kaeufer) {
+		return logik.kaufStrasse(kaeufer);
+	}
+
+	public int preis(Spieler spieler2) {
+		return logik.preis(spieler2);
+	}
+	public boolean isInJail(Spieler spieler2){
+		return logik.isInJail(spieler2);
+	}
+	public void TurnIni(){
+		logik.getTurn().initialisiere();
+	}
+	public void nextTurn(){
+		logik.nextTurn();
+	}
 }

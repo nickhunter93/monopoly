@@ -30,6 +30,7 @@ public class Spielverwaltung {
 	public Spielverwaltung(Spielerverwaltung spieler){
 		feld = new Spielfeld();
 		this.spieler = spieler;
+		aktuellerTurn = new Turn();
 	}
 	
 	/**
@@ -265,21 +266,49 @@ public class Spielverwaltung {
 	}
 
 	public void nextTurn() {
-		if(aktuellerTurn.phase == 4){
+		if(aktuellerTurn.phase == Phase.End ){
 		aktuellerTurn.werIstDran = spieler.reihenfolge();// index
-		aktuellerTurn.phase = 1;
+		aktuellerTurn.nextPhase();
 		}
 		else{
-			aktuellerTurn.phase++;
+			aktuellerTurn.nextPhase();
 		}
 	}
-
-	public class Turn {
-		Spieler werIstDran;
-		int phase; // - enum Verwendung
+	
+	public enum Phase { 
 		
+		JailCheck, Dice, Passiv, End;
+
+		public Phase next() {
+			Phase phase = values()[(this.ordinal()+1) % values().length];
+			return phase;
+		}
+	};
+	
+	public class Turn {
+		private Spieler werIstDran;
+		private Phase phase;
+		public Turn() {
+			//phase = Phase.JailCheck;
+		}
+		
+		
+		//int phase; // - enum Verwendung
+		public void initialisiere(){
+			werIstDran = spieler.reihenfolge();
+			phase = Phase.JailCheck;
+		}
 		public Spieler getWerIstDran(){
 			return this.werIstDran;
+		}
+		public Phase getPhase(){
+			return this.phase;
+		}
+		public void nextPhase(){
+			this.phase = phase.next();
+		}
+		public void Jailed(){
+			this.phase = Phase.End;
 		}
 	}
 	
