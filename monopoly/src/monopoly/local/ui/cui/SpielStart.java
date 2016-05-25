@@ -123,11 +123,10 @@ public class SpielStart {
 						wuerfelAnzeigen(anzahl);
 						monopoly.move(spieler, anzahl);
 						showFeld(monopoly.getSpielfeld(), monopoly.getAllSpieler());
-						System.out.println("Sie befinden sich auf der Straï¿½e : " + monopoly.getStrasseName(spieler));
+						System.out.println("Sie befinden sich auf der Straße : " + monopoly.getStrasseName(spieler));
 
-						if (monopoly.getBesitzer(spieler.getSpielerPosition()).getSpielerNummer() == spieler
-								.getSpielerNummer()) {
-							System.out.println("Diese StraÃŸe gehÃ¶rt Ihnen bereits.");
+						if (monopoly.getBesitzer(spieler.getSpielerPosition()).equals(spieler)) {
+							System.out.println("Diese Straße gehört Ihnen bereits.");
 						} else {
 							System.out.print("Mietpreis : " + monopoly.miete(spieler));
 							System.out.print(" / Aktuelles Budget : " + spieler.getSpielerBudget());
