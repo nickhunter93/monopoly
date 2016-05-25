@@ -1,27 +1,21 @@
 package monopoly.local.valueobjects;
 
-public abstract class Aktion /* extends Feld */	 {
+import monopoly.local.domain.Spielerverwaltung;
+
+public abstract class Aktion {
 	
+	protected Ereignis ereignis = new Ereignis();
+	protected Payment zahlung = new Payment();
+	protected Spielfeld spielfeld;
+	protected Spielerverwaltung spielerverwaltung;
 	private String aktion;
 	
-	/**
-	 * Konstruktor der Klasse Aktion
-	 * erbt von Feld
-	 * 
-	 * @param name: Name des Feldes welches �bergeben wird
-	 * @param wert: 
-	 * @param status: 
-	 * @param aktion: 
-	 * @param nr: Nummer des Feldes welches �bergeben wurde
-	 */
-	public Aktion(){
-//		super(name, wert, status);
-		//super(name,nr);
-		this.setAktion(aktion);
+	public Aktion(Spielfeld spielfeld, Spielerverwaltung spielerverwaltung){
+		setAktion(aktion);
+		this.spielfeld = spielfeld;
+		this.spielerverwaltung = spielerverwaltung;
 	}
-
-	public abstract void ausfuehren();
-
+	
 	public String getAktion() {
 		return aktion;
 	}
@@ -29,4 +23,7 @@ public abstract class Aktion /* extends Feld */	 {
 	public void setAktion(String aktion) {
 		this.aktion = aktion;
 	}
+
+	public abstract void ausfuehren(Spieler spieler);
+
 }

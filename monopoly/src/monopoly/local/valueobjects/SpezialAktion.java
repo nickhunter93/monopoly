@@ -9,9 +9,9 @@ public class SpezialAktion extends Aktion {
 	}
 
 	@Override
-	public void ausfuehren() {
-
-
+	public void ausfuehren(Spieler spieler) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

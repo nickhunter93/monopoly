@@ -5,33 +5,23 @@ import monopoly.local.domain.Spielerverwaltung;
 
 public class Payment extends SpezialAktion {
 	
-	private int betrag;
 	private Spielverwaltung feldverwaltung;
 	private Spielerverwaltung verwaltung;
 	private Strasse[] yourStreets;
 	
-	public Payment(int betrag) {
-		this.setBetrag(betrag);
-	}
-
-	public int getBetrag() {
-		return betrag;
-	}
-
-	public void setBetrag(int betrag) {
-		this.betrag = betrag;
+	public Payment() {
 	}
 	
 	//Geignet für Karten, die einen Spieler einfache Gelbeträge hinzugeben oder abziehen.
 
-	public void zahlung(Spieler spieler, int betrag){
+	public void payment(Spieler spieler, int betrag){
 		betrag = spieler.getSpielerBudget() + betrag;
 		spieler.setSpielerBudget(betrag);
 	}
 
 	//Ein Spieler hat Geburtstag und erhält von jedem Mitspieler 2000.
 	
-	public void geburtstag(Spieler spieler){
+	public void birthday(Spieler spieler){
 		for(Spieler s : verwaltung.getAllSpieler()){
 			if(s.getSpielerNummer() == spieler.getSpielerNummer()){
 				spieler.setSpielerBudget(spieler.getSpielerBudget());
@@ -39,13 +29,12 @@ public class Payment extends SpezialAktion {
 			s.setSpielerBudget(s.getSpielerBudget() - 2000);
 			spieler.setSpielerBudget(spieler.getSpielerBudget() + 2000);
 			}
-			
 		}
 	}
 	
 	//Der Spieler muss für jedes Haus auf seinen Straßen 500 zahlen und für jedes Hotel 2000.
 	
-	public void renovierung(Spieler spieler){
+	public void renovation(Spieler spieler){
 		yourStreets = feldverwaltung.getYourStreets(spieler);
 		int hausbetrag = 500;
 		int hotelbetrag = 2000;

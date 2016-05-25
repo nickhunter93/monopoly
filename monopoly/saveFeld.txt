@@ -17,7 +17,7 @@ f
 Teststrasse
 0
 f
-99
+2
 
 Teststrasse
 0
@@ -26,8 +26,8 @@ f
 
 Teststrasse
 0
-f
-99
+w
+1
 
 Teststrasse
 0
@@ -47,10 +47,8 @@ f
 Gef�ngnis
 
 
-Teststrasse
-0
-f
-99
+Gef�ngnis
+
 
 Teststrasse
 0
@@ -65,7 +63,7 @@ f
 Teststrasse
 0
 f
-99
+1
 
 Teststrasse
 0
