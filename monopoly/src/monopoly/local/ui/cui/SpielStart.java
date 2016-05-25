@@ -129,6 +129,7 @@ public class SpielStart {
 							System.out.println("Diese Straße gehört Ihnen bereits.");
 						} else {
 							System.out.print("Mietpreis : " + monopoly.miete(spieler));
+							System.out.print(" / Kaufpreis : " + monopoly.preis(spieler));
 							System.out.print(" / Aktuelles Budget : " + spieler.getSpielerBudget());
 							System.out.println("");
 						}

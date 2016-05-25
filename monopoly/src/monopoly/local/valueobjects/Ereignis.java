@@ -5,6 +5,8 @@ public class Ereignis {
 
 	private Jail jail;
 	
+	public Ereignis(){
+	}
 	
 	//Geeignet für Karten, die einen auf eine bestimmte Straße senden, oder um ihn auf Los oder in das Gefängnis zu setzen, ohne dass du Geld erhältst.
 	//Auch wenn der Spieler Felder zurück muss, kann man das hier machen.
@@ -25,13 +27,13 @@ public class Ereignis {
 
 	//Setzt den Spieler aus dem Gefängnis frei.
 	
-	public void gefaengnisFrei(Spieler spieler){
-		if(jail.isPlayerIn(spieler)){
-			jail.release(spieler);
-		}else{
-			jail.getInsassen();
-		}
-	}
+//	public void gefaengnisFrei(Spieler spieler){
+//		if(jail.isPlayerIn(spieler)){
+//			jail.release(spieler);
+//		}else{
+//			jail.getInsassen();
+//		}
+//	}
 	
 	public void gefaengnisfrei(Spieler spieler){
 		jail.release(spieler);
