@@ -4,6 +4,7 @@ import monopoly.local.valueobjects.Jail;
 import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Spielfeld;
 import monopoly.local.valueobjects.Strasse;
+import monopoly.local.valueobjects.ToJail;
 
 public class Spielverwaltung {
 	private Spielfeld feld;
@@ -85,6 +86,9 @@ public class Spielverwaltung {
 		if(position instanceof Jail){
 			besitzer = ((Jail) position).getBesitzer();
 		}
+		if(position instanceof ToJail){
+			besitzer = ((ToJail) position).getBesitzer();
+		}
 		return besitzer;
 	}
 
@@ -112,6 +116,11 @@ public class Spielverwaltung {
 		if(position instanceof Jail){
 			miete = 0;
 		}
+		if(position instanceof ToJail){
+			ToJail toJail = (ToJail)position;
+			toJail.getToJail(spieler);
+			this.getTurn().phase = Phase.End;
+		}
 		return miete;
 	}
 	
@@ -123,10 +132,18 @@ public class Spielverwaltung {
 	public int preis(Spieler spieler){
 		Strasse strasse = null;
 		Feld position = spieler.getSpielerPosition();
+		int kaufpreis = 0;
 		if(position instanceof Strasse){
 			strasse =((Strasse)position);
+			kaufpreis = strasse.getKaufpreis();
 		}
-		return strasse.getKaufpreis();
+		if(position instanceof Jail){
+			kaufpreis = 0;
+		}
+		if(position instanceof ToJail){
+			kaufpreis = 0;
+		}
+		return kaufpreis;
 	}
 	
 	/**
@@ -294,6 +311,7 @@ public class Spielverwaltung {
 	};
 	
 	public class Turn {
+		
 		private Spieler werIstDran;
 		private Phase phase;
 		public Turn() {

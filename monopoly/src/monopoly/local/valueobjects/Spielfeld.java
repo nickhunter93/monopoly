@@ -33,7 +33,8 @@ public class Spielfeld {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		feld[9] = new Jail("Gef�ngnis",9);
+		//feld[9] = new Jail("Gef�ngnis",9);
+		//feld[19] = new ToJail("Gehe ins Gefängnis",19,(Jail) feld[9]);
 	}
 	
 	/**

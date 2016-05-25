@@ -12,6 +12,7 @@ import monopoly.local.domain.Spielverwaltung.Phase;
 import monopoly.local.domain.Spielverwaltung.Turn;
 import monopoly.local.persistenz.PersistenzSpeichern;
 import monopoly.local.valueobjects.Feld;
+import monopoly.local.valueobjects.Jail;
 import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Strasse;
 
@@ -52,27 +53,29 @@ public class SpielStart {
 			Turn aktuellerTurn = monopoly.getTurn();
 			spieler = aktuellerTurn.getWerIstDran();
 			roundLoop = true;
+			switch (aktuellerTurn.getPhase()) {
+
 			// ******************** PHASE JailCheck ******
-			if(aktuellerTurn.getPhase() == Phase.JailCheck){
-				if(monopoly.isInJail(spieler)){
-					do{
+			case JailCheck: {
+				if (monopoly.isInJail(spieler)) {
+					do {
 						System.out.println("1:Würfeln.");
-						try{
-						buffer = eingabe.readLine();
-						auswahl = Integer.parseInt(buffer);
-						if(auswahl == 1){
-							int anzahl = monopoly.wuerfel();
-							wuerfelAnzeigen(anzahl);
-							if(anzahl == 6){
-								System.out.println("Sie kommen aus dem Gefängnis frei.");
-							}else{
-								System.out.println("Sie bleiben im Gefängnis.");
-								aktuellerTurn.Jailed();
+						try {
+							buffer = eingabe.readLine();
+							auswahl = Integer.parseInt(buffer);
+							if (auswahl == 1) {
+								int anzahl = monopoly.wuerfel();
+								wuerfelAnzeigen(anzahl);
+								if (anzahl == 6) {
+									System.out.println("Sie kommen aus dem Gefängnis frei.");
+								} else {
+									System.out.println("Sie bleiben im Gefängnis.");
+									aktuellerTurn.Jailed();
+								}
+								roundLoop = false;
+							} else {
+								roundLoop = true;
 							}
-							roundLoop = false;
-						}else{
-							roundLoop = true;
-						}
 						} catch (IOException e) {
 							auswahl = 0;
 							System.out.println("Auswahl fehlerhaft.");
@@ -82,16 +85,17 @@ public class SpielStart {
 							System.out.println("Auswahl fehlerhaft.");
 							roundLoop = true;
 						}
-						
-					}while(roundLoop);
-				}else{
-					
+
+					} while (roundLoop);
+				} else {
+
 				}
 			}
-			// ******************** PHASE JailCheck END **
+				// ******************** PHASE JailCheck END **
+				break;
 			// ******************** PHASE DICE ***********
 
-			if (aktuellerTurn.getPhase() == Phase.Dice) {
+			case Dice: {
 				do {
 					try {
 						System.out.println();
@@ -121,7 +125,7 @@ public class SpielStart {
 
 						int anzahl = monopoly.wuerfel();
 						wuerfelAnzeigen(anzahl);
-						monopoly.move(spieler, anzahl);
+						monopoly.move(spieler, 20);
 						showFeld(monopoly.getSpielfeld(), monopoly.getAllSpieler());
 						System.out.println("Sie befinden sich auf der Straße : " + monopoly.getStrasseName(spieler));
 
@@ -132,6 +136,9 @@ public class SpielStart {
 							System.out.print(" / Kaufpreis : " + monopoly.preis(spieler));
 							System.out.print(" / Aktuelles Budget : " + spieler.getSpielerBudget());
 							System.out.println("");
+						}
+						if(aktuellerTurn.getPhase() == Phase.End && spieler.getSpielerPosition() instanceof Jail){
+							System.out.println("Sie sind nun im Gefängnis");
 						}
 						roundLoop = false;
 
@@ -262,12 +269,13 @@ public class SpielStart {
 					}
 				} while (roundLoop);
 			}
-			// ********************************* PHASE DICE END
-			// ***********************************
+				// ********************************* PHASE DICE END
+				// ***********************************
+				break;
 			// ********************************* PHASE Passiv
 			// *************************************
 
-			if (aktuellerTurn.getPhase() == Phase.Passiv) {
+			case Passiv: {
 				if (monopoly.getBesitzer(spieler.getSpielerPosition()).getSpielerNummer() == 99) {
 					boolean loop = true;
 					do {
@@ -313,12 +321,15 @@ public class SpielStart {
 								+ monopoly.getBesitzer(spieler.getSpielerPosition()).getSpielerName() + " zahlen.");
 						System.out.println("Ihr Budget beträgt jetzt = " + spieler.getSpielerBudget());
 					}
+					
 				}
 
 			}
-			// ************************** PHASE Passiv END *********************
+				// ************************** PHASE Passiv END
+				// *********************
+				break;
 			// ************************** PHASE End ****************************
-			if (aktuellerTurn.getPhase() == Phase.End) {
+			case End: {
 				do {
 					try {
 						System.out.println();
@@ -475,7 +486,13 @@ public class SpielStart {
 					}
 				} while (roundLoop);
 			}
+
 			// ************************** PHASE End END ************************
+			default: {
+			}
+				break;
+			}
+
 			// ************************** RUNDEN ENDE CHECK ********************
 			monopoly.checkPleite();
 			if (monopoly.getAllSpieler().size() == 1) {

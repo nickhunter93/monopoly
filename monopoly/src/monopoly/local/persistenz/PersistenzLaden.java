@@ -13,6 +13,7 @@ import monopoly.local.valueobjects.Feld;
 import monopoly.local.valueobjects.Jail;
 import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Strasse;
+import monopoly.local.valueobjects.ToJail;
 
 public class PersistenzLaden {
 	BufferedReader laden;
@@ -123,6 +124,11 @@ public class PersistenzLaden {
 				laden.readLine();
 				feld[i] = new Jail(str,i);
 				laden.readLine();
+				laden.readLine();
+			}else if(str.equals("Gehe ins Gefängnis")){
+				laden.readLine();
+				int jailNumber = Integer.parseInt(laden.readLine());
+				feld[i] = new ToJail(str,i,(Jail)feld[jailNumber]);
 				laden.readLine();
 			}else{
 				
