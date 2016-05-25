@@ -114,7 +114,7 @@ public class Menue {
 			case 3 :	int spielerAnzahl = spieler.getAllSpieler().size();
 			if(spielerAnzahl >= 2){
 				SpielStart spiel = new SpielStart(logik,spieler);
-				spiel.start();
+				spiel.start(true);
 			}else{
 				System.out.println("Es gibt nicht gen�gend Spieler (min. 2).");
 			}
@@ -125,7 +125,7 @@ public class Menue {
 //				PersistenzLaden laden = new PersistenzLaden();
 //				SpielStart spiel = laden.loadAll();
 				SpielStart spiel = monopoly.spielStandLaden("test");
-				spiel.start();
+				spiel.start(false);
 				
 			break;
 			default:	System.out.println("Keine G�ltige Auswahl.");

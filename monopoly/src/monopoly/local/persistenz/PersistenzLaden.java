@@ -36,7 +36,7 @@ public class PersistenzLaden {
 			this.loadField(spielerListe, feld);
 			
 			verwaltung.setAllSpieler(spielerListe);
-			Spieler activPlayer = spielerListe.get(loadActivePlayer());
+			Spieler activPlayer = spielerListe.get(loadActivePlayer()-1);
 			feldverwaltung.getTurn().setWerIstDran(activPlayer);
 			feldverwaltung.getTurn().setPhase(loadPhase());
 			SpielStart start = new SpielStart(feldverwaltung,verwaltung);
@@ -69,6 +69,7 @@ public class PersistenzLaden {
 		default :
 		phase = Phase.End;
 		}
+		laden.close();
 		return phase;
 	}
 
@@ -76,6 +77,7 @@ public class PersistenzLaden {
 		laden = new BufferedReader(new FileReader("saveTurn"));
 		int spielernummer = Integer.parseInt(laden.readLine());
 		
+		laden.close();
 		return spielernummer;
 	}
 
@@ -94,6 +96,7 @@ public class PersistenzLaden {
 			laden.readLine();
 			spielerListe.add(spieler);
 		}
+		laden.close();
 		return spielerListe;
 		
 	}
@@ -110,14 +113,12 @@ public class PersistenzLaden {
 				str =laden.readLine();
 				str =laden.readLine();
 				str =laden.readLine();
-				str =laden.readLine();
 				
 			}else if(str.equals("Gef�ngnis")){
 				feld[i] = new Jail("Gef�ngnis",i);
 				laden.readLine();
 				laden.readLine();
 			}else if(str.equals("Gehe ins Gefängnis")){
-				laden.readLine();
 				laden.readLine();
 			}else{
 				int hausanzahl = Integer.parseInt(laden.readLine());
@@ -131,7 +132,9 @@ public class PersistenzLaden {
 					}
 				}
 				laden.readLine();
+				laden.readLine();
 			}
+			laden.readLine();
 		}
 		laden.close();
 	}

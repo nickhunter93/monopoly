@@ -98,8 +98,8 @@ public class Monopoly {
 	public boolean isInJail(Spieler spieler2){
 		return logik.isInJail(spieler2);
 	}
-	public void TurnIni(){
-		logik.getTurn().initialisiere();
+	public void TurnIni(boolean gamestart){
+		logik.getTurn().initialisiere(gamestart);
 	}
 	public void nextTurn(){
 		logik.nextTurn();

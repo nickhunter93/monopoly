@@ -45,9 +45,9 @@ public class SpielStart {
 	 * 3: der Spieler nimmt wenn es mï¿½glich ist eine Hypothek auf und setzt
 	 * wenn es mï¿½glich ist seine Runde fort
 	 */
-	public void start() {
+	public void start(boolean gamestart) {
 		BufferedReader eingabe = new BufferedReader(new InputStreamReader(System.in));
-		monopoly.TurnIni();
+		monopoly.TurnIni(gamestart);
 		while (schleife) {
 			monopoly.nextTurn();
 			Turn aktuellerTurn = monopoly.getTurn();

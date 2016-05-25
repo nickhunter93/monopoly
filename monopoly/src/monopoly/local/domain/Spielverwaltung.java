@@ -320,9 +320,11 @@ public class Spielverwaltung {
 		
 		
 		//int phase; // - enum Verwendung
-		public void initialisiere(){
-			werIstDran = spieler.reihenfolge();
-			phase = Phase.JailCheck;
+		public void initialisiere(boolean gamestart){
+			if(gamestart){
+				werIstDran = spieler.reihenfolge();
+				phase = Phase.JailCheck;
+			}
 		}
 		public Spieler getWerIstDran(){
 			return this.werIstDran;

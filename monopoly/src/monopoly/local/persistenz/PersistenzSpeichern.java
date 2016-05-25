@@ -37,7 +37,8 @@ public class PersistenzSpeichern {
 	private void saveTurn(Turn turn)throws IOException {
 		speicher = new BufferedWriter(new FileWriter("saveTurn"));
 		turn.getWerIstDran();
-		speicher.write(turn.getWerIstDran().getSpielerNummer());
+		speicher.write(""+turn.getWerIstDran().getSpielerNummer());
+		speicher.newLine();
 		switch(turn.getPhase()){
 		case JailCheck :
 			speicher.write("1");
@@ -54,6 +55,7 @@ public class PersistenzSpeichern {
 		default : {}
 		break;
 		}
+		speicher.close();
 	}
 
 	public void saveSpieler(Vector<Spieler> spielerListe) throws IOException{
