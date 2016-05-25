@@ -260,7 +260,7 @@ public class SpielStart {
 					case 4:
 						System.out.println("Spielstand erfolgreich gespeichert.");
 						PersistenzSpeichern speichern = new PersistenzSpeichern();
-						speichern.saveAll(monopoly.getAllSpieler(), monopoly.getSpielfeld());
+						speichern.saveAll(monopoly.getAllSpieler(), monopoly.getSpielfeld(),aktuellerTurn);
 						break;
 
 					default:
@@ -477,7 +477,7 @@ public class SpielStart {
 					case 4:
 						System.out.println("Spielstand erfolgreich gespeichert.");
 						PersistenzSpeichern speichern = new PersistenzSpeichern();
-						speichern.saveAll(monopoly.getAllSpieler(), monopoly.getSpielfeld());
+						speichern.saveAll(monopoly.getAllSpieler(), monopoly.getSpielfeld(),aktuellerTurn);
 						break;
 
 					default:

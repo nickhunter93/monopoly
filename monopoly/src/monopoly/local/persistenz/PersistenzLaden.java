@@ -8,6 +8,8 @@ import java.util.Vector;
 
 import monopoly.local.domain.Spielerverwaltung;
 import monopoly.local.domain.Spielverwaltung;
+import monopoly.local.domain.Spielverwaltung.Phase;
+import monopoly.local.domain.Spielverwaltung.Turn;
 import monopoly.local.ui.cui.SpielStart;
 import monopoly.local.valueobjects.Feld;
 import monopoly.local.valueobjects.Jail;
@@ -34,7 +36,9 @@ public class PersistenzLaden {
 			this.loadField(spielerListe, feld);
 			
 			verwaltung.setAllSpieler(spielerListe);
-			
+			Spieler activPlayer = spielerListe.get(loadActivePlayer());
+			feldverwaltung.getTurn().setWerIstDran(activPlayer);
+			feldverwaltung.getTurn().setPhase(loadPhase());
 			SpielStart start = new SpielStart(feldverwaltung,verwaltung);
 			return start;
 		} catch (IOException e) {
@@ -44,6 +48,37 @@ public class PersistenzLaden {
 		
 	}
 	
+	private Phase loadPhase() throws IOException {
+		laden = new BufferedReader(new FileReader("saveTurn"));
+		laden.readLine();
+		int fall = Integer.parseInt(laden.readLine());
+		Phase phase;
+		switch (fall){
+		case 1 :
+			phase = Phase.JailCheck;
+			break;
+		case 2 :
+			phase = Phase.Dice;
+			break;
+		case 3 :
+			phase = Phase.Passiv;
+			break;
+		case 4 :
+			phase = Phase.End;
+			break;
+		default :
+		phase = Phase.End;
+		}
+		return phase;
+	}
+
+	private int loadActivePlayer() throws IOException {
+		laden = new BufferedReader(new FileReader("saveTurn"));
+		int spielernummer = Integer.parseInt(laden.readLine());
+		
+		return spielernummer;
+	}
+
 	public Vector<Spieler> loadSpieler(Feld[] feld) throws IOException{
 		
 		laden = new BufferedReader(new FileReader("saveSpieler.txt"));
@@ -70,14 +105,18 @@ public class PersistenzLaden {
 			String str = laden.readLine();
 			if(str.equals("Los")){
 				
-				laden.readLine();
-				laden.readLine();
-				laden.readLine();
-				
-				laden.readLine();
+				str =laden.readLine();
+				str =laden.readLine();
+				str =laden.readLine();
+				str =laden.readLine();
+				str =laden.readLine();
+				str =laden.readLine();
 				
 			}else if(str.equals("Gef�ngnis")){
 				feld[i] = new Jail("Gef�ngnis",i);
+				laden.readLine();
+				laden.readLine();
+			}else if(str.equals("Gehe ins Gefängnis")){
 				laden.readLine();
 				laden.readLine();
 			}else{
@@ -92,7 +131,6 @@ public class PersistenzLaden {
 					}
 				}
 				laden.readLine();
-				
 			}
 		}
 		laden.close();

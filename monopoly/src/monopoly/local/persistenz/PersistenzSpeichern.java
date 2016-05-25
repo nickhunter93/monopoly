@@ -1,14 +1,20 @@
 package monopoly.local.persistenz;
 
 import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Vector;
 
+import com.sun.corba.se.impl.orbutil.ObjectWriter;
+
+import monopoly.local.domain.Spielverwaltung.Turn;
 import monopoly.local.valueobjects.Feld;
 import monopoly.local.valueobjects.Jail;
 import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Strasse;
+import monopoly.local.valueobjects.ToJail;
 
 public class PersistenzSpeichern {
 	BufferedWriter speicher;
@@ -16,14 +22,37 @@ public class PersistenzSpeichern {
 	public PersistenzSpeichern(){
 	}
 
-	public boolean saveAll(Vector<Spieler> spielerListe, Feld[] spielfeld){
+	public boolean saveAll(Vector<Spieler> spielerListe, Feld[] spielfeld,Turn turn){
 		try{
 			saveSpieler(spielerListe);
 			saveFeld(spielfeld);
+			saveTurn(turn);
 			return true;
 		}
 		catch(IOException e){
 			return false;
+		}
+	}
+
+	private void saveTurn(Turn turn)throws IOException {
+		speicher = new BufferedWriter(new FileWriter("saveTurn"));
+		turn.getWerIstDran();
+		speicher.write(turn.getWerIstDran().getSpielerNummer());
+		switch(turn.getPhase()){
+		case JailCheck :
+			speicher.write("1");
+			break;
+		case Dice :
+			speicher.write("2");
+			break;
+		case Passiv :
+			speicher.write("3");
+			break;
+		case End :
+			speicher.write("4");
+			break;
+		default : {}
+		break;
 		}
 	}
 
@@ -81,7 +110,11 @@ public class PersistenzSpeichern {
 					speicher.write(spieler.getSpielerNummer());
 					speicher.newLine();
 				}
-				
+			if(feld instanceof ToJail){
+				ToJail toJail = (ToJail)feld;
+				speicher.write(toJail.getName());
+				speicher.newLine();
+			}	
 				speicher.newLine();
 				speicher.newLine();
 			}
@@ -113,10 +146,14 @@ public class PersistenzSpeichern {
 					speicher.write(spieler.getSpielerNummer());
 					speicher.newLine();
 				}
-				
-				speicher.newLine();
-				speicher.newLine();
 			}
+			if(feld instanceof ToJail){
+				ToJail toJail = (ToJail)feld;
+				speicher.write(toJail.getName());
+				speicher.newLine();
+			}	
+			speicher.newLine();
+			speicher.newLine();
 		}
 		speicher.close();
 	}

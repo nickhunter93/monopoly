@@ -327,8 +327,14 @@ public class Spielverwaltung {
 		public Spieler getWerIstDran(){
 			return this.werIstDran;
 		}
+		public void setWerIstDran(Spieler werIstDran){
+			this.werIstDran = werIstDran;
+		}
 		public Phase getPhase(){
 			return this.phase;
+		}
+		public void setPhase(Phase phase){
+			this.phase = phase;
 		}
 		public void nextPhase(){
 			this.phase = phase.next();
