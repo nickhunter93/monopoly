@@ -49,7 +49,6 @@ public class SpielStart {
 		BufferedReader eingabe = new BufferedReader(new InputStreamReader(System.in));
 		monopoly.TurnIni(gamestart);
 		while (schleife) {
-			monopoly.nextTurn();
 			Turn aktuellerTurn = monopoly.getTurn();
 			spieler = aktuellerTurn.getWerIstDran();
 			roundLoop = true;
@@ -492,7 +491,7 @@ public class SpielStart {
 			}
 				break;
 			}
-
+			monopoly.nextTurn();
 			// ************************** RUNDEN ENDE CHECK ********************
 			monopoly.checkPleite();
 			if (monopoly.getAllSpieler().size() == 1) {
