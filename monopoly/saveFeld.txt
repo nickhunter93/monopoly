@@ -5,9 +5,14 @@ f
 98
 
 Teststrasse
+4
+f
+1
+
+Teststrasse
 0
 f
-99
+2
 
 Teststrasse
 0
@@ -37,12 +42,10 @@ f
 Teststrasse
 0
 f
-99
+2
 
-Teststrasse
-0
-f
-99
+Gef�ngnis
+
 
 Gef�ngnis
 
@@ -65,12 +68,7 @@ f
 Teststrasse
 0
 f
-99
-
-Teststrasse
-0
-f
-99
+2
 
 Teststrasse
 0
