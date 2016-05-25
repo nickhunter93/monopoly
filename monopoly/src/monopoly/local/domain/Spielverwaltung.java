@@ -82,6 +82,9 @@ public class Spielverwaltung {
 		if(position instanceof Strasse){
 			besitzer = ((Strasse) position).getBesitzer();
 		}
+		if(position instanceof Jail){
+			besitzer = ((Jail) position).getBesitzer();
+		}
 		return besitzer;
 	}
 
