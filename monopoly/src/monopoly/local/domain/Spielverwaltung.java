@@ -104,10 +104,15 @@ public class Spielverwaltung {
 	public int miete(Spieler spieler){
 		Strasse strasse = null;
 		Feld position = spieler.getSpielerPosition();
+		int miete = 0;
 		if(position instanceof Strasse){
 			strasse =((Strasse)position);
+			miete = strasse.getMietpreis();
 		}
-		return strasse.getMietpreis();
+		if(position instanceof Jail){
+			miete = 0;
+		}
+		return miete;
 	}
 	
 	/**
