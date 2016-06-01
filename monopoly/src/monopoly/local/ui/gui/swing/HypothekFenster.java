@@ -16,7 +16,7 @@ import net.miginfocom.swing.MigLayout;
 
 public class HypothekFenster {
 	//Variablen für "Hypothek aufnehmen" Fenster
-	private JFrame hypothek;
+	private JPanel hypothek;
 	private JPanel hyPanel1;
 	private JPanel hyPanel2;
 	private JPanel hyPanel3;
@@ -31,8 +31,7 @@ public class HypothekFenster {
 
 	public void hyInit(){
 		//Hypothek Fenster
-		hypothek = new JFrame("Hypothek");
-		hypothek.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		hypothek = new JPanel();
 		
 		MigLayout hyLayout1 = new MigLayout("", "[]10[]", "[]");
 		MigLayout hyLayout3 = new MigLayout("", "[]", "[]10[]10[]10[]");
@@ -80,7 +79,7 @@ public class HypothekFenster {
 		hyPanel3.setBorder(BorderFactory.createLineBorder(new Color(255,255,255), 3));
 		
 		hyPanel1.setOpaque(false);
-		hypothek.getContentPane().setBackground(new Color(0,0,0));
+		hypothek.setBackground(new Color(0,0,0));
 		
 		hypothek.setSize(600, 600);
 		hypothek.setVisible(true);

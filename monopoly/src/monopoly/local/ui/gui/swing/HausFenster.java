@@ -16,9 +16,9 @@ import javax.swing.JTextField;
 
 import net.miginfocom.swing.MigLayout;
 
-public class HausFenster {
+public class HausFenster extends JPanel {
 	//Variablen für das "Haus bauen"-Fenster
-	private JFrame haBauen;
+	private JPanel haBauen;
 	private JPanel haPanel;
 	private JPanel haPanel2;
 	private JPanel haPanel3;
@@ -35,11 +35,10 @@ public class HausFenster {
 
 	public void haInit(){
 		//Pop-Up-Fenster Haus bauen
-		haBauen = new JFrame("Haus bauen");
-		haBauen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		haBauen = new JPanel();
 		
-		MigLayout haLayout = new MigLayout("debug", "[]", "[]10[]");
-		MigLayout haLayout3 = new MigLayout("debug", "[]10[]10[]", "[]");
+		MigLayout haLayout = new MigLayout("", "[]", "[]10[]");
+		MigLayout haLayout3 = new MigLayout("", "[]10[]10[]", "[]");
 		
 		Font haFont1 = new Font("Berlin Sans FB",Font.ITALIC,14);
 		Font haFont2 = new Font("Berlin Sans FB Demi",Font.PLAIN,14);
@@ -80,7 +79,7 @@ public class HausFenster {
 		haButton.setBackground(new Color(173,232,202));
 		
 		haPanel.setOpaque(false);
-		haBauen.getContentPane().setBackground(new Color(0,0,0));
+		haBauen.setBackground(new Color(0,0,0));
 		
 		haBauen.setSize(600, 600);
 		haBauen.setVisible(true);

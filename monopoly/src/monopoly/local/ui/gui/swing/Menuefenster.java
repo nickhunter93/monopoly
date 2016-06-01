@@ -2,6 +2,8 @@ package monopoly.local.ui.gui.swing;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -68,7 +70,17 @@ public class Menuefenster {
 		mButton2.setFont(mFont);
 		mButton3.setFont(mFont);
 		
+		mButton2.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				Spielfenster spFenster = new Spielfenster();
+				spFenster.sInit();
+				menue.dispose();
+			}
+		});
+		
 		menue.setSize(600, 600);
 		menue.setVisible(true);
 	}
 }
+
+
