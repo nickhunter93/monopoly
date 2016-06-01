@@ -18,6 +18,7 @@ public class Jail extends Feld{
 
 	public void addInsasse(Spieler spieler){
 		insassen.add(spieler);
+		spieler.setSpielerPosition(this);
 	}
 	
 	public void release(Spieler spieler){

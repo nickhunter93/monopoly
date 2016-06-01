@@ -145,7 +145,7 @@ public class PersistenzSpeichern {
 				speicher.write(jail.getName());
 				speicher.newLine();
 				for(Spieler spieler:jail.getInsassen()){
-					speicher.write(spieler.getSpielerNummer());
+					speicher.write(""+spieler.getSpielerNummer());
 					speicher.newLine();
 				}
 			}

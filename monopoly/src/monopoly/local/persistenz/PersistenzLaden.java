@@ -18,24 +18,26 @@ import monopoly.local.valueobjects.Strasse;
 import monopoly.local.valueobjects.ToJail;
 
 public class PersistenzLaden {
-	BufferedReader laden;
+	private Spielerverwaltung verwaltung;
+	private Spielverwaltung feldverwaltung;
+	private BufferedReader laden;
 	public PersistenzLaden(){
 		
 	}
 	
 	public SpielStart loadAll(){
 		try {
-			Spielerverwaltung verwaltung = new Spielerverwaltung();
-			Spielverwaltung feldverwaltung = new Spielverwaltung(verwaltung);
+			verwaltung = new Spielerverwaltung();
+			feldverwaltung = new Spielverwaltung(verwaltung);
 			
 			Feld[] feld = feldverwaltung.getSpielfeld();
 			
 			Vector<Spieler> spielerListe;
 			spielerListe = this.loadSpieler(feld);
+			verwaltung.setAllSpieler(spielerListe);
 			
 			this.loadField(spielerListe, feld);
 			
-			verwaltung.setAllSpieler(spielerListe);
 			Spieler activPlayer = spielerListe.get(loadActivePlayer()-1);
 			feldverwaltung.getTurn().setWerIstDran(activPlayer);
 			feldverwaltung.getTurn().setPhase(loadPhase());
@@ -114,10 +116,19 @@ public class PersistenzLaden {
 				str =laden.readLine();
 				str =laden.readLine();
 				
-			}else if(str.equals("Gef�ngnis")){
-				feld[i] = new Jail("Gef�ngnis",i);
-				laden.readLine();
-				laden.readLine();
+			}else if(str.equals("Gefängnis")){
+				boolean schleife = true;
+				feld[i] = new Jail("Gefängnis",i);
+				while(schleife == true){
+					str = laden.readLine();
+					if (!str.isEmpty()){
+						int spielernummer = Integer.parseInt(str);
+						Jail jail = ((Jail)feld[i]);
+						jail.addInsasse(verwaltung.getSpieler(spielernummer-1));
+					}else{
+						schleife = false;
+					}
+				}
 			}else if(str.equals("Gehe ins Gefängnis")){
 				laden.readLine();
 			}else{
@@ -161,7 +172,7 @@ public class PersistenzLaden {
 				laden.readLine();
 				laden.readLine();
 				
-			}else if(str.equals("Gef�ngnis")){
+			}else if(str.equals("Gefängnis")){
 				laden.readLine();
 				feld[i] = new Jail(str,i);
 				laden.readLine();
