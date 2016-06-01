@@ -24,7 +24,7 @@ public class SButtonPanel extends JPanel{
 		super();
 		p1Layout = new MigLayout("debug", "[]10[]10[]", "[]10[]10[]10[]10[]10[]10[]");
 		setLayout(p1Layout);
-		sButton1 = new JButton("Würfeln");
+		sButton1 = new JButton("Wï¿½rfeln");
 		sButton2 = new JButton("Haus bauen");
 		sButton3 = new JButton("Hypothek aufnehmen");
 		sButton4 = new JButton("Spiel speichern");
@@ -52,7 +52,8 @@ public class SButtonPanel extends JPanel{
 
 		setBackground(new Color(255,0,0));
 		setOpaque(false);
-		
-		sButton2.addActionListener(new SButtonListener());
+	}
+	public JButton getButton2(){
+		return sButton2;
 	}
 }

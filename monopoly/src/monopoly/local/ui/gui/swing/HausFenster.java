@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
 
 public class HausFenster extends JPanel {
-	//Variablen für das "Haus bauen"-Fenster
+	//Variablen fï¿½r das "Haus bauen"-Fenster
 	private JPanel haBauen;
 	private JPanel haPanel;
 	private JPanel haPanel2;
@@ -37,8 +37,8 @@ public class HausFenster extends JPanel {
 		//Pop-Up-Fenster Haus bauen
 		haBauen = new JPanel();
 		
-		MigLayout haLayout = new MigLayout("", "[]", "[]10[]");
-		MigLayout haLayout3 = new MigLayout("", "[]10[]10[]", "[]");
+		MigLayout haLayout = new MigLayout("debug", "[]", "[]10[]");
+		MigLayout haLayout3 = new MigLayout("debug", "[]10[]10[]", "[]");
 		
 		Font haFont1 = new Font("Berlin Sans FB",Font.ITALIC,14);
 		Font haFont2 = new Font("Berlin Sans FB Demi",Font.PLAIN,14);
@@ -46,10 +46,10 @@ public class HausFenster extends JPanel {
 		haPanel = new JPanel();
 		haPanel2 = new JPanel();
 		haPanel3 = new JPanel();
-		String Inhalt[] = {"Hier", "kommt", "die", "Liste", "mit", "den", "Straßen", "hin", ".", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"};
+		String Inhalt[] = {"Hier", "kommt", "die", "Liste", "mit", "den", "Straï¿½en", "hin", ".", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"};
 		liste  = new JList(Inhalt);
 		haSP = new JScrollPane(liste);
-		haLabel = new JLabel("Gib die Anzahl der Häuser an: ");
+		haLabel = new JLabel("Gib die Anzahl der Hï¿½user an: ");
 		haHausAnz = new JTextField();
 		haButton = new JButton("bauen");
 		
@@ -79,9 +79,8 @@ public class HausFenster extends JPanel {
 		haButton.setBackground(new Color(173,232,202));
 		
 		haPanel.setOpaque(false);
-		haBauen.setBackground(new Color(0,0,0));
+//		haBauen.setBackground(new Color(0,0,0));
 		
-		haBauen.setSize(600, 600);
 		haBauen.setVisible(true);
 	}
 }

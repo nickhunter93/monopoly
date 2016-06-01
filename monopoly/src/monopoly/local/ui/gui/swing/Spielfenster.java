@@ -18,7 +18,7 @@ import javax.swing.JTextArea;
 import net.miginfocom.swing.MigLayout;
 
 public class Spielfenster {
-	//Variablen für das Spielfenster
+	//Variablen fï¿½r das Spielfenster
 	private JFrame spiel;
 	private SButtonPanel sBP;
 	private SpielPanel sP;
@@ -32,8 +32,12 @@ public class Spielfenster {
 	public void sInit(){
 		//Spielfeldfenster
 		spiel = new JFrame("Monopoly");
+		sP = new SpielPanel();
+		sBP = new SButtonPanel();
+		sBP.getButton2().addActionListener(new SButtonListener(spiel));
+		sIP = new SInfoPanel();
 		spiel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		spiel.setLayout(new MigLayout("", "[]10[]", "[]10[]"));
+		spiel.setLayout(new MigLayout("debug", "[]10[]", "[]10[]"));
 		
 		spiel.add(sP, "cell 0 0, w 600, h 600");
 		spiel.add(sBP, "cell 1 0, pushx, growx, shrinkx ");
@@ -52,23 +56,30 @@ public class Spielfenster {
 //		spalten = new Vector<String>();
 //		spalten.add("Strassennummer");
 //		spalten.add("Strassenname");
-//		spalten.add("Häuseranzahl");
+//		spalten.add("Hï¿½useranzahl");
 //		this.columnIdentifiers = spalten;
 //	}
 //	
 //}
-}
-
- class SButtonListener implements ActionListener{
-	
-	public SButtonListener(){
+	public class SButtonListener implements ActionListener{
+		private JFrame spiel;
+		public SButtonListener(JFrame spiel){
+			this.spiel = spiel;
+		}
+		
+		public void actionPerformed(ActionEvent e){
+			spiel.remove(sBP);
+			HausFenster haFenster = new HausFenster();
+			//Spielfenster
+//			spiel.add(haFenster, "cell 1 0, pushx, growx, shrinkx ");
+			
+			SInfoPanel panel = new SInfoPanel();
+			spiel.add(panel, "cell 1 0, w 600, h 600, pushx, growx, shrinkx");
+			haFenster.haInit();
+			spiel.revalidate();
+		   }
 		
 	}
-	
-	public void actionPerformed(ActionEvent e){
-		HausFenster haFenster = new HausFenster();
-		//Spielfenster
-		haFenster.haInit();
-	   }
-	
 }
+
+
