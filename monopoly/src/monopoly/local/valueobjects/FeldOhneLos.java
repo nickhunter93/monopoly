@@ -4,15 +4,18 @@ import monopoly.local.domain.Spielerverwaltung;
 
 public class FeldOhneLos extends Aktion {
 
-	public FeldOhneLos(Spielfeld spielfeld, Spielerverwaltung spielerverwaltung) {
-		super(spielfeld, spielerverwaltung);
+	private Feld target;
+	
+	public FeldOhneLos(Spieler spieler, Feld target, Spielfeld spielfeld, Spielerverwaltung spielerverwaltung) {
+		super(spieler, spielfeld, spielerverwaltung);
+		this.target = target;
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void ausfuehren(Spieler spieler) {
-		ereignis.aufFeldOhneLos(spieler, spielfeld.getSpielfeld()[7]);
-		
+	public void ausfuehren() {
+		spieler.setSpielerPosition(target);
+//		ereignis.aufFeldOhneLos(spieler, spielfeld.getSpielfeld()[7]);		
 	}
 
 }

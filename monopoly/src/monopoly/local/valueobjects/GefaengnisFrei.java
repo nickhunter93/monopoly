@@ -4,14 +4,18 @@ import monopoly.local.domain.Spielerverwaltung;
 
 public class GefaengnisFrei extends Aktion {
 
-	public GefaengnisFrei(Spielfeld spielfeld, Spielerverwaltung spielerverwaltung) {
-		super(spielfeld, spielerverwaltung);
+	private Jail jail;
+	
+	public GefaengnisFrei(Spieler spieler, Jail jail, Spielfeld spielfeld, Spielerverwaltung spielerverwaltung) {
+		super(spieler, spielfeld, spielerverwaltung);
+		this.jail = jail;
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void ausfuehren(Spieler spieler) {
-		ereignis.gefaengnisfrei(spieler);
+	public void ausfuehren() {
+//		ereignis.gefaengnisfrei(spieler);
+		jail.release(spieler);
 	}
 
 }

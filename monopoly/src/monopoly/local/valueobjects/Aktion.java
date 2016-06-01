@@ -9,11 +9,13 @@ public abstract class Aktion {
 	protected Spielfeld spielfeld;
 	protected Spielerverwaltung spielerverwaltung;
 	private String aktion;
+	protected Spieler spieler;
 	
-	public Aktion(Spielfeld spielfeld, Spielerverwaltung spielerverwaltung){
+	public Aktion(Spieler spieler, Spielfeld spielfeld, Spielerverwaltung spielerverwaltung){
 		setAktion(aktion);
 		this.spielfeld = spielfeld;
 		this.spielerverwaltung = spielerverwaltung;
+		this.spieler = spieler;
 	}
 	
 	public String getAktion() {
@@ -23,7 +25,15 @@ public abstract class Aktion {
 	public void setAktion(String aktion) {
 		this.aktion = aktion;
 	}
+	
+	public Spieler getSpieler(){
+		return spieler;
+	}
+	
+	public void setSpieler(Spieler spieler){
+		this.spieler = spieler;
+	}
 
-	public abstract void ausfuehren(Spieler spieler);
+	public abstract void ausfuehren();
 
 }

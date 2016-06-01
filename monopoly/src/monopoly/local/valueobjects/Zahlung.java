@@ -4,10 +4,11 @@ import monopoly.local.domain.Spielerverwaltung;
 
 public class Zahlung extends Aktion {
 	
-	int betrag;
+	private int betrag;
 
-	public Zahlung(Spielfeld spielfeld, Spielerverwaltung spielerverwaltung , int betrag) {
-		super(spielfeld, spielerverwaltung);
+	public Zahlung(Spieler spieler,Spielfeld spielfeld, Spielerverwaltung spielerverwaltung , int betrag) {
+		super(spieler,spielfeld, spielerverwaltung);
+		this.betrag = betrag;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -20,9 +21,9 @@ public class Zahlung extends Aktion {
 	}
 
 	@Override
-	public void ausfuehren(Spieler spieler) {
-		zahlung.payment(spieler, spieler.getSpielerBudget() + betrag);
-		
+	public void ausfuehren() {
+		betrag = spieler.getSpielerBudget() + betrag;
+		spieler.setSpielerBudget(betrag);
 	}
 
 }

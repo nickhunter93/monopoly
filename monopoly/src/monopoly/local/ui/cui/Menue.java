@@ -81,7 +81,7 @@ public class Menue {
 				int spielernummer;
 				
 				if(spieler.getAllSpieler().size() == 0){
-					System.err.println("Es sind noch keine Spieler im Spiel.");
+					System.out.println("Es sind noch keine Spieler im Spiel.");
 				}else{
 				
 				try {
@@ -102,11 +102,11 @@ public class Menue {
 					
 				} catch (IOException e) {
 					e.printStackTrace();
-					System.err.println("Fehler beim entfernen eines Spielers.");
+					System.out.println("Fehler beim entfernen eines Spielers.");
 				} catch (NumberFormatException e) {
-					System.err.println("Geben Sie eine SpielerNUMMER ein.");
+					System.out.println("Geben Sie eine SpielerNUMMER ein.");
 				} catch (ArrayIndexOutOfBoundsException e) {
-					System.err.println("Kein Spieler mit der Nummer gefunden.");
+					System.out.println("Kein Spieler mit der Nummer gefunden.");
 				}
 			}
 			}
