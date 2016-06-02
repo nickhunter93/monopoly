@@ -30,12 +30,8 @@ public class HausFenster extends JPanel {
 	private Vector<String> spalten;
 	
 	public HausFenster(){
-		
-	}
-
-	public void haInit(){
-		//Pop-Up-Fenster Haus bauen
 		haBauen = new JPanel();
+
 		
 		MigLayout haLayout = new MigLayout("debug", "[]", "[]10[]");
 		MigLayout haLayout3 = new MigLayout("debug", "[]10[]10[]", "[]");
@@ -49,22 +45,23 @@ public class HausFenster extends JPanel {
 		String Inhalt[] = {"Hier", "kommt", "die", "Liste", "mit", "den", "Straï¿½en", "hin", ".", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"};
 		liste  = new JList(Inhalt);
 		haSP = new JScrollPane(liste);
-		haLabel = new JLabel("Gib die Anzahl der Hï¿½user an: ");
+		haLabel = new JLabel("Häuseranzahl: ");
 		haHausAnz = new JTextField();
 		haButton = new JButton("bauen");
 		
 		haPanel.setLayout(haLayout);
 		haPanel3.setLayout(haLayout3);
 		
-		haBauen.add(haPanel);
+		add(haPanel);
+//		haBauen.add(haPanel);
 		haPanel.add(haPanel2, "cell 0 0, push, grow, shrink");
 		haPanel.add(haPanel3, "cell 0 1, pushx, growx, shrinkx");
 		haPanel2.add(haSP);
 		haPanel3.add(haLabel, "cell 0 0, pushx, growx, shrinkx");
-		haPanel3.add(haHausAnz, "cell 1 0, pushx, growx, shrinkx");
+		haPanel3.add(haHausAnz, "cell 1 0,w 50, pushx, growx, shrinkx");
 		haPanel3.add(haButton, "cell 2 0, pushx, growx, shrinkx");
 		
-		haSP.setPreferredSize(new Dimension(400, 400));
+		haSP.setPreferredSize(new Dimension(200,200));
 		
 		liste.setFont(haFont2);
 		haLabel.setFont(haFont2);
@@ -79,8 +76,12 @@ public class HausFenster extends JPanel {
 		haButton.setBackground(new Color(173,232,202));
 		
 		haPanel.setOpaque(false);
-//		haBauen.setBackground(new Color(0,0,0));
+		haBauen.setBackground(new Color(0,0,0));
+
+	}
+
+	public void haInit(){
+		//Pop-Up-Fenster Haus bauen
 		
-		haBauen.setVisible(true);
 	}
 }

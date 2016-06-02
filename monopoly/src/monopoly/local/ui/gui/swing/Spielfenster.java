@@ -70,12 +70,7 @@ public class Spielfenster {
 		public void actionPerformed(ActionEvent e){
 			spiel.remove(sBP);
 			HausFenster haFenster = new HausFenster();
-			//Spielfenster
-//			spiel.add(haFenster, "cell 1 0, pushx, growx, shrinkx ");
-			
-			SInfoPanel panel = new SInfoPanel();
-			spiel.add(panel, "cell 1 0, w 600, h 600, pushx, growx, shrinkx");
-			haFenster.haInit();
+			spiel.add(haFenster, "cell 1 0, push, grow, shrink");
 			spiel.revalidate();
 		   }
 		
