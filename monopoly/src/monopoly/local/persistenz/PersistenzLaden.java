@@ -1,6 +1,7 @@
 package monopoly.local.persistenz;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Vector;
@@ -17,14 +18,31 @@ import monopoly.local.valueobjects.ToJail;
 public class PersistenzLaden {
 	private Monopoly monopoly;
 	private BufferedReader laden;
+	private String filename;
 	public PersistenzLaden(){
 		
 	}
 	
-	public SpielStart loadAll(){
+	public Vector<String> loadSaveFiles(){
+		Vector<String> savefiles = new Vector<String>();
+		String save;
+		try{
+		laden = new BufferedReader(new FileReader("savefiles"));
+		save = laden.readLine();
+		while(save != null && !save.isEmpty() ){
+			savefiles.addElement(save);
+			save = laden.readLine();
+		}
+		return savefiles;
+		}catch(IOException e) {
+			return null;
+		}
+	}
+	
+	public SpielStart loadAll(String filename){
 		try {
 			monopoly = new Monopoly();
-			
+			this.filename = filename;
 			Feld[] feld = monopoly.getSpielfeld();
 			
 			Vector<Spieler> spielerListe;
@@ -46,7 +64,7 @@ public class PersistenzLaden {
 	}
 	
 	private Phase loadPhase() throws IOException {
-		laden = new BufferedReader(new FileReader("saveTurn"));
+		laden = new BufferedReader(new FileReader(filename+"Turn"));
 		laden.readLine();
 		int fall = Integer.parseInt(laden.readLine());
 		Phase phase;
@@ -71,7 +89,7 @@ public class PersistenzLaden {
 	}
 
 	private int loadActivePlayer() throws IOException {
-		laden = new BufferedReader(new FileReader("saveTurn"));
+		laden = new BufferedReader(new FileReader(filename+"Turn"));
 		int spielernummer = Integer.parseInt(laden.readLine());
 		
 		laden.close();
@@ -80,7 +98,7 @@ public class PersistenzLaden {
 
 	public Vector<Spieler> loadSpieler(Feld[] feld) throws IOException{
 		
-		laden = new BufferedReader(new FileReader("saveSpieler.txt"));
+		laden = new BufferedReader(new FileReader(filename+"Spieler.txt"));
 		int spieleranzahl = Integer.parseInt(laden.readLine());
 		Vector<Spieler> spielerListe = new Vector<Spieler>();
 		
@@ -99,7 +117,7 @@ public class PersistenzLaden {
 	}
 	
 	public void loadField(Vector<Spieler> spielerListe,Feld[] feld)throws IOException{
-		laden = new BufferedReader(new FileReader("saveFeld.txt"));
+		laden = new BufferedReader(new FileReader(filename+"Feld.txt"));
 		laden.readLine();
 		for(int i = 0 ; i<36 ; i++){
 			String str = laden.readLine();

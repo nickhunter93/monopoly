@@ -257,9 +257,15 @@ public class SpielStart {
 						break;
 
 					case 4:
+						System.out.println("Geben Sie den Namen der Speicher Datei an.");
+						try {
+							buffer = eingabe.readLine();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 						System.out.println("Spielstand erfolgreich gespeichert.");
 						PersistenzSpeichern speichern = new PersistenzSpeichern();
-						speichern.saveAll(monopoly.getAllSpieler(), monopoly.getSpielfeld(),aktuellerTurn);
+						speichern.saveAll(monopoly.getAllSpieler(), monopoly.getSpielfeld(),aktuellerTurn,buffer);
 						break;
 
 					default:
@@ -474,9 +480,14 @@ public class SpielStart {
 						break;
 
 					case 4:
-						System.out.println("Spielstand erfolgreich gespeichert.");
+						System.out.println("Geben Sie den Namen der Speicher Datei ein.");
+						try {
+							buffer = eingabe.readLine();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 						PersistenzSpeichern speichern = new PersistenzSpeichern();
-						speichern.saveAll(monopoly.getAllSpieler(), monopoly.getSpielfeld(),aktuellerTurn);
+						speichern.saveAll(monopoly.getAllSpieler(), monopoly.getSpielfeld(),aktuellerTurn,buffer);
 						break;
 
 					default:

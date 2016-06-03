@@ -17,16 +17,19 @@ import monopoly.local.valueobjects.Strasse;
 import monopoly.local.valueobjects.ToJail;
 
 public class PersistenzSpeichern {
-	BufferedWriter speicher;
+	private BufferedWriter speicher;
+	private String filename;
 
 	public PersistenzSpeichern(){
 	}
 
-	public boolean saveAll(Vector<Spieler> spielerListe, Feld[] spielfeld,Turn turn){
+	public boolean saveAll(Vector<Spieler> spielerListe, Feld[] spielfeld,Turn turn,String filename){
 		try{
+			this.filename = filename;
 			saveSpieler(spielerListe);
 			saveFeld(spielfeld);
 			saveTurn(turn);
+			saveFilenames();
 			return true;
 		}
 		catch(IOException e){
@@ -34,8 +37,24 @@ public class PersistenzSpeichern {
 		}
 	}
 
+	private void saveFilenames()throws IOException {
+		speicher = new BufferedWriter(new FileWriter("savefiles",true));
+		Vector<String> savefiles = new PersistenzLaden().loadSaveFiles();
+		boolean checkDoubleName = false;
+		for(String str : savefiles){
+			if(str.equals(filename)){
+				checkDoubleName = true;
+			}
+		}
+		if(checkDoubleName == false){
+			speicher.write(filename+"");
+			speicher.newLine();
+		}
+		speicher.close();
+	}
+
 	private void saveTurn(Turn turn)throws IOException {
-		speicher = new BufferedWriter(new FileWriter("saveTurn"));
+		speicher = new BufferedWriter(new FileWriter(filename+"Turn"));
 		turn.getWerIstDran();
 		speicher.write(""+turn.getWerIstDran().getSpielerNummer());
 		speicher.newLine();
@@ -59,7 +78,7 @@ public class PersistenzSpeichern {
 	}
 
 	public void saveSpieler(Vector<Spieler> spielerListe) throws IOException{
-		speicher = new BufferedWriter(new FileWriter("saveSpieler.txt"));
+		speicher = new BufferedWriter(new FileWriter(filename+"Spieler.txt"));
 		int anzahl = spielerListe.size();
 		speicher.write(anzahl+"");
 		speicher.newLine();
@@ -79,7 +98,7 @@ public class PersistenzSpeichern {
 	}
 
 	public void saveDefaultFeld(Feld[] spielfeld) throws IOException{
-		speicher = new BufferedWriter(new FileWriter("saveFeld.txt"));
+		speicher = new BufferedWriter(new FileWriter(filename+"Feld.txt"));
 		speicher.newLine();
 		for(Feld feld:spielfeld){
 			if(feld instanceof Strasse){
@@ -125,7 +144,7 @@ public class PersistenzSpeichern {
 	}
 	
 	public void saveFeld(Feld[] spielfeld) throws IOException{
-		speicher = new BufferedWriter(new FileWriter("saveFeld.txt"));
+		speicher = new BufferedWriter(new FileWriter(filename+"saveFeld.txt"));
 		speicher.newLine();
 		for(Feld feld:spielfeld){
 			if(feld instanceof Strasse){

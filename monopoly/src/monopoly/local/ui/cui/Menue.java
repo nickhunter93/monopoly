@@ -3,6 +3,7 @@ package monopoly.local.ui.cui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Vector;
 
 import monopoly.local.domain.Monopoly;
 import monopoly.local.domain.Spielerverwaltung;
@@ -117,11 +118,21 @@ public class Menue {
 			break;
 			
 			case 4 :	
-				System.out.println("Spielstand erfolgreich geladen.");
-//				PersistenzLaden laden = new PersistenzLaden();
-//				SpielStart spiel = laden.loadAll();
-				SpielStart spiel = monopoly.spielStandLaden("test");
-				spiel.start(false);
+				System.out.println("Wählen Sie einen Spielstand aus.");
+				Vector<String> savefiles = monopoly.saveFilesLaden();
+				for(int i = 0 ; i < savefiles.size() ; i++){
+					System.out.println(i+1+savefiles.elementAt(i));
+				}
+				try {
+					buffer = eingabe.readLine();
+					int savewahl = Integer.parseInt(buffer);
+					buffer = savefiles.get(savewahl-1);
+					SpielStart spiel = monopoly.spielStandLaden(buffer);
+					spiel.start(false);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			break;
 			default:	System.out.println("Keine G�ltige Auswahl.");

@@ -53,7 +53,7 @@ public class Monopoly {
 	}
 	
 	public SpielStart spielStandLaden(String datei) {
-		return pmLaden.loadAll();
+		return pmLaden.loadAll(datei);
 	}
 	
 	public String getFeldName(int nr){
@@ -123,5 +123,10 @@ public class Monopoly {
 
 	public void setAllSpieler(Vector<Spieler> spielerListe) {
 		spieler.setAllSpieler(spielerListe);
+	}
+
+	public Vector<String> saveFilesLaden() {
+	Vector<String> savefiles = pmLaden.loadSaveFiles();
+	return savefiles;	
 	}
 }
