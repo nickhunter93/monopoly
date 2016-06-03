@@ -17,10 +17,10 @@ public class Monopoly {
 	private Spielerverwaltung spieler;
 	private Spielverwaltung logik;
 
-	public Monopoly(Spielverwaltung logik , Spielerverwaltung spieler) {
+	public Monopoly() {
 		super();
-		this.logik = logik;
-		this.spieler = spieler;
+		this.spieler = new Spielerverwaltung();
+		this.logik = new Spielverwaltung(spieler);
 		pmLaden = new PersistenzLaden();
 	}
 	
@@ -103,5 +103,21 @@ public class Monopoly {
 	}
 	public void nextTurn(){
 		logik.nextTurn();
+	}
+
+	public Feld getLos() {
+		return logik.getLos();
+	}
+
+	public boolean beitreten(Spieler player) {
+		return spieler.beitreten(player);
+	}
+
+	public Spieler getSpieler(int i) {
+		return spieler.getSpieler(i);
+	}
+
+	public boolean entfernen(int spielernummer) {
+		return spieler.entfernen(spielernummer);
 	}
 }

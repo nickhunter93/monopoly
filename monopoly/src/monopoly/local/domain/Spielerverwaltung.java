@@ -9,11 +9,11 @@ public class Spielerverwaltung {
 	private int reihenfolge;
 	private Jail jail;
 	private ToJail toJail;
-	
+	private Vector<Spieler> spielerListe = new Vector<Spieler>();
 	/**
 	 * Konstruktor der Klasse Spielerverwaltung
 	 */
-	private Vector<Spieler> spielerListe = new Vector<Spieler>();
+
 	public Spielerverwaltung(){
 		reihenfolge = -1;
 	}

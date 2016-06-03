@@ -27,13 +27,13 @@ public class MonopolyGUI {
 //		haFenster = new HausFenster();
 //		hyFenster = new HypothekFenster();
 		
-		mFenster.mInit();
+		//mFenster.mInit();
 
 	}
 	
 	/**
 	 * zum Probieren und bauen der GUI
-	 * wird später geloescht oder verschoben
+	 * wird spï¿½ter geloescht oder verschoben
 	 */
 	public static void main(String[] args){
 		MonopolyGUI monopolyGUI = new MonopolyGUI();

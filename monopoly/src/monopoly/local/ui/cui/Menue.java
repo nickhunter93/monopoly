@@ -12,17 +12,13 @@ import monopoly.local.persistenz.PersistenzSpeichern;
 import monopoly.local.valueobjects.Spieler;
 
 public class Menue {
-	private Spielerverwaltung spieler;
-	private Spielverwaltung logik;
 	private Monopoly monopoly;
 	
 	/**
 	 * Main Methode in der Klasse Menue
 	 */
 	public Menue(){
-		spieler = new Spielerverwaltung();
-		logik = new Spielverwaltung(spieler);
-		monopoly = new Monopoly(logik,spieler);
+		monopoly = new Monopoly();
 		this.menueOefnen();
 	}
 	
@@ -63,9 +59,9 @@ public class Menue {
 				try {
 					System.out.println("Geben Sie den Namen an.");
 					name = eingabe.readLine();
-					spielernummer = spieler.getAllSpieler().size();
-					Spieler player = new Spieler(name,spielernummer+1,logik.getLos(),2000);
-					if(spieler.beitreten(player)){
+					spielernummer = monopoly.getAllSpieler().size();
+					Spieler player = new Spieler(name,spielernummer+1,monopoly.getLos(),2000);
+					if(monopoly.beitreten(player)){
 						System.out.println("Spieler " + (spielernummer+1) + " von 6 erfolgreich hinzugef�gt.");
 					}else{
 						System.out.println("Maximale Spieleranzahl erreicht.");
@@ -80,23 +76,23 @@ public class Menue {
 				String str;
 				int spielernummer;
 				
-				if(spieler.getAllSpieler().size() == 0){
+				if(monopoly.getAllSpieler().size() == 0){
 					System.out.println("Es sind noch keine Spieler im Spiel.");
 				}else{
 				
 				try {
 					System.out.println("Geben Sie die Spieler Nummer an.");
-					for(int i=0;i<spieler.getAllSpieler().size();i++){
-						Spieler spieler = this.spieler.getSpieler(i);
+					for(int i=0;i<monopoly.getAllSpieler().size();i++){
+						Spieler spieler = this.monopoly.getSpieler(i);
 						int spielerNummer = spieler.getSpielerNummer();
 						String spielerName = spieler.getSpielerName();
 						System.out.println(spielerNummer+" :"+spielerName+".");
 					}
 					str = eingabe.readLine();
 					spielernummer = Integer.parseInt(str);
-					str = spieler.getSpieler(spielernummer-1).getSpielerName();
+					str = monopoly.getSpieler(spielernummer-1).getSpielerName();
 					
-					if(spieler.entfernen(spielernummer)){
+					if(monopoly.entfernen(spielernummer)){
 						System.out.println("Spieler "+str+" wurde entfernt.");
 					}
 					
@@ -111,9 +107,9 @@ public class Menue {
 			}
 			}
 			break;
-			case 3 :	int spielerAnzahl = spieler.getAllSpieler().size();
+			case 3 :	int spielerAnzahl = monopoly.getAllSpieler().size();
 			if(spielerAnzahl >= 2){
-				SpielStart spiel = new SpielStart(logik,spieler);
+				SpielStart spiel = new SpielStart(monopoly);
 				spiel.start(true);
 			}else{
 				System.out.println("Es gibt nicht gen�gend Spieler (min. 2).");

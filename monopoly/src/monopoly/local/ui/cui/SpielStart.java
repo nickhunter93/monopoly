@@ -27,8 +27,8 @@ public class SpielStart {
 	/**
 	 * Konstruktor der Klasse SpielStart
 	 */
-	public SpielStart(Spielverwaltung logik, Spielerverwaltung spieler) {
-		this.monopoly = new Monopoly(logik, spieler);
+	public SpielStart(Monopoly monopoly) {
+		this.monopoly = monopoly;
 	}
 
 	/**
