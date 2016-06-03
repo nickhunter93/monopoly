@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import monopoly.local.domain.Monopoly;
 import net.miginfocom.swing.MigLayout;
 
 public class Spielfenster {
@@ -23,10 +24,10 @@ public class Spielfenster {
 	private SButtonPanel sBP;
 	private SpielPanel sP;
 	private SInfoPanel sIP;
+	private Monopoly monopoly;
 	
-	
-	public Spielfenster(){
-		
+	public Spielfenster(Monopoly monopoly){
+		this.monopoly = monopoly;
 	}
 
 	public void sInit(){

@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -16,36 +17,35 @@ import monopoly.local.domain.Monopoly;
 import monopoly.local.valueobjects.Spieler;
 import net.miginfocom.swing.MigLayout;
 
-public class MenueAustreten extends JPanel{
+public class MenueAustreten{
 	
 	private Font mFont;
 	private JButton mButton;
 	private MenuePanel mPanel;
-	private JTextField mTextField;
+	private JList<String> liste;
 	
 	public MenueAustreten(Monopoly monopoly){
 		//Menue	
-		JTextArea mTextArea;
 		MigLayout mLayout = new MigLayout("", "[]20[]20[]", "[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]");
 		mFont = new Font("Berlin Sans FB",Font.ITALIC,20);
         
-		mTextArea = new JTextArea("Spielername");
-		mTextArea.setEditable(false);
+		liste = new JList<String>();
 		int pos = 0;
+		String[] str = new String[monopoly.getAllSpieler().size()];
+		
 		for(Spieler spieler : monopoly.getAllSpieler()){
-			String str = spieler.getSpielerName();
-			mTextArea.insert(str, pos);
+			str[pos] = spieler.getSpielerName();
 			pos++;
 		}
+		liste = new JList<String>(str);
 		mButton = new JButton("Bestätigen");
 		mPanel = new MenuePanel(600,600);
 		
 		mPanel.setLayout(mLayout);
-		mPanel.add(mTextArea,"w 425, h 50, cell 2 20, pushx, growx");
+		mPanel.add(liste,"w 425, h 50, cell 2 20, pushx, growx");
 		mPanel.add(new JLabel(""), "w 25");
-		mPanel.add(mButton,"w 425, h 50, cell 3 20, pushx, growx");
+		mPanel.add(mButton,"w 425, h 50, cell 2 20, pushx, growx");
 		mPanel.add(new JLabel(""), "w 25");
-		add(mPanel);
 		
 		mButton.setToolTipText("Du tritts aus einem Spiel aus");
 		
@@ -74,12 +74,12 @@ public class MenueAustreten extends JPanel{
 		this.mPanel = mPanel;
 	}
 
-	public JTextField getmTextField() {
-		return mTextField;
+	public JList<String> getListe() {
+		return liste;
 	}
 
-	public void setmTextField(JTextField mTextField) {
-		this.mTextField = mTextField;
+	public void setmTextField(JList<String> mTextField) {
+		this.liste = mTextField;
 	}
 	
 	

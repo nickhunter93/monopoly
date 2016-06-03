@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 
-public class MenueHauptPanel extends JPanel {
+public class MenueHauptPanel {
 	private Font mFont;
 	private JButton mButton;
 	private JButton mButton1;
@@ -56,10 +56,13 @@ public class MenueHauptPanel extends JPanel {
 				mButton2.setFont(mFont);
 				mButton3.setFont(mFont);
 				
-				add(mPanel);
-				
 				
 	}
+	
+	public MenuePanel getmPanel(){
+		return mPanel;
+	}
+	
 	public JButton getmButton() {
 		return mButton;
 	}

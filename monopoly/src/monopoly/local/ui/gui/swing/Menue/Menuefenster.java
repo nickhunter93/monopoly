@@ -40,10 +40,10 @@ public class Menuefenster {
 
 	public void mInit(){
 		hauptPanel = new MenueHauptPanel();
-		menue.add(hauptPanel, 0,0);
+		menue.add(hauptPanel.getmPanel(), 0,0);
 		hauptPanel.getmButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				menue.remove(hauptPanel);
+				menue.remove(hauptPanel.getmPanel());
 				menue.repaint();
 				mBeitreten();
 			}
@@ -51,7 +51,7 @@ public class Menuefenster {
 		
 		hauptPanel.getmButton1().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				menue.remove(hauptPanel);
+				menue.remove(hauptPanel.getmPanel());
 				menue.repaint();
 				mEntfernen();
 			}
@@ -59,7 +59,7 @@ public class Menuefenster {
 		
 		hauptPanel.getmButton2().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				Spielfenster spFenster = new Spielfenster();
+				Spielfenster spFenster = new Spielfenster(monopoly);
 				spFenster.sInit();
 				menue.dispose();
 			}
@@ -70,7 +70,7 @@ public class Menuefenster {
 	}
 	public void mBeitreten(){
 		panel = new MenueBeitreten();
-		menue.add(panel,"cell 0 0, pushx, growx, shrinkx ");
+		menue.add(panel.getmPanel(),"cell 0 0, pushx, growx, shrinkx ");
 		menue.validate();
 		
 		panel.getmButton().addActionListener(new ActionListener(){
@@ -81,7 +81,7 @@ public class Menuefenster {
 					Spieler spieler = new Spieler(name,spielernummer+1,monopoly.getLos(),2000);
 					boolean bestätigung = monopoly.beitreten(spieler);
 					showErfolg(bestätigung);
-					menue.remove(panel);
+					menue.remove(panel.getmPanel());
 					mInit();
 				}
 						
@@ -95,20 +95,19 @@ public class Menuefenster {
 	
 	public void mEntfernen(){
 		panel2 = new MenueAustreten(monopoly);
-		menue.add(panel2,"cell 0 0, pushx, growx, shrinkx ");
+		menue.add(panel2.getmPanel(),"cell 0 0, pushx, growx, shrinkx ");
 		
 		panel2.getmButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				if(!panel2.getmTextField().getText().isEmpty()){
-					String name = panel2.getmTextField().getText();
-					int spielernummer = monopoly.getAllSpieler().size();
-					Spieler spieler = new Spieler(name,spielernummer+1,monopoly.getLos(),2000);
-					boolean bestätigung = monopoly.beitreten(spieler);
+				if(!panel2.getListe().isSelectionEmpty()){
+					boolean bestätigung = monopoly.entfernen(panel2.getListe().getSelectedIndex()+1);
 					showErfolg(bestätigung);
-					menue.remove(panel);
+					menue.remove(panel2.getmPanel());
+					mInit();
+				}else{
+					menue.remove(panel2.getmPanel());
 					mInit();
 				}
-				
 			}
 		});
 		

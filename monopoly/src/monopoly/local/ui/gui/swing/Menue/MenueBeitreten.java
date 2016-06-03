@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 import monopoly.local.valueobjects.Spieler;
 import net.miginfocom.swing.MigLayout;
 
-public class MenueBeitreten extends JPanel {
+public class MenueBeitreten {
 	
 	private Font mFont;
 	private JTextField mTextField;
@@ -45,9 +45,12 @@ public class MenueBeitreten extends JPanel {
 		
 		mTextField.setFont(mFont);
 		mButton.setFont(mFont);
-		add(mPanel);
 	}
 
+	public MenuePanel getmPanel(){
+		return mPanel;
+	}
+	
 	public JTextField getmTextField() {
 		return mTextField;
 	}
