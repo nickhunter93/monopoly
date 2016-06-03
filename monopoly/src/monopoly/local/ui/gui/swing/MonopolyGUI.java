@@ -1,5 +1,6 @@
 package monopoly.local.ui.gui.swing;
 
+import monopoly.local.ui.gui.swing.Menue.Menuefenster;
 import net.miginfocom.swing.MigLayout;
 
 public class MonopolyGUI {

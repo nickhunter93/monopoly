@@ -1,4 +1,4 @@
-package monopoly.local.ui.gui.swing;
+package monopoly.local.ui.gui.swing.Menue;
 
 import java.awt.Graphics;
 import java.awt.Image;
