@@ -120,4 +120,8 @@ public class Monopoly {
 	public boolean entfernen(int spielernummer) {
 		return spieler.entfernen(spielernummer);
 	}
+
+	public void setAllSpieler(Vector<Spieler> spielerListe) {
+		spieler.setAllSpieler(spielerListe);
+	}
 }

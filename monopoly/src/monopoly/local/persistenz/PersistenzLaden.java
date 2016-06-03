@@ -1,15 +1,12 @@
 package monopoly.local.persistenz;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Vector;
 
-import monopoly.local.domain.Spielerverwaltung;
-import monopoly.local.domain.Spielverwaltung;
+import monopoly.local.domain.Monopoly;
 import monopoly.local.domain.Spielverwaltung.Phase;
-import monopoly.local.domain.Spielverwaltung.Turn;
 import monopoly.local.ui.cui.SpielStart;
 import monopoly.local.valueobjects.Feld;
 import monopoly.local.valueobjects.Jail;
@@ -18,8 +15,7 @@ import monopoly.local.valueobjects.Strasse;
 import monopoly.local.valueobjects.ToJail;
 
 public class PersistenzLaden {
-	private Spielerverwaltung verwaltung;
-	private Spielverwaltung feldverwaltung;
+	private Monopoly monopoly;
 	private BufferedReader laden;
 	public PersistenzLaden(){
 		
@@ -27,21 +23,20 @@ public class PersistenzLaden {
 	
 	public SpielStart loadAll(){
 		try {
-			verwaltung = new Spielerverwaltung();
-			feldverwaltung = new Spielverwaltung(verwaltung);
+			monopoly = new Monopoly();
 			
-			Feld[] feld = feldverwaltung.getSpielfeld();
+			Feld[] feld = monopoly.getSpielfeld();
 			
 			Vector<Spieler> spielerListe;
 			spielerListe = this.loadSpieler(feld);
-			verwaltung.setAllSpieler(spielerListe);
+			monopoly.setAllSpieler(spielerListe);
 			
 			this.loadField(spielerListe, feld);
 			
 			Spieler activPlayer = spielerListe.get(loadActivePlayer()-1);
-			feldverwaltung.getTurn().setWerIstDran(activPlayer);
-			feldverwaltung.getTurn().setPhase(loadPhase());
-			SpielStart start = new SpielStart(feldverwaltung,verwaltung);
+			monopoly.getTurn().setWerIstDran(activPlayer);
+			monopoly.getTurn().setPhase(loadPhase());
+			SpielStart start = new SpielStart(monopoly);
 			return start;
 		} catch (IOException e) {
 			System.out.println("FEHLER BEIM LADEN");
@@ -124,7 +119,7 @@ public class PersistenzLaden {
 					if (!str.isEmpty()){
 						int spielernummer = Integer.parseInt(str);
 						Jail jail = ((Jail)feld[i]);
-						jail.addInsasse(verwaltung.getSpieler(spielernummer-1));
+						jail.addInsasse(monopoly.getSpieler(spielernummer-1));
 					}else{
 						schleife = false;
 					}

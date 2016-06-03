@@ -5,11 +5,17 @@ package monopoly.local.valueobjects;
 public class SpezialAktion extends Aktion {
 
 	public SpezialAktion() {
+		super(null, null, null);
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public void ausfuehren(Spieler spieler) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ausfuehren() {
 		// TODO Auto-generated method stub
 		
 	}
