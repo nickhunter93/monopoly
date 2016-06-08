@@ -26,4 +26,9 @@ public class Renovation implements Aktion {
 		}
 	}
 
+	public void setSpieler(Spieler spieler) {
+		// TODO Auto-generated method stub
+		this.spieler = spieler;	
+	}
+
 }

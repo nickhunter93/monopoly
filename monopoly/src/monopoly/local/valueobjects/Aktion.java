@@ -3,9 +3,10 @@ package monopoly.local.valueobjects;
 
 public interface Aktion {
 
-	/**
-	 * Abstrakte Methode zum ausführen einer Aktion
-	 */
-	public abstract void ausfuehren();
+	public void ausfuehren();
+	
+	public void setSpieler(Spieler spieler);
+	
+	
 
 }
