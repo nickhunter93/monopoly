@@ -12,9 +12,11 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import monopoly.local.domain.Monopoly;
+import monopoly.local.valueobjects.Spieler;
 import net.miginfocom.swing.MigLayout;
 
-public class HypothekFenster {
+public class HypothekFenster extends JPanel {
 	//Variablen für "Hypothek aufnehmen" Fenster
 	private JPanel hypothek;
 	private JPanel hyPanel1;
@@ -24,14 +26,14 @@ public class HypothekFenster {
 	private JScrollPane hySP;
 	private JButton hyButton1;
 	private JButton hyButton2;
+	private Monopoly monopoly;
 	
-	public HypothekFenster(){
+	public HypothekFenster(Monopoly monopoly){
+		super();
 		
-	}
-
-	public void hyInit(){
-		//Hypothek Fenster
 		hypothek = new JPanel();
+		this.monopoly = monopoly;
+		monopoly.TurnIni(true);
 		
 		MigLayout hyLayout1 = new MigLayout("", "[]10[]", "[]");
 		MigLayout hyLayout3 = new MigLayout("", "[]", "[]10[]10[]10[]");
@@ -42,7 +44,14 @@ public class HypothekFenster {
 		hyPanel3 = new JPanel();
 		hyButton1 = new JButton("aufnehmen");
 		hyButton2 = new JButton("abbezahlen");
-		String hyInhalt[] = {"Inhalt 1", "Inhalt 2", "Inhalt 3", "Inhalt 4"};
+		//String hyInhalt[] = {"Inhalt 1", "Inhalt 2", "Inhalt 3", "Inhalt 4"};
+		Spieler spieler = monopoly.getTurn().getWerIstDran();
+		String hyInhalt[] = {};
+		if(monopoly.getYourStreets(spieler) != null){
+			for(int i = 0; i <= monopoly.getYourStreets(spieler).length; i++){
+				hyInhalt[i] = monopoly.getFeldName(i);
+			}
+		}
 		hyListe  = new JList<String>(hyInhalt);
 		hySP = new JScrollPane(hyListe);
 		JLabel hyLabel1 = new JLabel("");
@@ -51,7 +60,7 @@ public class HypothekFenster {
 		hyPanel1.setLayout(hyLayout1);
 		hyPanel3.setLayout(hyLayout3);
 		
-		hypothek.add(hyPanel1);
+		add(hyPanel1);
 		hyPanel1.add(hyPanel2, "cell 0 0, push, grow, shrink");
 		hyPanel1.add(hyPanel3, "cell 0 1, pushx, growx, shrinkx");
 		hyPanel2.add(hySP, "push, grow, shrink");
@@ -60,10 +69,10 @@ public class HypothekFenster {
 		hyPanel3.add(hyButton2, " pushx, growx, shrinkx");
 		hyPanel3.add(hyLabel2, "cell 3 0, pushx, growx, shrinkx");
 		
-		hySP.setPreferredSize(new Dimension(400, 400));
+		hySP.setPreferredSize(new Dimension(200, 200));
 		
-		hyLabel1.setMinimumSize(new Dimension(100,25));
-		hyLabel2.setMinimumSize(new Dimension(100,25));
+//		hyLabel1.setMinimumSize(new Dimension(100,25));
+//		hyLabel2.setMinimumSize(new Dimension(100,25));
 		
 		hyButton1.setBackground(new Color(173,232,202));
 		hyButton2.setBackground(new Color(173,232,202));
@@ -79,9 +88,20 @@ public class HypothekFenster {
 		hyPanel3.setBorder(BorderFactory.createLineBorder(new Color(255,255,255), 3));
 		
 		hyPanel1.setOpaque(false);
-		hypothek.setBackground(new Color(0,0,0));
+		setBackground(new Color(0,0,0));
 		
-		hypothek.setSize(600, 600);
-		hypothek.setVisible(true);
+		//setVisible(true);
+	}
+	
+	public JButton getHyButton1(){
+		return hyButton1;
+	}
+	
+	public JButton getHyButton2(){
+		return hyButton2;
+	}
+	
+	public JList getHyListe(){
+		return hyListe;
 	}
 }

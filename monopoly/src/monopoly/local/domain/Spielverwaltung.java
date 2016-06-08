@@ -198,9 +198,6 @@ public class Spielverwaltung {
 	/**
 	 * 
 	 * @return: gibt das Spielfeld zur�ck
-=======
-	 * @return: gibt das Spielfeld zur�ck
->>>>>>> Stashed changes
 	 */
 	public Feld[] getSpielfeld(){
 		return feld.getSpielfeld();

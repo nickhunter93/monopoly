@@ -11,11 +11,14 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import monopoly.local.domain.Monopoly;
+import monopoly.local.valueobjects.Spieler;
 import net.miginfocom.swing.MigLayout;
 
 public class Spielfenster {
@@ -25,6 +28,8 @@ public class Spielfenster {
 	private SpielPanel sP;
 	private SInfoPanel sIP;
 	private Monopoly monopoly;
+	private HausFenster haFenster;
+	private HypothekFenster hyFenster; 
 	
 	public Spielfenster(Monopoly monopoly){
 		this.monopoly = monopoly;
@@ -35,47 +40,114 @@ public class Spielfenster {
 		spiel = new JFrame("Monopoly");
 		sP = new SpielPanel();
 		sBP = new SButtonPanel();
-		sBP.getButton2().addActionListener(new SButtonListener(spiel));
 		sIP = new SInfoPanel();
+		haFenster = new HausFenster(monopoly);
+		hyFenster = new HypothekFenster(monopoly);
 		spiel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		spiel.setLayout(new MigLayout("debug", "[]10[]", "[]10[]"));
+		spiel.setLayout(new MigLayout("", "[]10[]", "[]10[]"));
 		
-		spiel.add(sP, "cell 0 0, w 600, h 600");
-		spiel.add(sBP, "cell 1 0, pushx, growx, shrinkx ");
+		spiel.add(sP, "cell 0 0, w 600, h 600, push, grow, shrink ");
+		spiel.add(sBP, "cell 1 0, push, grow, shrink");
 		spiel.add(sIP, "cell 0 1, span 2, pushx, growx, shrinkx");
 		
 		spiel.getContentPane().setBackground(new Color(0,0,0));
 		
 		spiel.setSize(600, 600);
 		spiel.setVisible(true);
-	}
-	
-//	public class ListenModell extends DefaultTableModel{
-//	public ListenModell(){
-//		super();
-//		
-//		spalten = new Vector<String>();
-//		spalten.add("Strassennummer");
-//		spalten.add("Strassenname");
-//		spalten.add("H�useranzahl");
-//		this.columnIdentifiers = spalten;
-//	}
-//	
-//}
-	public class SButtonListener implements ActionListener{
-		private JFrame spiel;
-		public SButtonListener(JFrame spiel){
-			this.spiel = spiel;
-		}
 		
-		public void actionPerformed(ActionEvent e){
-			spiel.remove(sBP);
-			HausFenster haFenster = new HausFenster();
-			spiel.add(haFenster, "cell 1 0, push, grow, shrink");
-			spiel.revalidate();
-		   }
+		//Info-TextArea mit sich anpassenden Infos... wie macht man das
 		
+		sBP.getButton1().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				int zugweite = monopoly.wuerfel();
+				Spieler spieler = monopoly.getTurn().getWerIstDran();
+				monopoly.move(spieler, zugweite);
+				JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
+			}
+		});
+		
+		sBP.getButton2().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				spiel.remove(sBP);
+				spiel.add(haFenster, "cell 1 0, push, grow, shrink");
+				spiel.repaint();
+				spiel.revalidate();
+			}
+		});
+		sBP.getButton3().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				spiel.remove(sBP);
+				spiel.add(hyFenster, "cell 1 0, push, grow, shrink");
+				spiel.repaint();
+				spiel.revalidate();
+			}
+		});
+		
+		sBP.getButton4().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				//monopoly.saveAll();
+				JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
+			}
+		});
+		
+		haFenster.getHaButton().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				Spieler spieler = monopoly.getTurn().getWerIstDran();
+				int position = spieler.getSpielerPosition().getNummer();
+				if(!haFenster.getHaListe().isSelectionEmpty()){
+					monopoly.bauHaus(position, spieler);
+					JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
+					spiel.remove(haFenster);
+					spiel.add(sBP, "cell 1 0, push, grow, shrink");
+					spiel.repaint();
+					spiel.revalidate();
+				}
+				else{
+					spiel.remove(haFenster);
+					spiel.add(sBP, "cell 1 0, push, grow, shrink");
+					spiel.repaint();
+					spiel.revalidate();
+				}
+			}
+		});
+		
+		hyFenster.getHyButton1().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				//if hypothek == false -->if(monopoly.getHypothek == false){
+				//}
+				Spieler spieler = monopoly.getTurn().getWerIstDran();
+				int position = spieler.getSpielerPosition().getNummer();
+				if(! hyFenster.getHyListe().isSelectionEmpty()){
+					monopoly.switchHypothek(position);
+					spiel.remove(hyFenster);
+					spiel.add(sBP, "cell 1 0, push, grow, shrink");
+					spiel.repaint();
+					spiel.revalidate();
+					JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
+				}
+				else{
+					spiel.remove(hyFenster);
+					spiel.add(sBP, "cell 1 0, push, grow, shrink");
+					spiel.repaint();
+					spiel.revalidate();
+				}
+			}
+		});
+		
+		hyFenster.getHyButton2().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				//if hypothek == true --> if(monopoly.getHypothek == true){
+				//monopoly.switchHypothek(position);}
+				spiel.remove(hyFenster);
+				spiel.add(sBP, "cell 1 0, push, grow, shrink");
+				spiel.repaint();
+				spiel.revalidate();
+				JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
+			}
+		});
 	}
 }
+
+
 
 

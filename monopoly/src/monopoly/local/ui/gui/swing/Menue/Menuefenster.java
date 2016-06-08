@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -59,9 +60,15 @@ public class Menuefenster {
 		
 		hauptPanel.getmButton2().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				if(monopoly.getAllSpieler().size() < 2){
+					JOptionPane fehler =  new JOptionPane();
+					fehler.showMessageDialog(menue, "Es werden mindestens zwei Spieler benötigt");
+					return;
+				}
 				Spielfenster spFenster = new Spielfenster(monopoly);
 				spFenster.sInit();
 				menue.dispose();
+				
 			}
 		});
 		

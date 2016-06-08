@@ -23,7 +23,7 @@ public class MenueBeitreten {
 	
 	public MenueBeitreten(){
 		//Menue	
-		MigLayout mLayout = new MigLayout("debug", "[]20[]20[]", "[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]");
+		MigLayout mLayout = new MigLayout("", "[]20[]20[]", "[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]");
 		mFont = new Font("Berlin Sans FB",Font.ITALIC,20);
 		
 		mTextField = new JTextField("Spielername");

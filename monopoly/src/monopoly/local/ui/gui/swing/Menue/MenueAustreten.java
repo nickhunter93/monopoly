@@ -5,11 +5,13 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -23,6 +25,7 @@ public class MenueAustreten{
 	private JButton mButton;
 	private MenuePanel mPanel;
 	private JList<String> liste;
+	private JScrollPane mSP;
 	
 	public MenueAustreten(Monopoly monopoly){
 		//Menue	
@@ -40,11 +43,12 @@ public class MenueAustreten{
 		liste = new JList<String>(str);
 		mButton = new JButton("Bestätigen");
 		mPanel = new MenuePanel(600,600);
+		mSP = new JScrollPane(liste);
 		
 		mPanel.setLayout(mLayout);
-		mPanel.add(liste,"w 425, h 50, cell 2 20, pushx, growx");
+		mPanel.add(mSP,"w 425, h 50, cell 2 20, pushx, growx, flowy, top");
 		mPanel.add(new JLabel(""), "w 25");
-		mPanel.add(mButton,"w 425, h 50, cell 2 20, pushx, growx");
+		mPanel.add(mButton,"w 425, h 50, cell 3 20, pushx, growx");
 		mPanel.add(new JLabel(""), "w 25");
 		
 		mButton.setToolTipText("Du tritts aus einem Spiel aus");

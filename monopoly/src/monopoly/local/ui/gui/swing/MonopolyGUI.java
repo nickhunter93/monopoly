@@ -24,12 +24,6 @@ public class MonopolyGUI {
 	 */
 	private void initialize(){
 		mFenster = new Menuefenster();
-//		spFenster = new Spielfenster();
-//		haFenster = new HausFenster();
-//		hyFenster = new HypothekFenster();
-		
-		//mFenster.mInit();
-
 	}
 	
 	/**

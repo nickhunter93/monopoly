@@ -4,7 +4,12 @@ import monopoly.local.domain.Spielerverwaltung;
 
 public class Birthday extends Aktion {
 
-	
+	/**
+	 * Konstruktor der Klasse 
+	 * @param spieler
+	 * @param spielfeld
+	 * @param spielerverwaltung
+	 */
 	public Birthday(Spieler spieler, Spielfeld spielfeld, Spielerverwaltung spielerverwaltung) {
 		super(spieler, spielfeld, spielerverwaltung);
 		// TODO Auto-generated constructor stub

@@ -22,6 +22,7 @@ public class Monopoly {
 		this.spieler = new Spielerverwaltung();
 		this.logik = new Spielverwaltung(spieler);
 		pmLaden = new PersistenzLaden();
+		pmSpeichern = new PersistenzSpeichern();
 	}
 	
 	public void move(Spieler spieler,int zugweite){
@@ -129,4 +130,13 @@ public class Monopoly {
 	Vector<String> savefiles = pmLaden.loadSaveFiles();
 	return savefiles;	
 	}
+	
+	public void saveAll(){
+		String datei = "";
+		pmSpeichern.saveAll(spieler.getAllSpieler(), logik.getSpielfeld(), logik.getTurn(),datei );
+	}
+	
+	//public boolean getHypothek(){
+	//return logik.getHypothek();
+	//}
 }

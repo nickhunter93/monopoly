@@ -16,7 +16,7 @@ public class SInfoPanel extends JPanel{
 	private MigLayout p2Layout;
 	
 	public SInfoPanel(){
-		p2Layout = new MigLayout("debug", "[]", "[]");
+		p2Layout = new MigLayout("", "[]", "[]");
 		sFont2 = new Font("Berlin Sans FB Demi",Font.PLAIN,14);
 		sTextArea = new JTextArea(25,6);
 		JScrollPane sP = new JScrollPane(sTextArea);
@@ -25,7 +25,8 @@ public class SInfoPanel extends JPanel{
 		
 		add(sP, "push, grow, shrink");
 		
-		sTextArea.setText("Wuhuuuuu geschafft. :)");
+		sTextArea.setText("Dich muss ich bestimmt iwie aendern können..."
+				+ "                Wir sollten nicht vergessen (wieder) einzubauen das man nicht mit null Spielern ein Spiel anfangen kann");
 		sTextArea.setEditable(false);
 		sTextArea.setAutoscrolls(true);
 		sTextArea.setLineWrap(true);
@@ -38,4 +39,7 @@ public class SInfoPanel extends JPanel{
 		setOpaque(false);
 	}
 
+	public JTextArea getSTextArea(){
+		return sTextArea;
+	}
 }

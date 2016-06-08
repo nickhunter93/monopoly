@@ -14,12 +14,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import monopoly.local.domain.Monopoly;
+import monopoly.local.valueobjects.Spieler;
+import monopoly.local.valueobjects.Strasse;
 import net.miginfocom.swing.MigLayout;
 
 public class HausFenster extends JPanel {
 	//Variablen fï¿½r das "Haus bauen"-Fenster
 	private JPanel haBauen;
-	private JPanel haPanel;
+	private JPanel haPanel1;
 	private JPanel haPanel2;
 	private JPanel haPanel3;
 	private JLabel haLabel;
@@ -28,35 +31,42 @@ public class HausFenster extends JPanel {
 	private JList<String> liste;
 	private JScrollPane haSP;
 	private Vector<String> spalten;
+	private Monopoly monopoly;
 	
-	public HausFenster(){
+	public HausFenster(Monopoly monopoly){
 		haBauen = new JPanel();
-
+		this.monopoly = monopoly;
+		monopoly.TurnIni(true);
 		
-		MigLayout haLayout = new MigLayout("debug", "[]", "[]10[]");
-		MigLayout haLayout3 = new MigLayout("debug", "[]10[]10[]", "[]");
+		MigLayout haLayout = new MigLayout("", "[]", "[]10[]");
+		MigLayout haLayout3 = new MigLayout("", "[]10[]10[]", "[]");
 		
 		Font haFont1 = new Font("Berlin Sans FB",Font.ITALIC,14);
 		Font haFont2 = new Font("Berlin Sans FB Demi",Font.PLAIN,14);
 		
-		haPanel = new JPanel();
+		haPanel1 = new JPanel();
 		haPanel2 = new JPanel();
 		haPanel3 = new JPanel();
-		String Inhalt[] = {"Hier", "kommt", "die", "Liste", "mit", "den", "Straï¿½en", "hin", ".", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"};
-		liste  = new JList(Inhalt);
+		Spieler spieler = monopoly.getTurn().getWerIstDran();
+		String inhalt[] = {};
+		if(monopoly.getYourStreets(spieler) != null){
+			for(int i = 0; i <= monopoly.getYourStreets(spieler).length; i++){
+				inhalt[i] = monopoly.getFeldName(i);
+			}
+		}
+		liste  = new JList(inhalt);
 		haSP = new JScrollPane(liste);
 		haLabel = new JLabel("Häuseranzahl: ");
 		haHausAnz = new JTextField();
 		haButton = new JButton("bauen");
 		
-		haPanel.setLayout(haLayout);
+		haPanel1.setLayout(haLayout);
 		haPanel3.setLayout(haLayout3);
 		
-		add(haPanel);
-//		haBauen.add(haPanel);
-		haPanel.add(haPanel2, "cell 0 0, push, grow, shrink");
-		haPanel.add(haPanel3, "cell 0 1, pushx, growx, shrinkx");
-		haPanel2.add(haSP);
+		add(haPanel1);
+		haPanel1.add(haPanel2, "cell 0 0, push, grow, shrink");
+		haPanel1.add(haPanel3, "cell 0 1, pushx, growx, shrinkx");
+		haPanel2.add(haSP,"push, grow, shrink");
 		haPanel3.add(haLabel, "cell 0 0, pushx, growx, shrinkx");
 		haPanel3.add(haHausAnz, "cell 1 0,w 50, pushx, growx, shrinkx");
 		haPanel3.add(haButton, "cell 2 0, pushx, growx, shrinkx");
@@ -75,13 +85,22 @@ public class HausFenster extends JPanel {
 		haPanel3.setBackground(new Color(255,155,55));
 		haButton.setBackground(new Color(173,232,202));
 		
-		haPanel.setOpaque(false);
-		haBauen.setBackground(new Color(0,0,0));
-
-	}
-
-	public void haInit(){
-		//Pop-Up-Fenster Haus bauen
+		haPanel1.setOpaque(false);
+		setBackground(new Color(0,0,0));
 		
+
 	}
+	
+	public JButton getHaButton(){
+		return haButton;
+	}
+	
+	public JTextField getHaHausAnz(){
+		return haHausAnz;
+	}
+	
+	public JList getHaListe(){
+		return liste;
+	}
+	
 }
