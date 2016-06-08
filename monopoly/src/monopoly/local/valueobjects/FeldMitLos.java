@@ -19,6 +19,15 @@ public class FeldMitLos implements Aktion {
 			spieler.setSpielerBudget(spieler.getSpielerBudget() + 4000);
 		}
 	}
+	
+
+	public void setSpieler(Spieler spieler) {
+		this.spieler = spieler;
+	}
+
+	public Spieler getSpieler() {
+		return spieler;
+	}
 
 }
 

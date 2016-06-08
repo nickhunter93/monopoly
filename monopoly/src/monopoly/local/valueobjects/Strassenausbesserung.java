@@ -25,4 +25,13 @@ public class Strassenausbesserung implements Aktion{
 			}
 		}
 	}
+	
+
+	public void setSpieler(Spieler spieler) {
+		this.spieler = spieler;
+	}
+	
+	public Spieler getSpieler() {
+		return spieler;
+	}
 }

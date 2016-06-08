@@ -5,12 +5,12 @@ import java.util.Vector;
 import monopoly.local.domain.Monopoly;
 
 
-public class Gemeinschaftskarte extends Deck {
+public class Gemeinschaftskarten extends Deck {
 	
 private Vector<Aktion> deck;
 private Monopoly monopoly;
 	
-	public Gemeinschaftskarte(Monopoly monopoly){
+	public Gemeinschaftskarten(Monopoly monopoly){
 		this.monopoly = monopoly;
 	}
 

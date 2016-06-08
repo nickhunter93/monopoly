@@ -17,4 +17,12 @@ public class FeldOhneLos implements Aktion {
 //		ereignis.aufFeldOhneLos(spieler, spielfeld.getSpielfeld()[7]);		
 	}
 
+
+	public void setSpieler(Spieler spieler) {
+		this.spieler = spieler;
+	}
+	
+	public Spieler getSpieler() {
+		return spieler;
+	}
 }

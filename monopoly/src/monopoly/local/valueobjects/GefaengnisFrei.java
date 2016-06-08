@@ -16,5 +16,14 @@ public class GefaengnisFrei implements Aktion {
 //		ereignis.gefaengnisfrei(spieler);
 		jail.release(spieler);
 	}
+	
+
+	public void setSpieler(Spieler spieler) {
+		this.spieler = spieler;
+	}
+	
+	public Spieler getSpieler() {
+		return spieler;
+	}
 
 }

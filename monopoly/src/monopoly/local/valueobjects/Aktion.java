@@ -7,6 +7,6 @@ public interface Aktion {
 	
 	public void setSpieler(Spieler spieler);
 	
-	
+	public Spieler getSpieler();
 
 }

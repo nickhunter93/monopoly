@@ -24,5 +24,14 @@ public class Zahlung implements Aktion {
 		betrag = spieler.getSpielerBudget() + betrag;
 		spieler.setSpielerBudget(betrag);
 	}
+	
+
+	public void setSpieler(Spieler spieler) {
+		this.spieler = spieler;
+	}
+	
+	public Spieler getSpieler() {
+		return spieler;
+	}
 
 }

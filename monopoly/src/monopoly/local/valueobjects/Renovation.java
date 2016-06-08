@@ -30,5 +30,9 @@ public class Renovation implements Aktion {
 		// TODO Auto-generated method stub
 		this.spieler = spieler;	
 	}
+	
+	public Spieler getSpieler() {
+		return spieler;
+	}
 
 }
