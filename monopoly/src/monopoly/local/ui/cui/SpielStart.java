@@ -10,6 +10,10 @@ import monopoly.local.domain.Spielerverwaltung;
 import monopoly.local.domain.Spielverwaltung;
 import monopoly.local.domain.Spielverwaltung.Phase;
 import monopoly.local.domain.Spielverwaltung.Turn;
+import monopoly.local.persistenz.Ereignisfeld;
+import monopoly.local.persistenz.Gemeinschaftsfeld;
+import monopoly.local.domain.exceptions.GehaltException;
+import monopoly.local.domain.exceptions.HausbauException;
 import monopoly.local.persistenz.PersistenzSpeichern;
 import monopoly.local.valueobjects.Feld;
 import monopoly.local.valueobjects.Jail;
@@ -123,8 +127,7 @@ public class SpielStart {
 					case 1: // pruefe ob im Gefaengnis
 
 						int anzahl = monopoly.wuerfel();
-						wuerfelAnzeigen(anzahl);
-						monopoly.move(spieler, 20);
+						wuerfelAnzeigen(anzahl);						monopoly.move(spieler, anzahl);
 						showFeld(monopoly.getSpielfeld(), monopoly.getAllSpieler());
 						System.out.println("Sie befinden sich auf der Straße : " + monopoly.getStrasseName(spieler));
 
@@ -138,6 +141,10 @@ public class SpielStart {
 						}
 						if(aktuellerTurn.getPhase() == Phase.End && spieler.getSpielerPosition() instanceof Jail){
 							System.out.println("Sie sind nun im Gefängnis");
+						} else if(aktuellerTurn.getPhase() == Phase.End && spieler.getSpielerPosition() instanceof Ereignisfeld){
+							System.out.println("Sie sind auf einem Ereignisfeld");
+						}else if(aktuellerTurn.getPhase() == Phase.End && spieler.getSpielerPosition() instanceof Gemeinschaftsfeld){
+							System.out.println("Sie sind auf einem Gemeinschaftsfeld");
 						}
 						roundLoop = false;
 
@@ -175,11 +182,14 @@ public class SpielStart {
 									}
 								}
 
-								if (pruefen
-										&& (monopoly.getHaeuseranzahl(spieler.getSpielerPosition().getNummer()) < 5)) {
-									if (monopoly.bauHaus(auswahl, spieler)) {
+								if (pruefen) {
+									try{
+										monopoly.bauHaus(auswahl, spieler); 
 										System.out.println("Das Haus wurde erfolgreich gebaut.");
+									}catch(HausbauException e){
+										System.out.println(e.getMessage());
 									}
+									
 								}
 
 								else if (pruefen == false) {
@@ -235,8 +245,13 @@ public class SpielStart {
 									}
 								}
 								if (pruefen) {
-									String str = monopoly.switchHypothek(auswahl);
-									System.out.println(str);
+									String str;
+									try {
+										str = monopoly.switchHypothek(auswahl);
+										System.out.println(str);
+									} catch (GehaltException e) {
+										System.out.println(e.getMessage());
+									}
 								} else {
 									System.out.println("Die Strasse existiert nicht oder Sie sind nicht ihr Besitzer.");
 								}
@@ -299,8 +314,12 @@ public class SpielStart {
 							e.printStackTrace();
 						}
 						if (check == 'y' || check == 'Y' || check == 'j' || check == 'J') {
-							System.out.println(
-									monopoly.kaufStrasse(spieler) ? "Kauf erfolgreich" : "Kauf fehlgeschlagen");
+							try {
+								monopoly.kaufStrasse(spieler);
+								System.out.println("Kauf erfolgreich.");
+							} catch (GehaltException e) {
+								System.out.println(e.getMessage());
+							}
 							System.out.println("Kosten: -" + monopoly.preis(spieler));
 							System.out.println(
 									spieler.getSpielerName() + " ihr Budget beträgt : " + spieler.getSpielerBudget());
@@ -398,10 +417,12 @@ public class SpielStart {
 									}
 								}
 
-								if (pruefen
-										&& (monopoly.getHaeuseranzahl(spieler.getSpielerPosition().getNummer()) < 5)) {
-									if (monopoly.bauHaus(auswahl, spieler)) {
+								if (pruefen) {
+									try{
+										monopoly.bauHaus(auswahl, spieler);
 										System.out.println("Das Haus wurde erfolgreich gebaut.");
+									}catch(HausbauException e){
+										System.out.println(e.getMessage());
 									}
 								}
 
@@ -458,8 +479,13 @@ public class SpielStart {
 									}
 								}
 								if (pruefen) {
-									String str = monopoly.switchHypothek(auswahl);
-									System.out.println(str);
+									String str;
+									try {
+										str = monopoly.switchHypothek(auswahl);
+										System.out.println(str);
+									} catch (GehaltException e) {
+										System.out.println(e.getMessage());
+									}
 								} else {
 									System.out.println("Die Strasse existiert nicht oder Sie sind nicht ihr Besitzer.");
 								}

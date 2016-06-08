@@ -144,6 +144,10 @@ public class PersistenzLaden {
 				}
 			}else if(str.equals("Gehe ins Gefängnis")){
 				laden.readLine();
+			}else if(str.equals("Ereignisfeld")){
+				laden.readLine();
+			}else if(str.equals("Gemeinschaftsfeld")){
+				laden.readLine();
 			}else{
 				int hausanzahl = Integer.parseInt(laden.readLine());
 				boolean hypothek = laden.readLine().equals("w") ? true : false;
@@ -195,6 +199,20 @@ public class PersistenzLaden {
 				int jailNumber = Integer.parseInt(laden.readLine());
 				feld[i] = new ToJail(str,i,(Jail)feld[jailNumber]);
 				laden.readLine();
+			}else if(str.equals("Ereignisfeld")){
+				laden.readLine();
+				feld[i] = new Ereignisfeld(str,i);
+				Ereignisfeld ereignis = ((Ereignisfeld)feld[i]);
+				laden.readLine();
+				
+				
+			}else if(str.equals("Gemeinschaftsfeld")){
+				laden.readLine();
+				feld[i] = new Gemeinschaftsfeld(str,i);
+				Gemeinschaftsfeld gemeinschaft = ((Gemeinschaftsfeld)feld[i]);
+				laden.readLine();
+				
+				
 			}else{
 				
 				laden.readLine();

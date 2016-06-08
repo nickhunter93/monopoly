@@ -10,13 +10,18 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+<<<<<<< HEAD
 import monopoly.local.domain.Monopoly;
 import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Strasse;
+=======
+import monopoly.local.domain.exceptions.HausbauException;
+>>>>>>> origin/master
 import net.miginfocom.swing.MigLayout;
 
 public class HausFenster extends JPanel {
@@ -38,8 +43,21 @@ public class HausFenster extends JPanel {
 		this.monopoly = monopoly;
 		monopoly.TurnIni(true);
 		
+<<<<<<< HEAD
 		MigLayout haLayout = new MigLayout("", "[]", "[]10[]");
 		MigLayout haLayout3 = new MigLayout("", "[]10[]10[]", "[]");
+=======
+		// irgendwo
+		try {
+			monopoly.hausBauen(spieler, feld);
+		} catch (HausbauException hbe) {
+			JOptionPane.showMessageDialog(this, hbe.getMessage(), "Pfusch am Bau!", JOptionPane.WARNING_MESSAGE, 0);
+		}
+		
+		
+		MigLayout haLayout = new MigLayout("debug", "[]", "[]10[]");
+		MigLayout haLayout3 = new MigLayout("debug", "[]10[]10[]", "[]");
+>>>>>>> origin/master
 		
 		Font haFont1 = new Font("Berlin Sans FB",Font.ITALIC,14);
 		Font haFont2 = new Font("Berlin Sans FB Demi",Font.PLAIN,14);
@@ -56,7 +74,7 @@ public class HausFenster extends JPanel {
 		}
 		liste  = new JList(inhalt);
 		haSP = new JScrollPane(liste);
-		haLabel = new JLabel("Häuseranzahl: ");
+		haLabel = new JLabel("Hï¿½useranzahl: ");
 		haHausAnz = new JTextField();
 		haButton = new JButton("bauen");
 		

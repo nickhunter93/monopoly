@@ -1,5 +1,7 @@
 package monopoly.local.valueobjects;
 
+import monopoly.local.domain.exceptions.HausbauException;
+
 public class Strasse extends Feld {
 	
 	private int kaufpreis, mietpreis, haeuseranzahl,hauspreis;
@@ -34,57 +36,6 @@ public class Strasse extends Feld {
 	
 	public void setHypothek(boolean hypothek){
 		this.hypothek = hypothek;
-	}
-	
-	/**
-	 * setzt den Wert der Hypothek neu wenn sie aufgenommen oder bezahlt wurde
-	 * gibt einen String mit entsprechendem Text zur�ck 
-	 */
-	public String switchHypothek(){
-		int budget = besitzer.getSpielerBudget();
-		int wert = kaufpreis / 2;
-		if(!hypothek){
-			budget = budget + wert;
-			besitzer.setSpielerBudget(budget);
-			this.hypothek = true;
-			return "Hypothek im Wert von " + wert + " auf Straße " + getName() + " wurde aufgenommen.";
-		}else{
-			if(budget - wert >= 0){
-				budget = budget - wert;
-				besitzer.setSpielerBudget(budget);
-				this.hypothek = false;
-				return "Hypothek wurde bezahlt.";
-			}else{
-				return "Hypothek konnte nicht bezahlt werden.";
-			}
-		}
-	}
-
-	/**
-	 * baut ein Haus auf der Stra�e wenn der Spieler ausreichend Geld besitzt 
-	 * und es noch m�glich ist H�user zu bauen
-	 */
-	public boolean bauHaus(Spieler spieler){
-		int budget = spieler.getSpielerBudget();
-		if(haeuseranzahl < 4){
-			haeuseranzahl++;
-			if(haeuseranzahl < 4){
-				if(budget-hauspreis >= 0){
-					spieler.setSpielerBudget(budget-hauspreis);
-				}else {
-					return false;
-				}
-			}else{
-				if((budget - (2*hauspreis)) >= 0){
-					spieler.setSpielerBudget(budget-(2*hauspreis));
-				}else {
-					return false;
-				}
-			}
-			return true;
-		} else{
-			return false;
-		}
 	}
 	
 	/** 

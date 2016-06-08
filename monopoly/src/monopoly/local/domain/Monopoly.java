@@ -3,11 +3,15 @@ package monopoly.local.domain;
 import java.util.Vector;
 
 import monopoly.local.domain.Spielverwaltung.Turn;
+import monopoly.local.domain.exceptions.GehaltException;
+import monopoly.local.domain.exceptions.HausbauException;
 import monopoly.local.persistenz.PersistenzLaden;
 import monopoly.local.persistenz.PersistenzSpeichern;
 import monopoly.local.ui.cui.SpielStart;
 import monopoly.local.valueobjects.Feld;
+import monopoly.local.valueobjects.Jail;
 import monopoly.local.valueobjects.Spieler;
+import monopoly.local.valueobjects.Spielfeld;
 import monopoly.local.valueobjects.Strasse;
 
 public class Monopoly {
@@ -65,11 +69,11 @@ public class Monopoly {
 		return logik.getHaeuseranzahl(position);
 	}
 	
-	public boolean bauHaus(int position,Spieler spieler){
-		return logik.bauHaus(position, spieler);
+	public void bauHaus(int position,Spieler spieler) throws HausbauException{
+		logik.bauHaus(position, spieler);
 	}
 	
-	public String switchHypothek(int position){
+	public String switchHypothek(int position)throws GehaltException{
 		return logik.switchHypothek(position);
 	}
 	
@@ -89,8 +93,8 @@ public class Monopoly {
 		spieler.mieteZahlen(miete, besitzer, mieter);
 	}
 
-	public boolean kaufStrasse(Spieler kaeufer) {
-		return logik.kaufStrasse(kaeufer);
+	public void kaufStrasse(Spieler kaeufer)throws GehaltException {
+		logik.kaufStrasse(kaeufer);
 	}
 
 	public int preis(Spieler spieler2) {
@@ -110,6 +114,11 @@ public class Monopoly {
 		return logik.getLos();
 	}
 
+	public Jail getJail(){
+		return (Jail)logik.getJail();
+	}
+	
+	
 	public boolean beitreten(Spieler player) {
 		return spieler.beitreten(player);
 	}

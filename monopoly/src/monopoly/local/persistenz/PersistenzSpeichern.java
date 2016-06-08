@@ -98,7 +98,7 @@ public class PersistenzSpeichern {
 	}
 
 	public void saveDefaultFeld(Feld[] spielfeld) throws IOException{
-		speicher = new BufferedWriter(new FileWriter(filename+"Feld.txt"));
+		speicher = new BufferedWriter(new FileWriter("defaultFeld.txt"));
 		speicher.newLine();
 		for(Feld feld:spielfeld){
 			if(feld instanceof Strasse){
@@ -111,13 +111,34 @@ public class PersistenzSpeichern {
 				speicher.newLine();
 				speicher.write(strasse.getMietpreis()+"");
 				speicher.newLine();
-				speicher.write(strasse.getHaeuseranzahl()+"");
+				speicher.write(0+"");
 				speicher.newLine();
 				speicher.write(strasse.getHypothek() ? "w":"f");
 				speicher.newLine();
 				speicher.write(strasse.getHauspreis()+"");
 				speicher.newLine();
-				speicher.write(strasse.getBesitzer().getSpielerNummer()+"");
+				speicher.write(99+"");
+				speicher.newLine();
+				speicher.newLine();
+			}
+			if(feld instanceof Ereignisfeld){
+				Ereignisfeld ereignisfeld = (Ereignisfeld)feld;
+				speicher.write(ereignisfeld.getName());
+				speicher.newLine();
+
+				speicher.write(ereignisfeld.getNummer());
+				
+				speicher.newLine();
+				speicher.newLine();
+			}
+			
+			if(feld instanceof Gemeinschaftsfeld){
+				Gemeinschaftsfeld gemeinschaftsfeld = (Gemeinschaftsfeld)feld;
+				speicher.write(gemeinschaftsfeld.getName());
+				speicher.newLine();
+
+				speicher.write(gemeinschaftsfeld.getNummer());
+				
 				speicher.newLine();
 				speicher.newLine();
 			}
@@ -144,7 +165,7 @@ public class PersistenzSpeichern {
 	}
 	
 	public void saveFeld(Feld[] spielfeld) throws IOException{
-		speicher = new BufferedWriter(new FileWriter(filename+"saveFeld.txt"));
+		speicher = new BufferedWriter(new FileWriter(filename+"Feld.txt"));
 		speicher.newLine();
 		for(Feld feld:spielfeld){
 			if(feld instanceof Strasse){
@@ -159,6 +180,28 @@ public class PersistenzSpeichern {
 				speicher.newLine();
 				speicher.newLine();
 			}
+			if(feld instanceof Ereignisfeld){
+				Ereignisfeld ereignisfeld = (Ereignisfeld)feld;
+				speicher.write(ereignisfeld.getName());
+				speicher.newLine();
+
+				speicher.write(ereignisfeld.getNummer());
+				
+				speicher.newLine();
+				speicher.newLine();
+			}
+			
+			if(feld instanceof Gemeinschaftsfeld){
+				Gemeinschaftsfeld gemeinschaftsfeld = (Gemeinschaftsfeld)feld;
+				speicher.write(gemeinschaftsfeld.getName());
+				speicher.newLine();
+
+				speicher.write(gemeinschaftsfeld.getNummer());
+				
+				speicher.newLine();
+				speicher.newLine();
+			}
+			
 			if(feld instanceof Jail){
 				Jail jail = (Jail)feld;
 				speicher.write(jail.getName());
