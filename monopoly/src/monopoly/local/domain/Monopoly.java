@@ -3,6 +3,8 @@ package monopoly.local.domain;
 import java.util.Vector;
 
 import monopoly.local.domain.Spielverwaltung.Turn;
+import monopoly.local.domain.exceptions.GehaltException;
+import monopoly.local.domain.exceptions.HausbauException;
 import monopoly.local.persistenz.PersistenzLaden;
 import monopoly.local.persistenz.PersistenzSpeichern;
 import monopoly.local.ui.cui.SpielStart;
@@ -64,11 +66,11 @@ public class Monopoly {
 		return logik.getHaeuseranzahl(position);
 	}
 	
-	public boolean bauHaus(int position,Spieler spieler){
-		return logik.bauHaus(position, spieler);
+	public void bauHaus(int position,Spieler spieler) throws HausbauException{
+		logik.bauHaus(position, spieler);
 	}
 	
-	public String switchHypothek(int position){
+	public String switchHypothek(int position)throws GehaltException{
 		return logik.switchHypothek(position);
 	}
 	
@@ -88,8 +90,8 @@ public class Monopoly {
 		spieler.mieteZahlen(miete, besitzer, mieter);
 	}
 
-	public boolean kaufStrasse(Spieler kaeufer) {
-		return logik.kaufStrasse(kaeufer);
+	public void kaufStrasse(Spieler kaeufer)throws GehaltException {
+		logik.kaufStrasse(kaeufer);
 	}
 
 	public int preis(Spieler spieler2) {
