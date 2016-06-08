@@ -1,8 +1,4 @@
-package monopoly.local.persistenz;
-
-import monopoly.local.valueobjects.Gemeinschaftskarte;
-import monopoly.local.valueobjects.Feld;
-import monopoly.local.valueobjects.Spieler;
+package monopoly.local.valueobjects;
 
 public class Gemeinschaftsfeld extends Feld{
 

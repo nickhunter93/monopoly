@@ -10,12 +10,12 @@ import monopoly.local.domain.Spielerverwaltung;
 import monopoly.local.domain.Spielverwaltung;
 import monopoly.local.domain.Spielverwaltung.Phase;
 import monopoly.local.domain.Spielverwaltung.Turn;
-import monopoly.local.persistenz.Ereignisfeld;
-import monopoly.local.persistenz.Gemeinschaftsfeld;
 import monopoly.local.domain.exceptions.GehaltException;
 import monopoly.local.domain.exceptions.HausbauException;
 import monopoly.local.persistenz.PersistenzSpeichern;
+import monopoly.local.valueobjects.Ereignisfeld;
 import monopoly.local.valueobjects.Feld;
+import monopoly.local.valueobjects.Gemeinschaftsfeld;
 import monopoly.local.valueobjects.Jail;
 import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Strasse;
@@ -187,6 +187,8 @@ public class SpielStart {
 										monopoly.bauHaus(auswahl, spieler); 
 										System.out.println("Das Haus wurde erfolgreich gebaut.");
 									}catch(HausbauException e){
+										System.out.println(e.getMessage());
+									}catch(GehaltException e){
 										System.out.println(e.getMessage());
 									}
 									
@@ -422,6 +424,8 @@ public class SpielStart {
 										monopoly.bauHaus(auswahl, spieler);
 										System.out.println("Das Haus wurde erfolgreich gebaut.");
 									}catch(HausbauException e){
+										System.out.println(e.getMessage());
+									}catch(GehaltException e){
 										System.out.println(e.getMessage());
 									}
 								}

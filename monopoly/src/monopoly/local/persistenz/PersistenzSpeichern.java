@@ -10,7 +10,9 @@ import java.util.Vector;
 import com.sun.corba.se.impl.orbutil.ObjectWriter;
 
 import monopoly.local.domain.Spielverwaltung.Turn;
+import monopoly.local.valueobjects.Ereignisfeld;
 import monopoly.local.valueobjects.Feld;
+import monopoly.local.valueobjects.Gemeinschaftsfeld;
 import monopoly.local.valueobjects.Jail;
 import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Strasse;

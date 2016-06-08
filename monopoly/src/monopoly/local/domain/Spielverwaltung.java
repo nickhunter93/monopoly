@@ -1,11 +1,11 @@
 package monopoly.local.domain;
-import monopoly.local.persistenz.Ereignisfeld;
-import monopoly.local.persistenz.Gemeinschaftsfeld;
 import monopoly.local.valueobjects.Aktion;
+import monopoly.local.valueobjects.Ereignisfeld;
 import monopoly.local.valueobjects.Ereigniskarten;
 import monopoly.local.domain.exceptions.GehaltException;
 import monopoly.local.domain.exceptions.HausbauException;
 import monopoly.local.valueobjects.Feld;
+import monopoly.local.valueobjects.Gemeinschaftsfeld;
 import monopoly.local.valueobjects.Jail;
 import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Spielfeld;
@@ -269,8 +269,9 @@ public class Spielverwaltung {
 	 * @param position
 	 * @param player
 	 * @return: gibt das Feld mit dem dazu gebauten Haus zur�ck
+	 * @throws GehaltException 
 	 */
-	public void bauHaus(int position , Spieler spieler) throws HausbauException {
+	public void bauHaus(int position , Spieler spieler) throws HausbauException, GehaltException {
 		int budget = spieler.getSpielerBudget();
 		if(getSpielfeld()[position] instanceof Strasse){
 			Strasse strasse = (Strasse)getSpielfeld()[position];
@@ -280,7 +281,7 @@ public class Spielverwaltung {
 					if(budget-strasse.getHauspreis() >= 0){
 						spieler.setSpielerBudget(budget-strasse.getHauspreis());
 					}else {
-						throw new HausbauException(spieler, getSpielfeld()[position]);
+						throw new GehaltException(spieler);
 					}
 				}else{
 					if((budget - (2*strasse.getHauspreis())) >= 0){

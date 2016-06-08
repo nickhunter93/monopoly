@@ -1,8 +1,4 @@
-package monopoly.local.persistenz;
-
-import monopoly.local.valueobjects.Ereigniskarten;
-import monopoly.local.valueobjects.Feld;
-import monopoly.local.valueobjects.Spieler;
+package monopoly.local.valueobjects;
 
 public class Ereignisfeld extends Feld{
 	

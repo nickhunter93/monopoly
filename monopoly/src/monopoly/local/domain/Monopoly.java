@@ -69,7 +69,7 @@ public class Monopoly {
 		return logik.getHaeuseranzahl(position);
 	}
 	
-	public void bauHaus(int position,Spieler spieler) throws HausbauException{
+	public void bauHaus(int position,Spieler spieler) throws HausbauException, GehaltException{
 		logik.bauHaus(position, spieler);
 	}
 	
