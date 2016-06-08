@@ -62,6 +62,14 @@ public class Spielfeld {
 		return feld[0];
 	}
 	
+	public Feld getEreignisfeld(){
+		return feld[5];
+	}
+	
+	public Feld getGemeinschaftsfeld(){
+		return feld[18];
+	}
+	
 	/**
 	 * gibt das Gefaengnisfeld zurueck
 	 */

@@ -43,14 +43,8 @@ f
 250
 99
 
-Teststrasse
+Ereignisfeld
 5
-800
-480
-0
-f
-250
-99
 
 Teststrasse
 6

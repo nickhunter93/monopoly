@@ -1,18 +1,17 @@
 package monopoly.local.valueobjects;
 
-import monopoly.local.domain.Spielerverwaltung;
 
-public class FeldMitLos extends Aktion {
+public class FeldMitLos implements Aktion {
 	
 	private Feld target;
+	private Spieler spieler;
 
-	public FeldMitLos(Spieler spieler, Feld target, Spielfeld spielfeld, Spielerverwaltung spielerverwaltung) {
-		super(spieler, spielfeld, spielerverwaltung);
+	public FeldMitLos(Spieler spieler, Feld target) {
 		this.target = target;
+		this.spieler = spieler;
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public void ausfuehren() {
 		Feld current = spieler.getSpielerPosition();
 		spieler.setSpielerPosition(target);

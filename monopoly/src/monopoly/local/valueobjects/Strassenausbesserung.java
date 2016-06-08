@@ -1,23 +1,19 @@
 package monopoly.local.valueobjects;
 
-import monopoly.local.domain.Spielerverwaltung;
-import monopoly.local.domain.Spielverwaltung;
 
-public class Strassenausbesserung extends Aktion{
+public class Strassenausbesserung implements Aktion{
 
 	private Strasse[] yourStreets;
-	private Spielverwaltung feldverwaltung;
+	private Spieler spieler;
 
-	public Strassenausbesserung(Spieler spieler, Strasse[] yourStreets, Spielverwaltung feldverwaltung, Spielfeld spielfeld, Spielerverwaltung spielerverwaltung) {
-		super(spieler, spielfeld, spielerverwaltung);
-		this.feldverwaltung = feldverwaltung;
+	public Strassenausbesserung(Spieler spieler, Strasse[] yourStreets) {
 		this.yourStreets = yourStreets;
+		this.spieler = spieler;
 		// TODO Auto-generated constructor stub
 	}
 
 	
 	public void ausfuehren(){
-		yourStreets = feldverwaltung.getYourStreets(spieler);
 		int hausbetrag = 800;
 		int hotelbetrag = 2300;
 			

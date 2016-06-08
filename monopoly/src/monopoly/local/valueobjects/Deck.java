@@ -8,6 +8,6 @@ public abstract class Deck {
 	
 	public abstract void deckMischen();
 	
-	public abstract void karteZiehen(Spieler spieler);
+	public abstract Aktion karteZiehen(Spieler spieler);
 	
 }

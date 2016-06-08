@@ -10,6 +10,8 @@ import monopoly.local.domain.Spielerverwaltung;
 import monopoly.local.domain.Spielverwaltung;
 import monopoly.local.domain.Spielverwaltung.Phase;
 import monopoly.local.domain.Spielverwaltung.Turn;
+import monopoly.local.persistenz.Ereignisfeld;
+import monopoly.local.persistenz.Gemeinschaftsfeld;
 import monopoly.local.persistenz.PersistenzSpeichern;
 import monopoly.local.valueobjects.Feld;
 import monopoly.local.valueobjects.Jail;
@@ -124,7 +126,7 @@ public class SpielStart {
 
 						int anzahl = monopoly.wuerfel();
 						wuerfelAnzeigen(anzahl);
-						monopoly.move(spieler, 20);
+						monopoly.move(spieler, 5);
 						showFeld(monopoly.getSpielfeld(), monopoly.getAllSpieler());
 						System.out.println("Sie befinden sich auf der Straße : " + monopoly.getStrasseName(spieler));
 
@@ -138,6 +140,10 @@ public class SpielStart {
 						}
 						if(aktuellerTurn.getPhase() == Phase.End && spieler.getSpielerPosition() instanceof Jail){
 							System.out.println("Sie sind nun im Gefängnis");
+						} else if(aktuellerTurn.getPhase() == Phase.End && spieler.getSpielerPosition() instanceof Ereignisfeld){
+							System.out.println("Sie sind auf einem Ereignisfeld");
+						}else if(aktuellerTurn.getPhase() == Phase.End && spieler.getSpielerPosition() instanceof Gemeinschaftsfeld){
+							System.out.println("Sie sind auf einem Gemeinschaftsfeld");
 						}
 						roundLoop = false;
 

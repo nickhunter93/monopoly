@@ -7,7 +7,9 @@ import monopoly.local.persistenz.PersistenzLaden;
 import monopoly.local.persistenz.PersistenzSpeichern;
 import monopoly.local.ui.cui.SpielStart;
 import monopoly.local.valueobjects.Feld;
+import monopoly.local.valueobjects.Jail;
 import monopoly.local.valueobjects.Spieler;
+import monopoly.local.valueobjects.Spielfeld;
 import monopoly.local.valueobjects.Strasse;
 
 public class Monopoly {
@@ -109,6 +111,11 @@ public class Monopoly {
 		return logik.getLos();
 	}
 
+	public Jail getJail(){
+		return (Jail)logik.getJail();
+	}
+	
+	
 	public boolean beitreten(Spieler player) {
 		return spieler.beitreten(player);
 	}

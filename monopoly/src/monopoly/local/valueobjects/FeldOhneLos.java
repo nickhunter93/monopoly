@@ -1,18 +1,17 @@
 package monopoly.local.valueobjects;
 
-import monopoly.local.domain.Spielerverwaltung;
 
-public class FeldOhneLos extends Aktion {
+public class FeldOhneLos implements Aktion {
 
 	private Feld target;
+	private Spieler spieler;
 	
-	public FeldOhneLos(Spieler spieler, Feld target, Spielfeld spielfeld, Spielerverwaltung spielerverwaltung) {
-		super(spieler, spielfeld, spielerverwaltung);
+	public FeldOhneLos(Spieler spieler, Feld target) {
+		this.spieler = spieler;
 		this.target = target;
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public void ausfuehren() {
 		spieler.setSpielerPosition(target);
 //		ereignis.aufFeldOhneLos(spieler, spielfeld.getSpielfeld()[7]);		

@@ -121,6 +121,27 @@ public class PersistenzSpeichern {
 				speicher.newLine();
 				speicher.newLine();
 			}
+			if(feld instanceof Ereignisfeld){
+				Ereignisfeld ereignisfeld = (Ereignisfeld)feld;
+				speicher.write(ereignisfeld.getName());
+				speicher.newLine();
+
+				speicher.write(ereignisfeld.getNummer());
+				
+				speicher.newLine();
+				speicher.newLine();
+			}
+			
+			if(feld instanceof Gemeinschaftsfeld){
+				Gemeinschaftsfeld gemeinschaftsfeld = (Gemeinschaftsfeld)feld;
+				speicher.write(gemeinschaftsfeld.getName());
+				speicher.newLine();
+
+				speicher.write(gemeinschaftsfeld.getNummer());
+				
+				speicher.newLine();
+				speicher.newLine();
+			}
 			if(feld instanceof Jail){
 				Jail jail = (Jail)feld;
 				speicher.write(jail.getName());
@@ -159,6 +180,28 @@ public class PersistenzSpeichern {
 				speicher.newLine();
 				speicher.newLine();
 			}
+			if(feld instanceof Ereignisfeld){
+				Ereignisfeld ereignisfeld = (Ereignisfeld)feld;
+				speicher.write(ereignisfeld.getName());
+				speicher.newLine();
+
+				speicher.write(ereignisfeld.getNummer());
+				
+				speicher.newLine();
+				speicher.newLine();
+			}
+			
+			if(feld instanceof Gemeinschaftsfeld){
+				Gemeinschaftsfeld gemeinschaftsfeld = (Gemeinschaftsfeld)feld;
+				speicher.write(gemeinschaftsfeld.getName());
+				speicher.newLine();
+
+				speicher.write(gemeinschaftsfeld.getNummer());
+				
+				speicher.newLine();
+				speicher.newLine();
+			}
+			
 			if(feld instanceof Jail){
 				Jail jail = (Jail)feld;
 				speicher.write(jail.getName());

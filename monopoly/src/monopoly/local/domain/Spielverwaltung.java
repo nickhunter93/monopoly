@@ -1,4 +1,8 @@
 package monopoly.local.domain;
+import monopoly.local.persistenz.Ereignisfeld;
+import monopoly.local.persistenz.Gemeinschaftsfeld;
+import monopoly.local.valueobjects.Aktion;
+import monopoly.local.valueobjects.Ereigniskarten;
 import monopoly.local.valueobjects.Feld;
 import monopoly.local.valueobjects.Jail;
 import monopoly.local.valueobjects.Spieler;
@@ -9,7 +13,7 @@ import monopoly.local.valueobjects.ToJail;
 public class Spielverwaltung {
 	private Spielfeld feld;
 	private Spielerverwaltung spieler;
-	
+	private Ereigniskarten ereignisKarten;
 	private Turn aktuellerTurn;
 /*	
 	private Turn aktuellerTurn;
@@ -89,6 +93,9 @@ public class Spielverwaltung {
 		if(position instanceof ToJail){
 			besitzer = ((ToJail) position).getBesitzer();
 		}
+		if(position instanceof Ereignisfeld){
+			besitzer = ((Ereignisfeld) position).getBesitzer();
+		}
 		return besitzer;
 	}
 
@@ -120,6 +127,14 @@ public class Spielverwaltung {
 			ToJail toJail = (ToJail)position;
 			toJail.getToJail(spieler);
 			this.getTurn().phase = Phase.End;
+		}
+		if(position instanceof Ereignisfeld){
+			Ereignisfeld ereignisfeld = (Ereignisfeld)position;
+			ereignisfeld.getEreignis(spieler);
+		}
+		if(position instanceof Gemeinschaftsfeld){
+			Gemeinschaftsfeld gemeinschaftsfeld = (Gemeinschaftsfeld)position;
+			gemeinschaftsfeld.getEreignis(spieler);
 		}
 		return miete;
 	}
@@ -177,6 +192,10 @@ public class Spielverwaltung {
 	 */
 	public Feld getLos(){
 		return feld.getLos();
+	}
+	
+	public Feld getEreignisfeld(){
+		return feld.getEreignisfeld();
 	}
 	
 	/**
@@ -241,6 +260,16 @@ public class Spielverwaltung {
 	 */
 	public Strasse[] getYourStreets(Spieler spieler){
 		return feld.getYourStreets(spieler);
+	}
+	
+	public Spielfeld getSpielfeldObjekt(){
+		return feld;
+	}
+	
+	public void karteZiehen(Spieler wer) {
+		ereignisKarten.deckMischen();
+		Aktion aktion = ereignisKarten.karteZiehen(wer);
+		aktion.ausfuehren();
 	}
 	
 	/**

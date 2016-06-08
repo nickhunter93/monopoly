@@ -1,18 +1,17 @@
 package monopoly.local.valueobjects;
 
-import monopoly.local.domain.Spielerverwaltung;
 
-public class GefaengnisFrei extends Aktion {
+public class GefaengnisFrei implements Aktion {
 
 	private Jail jail;
+	private Spieler spieler;
 	
-	public GefaengnisFrei(Spieler spieler, Jail jail, Spielfeld spielfeld, Spielerverwaltung spielerverwaltung) {
-		super(spieler, spielfeld, spielerverwaltung);
+	public GefaengnisFrei(Spieler spieler, Jail jail) {
+		this.spieler = spieler;
 		this.jail = jail;
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public void ausfuehren() {
 //		ereignis.gefaengnisfrei(spieler);
 		jail.release(spieler);

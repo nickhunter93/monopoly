@@ -1,18 +1,20 @@
 package monopoly.local.valueobjects;
 
-import monopoly.local.domain.Spielerverwaltung;
+import java.util.Vector;
 
-public class Birthday extends Aktion {
-
+public class Birthday implements Aktion {
 	
-	public Birthday(Spieler spieler, Spielfeld spielfeld, Spielerverwaltung spielerverwaltung) {
-		super(spieler, spielfeld, spielerverwaltung);
+private Vector<Spieler> allSpieler;
+private Spieler spieler; 
+	
+	public Birthday(Spieler spieler, Vector<Spieler> allSpieler) {
+		this.spieler = spieler;
+		this.allSpieler = allSpieler;
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public void ausfuehren() {
-		for(Spieler s : spielerverwaltung.getAllSpieler()){
+		for(Spieler s : allSpieler){
 			if(s.getSpielerNummer() == spieler.getSpielerNummer()){
 				spieler.setSpielerBudget(spieler.getSpielerBudget());
 			} else {
