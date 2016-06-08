@@ -37,17 +37,6 @@ public class Spielfeld {
 		//feld[19] = new ToJail("Gehe ins Gefängnis",19,(Jail) feld[9]);
 	}
 	
-	/**
-	 * setzt den Wert der Hypothek an der Stelle Position.
-	 */
-	public String switchHypothek(int position){
-		if(feld[position] instanceof Strasse){
-			Strasse strasse = (Strasse)feld[position];
-			return strasse.switchHypothek();
-		}
-		return "Strasse nicht gefunden.";
-	}
-	
 	/** 
 	 * @return: gibt die Anzahl der Felder als int zur�ck 
 	 */
@@ -161,12 +150,7 @@ public class Spielfeld {
 	/**
 	 * baut ein Haus auf einer Stra�e  
 	 */
-	public boolean bauHaus(int position,Spieler spieler){
-		if(feld[position] instanceof Strasse){
-			return ((Strasse)feld[position]).bauHaus(spieler);
-		}
-		return false;
-	}
+	
 	
 	/**
 	 * @return gibt die H�useranzahl auf einer Stra�e als int zur�ck

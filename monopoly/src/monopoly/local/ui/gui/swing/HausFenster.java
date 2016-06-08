@@ -10,10 +10,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import monopoly.local.domain.exceptions.HausbauException;
 import net.miginfocom.swing.MigLayout;
 
 public class HausFenster extends JPanel {
@@ -33,6 +35,14 @@ public class HausFenster extends JPanel {
 		haBauen = new JPanel();
 
 		
+		// irgendwo
+		try {
+			monopoly.hausBauen(spieler, feld);
+		} catch (HausbauException hbe) {
+			JOptionPane.showMessageDialog(this, hbe.getMessage(), "Pfusch am Bau!", JOptionPane.WARNING_MESSAGE, 0);
+		}
+		
+		
 		MigLayout haLayout = new MigLayout("debug", "[]", "[]10[]");
 		MigLayout haLayout3 = new MigLayout("debug", "[]10[]10[]", "[]");
 		
@@ -45,7 +55,7 @@ public class HausFenster extends JPanel {
 		String Inhalt[] = {"Hier", "kommt", "die", "Liste", "mit", "den", "Straï¿½en", "hin", ".", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"};
 		liste  = new JList(Inhalt);
 		haSP = new JScrollPane(liste);
-		haLabel = new JLabel("Häuseranzahl: ");
+		haLabel = new JLabel("Hï¿½useranzahl: ");
 		haHausAnz = new JTextField();
 		haButton = new JButton("bauen");
 		

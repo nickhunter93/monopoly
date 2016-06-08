@@ -3,6 +3,8 @@ import monopoly.local.persistenz.Ereignisfeld;
 import monopoly.local.persistenz.Gemeinschaftsfeld;
 import monopoly.local.valueobjects.Aktion;
 import monopoly.local.valueobjects.Ereigniskarten;
+import monopoly.local.domain.exceptions.GehaltException;
+import monopoly.local.domain.exceptions.HausbauException;
 import monopoly.local.valueobjects.Feld;
 import monopoly.local.valueobjects.Jail;
 import monopoly.local.valueobjects.Spieler;
@@ -103,8 +105,29 @@ public class Spielverwaltung {
 	 * setzt den Wert der Hypothek einer Stra�e neu 
 	 * durch den Aufruf der switchHypthek-Funktion in der Klasse Spielfeld 
 	 */
-	public String switchHypothek(int position){
-		return feld.switchHypothek(position);
+	public String switchHypothek(int position) throws GehaltException{
+		if(feld.getSpielfeld()[position] instanceof Strasse){
+			Strasse strasse = (Strasse)feld.getSpielfeld()[position];
+			int budget = strasse.getBesitzer().getSpielerBudget();
+			int wert = strasse.getKaufpreis() / 2;
+			if(!strasse.getHypothek()){
+				budget = budget + wert;
+				strasse.getBesitzer().setSpielerBudget(budget);
+				strasse.setHypothek(true);
+				return "Hypothek im Wert von " + wert + " auf Straße " + strasse.getName() + " wurde aufgenommen.";
+			}else{
+				if(budget - wert >= 0){
+					budget = budget - wert;
+					strasse.getBesitzer().setSpielerBudget(budget);
+					strasse.setHypothek(false);
+					return "Hypothek wurde bezahlt.";
+				}else{
+					throw new GehaltException(aktuellerTurn.getWerIstDran());
+				}
+			}
+		}
+		return "Keine Strasse gefunden.";
+		
 	}
 	
 	/**
@@ -165,7 +188,7 @@ public class Spielverwaltung {
 	 * setzt den Besitzer der Stra�e auf den Spieler der die Stra�e gekauft hat
 	 * und zieht dem Spieler das Geld f�r die Stra�e aus seinem Budget ab
 	 */
-	public boolean kaufStrasse(Spieler spieler){
+	public void kaufStrasse(Spieler spieler)throws GehaltException{
 		Strasse strasse;
 		Feld position = spieler.getSpielerPosition();
 		if(position instanceof Strasse){
@@ -179,12 +202,12 @@ public class Spielverwaltung {
 			if( spielerNummer == 99 && differenz >= 0){
 				strasse.setBesitzer(spieler);
 				spieler.setSpielerBudget(differenz);
-				return true;
+				return;
 			}
 		}
 		
 		
-		return false;
+		throw new GehaltException(spieler);
 	}
 	
 	/**
@@ -207,20 +230,12 @@ public class Spielverwaltung {
 	}
 	
 	/**
-	 * 
-<<<<<<< Updated upstream
+	 *
 	 */
 	public Feld getToJailField(){
 		return feld.getToJail();
 	}
 	
-	/**
-	 * 
-	 * @return: gibt das Spielfeld zur�ck
-=======
-	 * @return: gibt das Spielfeld zur�ck
->>>>>>> Stashed changes
-	 */
 	public Feld[] getSpielfeld(){
 		return feld.getSpielfeld();
 	}
@@ -251,8 +266,30 @@ public class Spielverwaltung {
 	 * @param player
 	 * @return: gibt das Feld mit dem dazu gebauten Haus zur�ck
 	 */
-	public boolean bauHaus(int position,Spieler spieler){
-		return feld.bauHaus(position,spieler);	
+	public void bauHaus(int position , Spieler spieler) throws HausbauException {
+		int budget = spieler.getSpielerBudget();
+		if(getSpielfeld()[position] instanceof Strasse){
+			Strasse strasse = (Strasse)getSpielfeld()[position];
+			if(strasse.getHaeuseranzahl() < 4){
+				strasse.setHaeuseranzahl(strasse.getHaeuseranzahl()+1);
+				if(strasse.getHaeuseranzahl() < 4){
+					if(budget-strasse.getHauspreis() >= 0){
+						spieler.setSpielerBudget(budget-strasse.getHauspreis());
+					}else {
+						throw new HausbauException(spieler, getSpielfeld()[position]);
+					}
+				}else{
+					if((budget - (2*strasse.getHauspreis())) >= 0){
+						spieler.setSpielerBudget(budget-(2*strasse.getHauspreis()));
+					}else {
+						throw new HausbauException(spieler, getSpielfeld()[position]);
+					}
+				}
+			} else{
+				throw new HausbauException(spieler, getSpielfeld()[position]);
+			}
+		}
+		
 	}
 	
 	/**
