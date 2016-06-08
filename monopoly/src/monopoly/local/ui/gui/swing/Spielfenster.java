@@ -118,12 +118,14 @@ public class Spielfenster {
 				Spieler spieler = monopoly.getTurn().getWerIstDran();
 				int position = spieler.getSpielerPosition().getNummer();
 				if(! hyFenster.getHyListe().isSelectionEmpty()){
-					monopoly.switchHypothek(position);
-					spiel.remove(hyFenster);
-					spiel.add(sBP, "cell 1 0, push, grow, shrink");
-					spiel.repaint();
-					spiel.revalidate();
-					JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
+					//if(){
+						monopoly.switchHypothek(position);
+						spiel.remove(hyFenster);
+						spiel.add(sBP, "cell 1 0, push, grow, shrink");
+						spiel.repaint();
+						spiel.revalidate();
+						JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
+					//}
 				}
 				else{
 					spiel.remove(hyFenster);
@@ -138,11 +140,25 @@ public class Spielfenster {
 			public void actionPerformed(ActionEvent e){
 				//if hypothek == true --> if(monopoly.getHypothek == true){
 				//monopoly.switchHypothek(position);}
-				spiel.remove(hyFenster);
-				spiel.add(sBP, "cell 1 0, push, grow, shrink");
-				spiel.repaint();
-				spiel.revalidate();
-				JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
+				if(! hyFenster.getHyListe().isSelectionEmpty()){
+					//if(){
+						Spieler spieler = monopoly.getTurn().getWerIstDran();
+						int position = spieler.getSpielerPosition().getNummer();
+						monopoly.switchHypothek(position);
+						spiel.remove(hyFenster);
+						spiel.add(sBP, "cell 1 0, push, grow, shrink");
+						spiel.repaint();
+						spiel.revalidate();
+						JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
+					//}
+				}
+				else{
+					spiel.remove(hyFenster);
+					spiel.add(sBP, "cell 1 0, push, grow, shrink");
+					spiel.repaint();
+					spiel.revalidate();
+				}
+				
 			}
 		});
 	}
