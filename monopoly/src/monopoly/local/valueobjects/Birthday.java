@@ -1,21 +1,21 @@
 package monopoly.local.valueobjects;
 
-import java.util.Vector;
+
+import monopoly.local.domain.Monopoly;
 
 
 public class Birthday implements Aktion {
 	
-private Vector<Spieler> allSpieler;
 private Spieler spieler; 
+private Monopoly monopoly;
 	
-	public Birthday(Spieler spieler, Vector<Spieler> allSpieler) {
-		this.spieler = spieler;
-		this.allSpieler = allSpieler;
+	public Birthday(Monopoly monopoly) {
+		this.monopoly = monopoly;
 		// TODO Auto-generated constructor stub
 	}
 
 	public void ausfuehren() {
-		for(Spieler s : allSpieler){
+		for(Spieler s : monopoly.getAllSpieler()){
 			if(s.getSpielerNummer() == spieler.getSpielerNummer()){
 				spieler.setSpielerBudget(spieler.getSpielerBudget());
 			} else {

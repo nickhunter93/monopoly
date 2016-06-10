@@ -1,5 +1,7 @@
 package monopoly.local.valueobjects;
 
+import monopoly.local.domain.Monopoly;
+
 public class Ereignisfeld extends Feld{
 	
 	private Spieler besitzer = new Spieler("Bank", 98, null, -1);
@@ -13,8 +15,8 @@ public class Ereignisfeld extends Feld{
 		this.deck = deck;
 	}
 	
-	public void getEreignis(Spieler spieler){
-		deck.karteZiehen(spieler);
+	public void getEreignis(Monopoly monopoly){
+		deck.karteZiehen(monopoly);
 	}
 	
 	public Spieler getBesitzer(){

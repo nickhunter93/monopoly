@@ -1,9 +1,6 @@
-
 package monopoly.local.valueobjects;
 
-import monopoly.local.valueobjects.Gemeinschaftskarten;
-import monopoly.local.valueobjects.Feld;
-import monopoly.local.valueobjects.Spieler;
+import monopoly.local.domain.Monopoly;
 
 public class Gemeinschaftsfeld extends Feld{
 
@@ -18,8 +15,8 @@ public class Gemeinschaftsfeld extends Feld{
 		this.deck = deck;
 	}
 	
-	public void getEreignis(Spieler spieler){
-		deck.karteZiehen(spieler);
+	public void getEreignis(Monopoly monopoly){
+		deck.karteZiehen(monopoly);
 	}
 	
 	public Spieler getBesitzer(){

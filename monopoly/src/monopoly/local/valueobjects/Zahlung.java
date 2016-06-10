@@ -1,14 +1,16 @@
 package monopoly.local.valueobjects;
 
+import monopoly.local.domain.Monopoly;
 
 public class Zahlung implements Aktion {
 	
 	private int betrag;
 	private Spieler spieler;
+	private Monopoly monopoly;
 
-	public Zahlung(Spieler spieler, int betrag) {
-		this.spieler = spieler;
+	public Zahlung(Monopoly monopoly, int betrag) {
 		this.betrag = betrag;
+		this.monopoly = monopoly;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -22,7 +24,6 @@ public class Zahlung implements Aktion {
 
 	public void ausfuehren() {
 		betrag = spieler.getSpielerBudget() + betrag;
-		spieler.setSpielerBudget(betrag);
 	}
 	
 

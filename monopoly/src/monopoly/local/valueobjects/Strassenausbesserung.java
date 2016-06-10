@@ -1,14 +1,14 @@
 package monopoly.local.valueobjects;
 
+import monopoly.local.domain.Monopoly;
 
 public class Strassenausbesserung implements Aktion{
 
-	private Strasse[] yourStreets;
 	private Spieler spieler;
+	private Monopoly monopoly;
 
-	public Strassenausbesserung(Spieler spieler, Strasse[] yourStreets) {
-		this.yourStreets = yourStreets;
-		this.spieler = spieler;
+	public Strassenausbesserung(Monopoly monopoly) {
+		this.monopoly = monopoly;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -17,11 +17,11 @@ public class Strassenausbesserung implements Aktion{
 		int hausbetrag = 800;
 		int hotelbetrag = 2300;
 			
-		for(Strasse strasse : yourStreets){
+		for(Strasse strasse : monopoly.getYourStreets(spieler)){
 			if(strasse.getHaeuseranzahl() == 5){
 				spieler.setSpielerBudget(spieler.getSpielerBudget() - hotelbetrag);
 			} else{
-			spieler.setSpielerBudget(spieler.getSpielerBudget() - (hausbetrag * strasse.getHaeuseranzahl()));
+				spieler.setSpielerBudget(spieler.getSpielerBudget() - (hausbetrag * strasse.getHaeuseranzahl()));
 			}
 		}
 	}
