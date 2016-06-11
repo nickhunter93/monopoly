@@ -237,6 +237,40 @@ public class PersistenzLaden {
 				laden.readLine();
 			}
 		}
+		
+		laden.close();
+		
+		laden = new BufferedReader(new FileReader("defaultNeighbors.txt"));
+		String str = "";
+		while(str != null){
+			str = laden.readLine();
+			int feldnummer = Integer.parseInt(str);
+			char symbol = '0';
+			Vector<Feld> neighbors = new Vector<Feld>();
+			String neighbornumberString = "";
+			do{
+				do{
+					neighbornumberString = neighbornumberString.concat(""+symbol);
+					symbol = (char) laden.read();
+				}while(symbol != ','&& symbol != ';');
+				int neighbornumber = Integer.parseInt(neighbornumberString);
+				if(feld[neighbornumber] instanceof Strasse){
+					neighbors.addElement(feld[neighbornumber]);
+				}
+				neighbornumberString = "";
+				if(symbol != ';'){
+					symbol = '0';
+				}
+			}while(symbol != ';');
+			if(feld[feldnummer] instanceof Strasse){
+				Strasse strasse = (Strasse)feld[feldnummer];
+				strasse.setNeightbors(neighbors);
+			}
+			laden.readLine();
+			str = laden.readLine();
+		}
+		
+		
 		laden.close();
 		return feld;
 	}

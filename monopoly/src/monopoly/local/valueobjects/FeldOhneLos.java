@@ -8,13 +8,15 @@ public class FeldOhneLos implements Aktion {
 	private Spieler spieler;
 	private Monopoly monopoly;
 	
-	public FeldOhneLos(Monopoly monopoly, Feld target) {
+	public FeldOhneLos(Monopoly monopoly) {
 		this.target = target;
 		this.monopoly = monopoly;
 		// TODO Auto-generated constructor stub
 	}
 
 	public void ausfuehren() {
+		spieler = monopoly.getTurn().getWerIstDran();
+		target = monopoly.getSpielfeld()[monopoly.getTurn().getWerIstDran().getSpielerPosition().getNummer()-3];
 		spieler.setSpielerPosition(target);
 //		ereignis.aufFeldOhneLos(spieler, spielfeld.getSpielfeld()[7]);		
 	}

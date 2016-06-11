@@ -128,25 +128,7 @@ public class SpielStart {
 
 						int anzahl = monopoly.wuerfel();
 						wuerfelAnzeigen(anzahl);						
-						monopoly.move(spieler, 5);
-						showFeld(monopoly.getSpielfeld(), monopoly.getAllSpieler());
-						System.out.println("Sie befinden sich auf der Straße : " + monopoly.getStrasseName(spieler));
-
-						if (monopoly.getBesitzer(spieler.getSpielerPosition()).equals(spieler)) {
-							System.out.println("Diese Straße gehört Ihnen bereits.");
-						} else {
-							System.out.print("Mietpreis : " + monopoly.miete(spieler));
-							System.out.print(" / Kaufpreis : " + monopoly.preis(spieler));
-							System.out.print(" / Aktuelles Budget : " + spieler.getSpielerBudget());
-							System.out.println("");
-						}
-						if(aktuellerTurn.getPhase() == Phase.End && spieler.getSpielerPosition() instanceof Jail){
-							System.out.println("Sie sind nun im Gefängnis");
-						} else if(aktuellerTurn.getPhase() == Phase.End && spieler.getSpielerPosition() instanceof Ereignisfeld){
-							System.out.println("Sie sind auf einem Ereignisfeld");
-						}else if(aktuellerTurn.getPhase() == Phase.End && spieler.getSpielerPosition() instanceof Gemeinschaftsfeld){
-							System.out.println("Sie sind auf einem Gemeinschaftsfeld");
-						}
+						monopoly.move(spieler, 1);
 						roundLoop = false;
 
 						break;
@@ -299,10 +281,36 @@ public class SpielStart {
 			// *************************************
 
 			case Passiv: {
+				showFeld(monopoly.getSpielfeld(), monopoly.getAllSpieler());
+				String feldname = monopoly.getStrasseName(spieler);
+				System.out.println("Sie befinden sich auf der Straße : "+feldname);
+
+				if (monopoly.getBesitzer(spieler.getSpielerPosition()).equals(spieler)) {
+					System.out.println("Diese Straße gehört Ihnen bereits.");
+				} else {
+					System.out.print("Mietpreis : " + monopoly.miete(spieler));
+					System.out.print(" / Kaufpreis : " + monopoly.preis(spieler));
+					System.out.print(" / Aktuelles Budget : " + spieler.getSpielerBudget());
+					System.out.println("");
+				}
+				if(aktuellerTurn.getPhase() == Phase.End && spieler.getSpielerPosition() instanceof Jail){
+					System.out.println("Sie sind nun im Gefängnis");
+				} else if(aktuellerTurn.getPhase() == Phase.End && spieler.getSpielerPosition() instanceof Ereignisfeld){
+					System.out.println("Sie sind auf einem Ereignisfeld");
+				}else if(aktuellerTurn.getPhase() == Phase.End && spieler.getSpielerPosition() instanceof Gemeinschaftsfeld){
+					System.out.println("Sie sind auf einem Gemeinschaftsfeld");
+				}
+
 				if (monopoly.getBesitzer(spieler.getSpielerPosition()).getSpielerNummer() == 99) {
 					boolean loop = true;
 					do {
-						System.out.println("Wollen Sie die Strasse kaufen?");
+						System.out.println("Wollen Sie die Strasse "+spieler.getSpielerPosition().getName()+" kaufen?");
+						if(!feldname.equals(spieler.getSpielerPosition().getName())){
+							System.out.print("Mietpreis : " + monopoly.miete(spieler));
+							System.out.print(" / Kaufpreis : " + monopoly.preis(spieler));
+							System.out.print(" / Aktuelles Budget : " + spieler.getSpielerBudget());
+							System.out.println("");
+						}
 						System.out.println("'y' fï¿½r Ja/ 'n' fï¿½r Nein.");
 						char check = 'k';
 						try {
@@ -340,6 +348,10 @@ public class SpielStart {
 					if (monopoly.getBesitzer(spieler.getSpielerPosition()).getSpielerNummer() == spieler
 							.getSpielerNummer()) {
 						System.out.println("Sie mussten keine Miete zahlen.");
+					}else if(monopoly.miete(spieler) == 0){
+						System.out.println("Es ist keine Miete fällig.");
+						monopoly.mieteZahlen(monopoly.miete(spieler),
+								monopoly.getBesitzer(spieler.getSpielerPosition()), spieler);
 					} else {
 						spieler.setSpielerBudget(spieler.getSpielerBudget() - monopoly.miete(spieler));
 						monopoly.mieteZahlen(monopoly.miete(spieler),
@@ -349,6 +361,11 @@ public class SpielStart {
 						System.out.println("Ihr Budget beträgt jetzt = " + spieler.getSpielerBudget());
 					}
 					
+				}
+				if(feldname.equals(spieler.getSpielerPosition().getName())){
+
+					System.out.println("Sie befinden sich nun auf der Straße : "+spieler.getSpielerPosition().getName());
+					showFeld(monopoly.getSpielfeld(), monopoly.getAllSpieler());
 				}
 
 			}
@@ -496,11 +513,11 @@ public class SpielStart {
 								}
 
 							} catch (IOException e) {
-								e.printStackTrace();
+								//e.printStackTrace();
 								auswahl = 0;
 								System.out.println("Auswahl fehlerhaft.");
 							} catch (NumberFormatException e) {
-								e.printStackTrace();
+								//e.printStackTrace();
 								auswahl = 0;
 								System.out.println("Auswahl fehlerhaft.");
 							}

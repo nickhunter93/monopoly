@@ -31,7 +31,7 @@ private Monopoly monopoly;
 		//Du hast den zweiten Preis in einer Schönheitskonkurrenz gewonnen. Ziehe DM 200 ein.
 		deck.add(new Zahlung(monopoly, 200));
 		//Rücke vor bis auf Los.
-		deck.add(new FeldOhneLos(monopoly, monopoly.getLos()));
+		deck.add(new FeldOhneLos(monopoly));
 		//Du kommst aus dem Gefängnis frei.
 		deck.add(new GefaengnisFrei(monopoly));
 		//Bank-Irrtum zu deinen Gunsten. Ziehe DM 4000 ein.
@@ -41,14 +41,14 @@ private Monopoly monopoly;
 		//Du erhältst auf Vorzugs-Aktien 7% Dividende. DM 500.
 		deck.add(new Zahlung(monopoly, 500));
 		//Gehe zurück zu Badstraße.
-		deck.add(new FeldOhneLos(monopoly, monopoly.getSpielfeld()[1]));
+		deck.add(new FeldOhneLos(monopoly));
 		
 		//NEGATIV
 		
 		//Zahle eine Strafe von DM 200.
 		deck.add(new Zahlung(monopoly, -200));
 		//Gehe in das Gefängnis. Begib Dich direkt dorthin. Gehe nicht über Los. Ziehe nicht DM 4000 ein.
-		deck.add(new FeldOhneLos(monopoly, monopoly.getJail()));
+		deck.add(new FeldOhneLos(monopoly));
 		//Zahle an das Krankenhaus DM 2000.
 		deck.add(new Zahlung(monopoly, -2000));
 		//Zahle deine Versicherungssumme. DM 1000.
@@ -58,7 +58,7 @@ private Monopoly monopoly;
 	}
 
 	@Override
-	public Aktion karteZiehen(Monopoly monopoly) {
+	public Aktion karteZiehen() {
 		if(deck.size() == 0){
 			deckMischen();
 		}

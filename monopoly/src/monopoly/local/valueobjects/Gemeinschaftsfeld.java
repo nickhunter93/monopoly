@@ -15,8 +15,8 @@ public class Gemeinschaftsfeld extends Feld{
 		this.deck = deck;
 	}
 	
-	public void getEreignis(Monopoly monopoly){
-		deck.karteZiehen(monopoly);
+	public Aktion getEreignis(){
+		return deck.karteZiehen();
 	}
 	
 	public Spieler getBesitzer(){

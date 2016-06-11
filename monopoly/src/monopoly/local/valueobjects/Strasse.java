@@ -1,13 +1,14 @@
 package monopoly.local.valueobjects;
 
+import java.util.Vector;
+
 import monopoly.local.domain.exceptions.HausbauException;
 
 public class Strasse extends Feld {
 	
 	private int kaufpreis, mietpreis, haeuseranzahl,hauspreis;
-	private Spieler besitzer;
-	boolean hypothek;
-	
+	private boolean hypothek;
+	private Vector<Feld> neighbors;
 	/**
 	 * Konstrucktor der Klasse Strasse
 	 * 
@@ -25,11 +26,21 @@ public class Strasse extends Feld {
 		this.hauspreis = 250;
 		this.hypothek = hypothek;
 		this.besitzer = null;
+		this.neighbors = null;
 	}
 	
 	/**
 	 * @return: gibt den Wert der Hypothek als boolean-Wert zur�ck
 	 */
+	
+	public void setNeightbors(Vector<Feld> neighbors){
+		this.neighbors = neighbors;
+	}
+	
+	public Vector<Feld> getNeighbors(){
+		return neighbors;
+	}
+	
 	public boolean getHypothek(){
 		return this.hypothek;
 	}

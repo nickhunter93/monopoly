@@ -15,6 +15,7 @@ public class FeldMitLos implements Aktion {
 	}
 
 	public void ausfuehren() {
+		spieler = monopoly.getTurn().getWerIstDran();
 		Feld current = spieler.getSpielerPosition();
 		spieler.setSpielerPosition(target);
 		if(current.getNummer() >= target.getNummer()){

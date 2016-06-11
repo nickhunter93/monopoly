@@ -10,6 +10,6 @@ public abstract class Deck {
 	
 	public abstract void deckMischen();
 	
-	public abstract Aktion karteZiehen(Monopoly monopoly);
+	public abstract Aktion karteZiehen();
 	
 }

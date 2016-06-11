@@ -21,6 +21,7 @@ public class Feld {
 	
 	protected String name;
 	protected int nummer;
+	protected Spieler besitzer;
 
 	/**
 	 * Konstruktor der Klasse Feld
@@ -35,7 +36,7 @@ public class Feld {
 	}
 
 	/**
-	 * @return name: gibt den Namen des Feldes als String zurück
+	 * @return name: gibt den Namen des Feldes als String zurï¿½ck
 	 */
 	public String getName() {
 		return name;
@@ -49,7 +50,7 @@ public class Feld {
 	}
 
 	/**
-	 * @return nummer: gibt die Feldnummer zurück
+	 * @return nummer: gibt die Feldnummer zurï¿½ck
 	 */
 	public int getNummer() {
 		return nummer;
@@ -62,9 +63,19 @@ public class Feld {
 		this.nummer = nummer;
 	}
 	
+	public void setBesitzer(Spieler spieler){
+		besitzer = spieler;
+	}
+	
+	public Spieler getBesitzer(){
+		return this.besitzer;
+	}
+	
+	
+	
 	/**
 	 * Methode die bestimmt wann ein Feld gleich ist
-	 * dann gleich wenn: der Feldname und die Feldnummer übereinstimmen
+	 * dann gleich wenn: der Feldname und die Feldnummer ï¿½bereinstimmen
 	 */
 	public boolean equals(Feld feld){
 		if(feld.getName().equals(this.name)){

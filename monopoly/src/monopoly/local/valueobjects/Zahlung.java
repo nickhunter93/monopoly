@@ -23,6 +23,7 @@ public class Zahlung implements Aktion {
 	}
 
 	public void ausfuehren() {
+		spieler = monopoly.getTurn().getWerIstDran();
 		betrag = spieler.getSpielerBudget() + betrag;
 	}
 	
