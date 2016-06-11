@@ -1,20 +1,22 @@
 package monopoly.local.valueobjects;
 
+import monopoly.local.domain.Monopoly;
 
 public class GefaengnisFrei implements Aktion {
 
-	private Jail jail;
 	private Spieler spieler;
+	private Monopoly monopoly;
 	
-	public GefaengnisFrei(Spieler spieler, Jail jail) {
-		this.spieler = spieler;
-		this.jail = jail;
+	public GefaengnisFrei(Monopoly monopoly) {
+		this.monopoly = monopoly;
 		// TODO Auto-generated constructor stub
 	}
 
 	public void ausfuehren() {
 //		ereignis.gefaengnisfrei(spieler);
-		jail.release(spieler);
+//		jail.release(spieler);
+		monopoly.getJail().release(spieler);
+		
 	}
 	
 

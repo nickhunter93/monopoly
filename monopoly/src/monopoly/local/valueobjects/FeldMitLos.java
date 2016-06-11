@@ -1,14 +1,16 @@
 package monopoly.local.valueobjects;
 
+import monopoly.local.domain.Monopoly;
 
 public class FeldMitLos implements Aktion {
 	
 	private Feld target;
+	private Monopoly monopoly;
 	private Spieler spieler;
 
-	public FeldMitLos(Spieler spieler, Feld target) {
+	public FeldMitLos(Monopoly monopoly, Feld target) {
+		this.monopoly = monopoly;
 		this.target = target;
-		this.spieler = spieler;
 		// TODO Auto-generated constructor stub
 	}
 

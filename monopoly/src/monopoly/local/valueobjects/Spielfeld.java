@@ -57,7 +57,7 @@ public class Spielfeld {
 	}
 	
 	public Feld getGemeinschaftsfeld(){
-		return feld[18];
+		return feld[16];
 	}
 	
 	/**

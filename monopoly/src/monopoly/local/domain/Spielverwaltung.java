@@ -155,12 +155,10 @@ public class Spielverwaltung {
 			this.getTurn().phase = Phase.End;
 		}
 		if(position instanceof Ereignisfeld){
-			Ereignisfeld ereignisfeld = (Ereignisfeld)position;
-			ereignisfeld.getEreignis(spieler);
+			miete = 0;
 		}
 		if(position instanceof Gemeinschaftsfeld){
-			Gemeinschaftsfeld gemeinschaftsfeld = (Gemeinschaftsfeld)position;
-			gemeinschaftsfeld.getEreignis(spieler);
+			miete = 0;
 		}
 		return miete;
 	}
@@ -182,6 +180,12 @@ public class Spielverwaltung {
 			kaufpreis = 0;
 		}
 		if(position instanceof ToJail){
+			kaufpreis = 0;
+		}
+		if(position instanceof Ereignisfeld){
+			kaufpreis = 0;
+		}
+		if(position instanceof Gemeinschaftsfeld){
 			kaufpreis = 0;
 		}
 		return kaufpreis;
@@ -222,6 +226,10 @@ public class Spielverwaltung {
 	
 	public Feld getEreignisfeld(){
 		return feld.getEreignisfeld();
+	}
+	
+	public Feld getGemeinschaftsfeld(){
+		return feld.getGemeinschaftsfeld();
 	}
 	
 	/**
@@ -311,11 +319,11 @@ public class Spielverwaltung {
 		return feld;
 	}
 	
-	public void karteZiehen(Spieler wer) {
-		ereignisKarten.deckMischen();
-		Aktion aktion = ereignisKarten.karteZiehen(wer);
-		aktion.ausfuehren();
-	}
+//	public void karteZiehen(Spieler wer) {
+//		ereignisKarten.deckMischen();
+//		Aktion aktion = ereignisKarten.karteZiehen(wer);
+//		aktion.ausfuehren();
+//	}
 	
 	/**
 	 * @return: gibt die Anzahl der H�user zur�ck die auf einem Feld stehen
