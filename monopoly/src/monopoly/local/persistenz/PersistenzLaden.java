@@ -10,8 +10,10 @@ import monopoly.local.domain.Monopoly;
 import monopoly.local.domain.Spielverwaltung.Phase;
 import monopoly.local.ui.cui.SpielStart;
 import monopoly.local.valueobjects.Ereignisfeld;
+import monopoly.local.valueobjects.Ereigniskarten;
 import monopoly.local.valueobjects.Feld;
 import monopoly.local.valueobjects.Gemeinschaftsfeld;
+import monopoly.local.valueobjects.Gemeinschaftskarten;
 import monopoly.local.valueobjects.Jail;
 import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Strasse;
@@ -169,7 +171,7 @@ public class PersistenzLaden {
 		laden.close();
 	}
 	
-	public Feld[] loadDefaulField()throws IOException{
+	public Feld[] loadDefaulField(Monopoly monopoly)throws IOException{
 		laden = new BufferedReader(new FileReader("defaultFeld.txt"));
 		Feld[] feld = new Feld[36];
 		for(int i = 0 ; i<36 ; i++){
@@ -205,6 +207,7 @@ public class PersistenzLaden {
 				laden.readLine();
 				feld[i] = new Ereignisfeld(str,i);
 				Ereignisfeld ereignis = ((Ereignisfeld)feld[i]);
+				ereignis.setDeck(new Ereigniskarten(monopoly));
 				laden.readLine();
 				
 				
@@ -212,6 +215,7 @@ public class PersistenzLaden {
 				laden.readLine();
 				feld[i] = new Gemeinschaftsfeld(str,i);
 				Gemeinschaftsfeld gemeinschaft = ((Gemeinschaftsfeld)feld[i]);
+				gemeinschaft.setDeck(new Gemeinschaftskarten(monopoly));
 				laden.readLine();
 				
 				

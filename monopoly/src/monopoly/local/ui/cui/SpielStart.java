@@ -127,7 +127,8 @@ public class SpielStart {
 					case 1: // pruefe ob im Gefaengnis
 
 						int anzahl = monopoly.wuerfel();
-						wuerfelAnzeigen(anzahl);						monopoly.move(spieler, anzahl);
+						wuerfelAnzeigen(anzahl);						
+						monopoly.move(spieler, 5);
 						showFeld(monopoly.getSpielfeld(), monopoly.getAllSpieler());
 						System.out.println("Sie befinden sich auf der Straße : " + monopoly.getStrasseName(spieler));
 

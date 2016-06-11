@@ -11,11 +11,11 @@ private Monopoly monopoly;
 
 	public Ereigniskarten(Monopoly monopoly){
 		this.monopoly = monopoly;
+		deck  = new Vector<Aktion>();
 	}
 
 	@Override
 	public void deckMischen() {
-		deck  = new Vector<Aktion>();
 		
 		//POSITIV
 		
@@ -34,7 +34,7 @@ private Monopoly monopoly;
 		//Du erhältst DM 1500.
 		deck.add(new Zahlung(monopoly.getTurn().getWerIstDran(), 1500));
 		//Rücke vor bis zu Schlossallee (falls schon verkauft eher negativ zu sehen).
-		deck.add(new FeldOhneLos(monopoly.getTurn().getWerIstDran(), monopoly.getSpielfeld()[36]));
+		deck.add(new FeldOhneLos(monopoly.getTurn().getWerIstDran(), monopoly.getSpielfeld()[1]));
 		//Rücke vor bis zum Opernplatz. Wenn Du über Los kommst, ziehe DM 4000 ein (kann sich ebenso negativ auswirken sobald einem der Opernplatz nicht gehört).
 		deck.add(new FeldMitLos(monopoly.getTurn().getWerIstDran(), monopoly.getSpielfeld()[24]));
 		//Gehe 3 Felder zurück.
@@ -58,6 +58,9 @@ private Monopoly monopoly;
 
 	@Override
 	public Aktion karteZiehen(Spieler spieler) {
+		if(deck == null){
+			deckMischen();
+		}
 		if(deck.size() == 0){
 			deckMischen();
 		}

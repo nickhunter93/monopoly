@@ -12,11 +12,11 @@ private Monopoly monopoly;
 	
 	public Gemeinschaftskarten(Monopoly monopoly){
 		this.monopoly = monopoly;
+		deck  = new Vector<Aktion>();
 	}
 
 	@Override
 	public void deckMischen() {
-		deck  = new Vector<Aktion>();
 		
 		//POSITIV
 		

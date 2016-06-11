@@ -24,7 +24,7 @@ public class Monopoly {
 	public Monopoly() {
 		super();
 		this.spieler = new Spielerverwaltung();
-		this.logik = new Spielverwaltung(spieler);
+		this.logik = new Spielverwaltung(spieler,this);
 		pmLaden = new PersistenzLaden();
 		pmSpeichern = new PersistenzSpeichern();
 	}

@@ -3,6 +3,7 @@ package monopoly.local.valueobjects;
 import java.io.IOException;
 import java.util.Vector;
 
+import monopoly.local.domain.Monopoly;
 import monopoly.local.persistenz.PersistenzLaden;
 
 public class Spielfeld {
@@ -15,7 +16,7 @@ public class Spielfeld {
 	 * bestimmt das Feld [0] das Losfeld ist, 
 	 * zum Start des Spieles alle Stra�en geh�ren niemandem
 	 */
-	public Spielfeld(){
+	public Spielfeld(Monopoly monopoly){
 //		feld = new Feld [fieldSize];
 //		for (int i=0;i<fieldSize;i++){
 //			feld[i] = new Strasse("Teststrasse",800,480,false,i);
@@ -28,7 +29,7 @@ public class Spielfeld {
 		
 		PersistenzLaden test = new PersistenzLaden();
 		try {
-			feld = test.loadDefaulField();
+			feld = test.loadDefaulField(monopoly);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,7 +64,7 @@ public class Spielfeld {
 	 * gibt das Gefaengnisfeld zurueck
 	 */
 	public Feld getJail(){
-		return feld[18];
+		return feld[10];
 	}
 	
 	/**
@@ -71,7 +72,7 @@ public class Spielfeld {
 	 * gibt das "Gehe ins Gef�ngnis"-Feld zurueck
 	 */
 	public Feld getToJail(){
-		return feld[10];
+		return feld[20];
 	}
 	
 	/**

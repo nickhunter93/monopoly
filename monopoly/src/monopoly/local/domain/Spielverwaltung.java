@@ -34,8 +34,8 @@ public class Spielverwaltung {
 	/**
 	 * Konstruktor der Klasse Spielverwaltung
 	 */
-	public Spielverwaltung(Spielerverwaltung spieler){
-		feld = new Spielfeld();
+	public Spielverwaltung(Spielerverwaltung spieler,Monopoly monopoly){
+		feld = new Spielfeld(monopoly);
 		this.spieler = spieler;
 		aktuellerTurn = new Turn();
 	}
@@ -97,6 +97,9 @@ public class Spielverwaltung {
 		}
 		if(position instanceof Ereignisfeld){
 			besitzer = ((Ereignisfeld) position).getBesitzer();
+		}
+		if(position instanceof Gemeinschaftsfeld){
+			besitzer = ((Gemeinschaftsfeld) position).getBesitzer();
 		}
 		return besitzer;
 	}
