@@ -10,15 +10,23 @@ import javax.swing.JPanel;
 
 public class SpielPanel extends JPanel{
 	
+	private String spielBrett = "images/spielbrett.png";
+	private ImageIcon sBildIcon;
+	private Image sBild;
+	
+	/**
+	 * Konstruktor der Klasse SpielPanel
+	 * beinhaltet das Spielfeld
+	 */
 	public SpielPanel(){
 		super();
 		setBorder(BorderFactory.createLineBorder(new Color(255,255,255), 4));
 	}
 	
-	private String spielBrett = "images/fgZHJ.jpg.jpg";
-	private ImageIcon sBildIcon;
-	private Image sBild;
-	
+	/**
+	 * Methode zum ueberschreiben der PainComponent-Methode 
+	 * damit das Bild angezeigt wird
+	 */
 	public void paintComponent(Graphics g){
 		sBildIcon = new ImageIcon(spielBrett);
 		sBild = sBildIcon.getImage();

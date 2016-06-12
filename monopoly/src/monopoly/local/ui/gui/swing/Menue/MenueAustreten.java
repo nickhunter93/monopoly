@@ -20,15 +20,22 @@ import monopoly.local.valueobjects.Spieler;
 import net.miginfocom.swing.MigLayout;
 
 public class MenueAustreten{
-	
+
+	//Variablen für MenueAustreten
 	private Font mFont;
 	private JButton mButton;
+	private JButton mButton2;
 	private MenuePanel mPanel;
 	private JList<String> liste;
 	private JScrollPane mSP;
 	
+	/**
+	 * Konstruktor der Klasse MenueAustreten
+	 * @param monopoly: bekommt Fassadenklasse Monopoly übergeben
+	 * das Menuefenster für das Austreten eines Spieler wird zusammengebaut
+	 * (nur GUI-Elemente)
+	 */
 	public MenueAustreten(Monopoly monopoly){
-		//Menue	
 		MigLayout mLayout = new MigLayout("", "[]20[]20[]", "[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]");
 		mFont = new Font("Berlin Sans FB",Font.ITALIC,20);
         
@@ -42,46 +49,72 @@ public class MenueAustreten{
 		}
 		liste = new JList<String>(str);
 		mButton = new JButton("BestÃ¤tigen");
+		mButton2 = new JButton("zurueck");
 		mPanel = new MenuePanel(600,600);
 		mSP = new JScrollPane(liste);
 		
 		mPanel.setLayout(mLayout);
-		mPanel.add(mSP,"w 425, h 50, cell 2 20, pushx, growx, flowy, top");
-		mPanel.add(new JLabel(""), "w 25");
-		mPanel.add(mButton,"w 425, h 50, cell 3 20, pushx, growx");
+		mPanel.add(mSP,"w 425, h 75, cell 2 20,span 2, pushx, growx, shrinkx, flowy, top");
+		mPanel.add(mButton,"w 425, h 50, cell 2 21, pushx, growx, shrinkx");
+		mPanel.add(mButton2,"w 425, h 50, cell 3 21, pushx, growx, shrinkx");
 		mPanel.add(new JLabel(""), "w 25");
 		
 		mButton.setToolTipText("Du tritts aus einem Spiel aus");
 		
-		mButton.setBackground(new Color(255,155,55));
+		mButton.setBackground(new Color(255,255,93));
+		mButton2.setBackground(new Color(255,255,93));
+		liste.setBackground(new Color(255,255,255));
 		
 		mButton.setBorderPainted(false);
-		
-		
+		mButton2.setBorderPainted(false);
 		
 		mButton.setFont(mFont);
+		mButton2.setFont(mFont);
+		liste.setFont(mFont);
 	}
 
+	/**
+	 * 
+	 * @return der Button mButton(-bestaetigen-) wird zurueckgegeben
+	 */
 	public JButton getmButton() {
 		return mButton;
 	}
-
-	public void setmButton(JButton mButton) {
-		this.mButton = mButton;
+	
+	/**
+	 * 
+	 * @return der Button mButton2(-zurueck-) wird zurueckgegeben
+	 */
+	public JButton getmButton2() {
+		return mButton2;
 	}
 
+	//wozu die setter-Methoden, werden doch nicht gebraucht
+//	public void setmButton(JButton mButton) {
+//		this.mButton = mButton;
+//	}
+
+	/**
+	 * 
+	 * @return das Panel mPanel wird zurueckgegeben
+	 */
 	public MenuePanel getmPanel() {
 		return mPanel;
 	}
 
-	public void setmPanel(MenuePanel mPanel) {
-		this.mPanel = mPanel;
-	}
+//	public void setmPanel(MenuePanel mPanel) {
+//		this.mPanel = mPanel;
+//	}
 
+	/**
+	 * 
+	 * @return die Liste liste wird zurueckgeben
+	 */
 	public JList<String> getListe() {
 		return liste;
 	}
 
+	//wird diese Methode gebraucht
 	public void setmTextField(JList<String> mTextField) {
 		this.liste = mTextField;
 	}

@@ -15,6 +15,11 @@ public class SInfoPanel extends JPanel{
 	private Font sFont2;
 	private MigLayout p2Layout;
 	
+	/**
+	 * Konstruktor der Klasse SInfoPanel
+	 * hier wird das Informationenfeld zusammengesetzt
+	 * (nur GUI-Elemente)
+	 */
 	public SInfoPanel(){
 		p2Layout = new MigLayout("", "[]", "[]");
 		sFont2 = new Font("Berlin Sans FB Demi",Font.PLAIN,14);
@@ -25,20 +30,23 @@ public class SInfoPanel extends JPanel{
 		
 		add(sP, "push, grow, shrink");
 		
-		sTextArea.setText("Dich muss ich bestimmt iwie aendern können..."
-				+ "                Wir sollten nicht vergessen (wieder) einzubauen das man nicht mit null Spielern ein Spiel anfangen kann");
+		sTextArea.setText("Dich muss ich bestimmt iwie aendern können...");
 		sTextArea.setEditable(false);
 		sTextArea.setAutoscrolls(true);
 		sTextArea.setLineWrap(true);
 		sTextArea.setWrapStyleWord(true);
 		sTextArea.setFont(sFont2);
 		
-		sP.setMinimumSize(new Dimension(200,20));
+		sP.setPreferredSize(new Dimension(20,20));
 		
-		setBackground(new Color(0,0,255));
+		setBackground(new Color(197,251,255));
 		setOpaque(false);
 	}
 
+	/**
+	 * 
+	 * @return gibt das JTextArea Info.feld zurueck 
+	 */
 	public JTextArea getSTextArea(){
 		return sTextArea;
 	}

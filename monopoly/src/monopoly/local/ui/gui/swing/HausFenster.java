@@ -32,11 +32,20 @@ public class HausFenster extends JPanel {
 	private JLabel haLabel;
 	private JTextField haHausAnz;
 	private JButton haButton;
+	private JButton haButton2;
 	private JList<String> liste;
 	private JScrollPane haSP;
 	private Vector<String> spalten;
 	private Monopoly monopoly;
+	private int position;
 	
+	/**
+	 * Konstruktor der Klasse HausFenster
+	 * Spielmenuefenster Haus-bauen wird zusammengesetzt
+	 * (nur GUI-Elemente)
+	 * 
+	 * @param monopoly
+	 */
 	public HausFenster(Monopoly monopoly){
 		haBauen = new JPanel();
 		this.monopoly = monopoly;
@@ -51,8 +60,8 @@ public class HausFenster extends JPanel {
 //		}
 		
 		
-		MigLayout haLayout = new MigLayout("debug", "[]", "[]10[]");
-		MigLayout haLayout3 = new MigLayout("debug", "[]10[]10[]", "[]");
+		MigLayout haLayout = new MigLayout("", "[]", "[]10[]");
+		MigLayout haLayout3 = new MigLayout("", "[]10[]10[]", "[]");
 
 		
 		Font haFont1 = new Font("Berlin Sans FB",Font.ITALIC,14);
@@ -73,46 +82,76 @@ public class HausFenster extends JPanel {
 		haLabel = new JLabel("Hï¿½useranzahl: ");
 		haHausAnz = new JTextField();
 		haButton = new JButton("bauen");
+		haButton2 = new JButton("zurueck");
+		position = spieler.getSpielerPosition().getNummer();
 		
-		haPanel1.setLayout(haLayout);
+		setLayout(haLayout);
 		haPanel3.setLayout(haLayout3);
 		
-		add(haPanel1);
-		haPanel1.add(haPanel2, "cell 0 0, push, grow, shrink");
-		haPanel1.add(haPanel3, "cell 0 1, pushx, growx, shrinkx");
+		add(haPanel2, "cell 0 0, push, grow, shrink");
+		add(haPanel3, "cell 0 1, pushx, growx, shrinkx");
 		haPanel2.add(haSP,"push, grow, shrink");
 		haPanel3.add(haLabel, "cell 0 0, pushx, growx, shrinkx");
 		haPanel3.add(haHausAnz, "cell 1 0,w 50, pushx, growx, shrinkx");
-		haPanel3.add(haButton, "cell 2 0, pushx, growx, shrinkx");
+		haPanel3.add(haButton, "cell 0 1, pushx, growx, shrinkx");
+		haPanel3.add(haButton2, "cell 1 1, pushx, growx, shrinkx");
 		
-		haSP.setPreferredSize(new Dimension(200,200));
+		haSP.setPreferredSize(new Dimension(340,200));
 		
 		liste.setFont(haFont2);
 		haLabel.setFont(haFont2);
 		haHausAnz.setFont(haFont2);
 		haButton.setFont(haFont1);
+		haButton2.setFont(haFont1);
 		
-		haPanel2.setBorder(BorderFactory.createLineBorder(new Color(255,155,55), 5));
-		haPanel3.setBorder(BorderFactory.createLineBorder(new Color(255,155,55), 5));
+		setBorder(BorderFactory.createLineBorder(new Color(255,255,255), 2));
 		
-		haPanel2.setBackground(new Color(255,155,55));
-		haPanel3.setBackground(new Color(255,155,55));
-		haButton.setBackground(new Color(173,232,202));
+		haPanel2.setBackground(new Color(197,251,255));
+		haPanel3.setBackground(new Color(197,251,255));
+		haButton.setBackground(new Color(255,255,93));
+		haButton2.setBackground(new Color(255,255,93));
+		liste.setBackground(new Color(255,255,255));
+		haHausAnz.setBackground(new Color(255,255,255));
 		
-		haPanel1.setOpaque(false);
-		setBackground(new Color(0,0,0));
+		haHausAnz.setEditable(false);
+		haHausAnz.setText(""+ monopoly.getHaeuseranzahl(position)); //möglicherweise muss das noch mal anders gemacht werden
+		
+		haPanel1.setBackground(new Color(197,251,255));
+		setOpaque(false);
 		
 
 	}
 	
+	/**
+	 * 
+	 * @return gibt den haButton(-bauen-) zurueck
+	 */
 	public JButton getHaButton(){
 		return haButton;
 	}
 	
+	/**
+	 * 
+	 * @return gibt den haButton2(-zurueck-) zurueck
+	 */
+	public JButton getHaButton2(){
+		return haButton2;
+	}
+	
+	/**
+	 * 
+	 * @return gibt das JTextField haHausAnz zurueck
+	 * (beinhaltet die Anzahlt der Haeuser)
+	 */
 	public JTextField getHaHausAnz(){
 		return haHausAnz;
 	}
 	
+	/**
+	 * 
+	 * @return gibt die JListe liste zurueck
+	 * (beinhaltet die Strassen) 
+	 */
 	public JList getHaListe(){
 		return liste;
 	}

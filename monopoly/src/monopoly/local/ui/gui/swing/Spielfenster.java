@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import monopoly.local.domain.Monopoly;
+import monopoly.local.ui.gui.swing.Menue.Menuefenster;
 import monopoly.local.valueobjects.Spieler;
 import net.miginfocom.swing.MigLayout;
 
@@ -27,10 +28,18 @@ public class Spielfenster {
 	private SButtonPanel sBP;
 	private SpielPanel sP;
 	private SInfoPanel sIP;
+	private SInfoPanel sIP2;
 	private Monopoly monopoly;
 	private HausFenster haFenster;
 	private HypothekFenster hyFenster; 
+	private SpeichernFenster speFenster;
 	
+	/**
+	 * Konstruktor der Klasse Spielfenster
+	 * ein neuer JFrame wird erstellt und alle Komponenten hinzugefuegt
+	 * enthaelt alle ActionListener für das Spielfenster 
+	 * @param monopoly
+	 */
 	public Spielfenster(Monopoly monopoly){
 		this.monopoly = monopoly;
 	}
@@ -41,22 +50,26 @@ public class Spielfenster {
 		sP = new SpielPanel();
 		sBP = new SButtonPanel();
 		sIP = new SInfoPanel();
+		sIP2 = new SInfoPanel();
 		haFenster = new HausFenster(monopoly);
 		hyFenster = new HypothekFenster(monopoly);
+		speFenster = new SpeichernFenster(monopoly);
 		spiel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		spiel.setLayout(new MigLayout("", "[]10[]", "[]10[]"));
 		
-		spiel.add(sP, "cell 0 0, w 600, h 600, push, grow, shrink ");
+		spiel.add(sP, "cell 0 0,span 1 3, w 600, h 600");
 		spiel.add(sBP, "cell 1 0, push, grow, shrink");
-		spiel.add(sIP, "cell 0 1, span 2, pushx, growx, shrinkx");
+		spiel.add(sIP, "cell 1 1,h 150, push, grow, shrink");
+		spiel.add(sIP2, "cell 1 2,h 150, push, grow, shrink");
 		
-		spiel.getContentPane().setBackground(new Color(0,0,0));
+		spiel.getContentPane().setBackground(new Color(197,251,255));
 		
-		spiel.setSize(600, 600);
+		spiel.setSize(1000, 725);
 		spiel.setVisible(true);
 		
-		//Info-TextArea mit sich anpassenden Infos... wie macht man das
+		//Info-TextAreas mit sich anpassenden Infos... wie macht man das
 		
+		//ActionListener fuer den wuerfeln-Button
 		sBP.getButton1().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				int zugweite = monopoly.wuerfel();
@@ -66,6 +79,7 @@ public class Spielfenster {
 			}
 		});
 		
+		//ActionListener fuer den Haus-bauen-Button
 		sBP.getButton2().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				spiel.remove(sBP);
@@ -74,6 +88,8 @@ public class Spielfenster {
 				spiel.revalidate();
 			}
 		});
+		
+		//ActionListener fuer den Hypothek-aufnehmen-Button
 		sBP.getButton3().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				spiel.remove(sBP);
@@ -83,34 +99,45 @@ public class Spielfenster {
 			}
 		});
 		
+		//ActionListener fuer den speichern-Button
 		sBP.getButton4().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				//monopoly.saveAll();
-				JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
+				spiel.remove(sBP);
+				spiel.add(speFenster, "cell 1 0, pushx, growx, shrinkx");
+				spiel.repaint();
+				spiel.revalidate();
+				//JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
 			}
 		});
 		
+		//ActionListener für den bauen-Button
 		haFenster.getHaButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				Spieler spieler = monopoly.getTurn().getWerIstDran();
 				int position = spieler.getSpielerPosition().getNummer();
 				if(!haFenster.getHaListe().isSelectionEmpty()){
-					monopoly.bauHaus(position, spieler);
+					//monopoly.bauHaus(position, spieler);
 					JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
-					spiel.remove(haFenster);
-					spiel.add(sBP, "cell 1 0, push, grow, shrink");
-					spiel.repaint();
-					spiel.revalidate();
-				}
-				else{
-					spiel.remove(haFenster);
-					spiel.add(sBP, "cell 1 0, push, grow, shrink");
-					spiel.repaint();
-					spiel.revalidate();
+//					spiel.remove(haFenster);
+//					spiel.add(sBP, "cell 1 0, push, grow, shrink");
+//					spiel.repaint();
+//					spiel.revalidate();
 				}
 			}
 		});
 		
+		//ActionListener fuer den zurueck-Button
+		haFenster.getHaButton2().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				spiel.remove(haFenster);
+				spiel.add(sBP, "cell 1 0, push, grow, shrink");
+				spiel.repaint();
+				spiel.revalidate();
+			}
+		});
+		
+		//ActionListener fuer den aufnehmen-Button
 		hyFenster.getHyButton1().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				//if hypothek == false -->if(monopoly.getHypothek == false){
@@ -119,23 +146,18 @@ public class Spielfenster {
 				int position = spieler.getSpielerPosition().getNummer();
 				if(! hyFenster.getHyListe().isSelectionEmpty()){
 					//if(){
-						monopoly.switchHypothek(position);
-						spiel.remove(hyFenster);
-						spiel.add(sBP, "cell 1 0, push, grow, shrink");
-						spiel.repaint();
-						spiel.revalidate();
+						//monopoly.switchHypothek(position);
+//						spiel.remove(hyFenster);
+//						spiel.add(sBP, "cell 1 0, push, grow, shrink");
+//						spiel.repaint();
+//						spiel.revalidate();
 						JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
 					//}
-				}
-				else{
-					spiel.remove(hyFenster);
-					spiel.add(sBP, "cell 1 0, push, grow, shrink");
-					spiel.repaint();
-					spiel.revalidate();
 				}
 			}
 		});
 		
+		//ActionListener fuer den abbezahlen-Button
 		hyFenster.getHyButton2().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				//if hypothek == true --> if(monopoly.getHypothek == true){
@@ -144,23 +166,52 @@ public class Spielfenster {
 					//if(){
 						Spieler spieler = monopoly.getTurn().getWerIstDran();
 						int position = spieler.getSpielerPosition().getNummer();
-						monopoly.switchHypothek(position);
-						spiel.remove(hyFenster);
-						spiel.add(sBP, "cell 1 0, push, grow, shrink");
-						spiel.repaint();
-						spiel.revalidate();
+						//monopoly.switchHypothek(position);
+//						spiel.remove(hyFenster);
+//						spiel.add(sBP, "cell 1 0, push, grow, shrink");
+//						spiel.repaint();
+//						spiel.revalidate();
 						JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
 					//}
 				}
-				else{
-					spiel.remove(hyFenster);
+			}
+		});
+		
+		//ActionListener fuer den zurueck-Button
+		hyFenster.getHyButton3().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				spiel.remove(hyFenster);
+				spiel.add(sBP, "cell 1 0, push, grow, shrink");
+				spiel.repaint();
+				spiel.revalidate();
+			}
+		});
+		
+		//ActionListener fuer den speichern-Button
+		speFenster.getSfButton().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				String datei = speFenster.getDatName().getText();
+				monopoly.saveAll(datei);
+				//zurueck zum Hauptmenue
+				JOptionPane.showMessageDialog(spiel, "Speichern erfolgreich");
+//				Spielfenster spFenster = new Spielfenster(monopoly);
+//				spFenster.sInit();
+//				menue.dispose();
+				Menuefenster mFenster = new Menuefenster();
+				mFenster.mSetVisible();
+				spiel.dispose();
+			}
+		});
+		
+		//ActionListener fuer den zurueck-Button
+		speFenster.getSfButton2().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+					spiel.remove(speFenster);
 					spiel.add(sBP, "cell 1 0, push, grow, shrink");
 					spiel.repaint();
 					spiel.revalidate();
 				}
-				
-			}
-		});
+			});
 	}
 }
 

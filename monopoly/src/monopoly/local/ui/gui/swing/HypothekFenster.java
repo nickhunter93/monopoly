@@ -26,8 +26,16 @@ public class HypothekFenster extends JPanel {
 	private JScrollPane hySP;
 	private JButton hyButton1;
 	private JButton hyButton2;
+	private JButton hyButton3;
 	private Monopoly monopoly;
 	
+	/**
+	 * Konstruktor der Klasse HypothekFenster
+	 * hier wird das Spielmenuefenster Hypothek-aufnehmen zusammen gesetzt
+	 * (nur GUI-Elemente)
+	 * 
+	 * @param monopoly
+	 */
 	public HypothekFenster(Monopoly monopoly){
 		super();
 		
@@ -35,8 +43,8 @@ public class HypothekFenster extends JPanel {
 		this.monopoly = monopoly;
 		monopoly.TurnIni(true);
 		
-		MigLayout hyLayout1 = new MigLayout("", "[]10[]", "[]");
-		MigLayout hyLayout3 = new MigLayout("", "[]", "[]10[]10[]10[]");
+		MigLayout hyLayout1 = new MigLayout("", "[] []", "[]");
+		MigLayout hyLayout3 = new MigLayout("", "[]", "[] [] [] []");
 		Font hyFont1 = new Font("Berlin Sans FB",Font.ITALIC,14);
 		Font hyFont2 = new Font("Berlin Sans FB Demi",Font.PLAIN,14);
 		hyPanel1 = new JPanel();
@@ -44,6 +52,7 @@ public class HypothekFenster extends JPanel {
 		hyPanel3 = new JPanel();
 		hyButton1 = new JButton("aufnehmen");
 		hyButton2 = new JButton("abbezahlen");
+		hyButton3 = new JButton("zurueck");
 		//String hyInhalt[] = {"Inhalt 1", "Inhalt 2", "Inhalt 3", "Inhalt 4"};
 		Spieler spieler = monopoly.getTurn().getWerIstDran();
 		String hyInhalt[] = {};
@@ -57,50 +66,64 @@ public class HypothekFenster extends JPanel {
 		JLabel hyLabel1 = new JLabel("");
 		JLabel hyLabel2 = new JLabel("");
 		
-		hyPanel1.setLayout(hyLayout1);
+		setLayout(hyLayout1);
 		hyPanel3.setLayout(hyLayout3);
 		
-		add(hyPanel1);
-		hyPanel1.add(hyPanel2, "cell 0 0, push, grow, shrink");
-		hyPanel1.add(hyPanel3, "cell 0 1, pushx, growx, shrinkx");
+		add(hyPanel2, "cell 0 0, push, grow, shrink");
+		add(hyPanel3, "cell 0 1, pushx, growx, shrinkx");
 		hyPanel2.add(hySP, "push, grow, shrink");
-		hyPanel3.add(hyLabel1, "cell 0 0, pushx, growx, shrinkx");
-		hyPanel3.add(hyButton1, " pushx, growx, shrinkx");
-		hyPanel3.add(hyButton2, " pushx, growx, shrinkx");
-		hyPanel3.add(hyLabel2, "cell 3 0, pushx, growx, shrinkx");
+		hyPanel3.add(hyButton1, "cell 0 0, pushx, growx, shrinkx");
+		hyPanel3.add(hyButton2, "cell 0 1, pushx, growx, shrinkx");
+		hyPanel3.add(hyButton3, "cell 0 2, pushx, growx, shrinkx");
 		
-		hySP.setPreferredSize(new Dimension(200, 200));
+		hySP.setPreferredSize(new Dimension(340, 200));
 		
-//		hyLabel1.setMinimumSize(new Dimension(100,25));
-//		hyLabel2.setMinimumSize(new Dimension(100,25));
-		
-		hyButton1.setBackground(new Color(173,232,202));
-		hyButton2.setBackground(new Color(173,232,202));
-		hyListe.setBackground(new Color(90, 200, 90));
-		hyPanel2.setBackground(new Color(0,100,200));
-		hyPanel3.setBackground(new Color(200,100,0));
+		hyButton1.setBackground(new Color(255,255,93));
+		hyButton2.setBackground(new Color(255,255,93));
+		hyButton3.setBackground(new Color(255,255,93));
+		hyListe.setBackground(new Color(255,255,255));
+		hyPanel2.setBackground(new Color(197,251,255));
+		hyPanel3.setBackground(new Color(197,251,255));
 		
 		hyButton1.setFont(hyFont1);
 		hyButton2.setFont(hyFont1);
+		hyButton3.setFont(hyFont1);
 		hyListe.setFont(hyFont2);
 		
-		hyPanel2.setBorder(BorderFactory.createLineBorder(new Color(255,255,255), 3));
-		hyPanel3.setBorder(BorderFactory.createLineBorder(new Color(255,255,255), 3));
+		setBorder(BorderFactory.createLineBorder(new Color(255,255,255), 2));
 		
-		hyPanel1.setOpaque(false);
-		setBackground(new Color(0,0,0));
-		
-		//setVisible(true);
+		setOpaque(false);
 	}
 	
+	/**
+	 * 
+	 * @return gibt den hyButton1(-aufnehmen-) zurueck
+	 */
 	public JButton getHyButton1(){
 		return hyButton1;
 	}
 	
+	/**
+	 * 
+	 * @return gibt den hyButton2(-abbezahlen-) zurueck
+	 */
 	public JButton getHyButton2(){
 		return hyButton2;
 	}
 	
+	/**
+	 * 
+	 * @return gibt den hyButton3(-zurueck-) zurueck
+	 */
+	public JButton getHyButton3(){
+		return hyButton3;
+	}
+	
+	/**
+	 * 
+	 * @return gibt die hyListe zurueck
+	 * (beinhaltet die Strassen)
+	 */
 	public JList getHyListe(){
 		return hyListe;
 	}

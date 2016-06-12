@@ -20,6 +20,11 @@ public class SButtonPanel extends JPanel{
 	private MigLayout p1Layout;
 	private Font sFont1;
 	
+	/**
+	 * Konstruktor der Klasse SButtonPanel
+	 * hier werden die Buttons zum steuern des Spieles zusammen in ein Panel gesetzt
+	 * (nur GUI-Elemente)
+	 */
 	public SButtonPanel(){
 		super();
 		p1Layout = new MigLayout("", "[]10[]10[]", "[]10[]10[]10[]10[]10[]10[]");
@@ -35,10 +40,10 @@ public class SButtonPanel extends JPanel{
 		add(sButton3, "cell 1 3, push, grow, shrink");
 		add(sButton4, "cell 1 4, push, grow, shrink");
 		
-		sButton1.setBackground(new Color(173,232,202));
-		sButton2.setBackground(new Color(173,232,202));
-		sButton3.setBackground(new Color(173,232,202));
-		sButton4.setBackground(new Color(173,232,202));
+		sButton1.setBackground(new Color(255,255,93));
+		sButton2.setBackground(new Color(255,255,93));
+		sButton3.setBackground(new Color(255,255,93));
+		sButton4.setBackground(new Color(255,255,93));
 		
 		sButton1.setBorder(BorderFactory.createLineBorder(new Color(255,255,255), 2));
 		sButton2.setBorder(BorderFactory.createLineBorder(new Color(255,255,255), 2));
@@ -50,22 +55,37 @@ public class SButtonPanel extends JPanel{
 		sButton3.setFont(sFont1);
 		sButton4.setFont(sFont1);
 
-		setBackground(new Color(255,0,0));
 		setOpaque(false);
 	}
 	
+	/**
+	 * 
+	 * @return gibt den sButton1(-wuerfeln-) zurueck
+	 */
 	public JButton getButton1(){
 		return sButton1;
 	}
 	
+	/**
+	 * 
+	 * @return gibt den SButton2(-Haus bauen-) zurueck
+	 */
 	public JButton getButton2(){
 		return sButton2;
 	}
 	
+	/**
+	 * 
+	 * @return gibt den SButton3(-Hypothek aufnehmen-) zurueck
+	 */
 	public JButton getButton3(){
 		return sButton3;
 	}
 	
+	/**
+	 * 
+	 * @return gibt den SButton4(-Spiel speichern-) zurueck
+	 */
 	public JButton getButton4(){
 		return sButton4;
 	}

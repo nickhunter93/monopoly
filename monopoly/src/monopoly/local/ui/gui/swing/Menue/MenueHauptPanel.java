@@ -15,8 +15,13 @@ public class MenueHauptPanel {
 	private JButton mButton2;
 	private JButton mButton3;
 	private MenuePanel mPanel;
+	
+	/**
+	 * Konstruktor der Klasse MenueHauptPanel
+	 * das Menuefenster welches man sieht wenn man das Spiel startet wird zusammengebaut
+	 * (nur GUI-Elemente)
+	 */
 	public MenueHauptPanel(){
-		//Menue	
 				MigLayout mLayout = new MigLayout("", "[]20[]20[]", "[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]");
 				mFont = new Font("Berlin Sans FB",Font.ITALIC,20);
 		        
@@ -27,24 +32,28 @@ public class MenueHauptPanel {
 				mPanel = new MenuePanel(600,600);
 				
 				mPanel.setLayout(mLayout);
-				mPanel.add(mButton,"w 425, h 50, cell 2 20, pushx, growx");
-				mPanel.add(new JLabel(""), "w 25");
-				mPanel.add(mButton1,"w 425, h 50, cell 2 21, pushx, growx");
-				mPanel.add(new JLabel(""), "w 25");
-				mPanel.add(mButton2,"w 425, h 50, cell 2 22, pushx,growx");
-				mPanel.add(new JLabel(""), "w 25");
-				mPanel.add(mButton3,"w 425, h 50, cell 2 23, pushx, growx");
-				mPanel.add(new JLabel(""), "w 25");
+				mPanel.add(new JLabel(""), "w 125");
+				mPanel.add(mButton,"w 300, h 50, cell 2 6, pushx, growx, shrinkx");
+				mPanel.add(new JLabel(""), "w 50");
+				mPanel.add(new JLabel(""), "w 125");
+				mPanel.add(mButton1,"w 300, h 50, cell 2 7, pushx, growx, shrinkx");
+				mPanel.add(new JLabel(""), "w 50");
+				mPanel.add(new JLabel(""), "w 125");
+				mPanel.add(mButton2,"w 300, h 50, cell 2 8, pushx,growx, shrinkx");
+				mPanel.add(new JLabel(""), "w 50");
+				mPanel.add(new JLabel(""), "w 125");
+				mPanel.add(mButton3,"w 300, h 50, cell 2 9, pushx, growx, shrinkx");
+				mPanel.add(new JLabel(""), "w 50");
 				
 				mButton.setToolTipText("Du tritts einem Spiel bei");
 				mButton1.setToolTipText("Du verl�sst ein Spiel");
 				mButton2.setToolTipText("Du startest ein Spiel");
 				mButton3.setToolTipText("Du l�dst ein angefangenes Spiel");
 				
-				mButton.setBackground(new Color(255,155,55));
-				mButton1.setBackground(new Color(255,155,55));
-				mButton2.setBackground(new Color(255,155,55));
-				mButton3.setBackground(new Color(255,155,55));
+				mButton.setBackground(new Color(255,255,93));
+				mButton1.setBackground(new Color(255,255,93));
+				mButton2.setBackground(new Color(255,255,93));
+				mButton3.setBackground(new Color(255,255,93));
 				
 				mButton.setBorderPainted(false);
 				mButton1.setBorderPainted(false);
@@ -59,32 +68,59 @@ public class MenueHauptPanel {
 				
 	}
 	
+	/**
+	 * 
+	 * @return gibt das mPanel zurueck
+	 */
 	public MenuePanel getmPanel(){
 		return mPanel;
 	}
 	
+	/**
+	 * 
+	 * @return gibt den mButton(-Beitreten-) zurueck
+	 */
 	public JButton getmButton() {
 		return mButton;
 	}
-	public void setmButton(JButton mButton) {
-		this.mButton = mButton;
-	}
+//	public void setmButton(JButton mButton) {
+//		this.mButton = mButton;
+//	}
+	
+	/**
+	 * 
+	 * @return gibt den mButton1(-Verlassen-) zurueck
+	 */
 	public JButton getmButton1() {
 		return mButton1;
 	}
-	public void setmButton1(JButton mButton1) {
-		this.mButton1 = mButton1;
-	}
+	
+	
+//	public void setmButton1(JButton mButton1) {
+//		this.mButton1 = mButton1;
+//	}
+	
+	/**
+	 * 
+	 * @return gibt den mButton2(-Spiel starten-) zurueck
+	 */
 	public JButton getmButton2() {
 		return mButton2;
 	}
-	public void setmButton2(JButton mButton2) {
-		this.mButton2 = mButton2;
-	}
+	
+//	public void setmButton2(JButton mButton2) {
+//		this.mButton2 = mButton2;
+//	}
+	
+	/**
+	 * 
+	 * @return gibt den mButton3(-laden-) zurueck
+	 */
 	public JButton getmButton3() {
 		return mButton3;
 	}
-	public void setmButton3(JButton mButton3) {
-		this.mButton3 = mButton3;
-	}
+	
+//	public void setmButton3(JButton mButton3) {
+//		this.mButton3 = mButton3;
+//	}
 }

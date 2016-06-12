@@ -140,8 +140,7 @@ public class Monopoly {
 	return savefiles;	
 	}
 	
-	public void saveAll(){
-		String datei = "";
+	public void saveAll(String datei){
 		pmSpeichern.saveAll(spieler.getAllSpieler(), logik.getSpielfeld(), logik.getTurn(),datei );
 	}
 	
