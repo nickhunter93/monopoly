@@ -43,7 +43,7 @@ public class PersistenzLaden {
 		}
 	}
 	
-	public SpielStart loadAll(String filename){
+	public Monopoly loadAll(String filename){
 		try {
 			monopoly = new Monopoly();
 			this.filename = filename;
@@ -58,8 +58,7 @@ public class PersistenzLaden {
 			Spieler activPlayer = spielerListe.get(loadActivePlayer()-1);
 			monopoly.getTurn().setWerIstDran(activPlayer);
 			monopoly.getTurn().setPhase(loadPhase());
-			SpielStart start = new SpielStart(monopoly);
-			return start;
+			return monopoly;
 		} catch (IOException e) {
 			System.out.println("FEHLER BEIM LADEN");
 			return null;
@@ -150,7 +149,11 @@ public class PersistenzLaden {
 				laden.readLine();
 			}else if(str.equals("Ereignisfeld")){
 				laden.readLine();
+				laden.readLine();
+				laden.readLine();
 			}else if(str.equals("Gemeinschaftsfeld")){
+				laden.readLine();
+				laden.readLine();
 				laden.readLine();
 			}else{
 				int hausanzahl = Integer.parseInt(laden.readLine());

@@ -127,7 +127,8 @@ public class Menue {
 					buffer = eingabe.readLine();
 					int savewahl = Integer.parseInt(buffer);
 					buffer = savefiles.get(savewahl-1);
-					SpielStart spiel = monopoly.spielStandLaden(buffer);
+					monopoly = monopoly.spielStandLaden(buffer);
+					SpielStart spiel = new SpielStart(monopoly);
 					spiel.start(false);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

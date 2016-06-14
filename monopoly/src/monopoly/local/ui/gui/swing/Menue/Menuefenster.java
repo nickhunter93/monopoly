@@ -46,13 +46,13 @@ public class Menuefenster {
 
 	/**
 	 * startet das Menuefenster
-	 * enthält alle ActionListener für das eigendlich Menuefenster
+	 * enthï¿½lt alle ActionListener fï¿½r das eigendlich Menuefenster
 	 */
 	public void mInit(){
 		hauptPanel = new MenueHauptPanel();
 		menue.add(hauptPanel.getmPanel(), 0,0);
 		
-		//ActionListener für den Beitreten-Button
+		//ActionListener fï¿½r den Beitreten-Button
 		hauptPanel.getmButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				menue.remove(hauptPanel.getmPanel());
@@ -61,7 +61,7 @@ public class Menuefenster {
 			}
 		});
 		
-		//ActionListener für den Austreten-Button
+		//ActionListener fï¿½r den Austreten-Button
 		hauptPanel.getmButton1().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				menue.remove(hauptPanel.getmPanel());
@@ -70,12 +70,12 @@ public class Menuefenster {
 			}
 		});
 		
-		//ActionListener für den Spiel-starten-Button
+		//ActionListener fï¿½r den Spiel-starten-Button
 		hauptPanel.getmButton2().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if(monopoly.getAllSpieler().size() < 2){
-					JOptionPane fehler =  new JOptionPane();
-					fehler.showMessageDialog(menue, "Es werden mindestens zwei Spieler benötigt");
+					//JOptionPane fehler =  new JOptionPane();
+					JOptionPane.showMessageDialog(menue, "Es werden mindestens zwei Spieler benï¿½tigt");
 					return;
 				}
 				Spielfenster spFenster = new Spielfenster(monopoly);
@@ -85,7 +85,7 @@ public class Menuefenster {
 			}
 		});
 		
-		//ActionListener für den Spiel-laden-Button
+		//ActionListener fï¿½r den Spiel-laden-Button
 		hauptPanel.getmButton3().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				menue.remove(hauptPanel.getmPanel());
@@ -99,14 +99,14 @@ public class Menuefenster {
 	}
 	
 	/**
-	 * Methode die, die ActionListener für das Beitretenmenuefenster enthält
+	 * Methode die, die ActionListener fï¿½r das Beitretenmenuefenster enthï¿½lt
 	 */
 	public void mBeitreten(){
 		panel = new MenueBeitreten();
 		menue.add(panel.getmPanel(),"cell 0 0, pushx, growx, shrinkx ");
 		menue.validate();
 		
-		//ActionListener für den Beitreten-Button
+		//ActionListener fï¿½r den Beitreten-Button
 		panel.getmButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if(!panel.getmTextField().getText().isEmpty()){
@@ -122,7 +122,7 @@ public class Menuefenster {
 			}
 		});
 		
-		//ActionListener für den zurueck-Button
+		//ActionListener fï¿½r den zurueck-Button
 		panel.getmButton2().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				menue.remove(panel.getmPanel());
@@ -136,7 +136,7 @@ public class Menuefenster {
 	}
 	
 	/**
-	 * Methode die, die Actionlisterner für das Austretenmenuefenster enthaelt
+	 * Methode die, die Actionlisterner fï¿½r das Austretenmenuefenster enthaelt
 	 */
 	public void mEntfernen(){
 		panel2 = new MenueAustreten(monopoly);
@@ -157,7 +157,7 @@ public class Menuefenster {
 			}
 		});
 		
-		//ActionListener für den zurueck-Button
+		//ActionListener fï¿½r den zurueck-Button
 		panel2.getmButton2().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				menue.remove(panel2.getmPanel());
@@ -173,19 +173,23 @@ public class Menuefenster {
 	 * Methode die, die ActionListener fuer das Spielstand-laden-Menuefenster enthaelt
 	 */
 	public void mLaden(){
-		panel3 = new MenueLaden();
+		panel3 = new MenueLaden(monopoly);
 		menue.add(panel3.getMlPanel(),"cell 0 0, pushx, growx, shrinkx ");
 		
-		//ActionListener für den Laden-Button
+		//ActionListener fï¿½r den Laden-Button
 		panel3.getMlButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				String datei = "";
 				if(!panel3.getMlListe().isSelectionEmpty()){
-					JOptionPane OP = new JOptionPane();
-					OP.showMessageDialog(menue, "mach ich später");
-					datei = panel3.getListenInhalt();
-						monopoly.spielStandLaden(datei);
-						monopoly.saveFilesLaden();
+					//JOptionPane OP = new JOptionPane();
+					JOptionPane.showMessageDialog(menue, "mach ich spï¿½ter");
+					datei = (String)panel3.getMlListe().getSelectedValue();
+					//datei = panel3.getListenInhalt();
+						monopoly = monopoly.spielStandLaden(datei);
+						monopoly.TurnIni(false);
+						Spielfenster spFenster = new Spielfenster(monopoly);
+						spFenster.sInit();
+						menue.dispose();
 				}
 //				else{
 //					menue.remove(panel3.getMlPanel());
@@ -194,7 +198,7 @@ public class Menuefenster {
 			}
 		});
 		
-		//ActionListener für den zurueck-Button
+		//ActionListener fï¿½r den zurueck-Button
 		panel3.getMlButton2().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				menue.remove(panel3.getMlPanel());
@@ -215,7 +219,7 @@ public class Menuefenster {
 	}
 	
 	/**
-	 * Dialogfenster um dem Nutzer zu bestätigen das sich etwas getan hat
+	 * Dialogfenster um dem Nutzer zu bestï¿½tigen das sich etwas getan hat
 	 * @param bestÃ¤tigung: boolean-Wert ob eine Bestaetigung gebraucht wird
 	 */
 	//ggf. mit JOptionPane ersetzen?

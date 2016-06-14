@@ -14,9 +14,6 @@ public class MonopolyGUI {
 		
 	}
 	
-	private HausFenster haFenster;
-	private HypothekFenster hyFenster;
-	private Spielfenster spFenster;
 	private Menuefenster mFenster;
 	
 	/**
