@@ -122,7 +122,7 @@ public class PersistenzLaden {
 	public void loadField(Vector<Spieler> spielerListe,Feld[] feld)throws IOException{
 		laden = new BufferedReader(new FileReader(filename+"Feld.txt"));
 		laden.readLine();
-		for(int i = 0 ; i<36 ; i++){
+		for(int i = 0 ; i<feld.length ; i++){
 			String str = laden.readLine();
 			if(str.equals("LOS")){
 				
@@ -176,8 +176,8 @@ public class PersistenzLaden {
 	
 	public Feld[] loadDefaulField(Monopoly monopoly)throws IOException{
 		laden = new BufferedReader(new FileReader("defaultFeld.txt"));
-		Feld[] feld = new Feld[36];
-		for(int i = 0 ; i<36 ; i++){
+		Feld[] feld = new Feld[40];
+		for(int i = 0 ; i<feld.length ; i++){
 			String str = laden.readLine();
 			if(str.equals("LOS")){
 				
