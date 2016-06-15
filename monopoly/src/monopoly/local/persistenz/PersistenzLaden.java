@@ -124,7 +124,7 @@ public class PersistenzLaden {
 		laden.readLine();
 		for(int i = 0 ; i<36 ; i++){
 			String str = laden.readLine();
-			if(str.equals("Los")){
+			if(str.equals("LOS")){
 				
 				str =laden.readLine();
 				str =laden.readLine();
@@ -179,7 +179,7 @@ public class PersistenzLaden {
 		Feld[] feld = new Feld[36];
 		for(int i = 0 ; i<36 ; i++){
 			String str = laden.readLine();
-			if(str.equals("Los")){
+			if(str.equals("LOS")){
 				
 				laden.readLine();
 				int kaufpreis = Integer.parseInt(laden.readLine());
