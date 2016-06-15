@@ -2,6 +2,7 @@ package monopoly.local.ui.gui.swing.Menue;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -28,14 +29,19 @@ public class MenueLaden {
 	 * das Ladenmenuefenster wird zusammengebaut 
 	 * (nur GUI-Elemente)
 	 */
-	public MenueLaden(){
+	public MenueLaden(Monopoly monopoly){
+		this.monopoly = monopoly;
 		mlLayout = new MigLayout("","[]20[]20[]","[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]");
 		mlFont = new Font("Berlin Sans FB",Font.ITALIC,20);
 		
 		mlPanel = new MenuePanel(600,600);
-		String inhalt[] = {""}; 
-		//TODO liste mit inhalt füllen, wie komme ich an die namen für die speicherstände ran
-		mlListe = new JList(inhalt);
+		Vector<String> saveFiles = monopoly.saveFilesLaden();
+		String inhalt[] = new String[saveFiles.size()]; 
+		for(int i = 0;i<saveFiles.size();i++){
+			inhalt[i] = saveFiles.get(i);
+		}
+		//TODO liste mit inhalt fï¿½llen, wie komme ich an die namen fï¿½r die speicherstï¿½nde ran
+		mlListe = new JList<String>(inhalt);
 		mlSP = new JScrollPane(mlListe);
 		mlButton = new JButton("laden");
 		mlButton2 = new JButton("zurueck");

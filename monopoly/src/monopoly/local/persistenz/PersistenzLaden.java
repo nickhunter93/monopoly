@@ -43,7 +43,7 @@ public class PersistenzLaden {
 		}
 	}
 	
-	public SpielStart loadAll(String filename){
+	public Monopoly loadAll(String filename){
 		try {
 			monopoly = new Monopoly();
 			this.filename = filename;
@@ -58,8 +58,7 @@ public class PersistenzLaden {
 			Spieler activPlayer = spielerListe.get(loadActivePlayer()-1);
 			monopoly.getTurn().setWerIstDran(activPlayer);
 			monopoly.getTurn().setPhase(loadPhase());
-			SpielStart start = new SpielStart(monopoly);
-			return start;
+			return monopoly;
 		} catch (IOException e) {
 			System.out.println("FEHLER BEIM LADEN");
 			return null;
@@ -123,9 +122,9 @@ public class PersistenzLaden {
 	public void loadField(Vector<Spieler> spielerListe,Feld[] feld)throws IOException{
 		laden = new BufferedReader(new FileReader(filename+"Feld.txt"));
 		laden.readLine();
-		for(int i = 0 ; i<36 ; i++){
+		for(int i = 0 ; i<feld.length ; i++){
 			String str = laden.readLine();
-			if(str.equals("Los")){
+			if(str.equals("LOS")){
 				
 				str =laden.readLine();
 				str =laden.readLine();
@@ -150,7 +149,11 @@ public class PersistenzLaden {
 				laden.readLine();
 			}else if(str.equals("Ereignisfeld")){
 				laden.readLine();
+				laden.readLine();
+				laden.readLine();
 			}else if(str.equals("Gemeinschaftsfeld")){
+				laden.readLine();
+				laden.readLine();
 				laden.readLine();
 			}else{
 				int hausanzahl = Integer.parseInt(laden.readLine());
@@ -173,10 +176,10 @@ public class PersistenzLaden {
 	
 	public Feld[] loadDefaulField(Monopoly monopoly)throws IOException{
 		laden = new BufferedReader(new FileReader("defaultFeld.txt"));
-		Feld[] feld = new Feld[36];
-		for(int i = 0 ; i<36 ; i++){
+		Feld[] feld = new Feld[40];
+		for(int i = 0 ; i<feld.length ; i++){
 			String str = laden.readLine();
-			if(str.equals("Los")){
+			if(str.equals("LOS")){
 				
 				laden.readLine();
 				int kaufpreis = Integer.parseInt(laden.readLine());

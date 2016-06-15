@@ -57,7 +57,7 @@ public class Monopoly {
 		return logik.wuerfeln();
 	}
 	
-	public SpielStart spielStandLaden(String datei) {
+	public Monopoly spielStandLaden(String datei) {
 		return pmLaden.loadAll(datei);
 	}
 	
