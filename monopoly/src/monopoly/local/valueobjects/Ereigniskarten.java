@@ -28,17 +28,17 @@ private Monopoly monopoly;
 		//Du kommst aus dem Gefängnis frei.
 		deck.add(new GefaengnisFrei(monopoly));
 		//Rücke bis auf Los vor.
-		deck.add(new FeldOhneLos(monopoly));
+		deck.add(new FeldOhneLos(monopoly, monopoly.getSpielfeld()[0]));
 		//Die Bank zahlt dir eine Dividende von DM 1000.
 		deck.add(new Zahlung(monopoly, 1000));
 		//Du erhältst DM 1500.
 		deck.add(new Zahlung(monopoly, 1500));
 		//Rücke vor bis zu Schlossallee (falls schon verkauft eher negativ zu sehen).
-		deck.add(new FeldOhneLos(monopoly));
+		deck.add(new FeldOhneLos(monopoly, monopoly.getSpielfeld()[39]));
 		//Rücke vor bis zum Opernplatz. Wenn Du über Los kommst, ziehe DM 4000 ein (kann sich ebenso negativ auswirken sobald einem der Opernplatz nicht gehört).
 		deck.add(new FeldMitLos(monopoly, monopoly.getSpielfeld()[24]));
 		//Gehe 3 Felder zurück.
-		deck.add(new FeldOhneLos(monopoly));
+		deck.add(new FeldOhneLos(monopoly, monopoly.getSpielfeld()[monopoly.getTurn().getWerIstDran().getSpielerPosition().getNummer()-3]));
 		
 		//NEGATIV
 		
@@ -51,7 +51,7 @@ private Monopoly monopoly;
 		//Strafe für zu schnelles Fahren DM 300.
 		deck.add(new Zahlung(monopoly, -300));
 		//Gehe in das Gefängnis. 
-		deck.add(new FeldOhneLos(monopoly));
+		deck.add(new FeldOhneLos(monopoly, monopoly.getSpielfeld()[10]));
 		//Zahle Schulgeld
 		deck.add(new Zahlung(monopoly, -500));
 	}
