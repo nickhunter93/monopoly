@@ -128,7 +128,7 @@ public class SpielStart {
 
 						int anzahl = monopoly.wuerfel();
 						wuerfelAnzeigen(anzahl);						
-						monopoly.move(spieler, 1);
+						monopoly.move(spieler, anzahl);
 						roundLoop = false;
 
 						break;
