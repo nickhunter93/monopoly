@@ -37,7 +37,7 @@ public class Spielfenster {
 	/**
 	 * Konstruktor der Klasse Spielfenster
 	 * ein neuer JFrame wird erstellt und alle Komponenten hinzugefuegt
-	 * enthaelt alle ActionListener für das Spielfenster 
+	 * enthaelt alle ActionListener fï¿½r das Spielfenster 
 	 * @param monopoly
 	 */
 	public Spielfenster(Monopoly monopoly){
@@ -111,7 +111,7 @@ public class Spielfenster {
 			}
 		});
 		
-		//ActionListener für den bauen-Button
+		//ActionListener fÃ¼r den bauen-Button
 		haFenster.getHaButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				Spieler spieler = monopoly.getTurn().getWerIstDran();

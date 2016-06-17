@@ -113,8 +113,8 @@ public class Menuefenster {
 					String name = panel.getmTextField().getText();
 					int spielernummer = monopoly.getAllSpieler().size();
 					Spieler spieler = new Spieler(name,spielernummer+1,monopoly.getLos(),2000);
-					boolean bestätigung = monopoly.beitreten(spieler);
-					showErfolg(bestätigung);
+					monopoly.beitreten(spieler);
+					JOptionPane.showMessageDialog(menue, "Erfolgreich");
 					menue.remove(panel.getmPanel());
 					mInit();
 				}
@@ -146,8 +146,8 @@ public class Menuefenster {
 		panel2.getmButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if(!panel2.getListe().isSelectionEmpty()){
-					boolean bestätigung = monopoly.entfernen(panel2.getListe().getSelectedIndex()+1);
-					showErfolg(bestätigung);
+					monopoly.entfernen(panel2.getListe().getSelectedIndex()+1);
+					JOptionPane.showMessageDialog(menue, "Erfolgreich");
 					menue.remove(panel2.getmPanel());
 					mInit();
 				}else{
@@ -181,8 +181,6 @@ public class Menuefenster {
 			public void actionPerformed(ActionEvent e){
 				String datei = "";
 				if(!panel3.getMlListe().isSelectionEmpty()){
-					//JOptionPane OP = new JOptionPane();
-					JOptionPane.showMessageDialog(menue, "mach ich sp�ter");
 					datei = (String)panel3.getMlListe().getSelectedValue();
 					//datei = panel3.getListenInhalt();
 						monopoly = monopoly.spielStandLaden(datei);
@@ -217,37 +215,4 @@ public class Menuefenster {
 	public void mSetVisible(){
 		menue.setVisible(true);
 	}
-	
-	/**
-	 * Dialogfenster um dem Nutzer zu best�tigen das sich etwas getan hat
-	 * @param bestätigung: boolean-Wert ob eine Bestaetigung gebraucht wird
-	 */
-	//ggf. mit JOptionPane ersetzen?
-	public void showErfolg(boolean bestätigung){
-		final JDialog dialog = new JDialog ();
-		dialog.setModal (true);
-		dialog.setAlwaysOnTop (true);
-		dialog.setModalityType (ModalityType.APPLICATION_MODAL);
-		JLabel label = new JLabel();
-		JButton button = new JButton("Ok");
-		if(bestätigung){
-			label.setText("Erfolgreich");
-		}else{
-			label.setText("Fehlgeschlagen");
-		}
-		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		dialog.setLayout(new BorderLayout());
-		dialog.add(BorderLayout.NORTH,label);
-		dialog.add(BorderLayout.SOUTH,button);
-		button.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg0) {
-				dialog.dispose();
-			}
-		});
-		dialog.setSize(200, 200);
-		dialog.setVisible(true);
-	}
 }
-
-
