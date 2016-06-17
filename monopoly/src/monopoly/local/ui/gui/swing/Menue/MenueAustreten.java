@@ -21,7 +21,7 @@ import net.miginfocom.swing.MigLayout;
 
 public class MenueAustreten{
 
-	//Variablen für MenueAustreten
+	//Variablen fï¿½r MenueAustreten
 	private Font mFont;
 	private JButton mButton;
 	private JButton mButton2;
@@ -31,8 +31,8 @@ public class MenueAustreten{
 	
 	/**
 	 * Konstruktor der Klasse MenueAustreten
-	 * @param monopoly: bekommt Fassadenklasse Monopoly übergeben
-	 * das Menuefenster für das Austreten eines Spieler wird zusammengebaut
+	 * @param monopoly: bekommt Fassadenklasse Monopoly ï¿½bergeben
+	 * das Menuefenster fï¿½r das Austreten eines Spieler wird zusammengebaut
 	 * (nur GUI-Elemente)
 	 */
 	public MenueAustreten(Monopoly monopoly){
@@ -50,7 +50,7 @@ public class MenueAustreten{
 		liste = new JList<String>(str);
 		mButton = new JButton("BestÃ¤tigen");
 		mButton2 = new JButton("zurueck");
-		mPanel = new MenuePanel(600,600);
+		mPanel = new MenuePanel();
 		mSP = new JScrollPane(liste);
 		
 		mPanel.setLayout(mLayout);

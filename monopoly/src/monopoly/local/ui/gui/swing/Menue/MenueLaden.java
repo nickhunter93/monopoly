@@ -34,7 +34,7 @@ public class MenueLaden {
 		mlLayout = new MigLayout("","[]20[]20[]","[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]");
 		mlFont = new Font("Berlin Sans FB",Font.ITALIC,20);
 		
-		mlPanel = new MenuePanel(600,600);
+		mlPanel = new MenuePanel();
 		Vector<String> saveFiles = monopoly.saveFilesLaden();
 		String inhalt[] = new String[saveFiles.size()]; 
 		for(int i = 0;i<saveFiles.size();i++){

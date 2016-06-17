@@ -24,14 +24,15 @@ public class MenueHauptPanel {
 	public MenueHauptPanel(){
 				MigLayout mLayout = new MigLayout("", "[]20[]20[]", "[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]20[]");
 				mFont = new Font("Berlin Sans FB",Font.ITALIC,20);
-		        
 				mButton = new JButton("Beitreten");
 				mButton1 = new JButton("Verlassen");
 				mButton2 = new JButton("Spiel starten");
 				mButton3 = new JButton("Spiel laden");
-				mPanel = new MenuePanel(600,600);
+				mPanel = new MenuePanel();
 				
 				mPanel.setLayout(mLayout);
+				//mPanel.setH(mPanel.getHeight());
+				//mPanel.setB(mPanel.getWidth());
 				mPanel.add(new JLabel(""), "w 125");
 				mPanel.add(mButton,"w 300, h 50, cell 2 6, pushx, growx, shrinkx");
 				mPanel.add(new JLabel(""), "w 50");

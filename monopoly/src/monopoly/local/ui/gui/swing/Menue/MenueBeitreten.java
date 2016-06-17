@@ -16,7 +16,7 @@ import net.miginfocom.swing.MigLayout;
 
 public class MenueBeitreten {
 	
-	//Variablen für MenueBeitreten
+	//Variablen fï¿½r MenueBeitreten
 	private Font mFont;
 	private JTextField mTextField;
 	private JButton mButton;
@@ -36,8 +36,7 @@ public class MenueBeitreten {
 		mTextField = new JTextField("Spielername");
 		mButton = new JButton("BestÃ¤tigen");
 		mButton2 = new JButton("zurueck");
-		mPanel = new MenuePanel(600,600);
-		
+		mPanel = new MenuePanel();
 		mPanel.setLayout(mLayout);
 		mPanel.add(mTextField,"w 425,span 2, h 75, cell 2 20, pushx, growx, shrinkx");
 		mPanel.add(new JLabel(""), "w 25");
