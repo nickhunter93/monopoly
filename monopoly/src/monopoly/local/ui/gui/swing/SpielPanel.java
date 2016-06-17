@@ -8,6 +8,8 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import net.miginfocom.swing.MigLayout;
+
 public class SpielPanel extends JPanel{
 	
 	private String spielBrett = "images/spielbrett.png";
@@ -21,6 +23,7 @@ public class SpielPanel extends JPanel{
 	public SpielPanel(){
 		super();
 		setBorder(BorderFactory.createLineBorder(new Color(255,255,255), 4));
+		setLayout(new MigLayout("", "[]10[]", "[]10[]"));
 	}
 	
 	/**

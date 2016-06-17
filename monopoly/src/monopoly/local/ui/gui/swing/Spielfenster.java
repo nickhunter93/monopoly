@@ -7,10 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -68,7 +70,12 @@ public class Spielfenster {
 		
 		spiel.setSize(1000, 725);
 		spiel.setVisible(true);
-		
+		Vector<Spieler> spielerliste = monopoly.getAllSpieler();
+		Spieler spieler = spielerliste.get(0);
+		ImageIcon icon = new ImageIcon("images/spielfiguren/red.png");
+		spieler.setSpielfigur(icon.getImage());
+		spieler.getSpielerPosition().getNummer();
+		sP.add(new Spielfigur(spieler.getSpielfigur()), "pos 0.91al 0.9al,h 50,w 30");
 		//Info-TextAreas mit sich anpassenden Infos... wie macht man das
 		
 		//ActionListener fuer den wuerfeln-Button
@@ -77,12 +84,10 @@ public class Spielfenster {
 				int zugweite = monopoly.wuerfel();
 				Spieler spieler = monopoly.getTurn().getWerIstDran();
 				monopoly.move(spieler, zugweite);
-				JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
 			}
 		});
 		sP.addMouseListener(new MouseListener(){
 			public void mouseClicked(MouseEvent me) {
-				System.out.println(sP.getWidth());
 				//me.getX()/100;
 				System.out.println("\"pos "+ Math.round((double)me.getX()/sP.getWidth()*100)/100.0+"al "
 						+ Math.round((double)me.getY()/sP.getHeight()*100)/100.0+"al\"");

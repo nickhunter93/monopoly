@@ -1,10 +1,13 @@
 package monopoly.local.valueobjects;
 
+import java.awt.Image;
+
 public class Spieler {
 	
 	private String spielerName;
 	private Feld spielerPosition;
 	private int spielerNummer, budget;
+	private Image spielfigur;
 	
 	/**
 	 * Konstruktor der Klasse Spieler
@@ -21,29 +24,38 @@ public class Spieler {
 		this.budget = budget;
 	}
 	
+	public void setSpielfigur(Image spielfigur){
+		this.spielfigur = spielfigur;
+	}
+	
+	public Image getSpielfigur(){
+		return spielfigur;
+	}
+	
+	
 	/**
-	 * @return: gibt den NAmen des Spielers als String zurück
+	 * @return: gibt den NAmen des Spielers als String zurï¿½ck
 	 */
 	public String getSpielerName(){
 		return spielerName;
 	}
 	
 	/**
-	 * @return: gibt den Geldbetrag den der Spieler besitzt als int zurück
+	 * @return: gibt den Geldbetrag den der Spieler besitzt als int zurï¿½ck
 	 */
 	public int getSpielerBudget(){
 		return budget;
 	}
 	
 	/**
-	 * ändert den Geldbetrag den der Spieler besitzt
+	 * ï¿½ndert den Geldbetrag den der Spieler besitzt
 	 */
 	public void setSpielerBudget(int budget){
 		this.budget = budget;
 	}
 	
 	/**
-	 * @return: gibt die Nummer des Spielers zurück
+	 * @return: gibt die Nummer des Spielers zurï¿½ck
 	 */
 	public int getSpielerNummer(){
 		return spielerNummer;
@@ -57,7 +69,7 @@ public class Spieler {
 	}
 	
 	/**
-	 * @return: gibt die Spielerposition zurück
+	 * @return: gibt die Spielerposition zurï¿½ck
 	 */
 	public Feld getSpielerPosition(){
 		return spielerPosition;
@@ -79,7 +91,7 @@ public class Spieler {
 	
 	/**
 	 * Methode die bestimmt wann ein Spieler gleich ist
-	 * gleich wenn: die Spielernamen und die Spielernummern übereinstimmen
+	 * gleich wenn: die Spielernamen und die Spielernummern ï¿½bereinstimmen
 	 */
 	public boolean equals(Spieler spieler){
 		if(this.spielerName.equals(spieler.getSpielerName())){
