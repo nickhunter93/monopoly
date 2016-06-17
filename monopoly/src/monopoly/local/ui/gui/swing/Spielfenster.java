@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -37,7 +39,7 @@ public class Spielfenster {
 	/**
 	 * Konstruktor der Klasse Spielfenster
 	 * ein neuer JFrame wird erstellt und alle Komponenten hinzugefuegt
-	 * enthaelt alle ActionListener für das Spielfenster 
+	 * enthaelt alle ActionListener fï¿½r das Spielfenster 
 	 * @param monopoly
 	 */
 	public Spielfenster(Monopoly monopoly){
@@ -78,7 +80,35 @@ public class Spielfenster {
 				JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
 			}
 		});
-		
+		sP.addMouseListener(new MouseListener(){
+			public void mouseClicked(MouseEvent me) {
+				System.out.println(sP.getWidth());
+				//me.getX()/100;
+				System.out.println("\"pos "+ Math.round((double)me.getX()/sP.getWidth()*100)/100.0+"al "
+						+ Math.round((double)me.getY()/sP.getHeight()*100)/100.0+"al\"");
+				
+			}
+
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		//ActionListener fuer den Haus-bauen-Button
 		sBP.getButton2().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -111,7 +141,7 @@ public class Spielfenster {
 			}
 		});
 		
-		//ActionListener für den bauen-Button
+		//ActionListener fï¿½r den bauen-Button
 		haFenster.getHaButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				Spieler spieler = monopoly.getTurn().getWerIstDran();
