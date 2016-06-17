@@ -230,13 +230,17 @@ public class PersistenzLaden {
 				int hausanzahl = Integer.parseInt(laden.readLine());
 				boolean hypothek = laden.readLine().equals("w") ? true : false;
 				int hauspreis = Integer.parseInt(laden.readLine());
-				Spieler spieler = new Spieler("Bank", 99, null, -1);
-				
+				int spielernummer = Integer.parseInt(laden.readLine());
+				Spieler spieler;
+				if(spielernummer == 99){
+					spieler = new Spieler("Bank", 99, null, -1);
+				}else{
+					spieler = new Spieler("Bank",98,null,-1);
+				}
 				feld[i] = new Strasse(str,kaufpreis,mietpreis,hypothek,i);
 				((Strasse)feld[i]).setHaeuseranzahl(hausanzahl);
 				((Strasse)feld[i]).setHauspreis(hauspreis);
 				((Strasse)feld[i]).setBesitzer(spieler);
-				laden.readLine();
 				laden.readLine();
 			}
 		}
