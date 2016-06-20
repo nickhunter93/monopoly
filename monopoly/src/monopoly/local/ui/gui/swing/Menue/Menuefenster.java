@@ -57,7 +57,14 @@ public class Menuefenster {
 			public void actionPerformed(ActionEvent e){
 				menue.remove(hauptPanel.getmPanel());
 				menue.repaint();
-				mBeitreten();
+				if(monopoly.getAllSpieler().size() >= 6){
+					menue.remove(panel.getmPanel());
+					mInit();
+					JOptionPane.showMessageDialog(menue, "Es können nicht mehr als 6 Spieler mitspielen");
+				}
+				else{
+					mBeitreten();
+				}
 			}
 		});
 		

@@ -133,6 +133,16 @@ public class Spielverwaltung {
 		return "Keine Strasse gefunden.";
 
 	}
+	
+	public boolean getHypothek(int position){
+		if (feld.getSpielfeld()[position] instanceof Strasse) {
+			Strasse strasse = (Strasse) feld.getSpielfeld()[position];
+			return strasse.getHypothek();
+			
+			}else{
+				return false;
+			}
+		}
 
 	/**
 	 * 

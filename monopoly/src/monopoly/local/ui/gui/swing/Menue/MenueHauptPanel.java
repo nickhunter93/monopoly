@@ -14,6 +14,7 @@ public class MenueHauptPanel {
 	private JButton mButton1;
 	private JButton mButton2;
 	private JButton mButton3;
+	private JButton mButton4;
 	private MenuePanel mPanel;
 	
 	/**
@@ -28,6 +29,7 @@ public class MenueHauptPanel {
 				mButton1 = new JButton("Verlassen");
 				mButton2 = new JButton("Spiel starten");
 				mButton3 = new JButton("Spiel laden");
+				mButton4 = new JButton("Multiplayer");
 				mPanel = new MenuePanel();
 				
 				mPanel.setLayout(mLayout);
@@ -45,26 +47,31 @@ public class MenueHauptPanel {
 				mPanel.add(new JLabel(""), "w 125");
 				mPanel.add(mButton3,"w 300, h 50, cell 2 9, pushx, growx, shrinkx");
 				mPanel.add(new JLabel(""), "w 50");
+				mPanel.add(mButton4, "w 300, h 50, cell 2 10, pushx, growx, shrinkx");
 				
 				mButton.setToolTipText("Du tritts einem Spiel bei");
 				mButton1.setToolTipText("Du verl�sst ein Spiel");
 				mButton2.setToolTipText("Du startest ein Spiel");
 				mButton3.setToolTipText("Du l�dst ein angefangenes Spiel");
+				mButton4.setToolTipText("Du startest ein mehrspieler Spiel");
 				
 				mButton.setBackground(new Color(255,255,93));
 				mButton1.setBackground(new Color(255,255,93));
 				mButton2.setBackground(new Color(255,255,93));
 				mButton3.setBackground(new Color(255,255,93));
+				mButton4.setBackground(new Color(255,255,93));
 				
 				mButton.setBorderPainted(false);
 				mButton1.setBorderPainted(false);
 				mButton2.setBorderPainted(false);
 				mButton3.setBorderPainted(false);
+				mButton4.setBorderPainted(false);
 				
 				mButton.setFont(mFont);
 				mButton1.setFont(mFont);
 				mButton2.setFont(mFont);
 				mButton3.setFont(mFont);
+				mButton4.setFont(mFont);
 				
 				
 	}

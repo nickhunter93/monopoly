@@ -144,7 +144,7 @@ public class Monopoly {
 		pmSpeichern.saveAll(spieler.getAllSpieler(), logik.getSpielfeld(), logik.getTurn(),datei );
 	}
 	
-	//public boolean getHypothek(){
-	//return logik.getHypothek();
-	//}
+	public boolean getHypothek(int position){
+		return logik.getHypothek(position);
+	}
 }
