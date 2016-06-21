@@ -7,7 +7,7 @@ public class SpielerPosition {
 
 	public String getSpielerPosition(int feldnummer, int spielernummer) {
 		switch (feldnummer) {
-		case 13:
+		case 0:
 			switch (spielernummer) {
 			case 1:
 				return "pos 0.9al 0.9al,h 50,w 30";
@@ -239,7 +239,7 @@ public class SpielerPosition {
 				return "pos 0al 0al,h 50,w 30";
 			}
 
-		case 0:
+		case 13:
 			switch (spielernummer) {
 			case 1:
 				return "pos 0.01al 0.66al,h 50,w 30";
