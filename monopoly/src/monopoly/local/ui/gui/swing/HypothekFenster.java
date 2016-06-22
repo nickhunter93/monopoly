@@ -17,7 +17,7 @@ import monopoly.local.valueobjects.Spieler;
 import net.miginfocom.swing.MigLayout;
 
 public class HypothekFenster extends JPanel {
-	//Variablen für "Hypothek aufnehmen" Fenster
+	//Variablen fï¿½r "Hypothek aufnehmen" Fenster
 	private JPanel hypothek;
 	private JPanel hyPanel1;
 	private JPanel hyPanel2;

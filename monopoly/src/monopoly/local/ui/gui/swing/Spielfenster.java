@@ -116,16 +116,16 @@ public class Spielfenster {
 		spiel.setVisible(true);
 		turn = monopoly.getTurn();
 		player = turn.getWerIstDran();
-		player.setSpielerPosition(monopoly.getSpielfeld()[1]);
-		try {
-			monopoly.kaufStrasse(player);
-			player.setSpielerPosition(monopoly.getSpielfeld()[3]);
-			monopoly.kaufStrasse(player);
-			player.setSpielerPosition(monopoly.getLos());
-		} catch (GehaltException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
+//		player.setSpielerPosition(monopoly.getSpielfeld()[1]);
+//		try {
+//			monopoly.kaufStrasse(player);
+//			player.setSpielerPosition(monopoly.getSpielfeld()[3]);
+//			monopoly.kaufStrasse(player);
+//			player.setSpielerPosition(monopoly.getLos());
+//		} catch (GehaltException e2) {
+//			// TODO Auto-generated catch block
+//			e2.printStackTrace();
+//		}
 		// Info-TextAreas mit sich anpassenden Infos
 		// sIP2.getSTextArea().setText(monopoly.getStrasseName(spieler) +
 		// monopoly.getHaeuseranzahl(position) + monopoly.get);
@@ -274,7 +274,6 @@ public class Spielfenster {
 		// ActionListener fuer den speichern-Button
 		sBP.getButton4().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// monopoly.saveAll();
 				spiel.remove(sBP);
 				spiel.add(speFenster, "cell 1 0, pushx, growx, shrinkx");
 				spiel.repaint();

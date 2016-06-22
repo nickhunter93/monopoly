@@ -81,7 +81,6 @@ public class Menuefenster {
 		hauptPanel.getmButton2().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if(monopoly.getAllSpieler().size() < 2){
-					//JOptionPane fehler =  new JOptionPane();
 					JOptionPane.showMessageDialog(menue, "Es werden mindestens zwei Spieler ben�tigt");
 					return;
 				}
