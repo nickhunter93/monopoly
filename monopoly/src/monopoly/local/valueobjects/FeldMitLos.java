@@ -6,7 +6,6 @@ public class FeldMitLos implements Aktion {
 	
 	private Feld target;
 	private Monopoly monopoly;
-	private Spieler spieler;
 
 	public FeldMitLos(Monopoly monopoly, Feld target) {
 		this.monopoly = monopoly;
@@ -15,22 +14,13 @@ public class FeldMitLos implements Aktion {
 	}
 
 	public void ausfuehren() {
-		spieler = monopoly.getTurn().getWerIstDran();
-		Feld current = spieler.getSpielerPosition();
-		spieler.setSpielerPosition(target);
+		Feld current = monopoly.getTurn().getWerIstDran().getSpielerPosition();
+		monopoly.getTurn().getWerIstDran().setSpielerPosition(target);
 		if(current.getNummer() >= target.getNummer()){
-			spieler.setSpielerBudget(spieler.getSpielerBudget() + 4000);
+			monopoly.getTurn().getWerIstDran().setSpielerBudget(monopoly.getTurn().getWerIstDran().getSpielerBudget() + 4000);
 		}
 	}
 	
-
-	public void setSpieler(Spieler spieler) {
-		this.spieler = spieler;
-	}
-
-	public Spieler getSpieler() {
-		return spieler;
-	}
 
 }
 

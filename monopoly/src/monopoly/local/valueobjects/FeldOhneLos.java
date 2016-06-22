@@ -5,7 +5,6 @@ import monopoly.local.domain.Monopoly;
 public class FeldOhneLos implements Aktion {
 
 	private Feld target;
-	private Spieler spieler;
 	private Monopoly monopoly;
 	
 	public FeldOhneLos(Monopoly monopoly, Feld target) {
@@ -15,17 +14,8 @@ public class FeldOhneLos implements Aktion {
 	}
 
 	public void ausfuehren() {
-		spieler = monopoly.getTurn().getWerIstDran();
-		spieler.setSpielerPosition(target);
+		monopoly.getTurn().getWerIstDran().setSpielerPosition(target);
 //		ereignis.aufFeldOhneLos(spieler, spielfeld.getSpielfeld()[7]);		
 	}
 
-
-	public void setSpieler(Spieler spieler) {
-		this.spieler = spieler;
-	}
-	
-	public Spieler getSpieler() {
-		return spieler;
-	}
 }

@@ -4,7 +4,6 @@ import monopoly.local.domain.Monopoly;
 
 public class GefaengnisFrei implements Aktion {
 
-	private Spieler spieler;
 	private Monopoly monopoly;
 	
 	public GefaengnisFrei(Monopoly monopoly) {
@@ -15,17 +14,8 @@ public class GefaengnisFrei implements Aktion {
 	public void ausfuehren() {
 //		ereignis.gefaengnisfrei(spieler);
 //		jail.release(spieler);
-		monopoly.getJail().release(spieler);
+		monopoly.getJail().release(monopoly.getTurn().getWerIstDran());
 		
-	}
-	
-
-	public void setSpieler(Spieler spieler) {
-		this.spieler = spieler;
-	}
-	
-	public Spieler getSpieler() {
-		return spieler;
 	}
 
 }

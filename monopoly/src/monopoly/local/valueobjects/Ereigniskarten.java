@@ -61,12 +61,8 @@ private Monopoly monopoly;
 		if(deck == null){
 			deckMischen();
 		}
-		if(deck.size() == 0){
-			deckMischen();
-		}
 		// TODO Auto-generated method stub
 		Aktion aktion = deck.remove((int) Math.floor(Math.random() * 15));
-		
 		return aktion;
 	}
 	

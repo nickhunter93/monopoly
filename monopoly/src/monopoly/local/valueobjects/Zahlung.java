@@ -5,7 +5,6 @@ import monopoly.local.domain.Monopoly;
 public class Zahlung implements Aktion {
 	
 	private int betrag;
-	private Spieler spieler;
 	private Monopoly monopoly;
 
 	public Zahlung(Monopoly monopoly, int betrag) {
@@ -23,17 +22,8 @@ public class Zahlung implements Aktion {
 	}
 
 	public void ausfuehren() {
-		spieler = monopoly.getTurn().getWerIstDran();
-		betrag = spieler.getSpielerBudget() + betrag;
+		betrag = monopoly.getTurn().getWerIstDran().getSpielerBudget() + betrag;
 	}
 	
-
-	public void setSpieler(Spieler spieler) {
-		this.spieler = spieler;
-	}
-	
-	public Spieler getSpieler() {
-		return spieler;
-	}
 
 }
