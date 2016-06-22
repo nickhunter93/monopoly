@@ -262,26 +262,17 @@ public class Spielfenster {
 		});
 
 		// ActionListener fuer den Hypothek-aufnehmen-Button
-		sBP.getButton3().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				spiel.remove(sBP);
-				spiel.add(hyFenster, "cell 1 0, push, grow, shrink");
-				spiel.repaint();
-				spiel.revalidate();
-			}
-		});
+		sBP.getButton3().addActionListener(e -> hyFensterAufrufen());
 
 		// ActionListener fuer den speichern-Button
-		sBP.getButton4().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// monopoly.saveAll();
-				spiel.remove(sBP);
-				spiel.add(speFenster, "cell 1 0, pushx, growx, shrinkx");
-				spiel.repaint();
-				spiel.revalidate();
-				// JOptionPane.showMessageDialog(spiel, "Eggs are not supposed
-				// to be green.");
-			}
+		sBP.getButton4().addActionListener(e -> {
+			// monopoly.saveAll();
+			spiel.remove(sBP);
+			spiel.add(speFenster, "cell 1 0, pushx, growx, shrinkx");
+			spiel.repaint();
+			spiel.revalidate();
+			// JOptionPane.showMessageDialog(spiel, "Eggs are not supposed
+			// to be green.");
 		});
 
 		// ActionListener für den bauen-Button
@@ -395,6 +386,13 @@ public class Spielfenster {
 				spiel.revalidate();
 			}
 		});
+	}
+
+	private void hyFensterAufrufen() {
+		spiel.remove(sBP);
+		spiel.add(hyFenster, "cell 1 0, push, grow, shrink");
+		spiel.repaint();
+		spiel.revalidate();
 	}
 
 	public void bildHinzu(int zugweite) {
