@@ -45,6 +45,7 @@ public class Spielfenster {
 
 	private Vector<Spieler> spielerliste;
 
+	Spieler player;
 	Spieler spieler;
 	Spieler spieler1;
 	Spieler spieler2;
@@ -112,11 +113,10 @@ public class Spielfenster {
 		spiel.setSize(1000, 725);
 		spiel.setVisible(true);
 		turn = monopoly.getTurn();
-		Spieler player = turn.getWerIstDran();
+		player = turn.getWerIstDran();
 		// Info-TextAreas mit sich anpassenden Infos
 		// sIP2.getSTextArea().setText(monopoly.getStrasseName(spieler) +
 		// monopoly.getHaeuseranzahl(position) + monopoly.get);
-		sIP.getSTextArea().setText(("" + monopoly.getYourStreets(player)) + "");
 		
 		// ActionListener fuer den wuerfeln-Button
 		sBP.getButton1().addActionListener(new ActionListener() {
@@ -129,13 +129,22 @@ public class Spielfenster {
 						if (wurf == 6) {
 							monopoly.nextTurn();
 							turn = monopoly.getTurn();
+							sBP.getButton1().setText("Würfel");
+							sBP.repaint();
+							sBP.revalidate();
 						} else {
 							monopoly.getTurn().Jailed();
 							turn = monopoly.getTurn();
+							sBP.getButton1().setText("Jailed");
+							sBP.repaint();
+							sBP.revalidate();
 						}
 					}else{
 						monopoly.nextTurn();
 						turn = monopoly.getTurn();
+						sBP.getButton1().setText("Würfel");
+						sBP.repaint();
+						sBP.revalidate();
 					}
 					break;
 				case Dice:
@@ -146,17 +155,33 @@ public class Spielfenster {
 					bildHinzu(0);
 					monopoly.nextTurn();
 					turn = monopoly.getTurn();
+					sBP.getButton1().setText("Passiv");
+					sBP.repaint();
+					sBP.revalidate();
 					break;
 				case Passiv:
 					monopoly.nextTurn();
 					turn = monopoly.getTurn();
+					sBP.getButton1().setText("Runde Beenden");
+					sBP.repaint();
+					sBP.revalidate();
 					break;
 				case End:
 					monopoly.nextTurn();
 					turn = monopoly.getTurn();
+					sBP.getButton1().setText("Jail Check");
+					sBP.repaint();
+					sBP.revalidate();
 					break;
 				default:
 				}
+				if(player.getSpielerPosition() instanceof Strasse){
+					
+					sIP.getJTextArea().setText(""+turn.getPhase()+"\n");
+				}
+				player = turn.getWerIstDran();
+				sIP2.getJTextArea().setText("Name :"+player.getSpielerName()+"\nGehalt : "+player.getSpielerBudget()+
+						"\nPosition : "+player.getSpielerPosition().getName());
 //				int zugweite = monopoly.wuerfel();
 //				Spieler spieler = monopoly.getTurn().getWerIstDran();
 //				monopoly.move(spieler, zugweite);

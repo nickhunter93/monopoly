@@ -30,7 +30,7 @@ public class SInfoPanel extends JPanel{
 		
 		add(sP, "push, grow, shrink");
 		
-		sTextArea.setText("Dich muss ich bestimmt iwie aendern können...");
+		sTextArea.setText("Dich muss ich bestimmt iwie aendern kï¿½nnen...");
 		sTextArea.setEditable(false);
 		sTextArea.setAutoscrolls(true);
 		sTextArea.setLineWrap(true);
@@ -47,7 +47,7 @@ public class SInfoPanel extends JPanel{
 	 * 
 	 * @return gibt das JTextArea Info.feld zurueck 
 	 */
-	public JTextArea getSTextArea(){
+	public JTextArea getJTextArea(){
 		return sTextArea;
 	}
 }
