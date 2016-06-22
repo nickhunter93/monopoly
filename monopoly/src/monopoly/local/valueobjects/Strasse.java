@@ -107,7 +107,7 @@ public class Strasse extends Feld {
 	    "Kaufpreis: " + kaufpreis + " EUR" + "\n" +
 		"Mietpreis: " + mietpreis + " EUR/Monat" + "\n" +
 	    "Häuseranzahl: " + haeuseranzahl + "\n" +
-		"Status: "
+		"Besitzer: "+besitzer.getSpielerName()
 		);
 	}
 }

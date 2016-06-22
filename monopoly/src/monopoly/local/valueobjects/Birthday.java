@@ -16,11 +16,11 @@ private Monopoly monopoly;
 
 	public void ausfuehren() {
 		for(Spieler s : monopoly.getAllSpieler()){
-			if(s.getSpielerNummer() == spieler.getSpielerNummer()){
-				spieler.setSpielerBudget(spieler.getSpielerBudget());
+			if(s.getSpielerNummer() == monopoly.getTurn().getWerIstDran().getSpielerNummer()){
+				spieler.setSpielerBudget(monopoly.getTurn().getWerIstDran().getSpielerBudget());
 			} else {
 			s.setSpielerBudget(s.getSpielerBudget() - 2000);
-			spieler.setSpielerBudget(spieler.getSpielerBudget() + 2000);
+			spieler.setSpielerBudget(monopoly.getTurn().getWerIstDran().getSpielerBudget() + 2000);
 			}
 		}
 	}

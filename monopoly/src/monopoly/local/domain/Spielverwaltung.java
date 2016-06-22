@@ -156,6 +156,10 @@ public class Spielverwaltung {
 		int miete = 0;
 		if (position instanceof Strasse) {
 			strasse = ((Strasse) position);
+			spieler.setSpielerBudget(spieler.getSpielerBudget()-strasse.getMietpreis());
+			if(strasse.getBesitzer().getSpielerNummer() != 99 && strasse.getBesitzer().getSpielerNummer() != 98){
+				strasse.getBesitzer().setSpielerBudget(strasse.getBesitzer().getSpielerBudget()+strasse.getMietpreis());
+			}
 			miete = strasse.getMietpreis();
 		}
 		if (position instanceof Jail) {

@@ -27,6 +27,7 @@ import monopoly.local.domain.Spielverwaltung.Turn;
 import monopoly.local.domain.exceptions.GehaltException;
 import monopoly.local.domain.exceptions.HausbauException;
 import monopoly.local.ui.gui.swing.Menue.Menuefenster;
+import monopoly.local.valueobjects.Feld;
 import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Strasse;
 import net.miginfocom.swing.MigLayout;
@@ -122,11 +123,16 @@ public class Spielfenster {
 		sBP.getButton1().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Phase phase = turn.getPhase();
+				if(phase == Phase.JailCheck && !(monopoly.isInJail(turn.getWerIstDran()))){
+					monopoly.nextTurn();
+					phase = turn.getPhase();
+				}
 				switch (phase) {
 				case JailCheck:
 					if (monopoly.isInJail(turn.getWerIstDran())) {
 						int wurf = monopoly.wuerfel();
 						if (wurf == 6) {
+							monopoly.getJail().release(player);
 							monopoly.nextTurn();
 							turn = monopoly.getTurn();
 							sBP.getButton1().setText("Würfel");
@@ -160,6 +166,27 @@ public class Spielfenster {
 					sBP.revalidate();
 					break;
 				case Passiv:
+					Spieler besitzer = player.getSpielerPosition().getBesitzer();
+					if(besitzer.getSpielerNummer() == 99){
+						JOptionPane pane = new JOptionPane();
+						String message = "Wollen Sie die Strasse : "+player.getSpielerPosition().getName()+" kaufen?";
+						String title = "Strasse kaufen?";
+						pane.setOptionType(JOptionPane.YES_NO_OPTION);
+						pane.setMessageType(JOptionPane.QUESTION_MESSAGE);
+						switch(pane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE)){
+						case JOptionPane.YES_OPTION : try {
+								monopoly.kaufStrasse(player);
+							} catch (GehaltException e1) {
+								JOptionPane.showMessageDialog(null, e1.getMessage(), "Gehalt überschritten!", JOptionPane.WARNING_MESSAGE);
+							}
+							break;
+						case JOptionPane.NO_OPTION :
+							break;
+						default :
+						}
+					}else if(besitzer.getSpielerNummer() != player.getSpielerNummer()){
+						monopoly.miete(player);
+					}
 					monopoly.nextTurn();
 					turn = monopoly.getTurn();
 					sBP.getButton1().setText("Runde Beenden");
@@ -169,15 +196,15 @@ public class Spielfenster {
 				case End:
 					monopoly.nextTurn();
 					turn = monopoly.getTurn();
-					sBP.getButton1().setText("Jail Check");
+					sBP.getButton1().setText("Würfeln");
 					sBP.repaint();
 					sBP.revalidate();
 					break;
 				default:
 				}
 				if(player.getSpielerPosition() instanceof Strasse){
-					
-					sIP.getJTextArea().setText(""+turn.getPhase()+"\n");
+					Strasse strasse = (Strasse)player.getSpielerPosition();
+					sIP.getJTextArea().setText(""+turn.getPhase()+"\n"+strasse);
 				}
 				player = turn.getWerIstDran();
 				sIP2.getJTextArea().setText("Name :"+player.getSpielerName()+"\nGehalt : "+player.getSpielerBudget()+
@@ -237,6 +264,7 @@ public class Spielfenster {
 			public void actionPerformed(ActionEvent e) {
 				spiel.remove(sBP);
 				spiel.add(haFenster, "cell 1 0, push, grow, shrink");
+				haFenster.refreshList();
 				spiel.repaint();
 				spiel.revalidate();
 			}
@@ -274,13 +302,10 @@ public class Spielfenster {
 					try {
 						monopoly.bauHaus(position, spieler);
 					} catch (HausbauException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(spiel, e1.getMessage());
 					} catch (GehaltException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(spiel, e1.getMessage());
 					}
-					JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
 					spiel.remove(haFenster);
 					spiel.add(sBP, "cell 1 0, push, grow, shrink");
 					spiel.repaint();

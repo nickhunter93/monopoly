@@ -38,6 +38,8 @@ public class HausFenster extends JPanel {
 	private Vector<String> spalten;
 	private Monopoly monopoly;
 	private int position;
+	private Font haFont1 = new Font("Berlin Sans FB",Font.ITALIC,14);
+	private Font haFont2 = new Font("Berlin Sans FB Demi",Font.PLAIN,14);
 	
 	/**
 	 * Konstruktor der Klasse HausFenster
@@ -49,7 +51,6 @@ public class HausFenster extends JPanel {
 	public HausFenster(Monopoly monopoly){
 		haBauen = new JPanel();
 		this.monopoly = monopoly;
-		monopoly.TurnIni(true);
 		
 
 //		// irgendwo
@@ -64,26 +65,17 @@ public class HausFenster extends JPanel {
 		MigLayout haLayout3 = new MigLayout("", "[]10[]10[]", "[]");
 
 		
-		Font haFont1 = new Font("Berlin Sans FB",Font.ITALIC,14);
-		Font haFont2 = new Font("Berlin Sans FB Demi",Font.PLAIN,14);
+		
 		
 		haPanel1 = new JPanel();
 		haPanel2 = new JPanel();
 		haPanel3 = new JPanel();
-		Spieler spieler = monopoly.getTurn().getWerIstDran();
-		String inhalt[] = {};
-		if(monopoly.getYourStreets(spieler) != null){
-			for(int i = 0; i <= monopoly.getYourStreets(spieler).length; i++){
-				inhalt[i] = monopoly.getFeldName(i);
-			}
-		}
-		liste  = new JList(inhalt);
 		haSP = new JScrollPane(liste);
 		haLabel = new JLabel("Hï¿½useranzahl: ");
 		haHausAnz = new JTextField();
 		haButton = new JButton("bauen");
 		haButton2 = new JButton("zurueck");
-		position = spieler.getSpielerPosition().getNummer();
+		
 		
 		setLayout(haLayout);
 		haPanel3.setLayout(haLayout3);
@@ -98,23 +90,25 @@ public class HausFenster extends JPanel {
 		
 		haSP.setPreferredSize(new Dimension(340,200));
 		
-		liste.setFont(haFont2);
+		
 		haLabel.setFont(haFont2);
 		haHausAnz.setFont(haFont2);
 		haButton.setFont(haFont1);
 		haButton2.setFont(haFont1);
 		
+		refreshList();
+		
+
 		setBorder(BorderFactory.createLineBorder(new Color(255,255,255), 2));
 		
 		haPanel2.setBackground(new Color(197,251,255));
 		haPanel3.setBackground(new Color(197,251,255));
 		haButton.setBackground(new Color(255,255,93));
 		haButton2.setBackground(new Color(255,255,93));
-		liste.setBackground(new Color(255,255,255));
 		haHausAnz.setBackground(new Color(255,255,255));
 		
 		haHausAnz.setEditable(false);
-		haHausAnz.setText(""+ monopoly.getHaeuseranzahl(position)); //möglicherweise muss das noch mal anders gemacht werden
+		 //mï¿½glicherweise muss das noch mal anders gemacht werden
 		
 		haPanel1.setBackground(new Color(197,251,255));
 		setOpaque(false);
@@ -129,6 +123,8 @@ public class HausFenster extends JPanel {
 	public JButton getHaButton(){
 		return haButton;
 	}
+	
+	
 	
 	/**
 	 * 
@@ -156,4 +152,24 @@ public class HausFenster extends JPanel {
 		return liste;
 	}
 	
+	public void refreshList(){
+		Spieler spieler = monopoly.getTurn().getWerIstDran();
+		String inhalt[];
+		if(spieler != null && monopoly.getYourStreets(spieler) != null){
+			inhalt = new String[monopoly.getYourStreets(spieler).length];
+			for(int i = 0; i <= monopoly.getYourStreets(spieler).length-1; i++){
+				inhalt[i] = monopoly.getYourStreets(spieler)[i].getName();
+			}
+			position = spieler.getSpielerPosition().getNummer();
+			haHausAnz.setText(""+ monopoly.getHaeuseranzahl(position));
+
+			liste  = new JList<String>(inhalt);
+			haSP = new JScrollPane(liste);
+			liste.setFont(haFont2);
+			liste.setBackground(new Color(255,255,255));
+			liste.repaint();
+			liste.revalidate();
+		}
+
+	}
 }
