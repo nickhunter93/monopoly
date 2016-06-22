@@ -61,12 +61,12 @@ public class HausFenster extends JPanel {
 //		}
 		
 		
-		MigLayout haLayout = new MigLayout("", "[]", "[]10[]");
+		MigLayout haLayout = new MigLayout("", "[]10[]", "[]10[]");
 		MigLayout haLayout3 = new MigLayout("", "[]10[]10[]", "[]");
 
 		
-		
-		
+		String[] str = {"Hallo","Test"};
+		liste = new JList<String>(str);
 		haPanel1 = new JPanel();
 		haPanel2 = new JPanel();
 		haPanel3 = new JPanel();
@@ -90,7 +90,8 @@ public class HausFenster extends JPanel {
 		
 		haSP.setPreferredSize(new Dimension(340,200));
 		
-		
+
+		liste.setFont(haFont2);
 		haLabel.setFont(haFont2);
 		haHausAnz.setFont(haFont2);
 		haButton.setFont(haFont1);
@@ -101,6 +102,7 @@ public class HausFenster extends JPanel {
 
 		setBorder(BorderFactory.createLineBorder(new Color(255,255,255), 2));
 		
+		liste.setBackground(Color.WHITE);
 		haPanel2.setBackground(new Color(197,251,255));
 		haPanel3.setBackground(new Color(197,251,255));
 		haButton.setBackground(new Color(255,255,93));
@@ -155,20 +157,18 @@ public class HausFenster extends JPanel {
 	public void refreshList(){
 		Spieler spieler = monopoly.getTurn().getWerIstDran();
 		String inhalt[];
+		
 		if(spieler != null && monopoly.getYourStreets(spieler) != null){
-			inhalt = new String[monopoly.getYourStreets(spieler).length];
-			for(int i = 0; i <= monopoly.getYourStreets(spieler).length-1; i++){
-				inhalt[i] = monopoly.getYourStreets(spieler)[i].getName();
+			Strasse[] strassen = monopoly.getYourStreets(spieler);
+			inhalt = new String[strassen.length];
+			for(int i = 0; i < strassen.length; i++){
+				inhalt[i] = strassen[i].getName();
 			}
 			position = spieler.getSpielerPosition().getNummer();
 			haHausAnz.setText(""+ monopoly.getHaeuseranzahl(position));
-
-			liste  = new JList<String>(inhalt);
-			haSP = new JScrollPane(liste);
-			liste.setFont(haFont2);
-			liste.setBackground(new Color(255,255,255));
-			liste.repaint();
-			liste.revalidate();
+			liste.setListData(inhalt);
+			haSP.repaint();
+			haSP.revalidate();
 		}
 
 	}

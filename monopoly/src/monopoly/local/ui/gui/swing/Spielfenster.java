@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Vector;
@@ -115,6 +116,16 @@ public class Spielfenster {
 		spiel.setVisible(true);
 		turn = monopoly.getTurn();
 		player = turn.getWerIstDran();
+		player.setSpielerPosition(monopoly.getSpielfeld()[1]);
+		try {
+			monopoly.kaufStrasse(player);
+			player.setSpielerPosition(monopoly.getSpielfeld()[3]);
+			monopoly.kaufStrasse(player);
+			player.setSpielerPosition(monopoly.getLos());
+		} catch (GehaltException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		// Info-TextAreas mit sich anpassenden Infos
 		// sIP2.getSTextArea().setText(monopoly.getStrasseName(spieler) +
 		// monopoly.getHaeuseranzahl(position) + monopoly.get);
@@ -173,11 +184,11 @@ public class Spielfenster {
 						String title = "Strasse kaufen?";
 						pane.setOptionType(JOptionPane.YES_NO_OPTION);
 						pane.setMessageType(JOptionPane.QUESTION_MESSAGE);
-						switch(pane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE)){
+						switch(pane.showConfirmDialog(spiel, message, title, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE)){
 						case JOptionPane.YES_OPTION : try {
 								monopoly.kaufStrasse(player);
 							} catch (GehaltException e1) {
-								JOptionPane.showMessageDialog(null, e1.getMessage(), "Gehalt überschritten!", JOptionPane.WARNING_MESSAGE);
+								JOptionPane.showMessageDialog(spiel, e1.getMessage(), "Gehalt überschritten!", JOptionPane.WARNING_MESSAGE);
 							}
 							break;
 						case JOptionPane.NO_OPTION :
@@ -231,31 +242,11 @@ public class Spielfenster {
 //				}
 			}                                                       
 		});
-		sP.addMouseListener(new MouseListener() {
+		sP.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent me) {
 				// me.getX()/100;
 				System.out.println("\"pos " + Math.round((double) me.getX() / sP.getWidth() * 100) / 100.0 + "al "
 						+ Math.round((double) me.getY() / sP.getHeight() * 100) / 100.0 + "al\"");
-
-			}
-
-			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
 
 			}
 		});
