@@ -266,6 +266,7 @@ public class Spielfenster {
 			public void actionPerformed(ActionEvent e) {
 				spiel.remove(sBP);
 				spiel.add(hyFenster, "cell 1 0, push, grow, shrink");
+				hyFenster.refreshList();
 				spiel.repaint();
 				spiel.revalidate();
 			}

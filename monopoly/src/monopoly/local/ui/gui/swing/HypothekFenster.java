@@ -11,9 +11,12 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
 
 import monopoly.local.domain.Monopoly;
 import monopoly.local.valueobjects.Spieler;
+import monopoly.local.valueobjects.Strasse;
 import net.miginfocom.swing.MigLayout;
 
 public class HypothekFenster extends JPanel {
@@ -28,6 +31,9 @@ public class HypothekFenster extends JPanel {
 	private JButton hyButton2;
 	private JButton hyButton3;
 	private Monopoly monopoly;
+
+	private JTextField haHausAnz;
+	private int position;
 	
 	/**
 	 * Konstruktor der Klasse HypothekFenster
@@ -54,14 +60,16 @@ public class HypothekFenster extends JPanel {
 		hyButton2 = new JButton("abbezahlen");
 		hyButton3 = new JButton("zurueck");
 		//String hyInhalt[] = {"Inhalt 1", "Inhalt 2", "Inhalt 3", "Inhalt 4"};
-		Spieler spieler = monopoly.getTurn().getWerIstDran();
-		String hyInhalt[] = {};
-		if(monopoly.getYourStreets(spieler) != null){
-			for(int i = 0; i <= monopoly.getYourStreets(spieler).length; i++){
-				hyInhalt[i] = monopoly.getFeldName(i);
-			}
-		}
-		hyListe  = new JList<String>(hyInhalt);
+//		Spieler spieler = monopoly.getTurn().getWerIstDran();
+//		String hyInhalt[] = {};
+//		if(monopoly.getYourStreets(spieler) != null){
+//			for(int i = 0; i <= monopoly.getYourStreets(spieler).length; i++){
+//				hyInhalt[i] = monopoly.getFeldName(i);
+//			}
+//		}
+		
+		String[] str = {"Hallo","Test"};
+		hyListe  = new JList<String>(str);
 		hySP = new JScrollPane(hyListe);
 		JLabel hyLabel1 = new JLabel("");
 		JLabel hyLabel2 = new JLabel("");
@@ -126,5 +134,24 @@ public class HypothekFenster extends JPanel {
 	 */
 	public JList getHyListe(){
 		return hyListe;
+	}
+	
+	public void refreshList(){
+		Spieler spieler = monopoly.getTurn().getWerIstDran();
+		String inhalt[];
+		
+		if(spieler != null && monopoly.getYourStreets(spieler) != null){
+			Strasse[] strassen = monopoly.getYourStreets(spieler);
+			inhalt = new String[strassen.length];
+			for(int i = 0; i < strassen.length; i++){
+				inhalt[i] = strassen[i].getName() + ": hat Hypothek " + Boolean.toString(strassen[i].getHypothek());
+			}
+			position = spieler.getSpielerPosition().getNummer();
+			haHausAnz.setText(""+ monopoly.getHaeuseranzahl(position));
+			hyListe.setListData(inhalt);
+			hySP.repaint();
+			hySP.revalidate();
+		}
+
 	}
 }
