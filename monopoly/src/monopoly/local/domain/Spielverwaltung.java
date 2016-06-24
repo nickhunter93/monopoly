@@ -322,19 +322,20 @@ public class Spielverwaltung {
 			}
 			if (test) {
 				int budget = spieler.getSpielerBudget();
-				if (strasse.getHaeuseranzahl() < 4) {
-					strasse.setHaeuseranzahl(strasse.getHaeuseranzahl() + 1);
+				if (strasse.getHaeuseranzahl() <= 4) {
 					if (strasse.getHaeuseranzahl() < 4) {
 						if (budget - strasse.getHauspreis() >= 0) {
 							spieler.setSpielerBudget(budget - strasse.getHauspreis());
+							strasse.setHaeuseranzahl(strasse.getHaeuseranzahl() + 1);
 						} else {
 							throw new GehaltException(spieler);
 						}
 					} else {
 						if ((budget - (2 * strasse.getHauspreis())) >= 0) {
 							spieler.setSpielerBudget(budget - (2 * strasse.getHauspreis()));
+							strasse.setHaeuseranzahl(strasse.getHaeuseranzahl() + 1);
 						} else {
-							throw new HausbauException(spieler, getSpielfeld()[position]);
+							throw new GehaltException(spieler);
 						}
 					}
 				} else {

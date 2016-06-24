@@ -20,7 +20,7 @@ private Monopoly monopoly;
 				spieler.setSpielerBudget(monopoly.getTurn().getWerIstDran().getSpielerBudget());
 			} else {
 			s.setSpielerBudget(s.getSpielerBudget() - 2000);
-			spieler.setSpielerBudget(monopoly.getTurn().getWerIstDran().getSpielerBudget() + 2000);
+			monopoly.getTurn().getWerIstDran().setSpielerBudget(monopoly.getTurn().getWerIstDran().getSpielerBudget() + 2000);
 			}
 		}
 	}

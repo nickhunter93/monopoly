@@ -65,6 +65,8 @@ private Monopoly monopoly;
 		deckMischen();
 		// TODO Auto-generated method stub
 		Aktion aktion = deck.remove((int) Math.floor(Math.random() * 15));
+		//Aktion aktion = new Birthday(monopoly);
+
 		return aktion;
 	}
 	
