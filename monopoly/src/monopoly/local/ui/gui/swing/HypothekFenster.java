@@ -68,7 +68,7 @@ public class HypothekFenster extends JPanel {
 //			}
 //		}
 		
-		String[] str = {"Hallo","Test"};
+		String[] str = {};
 		hyListe  = new JList<String>(str);
 		hySP = new JScrollPane(hyListe);
 		JLabel hyLabel1 = new JLabel("");
@@ -144,14 +144,13 @@ public class HypothekFenster extends JPanel {
 			Strasse[] strassen = monopoly.getYourStreets(spieler);
 			inhalt = new String[strassen.length];
 			for(int i = 0; i < strassen.length; i++){
-				inhalt[i] = strassen[i].getName() + ": hat Hypothek " + Boolean.toString(strassen[i].getHypothek());
+				inhalt[i] = strassen[i].getName() + " hat " + (strassen[i].getHypothek() ? "eine" : "keine") + " Hypothek";
+				//Boolean.toString(strassen[i].getHypothek();
 			}
 			position = spieler.getSpielerPosition().getNummer();
-			haHausAnz.setText(""+ monopoly.getHaeuseranzahl(position));
 			hyListe.setListData(inhalt);
 			hySP.repaint();
 			hySP.revalidate();
 		}
-
 	}
 }
