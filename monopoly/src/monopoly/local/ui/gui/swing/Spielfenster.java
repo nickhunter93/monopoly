@@ -30,7 +30,9 @@ import monopoly.local.domain.Spielverwaltung.Turn;
 import monopoly.local.domain.exceptions.GehaltException;
 import monopoly.local.domain.exceptions.HausbauException;
 import monopoly.local.ui.gui.swing.Menue.Menuefenster;
+import monopoly.local.valueobjects.Ereignisfeld;
 import monopoly.local.valueobjects.Feld;
+import monopoly.local.valueobjects.Gemeinschaftsfeld;
 import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Strasse;
 import net.miginfocom.swing.MigLayout;
@@ -199,6 +201,8 @@ public class Spielfenster {
 						}
 					}else if(besitzer.getSpielerNummer() != player.getSpielerNummer()){
 						monopoly.miete(player);
+						if(player.getSpielerPosition() instanceof Ereignisfeld || player.getSpielerPosition() instanceof Gemeinschaftsfeld)
+						JOptionPane.showConfirmDialog(spiel,monopoly.ereignisausführen(player), "Karte gezogen!", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
 					}
 					monopoly.nextTurn();
 					turn = monopoly.getTurn();
@@ -338,7 +342,8 @@ public class Spielfenster {
 					spiel.add(sBP, "cell 1 0, push, grow, shrink");
 					spiel.repaint();
 					spiel.revalidate();
-					JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
+					sIP2.getJTextArea().setText("Name :"+player.getSpielerName()+"\nGehalt : "+player.getSpielerBudget()+
+							"\nPosition : "+player.getSpielerPosition().getName());
 				}
 			}
 		});
@@ -347,17 +352,22 @@ public class Spielfenster {
 		hyFenster.getHyButton2().addActionListener(e -> {
 			// if hypothek == true --> if(monopoly.getHypothek == true){
 			// monopoly.switchHypothek(position);}
+			int position = player.getSpielerPosition().getNummer();
 			if (!hyFenster.getHyListe().isSelectionEmpty()) {
-				// if(){
-				Spieler spieler = monopoly.getTurn().getWerIstDran();
-				int position = spieler.getSpielerPosition().getNummer();
-				// monopoly.switchHypothek(position);
-				// spiel.remove(hyFenster);
-				// spiel.add(sBP, "cell 1 0, push, grow, shrink");
-				// spiel.repaint();
-				// spiel.revalidate();
-				JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
-				// }
+				if (monopoly.getHypothek(position) == true) {
+					try {
+						monopoly.switchHypothek(position);
+					} catch (GehaltException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					spiel.remove(hyFenster);
+					spiel.add(sBP, "cell 1 0, push, grow, shrink");
+					spiel.repaint();
+					spiel.revalidate();
+					sIP2.getJTextArea().setText("Name :"+player.getSpielerName()+"\nGehalt : "+player.getSpielerBudget()+
+							"\nPosition : "+player.getSpielerPosition().getName());
+				}
 			}
 		});
 

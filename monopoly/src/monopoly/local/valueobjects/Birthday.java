@@ -7,7 +7,6 @@ import monopoly.local.domain.Monopoly;
 public class Birthday implements Aktion {
 	
 private Monopoly monopoly;
-	
 	public Birthday(Monopoly monopoly) {
 		this.monopoly = monopoly;
 		// TODO Auto-generated constructor stub
@@ -24,4 +23,7 @@ private Monopoly monopoly;
 		}
 	}
 
+	public String toString(){
+		return ""+monopoly.getTurn().getWerIstDran()+" hat Geburtstag. \nJeder Spieler zahlt ihm 2000 €.";
+	}
 }

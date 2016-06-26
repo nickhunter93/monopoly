@@ -6,10 +6,12 @@ public class FeldMitLos implements Aktion {
 	
 	private Feld target;
 	private Monopoly monopoly;
-
-	public FeldMitLos(Monopoly monopoly, Feld target) {
+	private String str;
+	
+	public FeldMitLos(Monopoly monopoly, Feld target,String str) {
 		this.monopoly = monopoly;
 		this.target = target;
+		this.str = str;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -21,6 +23,10 @@ public class FeldMitLos implements Aktion {
 		}
 	}
 	
+	public String toString(){
+		return str;
+	}
+
 
 }
 

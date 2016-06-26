@@ -81,6 +81,10 @@ public class Monopoly {
 		return logik.miete(spieler);
 	}
 	
+	public String ereignisausführen(Spieler spieler){
+		return logik.ereignisausführen(spieler);
+	}
+	
 	public Turn getTurn(){
 		return logik.getTurn();
 	}

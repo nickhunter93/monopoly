@@ -24,6 +24,9 @@ public class Renovation implements Aktion {
 			}
 		}
 	}
-
+	
+	public String toString(){
+		return "Lasse alle Deine Häuser renovieren.\nZahle an die Bank für jedes Haus 500€, für jedes Hotel 2000€.";
+	}
 
 }

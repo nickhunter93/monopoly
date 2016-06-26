@@ -17,5 +17,8 @@ public class GefaengnisFrei implements Aktion {
 		monopoly.getJail().release(monopoly.getTurn().getWerIstDran());
 		
 	}
+	public String toString(){
+		return "Sie kommen aus dem Gefängnis Frei.";
+	}
 
 }
