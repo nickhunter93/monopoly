@@ -25,7 +25,7 @@ public class SpeichernFenster extends JPanel{
 	
 	/**
 	 * Konstruktor der Klasse SpeichernFenster
-	 * hier wird das Spielmenuefenster für das Speichern zusammengesetzt
+	 * hier wird das Spielmenuefenster fï¿½r das Speichern zusammengesetzt
 	 * (nur GUI-Elemente)
 	 * 
 	 * @param monopoly
@@ -34,7 +34,6 @@ public class SpeichernFenster extends JPanel{
 		super();
 		
 		this.monopoly = monopoly;
-		monopoly.TurnIni(true);
 		
 		sfLayout = new MigLayout("","[] [] []","[] [] []");
 		

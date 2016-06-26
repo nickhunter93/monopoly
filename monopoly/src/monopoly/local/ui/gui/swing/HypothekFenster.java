@@ -47,7 +47,6 @@ public class HypothekFenster extends JPanel {
 		
 		hypothek = new JPanel();
 		this.monopoly = monopoly;
-		monopoly.TurnIni(true);
 		
 		MigLayout hyLayout1 = new MigLayout("", "[] []", "[]");
 		MigLayout hyLayout3 = new MigLayout("", "[]", "[] [] [] []");

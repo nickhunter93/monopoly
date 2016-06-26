@@ -120,6 +120,11 @@ public class Spielfenster {
 		spiel.setVisible(true);
 		turn = monopoly.getTurn();
 		player = turn.getWerIstDran();
+		sIP.getJTextArea().setText(""+turn.getPhase()+"\n"+player.getSpielerPosition());
+
+		sIP2.getJTextArea().setText("Name :"+player.getSpielerName()+"\nGehalt : "+player.getSpielerBudget()+
+				"\nPosition : "+player.getSpielerPosition().getName());
+
 //		player.setSpielerPosition(monopoly.getSpielfeld()[1]);
 //		try {
 //			monopoly.kaufStrasse(player);
