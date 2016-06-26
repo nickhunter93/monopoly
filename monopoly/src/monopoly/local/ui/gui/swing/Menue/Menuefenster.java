@@ -85,6 +85,7 @@ public class Menuefenster {
 					return;
 				}
 				Spielfenster spFenster = new Spielfenster(monopoly);
+				monopoly.TurnIni(true);
 				spFenster.sInit();
 				menue.dispose();
 				
