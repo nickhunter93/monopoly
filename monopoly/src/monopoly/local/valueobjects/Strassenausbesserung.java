@@ -24,4 +24,10 @@ public class Strassenausbesserung implements Aktion{
 			}
 		}
 	}
+	
+
+	public String toString(){
+		return "Du wirst zu Strassenausbesserungsarbeiten herangezogen. Zahle für deine Häuser und Hotels 800 € je Haus 2300 € je Hotel an die Bank.";
+		
+	}
 }
