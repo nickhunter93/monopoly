@@ -6,9 +6,11 @@ public class Renovation implements Aktion {
 	
 
 	private Monopoly monopoly;
+	private String str;
 
-	public Renovation(Monopoly monopoly) {
+	public Renovation(Monopoly monopoly, String str) {
 		this.monopoly = monopoly;
+		this.str = str;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -27,7 +29,7 @@ public class Renovation implements Aktion {
 	}
 	
 	public String toString(){
-		return "Lasse alle Deine Häuser renovieren.\nZahle an die Bank für jedes Haus 500€, für jedes Hotel 2000€.";
+		return str;
 	}
 
 }

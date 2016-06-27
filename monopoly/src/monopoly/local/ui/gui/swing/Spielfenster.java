@@ -3,18 +3,25 @@ package monopoly.local.ui.gui.swing;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -48,6 +55,7 @@ public class Spielfenster {
 	private HausFenster haFenster;
 	private HypothekFenster hyFenster;
 	private SpeichernFenster speFenster;
+	private BufferedImage img;
 
 	private Vector<Spieler> spielerliste;
 
@@ -175,6 +183,59 @@ public class Spielfenster {
 					break;
 				case Dice:
 					int zugweite = monopoly.wuerfel();
+//					JOptionPane dice = new JOptionPane();
+//					String eyes = "Sie haben eine "+zugweite+" gewürfelt";
+//					dice.showMessageDialog(spiel, eyes);
+//					
+					
+					try {
+						switch(zugweite){
+							case 1 :
+								img = ImageIO.read(new File("images/dice1.jpg"));
+							break;
+							
+							case 2 :
+								img = ImageIO.read(new File("images/dice2.jpg"));
+							break;
+							
+							case 3 :
+								img = ImageIO.read(new File("images/dice3.jpg"));
+							break;
+							
+							case 4 :
+								img = ImageIO.read(new File("images/dice4.jpg"));
+							break;
+							
+							case 5 :
+								img = ImageIO.read(new File("images/dice5.jpg"));
+							break;
+							
+							case 6 :
+								img = ImageIO.read(new File("images/dice6.jpg"));
+						
+						}
+
+	                    JDialog frame = new JDialog(spiel, "Würfel");
+        
+	                    frame.setContentPane(new JLabel(new ImageIcon(img)));
+//	                    frame.setLayout(new GridBagLayout());
+//	                    GridBagConstraints gbc = new GridBagConstraints();
+//	                    gbc.gridwidth = GridBagConstraints.REMAINDER;
+	                    
+//	                    frame.add(new JLabel("Sie haben eine "+zugweite+" gewürfelt"), gbc);
+	                    
+	                    frame.setSize(300, 300);
+	                    frame.setModal(true);
+	                    frame.setResizable(false);
+	                    frame.setLocationRelativeTo(null);
+	                    frame.setVisible(true);
+					} catch (IOException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+					
+					
+					
 					Spieler spieler = monopoly.getTurn().getWerIstDran();
 					monopoly.move(spieler, zugweite);
 					bildWeg();

@@ -8,9 +8,10 @@ public class Zahlung implements Aktion {
 	private Monopoly monopoly;
 	private String str;
 
-	public Zahlung(Monopoly monopoly, int betrag,String str) {
+	public Zahlung(Monopoly monopoly, int betrag, String str) {
 		this.betrag = betrag;
 		this.monopoly = monopoly;
+		this.str = str;
 		// TODO Auto-generated constructor stub
 	}
 	

@@ -26,7 +26,7 @@ private Monopoly monopoly;
 		//Miete und Anleihezinsen werden fällig. Die Bank zahlt Dir DM 3000.
 		deck.add(new Gewinn(monopoly, 3000,"Miete und Anleihezinsen werden fällig.\nDie Bank zahlt Dir 3000€."));
 		//Du kommst aus dem Gefängnis frei.
-		deck.add(new GefaengnisFrei(monopoly));
+		deck.add(new GefaengnisFrei(monopoly, "Sie kommen aus dem Gefängnis frei."));
 		//Rücke bis auf Los vor.
 		deck.add(new FeldOhneLos(monopoly, monopoly.getSpielfeld()[0],"Rücke bis auf Los vor."));
 		//Die Bank zahlt dir eine Dividende von DM 1000.
@@ -43,9 +43,9 @@ private Monopoly monopoly;
 		//NEGATIV
 		
 		//Lasse alle Deine Häuser renovieren. Zahle an die Bank für jedes Haus DM 500, für jedes Hotel DM 2000.
-		deck.add(new Renovation(monopoly));
+		deck.add(new Renovation(monopoly, "Lasse alle Deine Häuser renovieren. Zahle an die Bank für jedes Haus 500€, für jedes Hotel 2000€."));
 		//Du wirst zu Strassenausbesserungsarbeiten herangezogen. Zahle für deine Häuser und Hotels. DM 800 je Haus. DM 2300 je Hotel an die Bank.
-		deck.add(new Strassenausbesserung(monopoly));
+		deck.add(new Strassenausbesserung(monopoly, "Du wirst zu Strassenausbesserungsarbeiten herangezogen. Zahle für deine Häuser und Hotels. 800€ je Haus. 2300€ je Hotel an die Bank."));
 		//Betrunken im Dienst. Strafe DM 400.
 		deck.add(new Zahlung(monopoly, 400,"Betrunken im Dienst. Strafe 400€."));
 		//Strafe für zu schnelles Fahren DM 300.

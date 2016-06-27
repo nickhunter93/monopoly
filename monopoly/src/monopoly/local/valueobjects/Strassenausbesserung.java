@@ -5,9 +5,11 @@ import monopoly.local.domain.Monopoly;
 public class Strassenausbesserung implements Aktion{
 
 	private Monopoly monopoly;
+	private String str;
 
-	public Strassenausbesserung(Monopoly monopoly) {
+	public Strassenausbesserung(Monopoly monopoly,String str) {
 		this.monopoly = monopoly;
+		this.str = str;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -27,7 +29,7 @@ public class Strassenausbesserung implements Aktion{
 	
 
 	public String toString(){
-		return "Du wirst zu Strassenausbesserungsarbeiten herangezogen. Zahle für deine Häuser und Hotels 800 € je Haus 2300 € je Hotel an die Bank.";
+		return str;
 		
 	}
 }
