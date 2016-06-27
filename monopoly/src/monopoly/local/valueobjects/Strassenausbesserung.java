@@ -21,7 +21,9 @@ public class Strassenausbesserung implements Aktion{
 		for(Strasse strasse : monopoly.getYourStreets(monopoly.getTurn().getWerIstDran())){
 			if(strasse.getHaeuseranzahl() == 5){
 				monopoly.getTurn().getWerIstDran().setSpielerBudget(monopoly.getTurn().getWerIstDran().getSpielerBudget() - hotelbetrag);
-			} else{
+			} else if (strasse.getHaeuseranzahl() == 0){
+				monopoly.getTurn().getWerIstDran().setSpielerBudget(monopoly.getTurn().getWerIstDran().getSpielerBudget());
+			} else {
 				monopoly.getTurn().getWerIstDran().setSpielerBudget(monopoly.getTurn().getWerIstDran().getSpielerBudget() - (hausbetrag * strasse.getHaeuseranzahl()));
 			}
 		}
