@@ -24,24 +24,17 @@ public class Spieler {
 		this.budget = budget;
 	}
 	
-	/**
-	 * setzt die Spielfigur 
-	 */
 	public void setSpielfigur(Image spielfigur){
 		this.spielfigur = spielfigur;
 	}
 	
-	/**
-	 * 
-	 * @return: gibt die Spielfigur zurück
-	 */
 	public Image getSpielfigur(){
 		return spielfigur;
 	}
 	
 	
 	/**
-	 * @return: gibt den Namen des Spielers als String zur�ck
+	 * @return: gibt den NAmen des Spielers als String zur�ck
 	 */
 	public String getSpielerName(){
 		return spielerName;

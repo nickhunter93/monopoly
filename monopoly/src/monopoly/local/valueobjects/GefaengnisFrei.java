@@ -6,19 +6,11 @@ public class GefaengnisFrei implements Aktion {
 
 	private Monopoly monopoly;
 	
-	/**
-	 * Konstruktor der Klasse GefaengnisFrei
-	 * implementiert Aktion
-	 * 
-	 * @param monopoly
-	 */
 	public GefaengnisFrei(Monopoly monopoly) {
 		this.monopoly = monopoly;
+		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * befreit einen Spieler aus dem Gefnängnis
-	 */
 	public void ausfuehren() {
 //		ereignis.gefaengnisfrei(spieler);
 //		jail.release(spieler);
