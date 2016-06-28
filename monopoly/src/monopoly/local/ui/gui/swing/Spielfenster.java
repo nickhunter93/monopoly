@@ -65,10 +65,6 @@ public class Spielfenster {
 	private SpeichernFenster speFenster;
 	private BufferedImage img;
 
-//	public static Mixer mixer;
-//	public static Clip clip;
-	private Mixer mixer;
-	private Clip clip;
 	
 	private Vector<Spieler> spielerliste;
 
@@ -201,37 +197,6 @@ public class Spielfenster {
 //					dice.showMessageDialog(spiel, eyes);
 					
 					
-					Mixer.Info[] mixInfos = AudioSystem.getMixerInfo();
-
-					mixer = AudioSystem.getMixer(mixInfos[0]);
-					DataLine.Info dataInfo = new DataLine.Info(Clip.class, null);
-					try{
-						clip = (Clip)mixer.getLine(dataInfo);
-					} catch(LineUnavailableException lue){
-						lue.printStackTrace();
-					}
-					
-					try{
-						URL soundURL = Spielfenster.class.getResource("/images/sounds/dice.wav");
-						AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundURL);
-						clip.open(audioStream);
-					} catch(LineUnavailableException lue){
-						lue.printStackTrace();
-					} catch(UnsupportedAudioFileException uafe){
-						uafe.printStackTrace();
-					} catch(IOException ioe){
-						ioe.printStackTrace();
-					}
-					
-					clip.start();
-//					
-//					do{
-//						try {
-//							Thread.sleep(50);
-//						} catch(InterruptedException ie){
-//							ie.printStackTrace();
-//						}
-//					} while (clip.isActive());
 					
 					try {
 						switch(zugweite){
