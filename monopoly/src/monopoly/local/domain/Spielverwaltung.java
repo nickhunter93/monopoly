@@ -173,19 +173,36 @@ public class Spielverwaltung {
 		if (position instanceof Ereignisfeld) {
 			miete = 0;
 			Ereignisfeld ereignis = (Ereignisfeld) position;
-			Aktion aktion = ereignis.getEreignis();
-			aktion.ausfuehren();
+			//Aktion aktion = ereignis.getEreignis();
+			//aktion.ausfuehren();
 		}
 		if (position instanceof Gemeinschaftsfeld) {
 			miete = 0;
 
 			Gemeinschaftsfeld ereignis = (Gemeinschaftsfeld) position;
-			Aktion aktion = ereignis.getEreignis();
-			aktion.ausfuehren();
+			//Aktion aktion = ereignis.getEreignis();
+			//aktion.ausfuehren();
 		}
 		return miete;
 	}
-
+	
+	public String ereignisausführen(Spieler spieler){
+		Strasse strasse = null;
+		Feld position = spieler.getSpielerPosition();
+		if(position instanceof Ereignisfeld){
+			Ereignisfeld ereignis = (Ereignisfeld) position;
+			Aktion aktion = ereignis.getEreignis();
+			aktion.ausfuehren();
+			return aktion.toString();
+		}
+		if(position instanceof Gemeinschaftsfeld){
+			Gemeinschaftsfeld ereignis = (Gemeinschaftsfeld) position;
+			Aktion aktion = ereignis.getEreignis();
+			aktion.ausfuehren();
+			return aktion.toString();
+		}
+		return null;
+	}
 	/**
 	 * 
 	 * @param spieler

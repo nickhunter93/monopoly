@@ -1,314 +1,261 @@
+
 LOS
 0
-0
--2000
-0
 f
-250
 98
+
+
 
 Badstraße
-1
-60
-30
 0
 f
-250
-99
+1
+
+
 
 Gemeinschaftsfeld
-2
+
+
+
 
 Turmstraße
-3
-60
-30
 0
 f
-250
 99
+
+
 
 Einkommensteuer
-4
-0
-2000
 0
 f
-250
 98
 
+
+
 Südbahnhof
-5
-200
-100
 0
 f
-250
 99
+
+
 
 Chauseestraße
-6
-100
-50
 0
 f
-250
 99
 
-Elisenstraße
-7
-100
-50
-0
-f
-250
-99
+
 
 Ereignisfeld
-8
+
 
-Poststraße
-9
-120
-60
+
+
+Elisenstraße
 0
 f
-250
 99
 
+
+
+Poststraße
+0
+f
+99
+
+
+
 Gefängnis
-10
 
 
 Seestraße
-11
-140
-70
 0
 f
-250
 99
+
+
 
 Elektrizitätswerk
-12
-150
-750
 0
 f
-250
 99
+
+
 
 Hafenstraße
-13
-140
-70
 0
 f
-250
 99
+
+
 
 Neue Straße
-14
-160
-80
 0
 f
-250
 99
+
+
 
 Westbahnhof
-15
-200
-100
 0
 f
-250
 99
+
+
 
 Münchner Straße
-16
-180
-90
 0
 f
-250
 99
 
+
+
 Gemeinschaftsfeld
-17
+
+
+
 
 Wiener Straße
-18
-180
-90
 0
 f
-250
 99
+
+
 
 Berliner Straße
-19
-200
-100
 0
 f
-250
 99
+
+
 
 Frei Parken
-20
-0
-0
 0
 f
-250
 98
+
+
 
 Theaterstraße
-21
-220
-110
 0
 f
-250
 99
 
+
+
 Ereignisfeld
-22
+
+
+
 
 Museumsstraße
-23
-220
-110
 0
 f
-250
 99
+
+
 
 Opernplatz
-24
-240
-120
 0
 f
-250
 99
+
+
 
 Nordbahnhof
-25
-200
-100
 0
 f
-250
 99
+
+
 
 Lessingstraße
-26
-260
-130
 0
 f
-250
 99
+
+
 
 Schillerstraße
-27
-260
-130
 0
 f
-250
 99
+
+
 
 Wasserwerk
-28
-150
-75
 0
 f
-250
 99
+
+
 
 Goethestraße
-29
-280
-140
 0
 f
-250
 99
+
+
 
 Gehe ins Gefängnis
-30
-10
+
 
 Rathausplatz
-31
-300
-150
 0
 f
-250
 99
+
+
 
 Hauptstraße
-32
-300
-150
 0
 f
-250
 99
+
+
 
 Gemeinschaftsfeld
-33
+!
+
+
 
 Bahnhofsstraße
-34
-320
-160
 0
 f
-250
 99
+
+
 
 Hauptbahnhof
-35
-200
-100
 0
 f
-250
 99
+
+
 
 Ereignisfeld
-36
+$
+
+
 
 Parkstraße
-37
-350
-175
 0
 f
-250
 99
+
+
 
 Zusatzsteuer
-38
-0
-2000
 0
 f
-250
 98
 
+
+
 Schlossallee
-39
-400
-200
 0
 f
-250
 99
+
+
 

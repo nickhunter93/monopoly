@@ -3,18 +3,33 @@ package monopoly.local.ui.gui.swing;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.Mixer;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -30,7 +45,9 @@ import monopoly.local.domain.Spielverwaltung.Turn;
 import monopoly.local.domain.exceptions.GehaltException;
 import monopoly.local.domain.exceptions.HausbauException;
 import monopoly.local.ui.gui.swing.Menue.Menuefenster;
+import monopoly.local.valueobjects.Ereignisfeld;
 import monopoly.local.valueobjects.Feld;
+import monopoly.local.valueobjects.Gemeinschaftsfeld;
 import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Strasse;
 import net.miginfocom.swing.MigLayout;
@@ -46,7 +63,13 @@ public class Spielfenster {
 	private HausFenster haFenster;
 	private HypothekFenster hyFenster;
 	private SpeichernFenster speFenster;
+	private BufferedImage img;
 
+//	public static Mixer mixer;
+//	public static Clip clip;
+	private Mixer mixer;
+	private Clip clip;
+	
 	private Vector<Spieler> spielerliste;
 
 	Spieler player;
@@ -118,6 +141,11 @@ public class Spielfenster {
 		spiel.setVisible(true);
 		turn = monopoly.getTurn();
 		player = turn.getWerIstDran();
+		//sIP.getJTextArea().setText(""+turn.getPhase()+"\n"+player.getSpielerPosition());
+
+		//sIP2.getJTextArea().setText("Name :"+player.getSpielerName()+"\nGehalt : "+player.getSpielerBudget()+
+		//		"\nPosition : "+player.getSpielerPosition().getName());
+
 //		player.setSpielerPosition(monopoly.getSpielfeld()[1]);
 //		try {
 //			monopoly.kaufStrasse(player);
@@ -168,6 +196,88 @@ public class Spielfenster {
 					break;
 				case Dice:
 					int zugweite = monopoly.wuerfel();
+//					JOptionPane dice = new JOptionPane();
+//					String eyes = "Sie haben eine "+zugweite+" gewürfelt";
+//					dice.showMessageDialog(spiel, eyes);
+					
+					
+					Mixer.Info[] mixInfos = AudioSystem.getMixerInfo();
+
+					mixer = AudioSystem.getMixer(mixInfos[0]);
+					DataLine.Info dataInfo = new DataLine.Info(Clip.class, null);
+					try{
+						clip = (Clip)mixer.getLine(dataInfo);
+					} catch(LineUnavailableException lue){
+						lue.printStackTrace();
+					}
+					
+					try{
+						URL soundURL = Spielfenster.class.getResource("/images/sounds/dice.wav");
+						AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundURL);
+						clip.open(audioStream);
+					} catch(LineUnavailableException lue){
+						lue.printStackTrace();
+					} catch(UnsupportedAudioFileException uafe){
+						uafe.printStackTrace();
+					} catch(IOException ioe){
+						ioe.printStackTrace();
+					}
+					
+					clip.start();
+//					
+//					do{
+//						try {
+//							Thread.sleep(50);
+//						} catch(InterruptedException ie){
+//							ie.printStackTrace();
+//						}
+//					} while (clip.isActive());
+					
+					try {
+						switch(zugweite){
+							case 1 :
+								img = ImageIO.read(new File("images/dice1.jpg"));
+							break;
+							
+							case 2 :
+								img = ImageIO.read(new File("images/dice2.jpg"));
+							break;
+							
+							case 3 :
+								img = ImageIO.read(new File("images/dice3.jpg"));
+							break;
+							
+							case 4 :
+								img = ImageIO.read(new File("images/dice4.jpg"));
+							break;
+							
+							case 5 :
+								img = ImageIO.read(new File("images/dice5.jpg"));
+							break;
+							
+							case 6 :
+								img = ImageIO.read(new File("images/dice6.jpg"));
+						
+						}
+
+	                    JDialog frame = new JDialog(spiel, "Würfel");
+        
+	                    frame.setContentPane(new JLabel(new ImageIcon(img)));
+	                    
+//	                    frame.add(new JLabel("Sie haben eine "+zugweite+" gewürfelt"), gbc);
+	                    
+	                    frame.setSize(300, 300);
+	                    frame.setModal(true);
+	                    frame.setResizable(false);
+	                    frame.setLocationRelativeTo(null);
+	                    frame.setVisible(true);
+					} catch (IOException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+					
+					
+					
 					Spieler spieler = monopoly.getTurn().getWerIstDran();
 					monopoly.move(spieler, zugweite);
 					bildWeg();
@@ -199,6 +309,8 @@ public class Spielfenster {
 						}
 					}else if(besitzer.getSpielerNummer() != player.getSpielerNummer()){
 						monopoly.miete(player);
+						if(player.getSpielerPosition() instanceof Ereignisfeld || player.getSpielerPosition() instanceof Gemeinschaftsfeld)
+						JOptionPane.showConfirmDialog(spiel,monopoly.ereignisausführen(player), "Karte gezogen!", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
 					}
 					monopoly.nextTurn();
 					turn = monopoly.getTurn();
@@ -338,7 +450,8 @@ public class Spielfenster {
 					spiel.add(sBP, "cell 1 0, push, grow, shrink");
 					spiel.repaint();
 					spiel.revalidate();
-					JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
+					sIP2.getJTextArea().setText("Name :"+player.getSpielerName()+"\nGehalt : "+player.getSpielerBudget()+
+							"\nPosition : "+player.getSpielerPosition().getName());
 				}
 			}
 		});
@@ -347,17 +460,22 @@ public class Spielfenster {
 		hyFenster.getHyButton2().addActionListener(e -> {
 			// if hypothek == true --> if(monopoly.getHypothek == true){
 			// monopoly.switchHypothek(position);}
+			int position = player.getSpielerPosition().getNummer();
 			if (!hyFenster.getHyListe().isSelectionEmpty()) {
-				// if(){
-				Spieler spieler = monopoly.getTurn().getWerIstDran();
-				int position = spieler.getSpielerPosition().getNummer();
-				// monopoly.switchHypothek(position);
-				// spiel.remove(hyFenster);
-				// spiel.add(sBP, "cell 1 0, push, grow, shrink");
-				// spiel.repaint();
-				// spiel.revalidate();
-				JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
-				// }
+				if (monopoly.getHypothek(position) == true) {
+					try {
+						monopoly.switchHypothek(position);
+					} catch (GehaltException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					spiel.remove(hyFenster);
+					spiel.add(sBP, "cell 1 0, push, grow, shrink");
+					spiel.repaint();
+					spiel.revalidate();
+					sIP2.getJTextArea().setText("Name :"+player.getSpielerName()+"\nGehalt : "+player.getSpielerBudget()+
+							"\nPosition : "+player.getSpielerPosition().getName());
+				}
 			}
 		});
 

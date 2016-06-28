@@ -7,9 +7,11 @@ import monopoly.local.domain.Monopoly;
 public class Birthday implements Aktion {
 	
 private Monopoly monopoly;
-	
-	public Birthday(Monopoly monopoly) {
+private String str;
+
+	public Birthday(Monopoly monopoly, String str) {
 		this.monopoly = monopoly;
+		this.str = str;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -24,4 +26,7 @@ private Monopoly monopoly;
 		}
 	}
 
+	public String toString(){
+		return str;
+	}
 }
