@@ -4,6 +4,9 @@ import monopoly.local.domain.Monopoly;
 
 public abstract class Deck {
 
+	/**
+	 * Konstruktor der Klasse Deck
+	 */
 	public Deck(){
 		
 	}

@@ -7,13 +7,21 @@ public class Strassenausbesserung implements Aktion{
 	private Monopoly monopoly;
 	private String str;
 
+	/**
+	 * Konstruktor der Klasse Strssenausbesserung
+	 * implementiert Aktion
+	 * 
+	 * @param str: Beschreigung der Aktion
+	 */
 	public Strassenausbesserung(Monopoly monopoly,String str) {
 		this.monopoly = monopoly;
 		this.str = str;
-		// TODO Auto-generated constructor stub
+
 	}
 
-	
+	/**
+	 * Methode zum Ausführen der Strassenausbesserungsaktion
+	 */
 	public void ausfuehren(){
 		int hausbetrag = 800;
 		int hotelbetrag = 2300;
@@ -29,7 +37,9 @@ public class Strassenausbesserung implements Aktion{
 		}
 	}
 	
-
+	/**
+	 * gibt den String der Aktion zurück
+	 */
 	public String toString(){
 		return str;
 		

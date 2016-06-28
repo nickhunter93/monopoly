@@ -31,7 +31,6 @@ public class Spielfeld {
 		try {
 			feld = test.loadDefaulField(monopoly);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		//feld[9] = new Jail("Gef�ngnis",9);
@@ -52,10 +51,18 @@ public class Spielfeld {
 		return feld[0];
 	}
 	
+	/**
+	 * 
+	 * @return: gibt der Ereignisfeld zurück
+	 */
 	public Feld getEreignisfeld(){
 		return feld[5];
 	}
 	
+	/**
+	 * 
+	 * @return: gibt das Gemeinschaftsfeld zurück 
+	 */
 	public Feld getGemeinschaftsfeld(){
 		return feld[16];
 	}
@@ -68,7 +75,6 @@ public class Spielfeld {
 	}
 	
 	/**
-<<<<<<< Updated upstream
 	 * gibt das "Gehe ins Gef�ngnis"-Feld zurueck
 	 */
 	public Feld getToJail(){
@@ -76,10 +82,7 @@ public class Spielfeld {
 	}
 	
 	/**
-	 * �ndert die Position des Spielers
-=======
-	 * �ndert die Position des Spielers
->>>>>>> Stashed changes
+	 * ändert die Position des Spielers
 	 * 
 	 * @param player
 	 * @param steps
@@ -98,12 +101,17 @@ public class Spielfeld {
 		return this.feld;
 	}
 	
+	/**
+	 * setzt das Spielfeld neu
+	 * 
+	 * @param feld
+	 */
 	public void setSpielfeld(Feld[] feld){
 		this.feld = feld;
 	}
 	
 	/**
-	 * @return gibt den Namen des Feldes anhand der Feldnummer zur�ck
+	 * @return gibt den Namen des Feldes anhand der Feldnummer zurück
 	 */
 	public String getFeldName(int nr){
 		return feld[nr].getName();
@@ -125,7 +133,7 @@ public class Spielfeld {
 	/**
 	 * 
 	 * @param player
-	 * @return: gibt einen Vektor mit Stra�en zur�ck die einem Spieler geh�ren
+	 * @return: gibt einen Vektor mit Straßen zurück die einem Spieler gehören
 	 */
 	public Strasse[] getYourStreets(Spieler spieler){
 		Vector<Strasse> vec = new Vector<Strasse>();
@@ -146,15 +154,10 @@ public class Spielfeld {
 			return yourStreets;
 		}
 		return null;
-	}
+	}	
 	
 	/**
-	 * baut ein Haus auf einer Stra�e  
-	 */
-	
-	
-	/**
-	 * @return gibt die H�useranzahl auf einer Stra�e als int zur�ck
+	 * @return gibt die Häuseranzahl auf einer Stra�e als int zur�ck
 	 */
 	public int getHaeuseranzahl(int position){
 		if (feld[position] instanceof Strasse){
@@ -164,3 +167,9 @@ public class Spielfeld {
 	}
 
 }
+
+
+
+/**
+ * baut ein Haus auf einer Stra�e  
+ */

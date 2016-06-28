@@ -9,13 +9,22 @@ public class Gemeinschaftskarten extends Deck {
 	
 private Vector<Aktion> deck;
 private Monopoly monopoly;
-	
+
+/**
+* Konstruktor der Klasse Gemeinschaftskarten 
+* erbt von der Klasse Deck  
+* 
+* @param monopoly
+*/
 	public Gemeinschaftskarten(Monopoly monopoly){
 		this.monopoly = monopoly;
 		deck  = new Vector<Aktion>();
 	}
 
 	@Override
+	/**
+	 * Methode zum erstellen des Decks
+	 */
 	public void deckMischen() {
 		
 		//POSITIV
@@ -57,13 +66,16 @@ private Monopoly monopoly;
 		deck.add(new Zahlung(monopoly, 100,"Arzt-Kosten.\nZahle 100€."));
 	}
 
-	@Override
+	@Override	
+	/**
+	 * Methode zum ziehen einer Karte
+	 * Deck wird nach dem Ziehen gemischt
+	 */
 	public Aktion karteZiehen() {
 		if(deck.size() == 0){
 			deckMischen();
 		}
 		deckMischen();
-		// TODO Auto-generated method stub
 		Aktion aktion = deck.remove((int) Math.floor(Math.random() * 15));
 		return aktion;
 	}

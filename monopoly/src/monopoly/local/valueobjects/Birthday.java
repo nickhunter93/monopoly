@@ -9,23 +9,34 @@ public class Birthday implements Aktion {
 private Monopoly monopoly;
 private String str;
 
+/**
+ * Konstruktor der Klasse Birthday
+ * implementiert Aktion 
+ */
 	public Birthday(Monopoly monopoly, String str) {
 		this.monopoly = monopoly;
 		this.str = str;
-		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Methode für das Ausführen der Kartenaktion Geburtstag 
+	 */
 	public void ausfuehren() {
+Spieler spieler = monopoly.getTurn().getWerIstDran();
+		
 		for(Spieler s : monopoly.getAllSpieler()){
-			if(s.getSpielerNummer() == monopoly.getTurn().getWerIstDran().getSpielerNummer()){
-				monopoly.getTurn().getWerIstDran().setSpielerBudget(monopoly.getTurn().getWerIstDran().getSpielerBudget());
+			if(s.getSpielerNummer() == spieler.getSpielerNummer()){
+				spieler.setSpielerBudget(spieler.getSpielerBudget());
 			} else {
 			s.setSpielerBudget(s.getSpielerBudget() - 2000);
-			monopoly.getTurn().getWerIstDran().setSpielerBudget(monopoly.getTurn().getWerIstDran().getSpielerBudget() + 2000);
+			spieler.setSpielerBudget(spieler.getSpielerBudget() + 2000);
 			}
 		}
 	}
 
+	/**
+	 * gibt den String der Aktion zurück
+	 */
 	public String toString(){
 		return str;
 	}

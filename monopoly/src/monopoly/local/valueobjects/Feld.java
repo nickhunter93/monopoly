@@ -63,15 +63,22 @@ public class Feld {
 		this.nummer = nummer;
 	}
 	
+	/**
+	 * Methode die den Besitzer eines Feldes neu setzt
+	 * 
+	 * @param spieler: Spieler dem das Feld gehören soll
+	 */
 	public void setBesitzer(Spieler spieler){
 		besitzer = spieler;
 	}
 	
+	/**
+	 * 
+	 * @return: gibt den Besitzer eines Feldes zurück
+	 */
 	public Spieler getBesitzer(){
 		return this.besitzer;
 	}
-	
-	
 	
 	/**
 	 * Methode die bestimmt wann ein Feld gleich ist

@@ -36,15 +36,27 @@ public class Strasse extends Feld {
 	public void setNeightbors(Vector<Feld> neighbors){
 		this.neighbors = neighbors;
 	}
-	
+	/**
+	 * 
+	 * @return: gibt einen Vektor mit den Nachbarn zurück 
+	 */
 	public Vector<Feld> getNeighbors(){
 		return neighbors;
 	}
 	
+	/**
+	 * 
+	 * @return: gibt zurück ob eine Strße mit einer Hypothek belegt ist 
+	 */
 	public boolean getHypothek(){
 		return this.hypothek;
 	}
 	
+	/**
+	 * setzt den boolean-Wert einer Straße neu
+	 * 
+	 * @param hypothek
+	 */
 	public void setHypothek(boolean hypothek){
 		this.hypothek = hypothek;
 	}
@@ -87,14 +99,29 @@ public class Strasse extends Feld {
 		return haeuseranzahl;
 	}
 	
+	/**
+	 * gibt den Preis eines Hauses zurück 
+	 * 
+	 * @return: Hauspreis
+	 */
 	public int getHauspreis(){
 		return this.hauspreis;
 	}
 	
+	/**
+	 * setzt die Zahl der Häuser auf einer Straße neu
+	 * 
+	 * @param haeuseranzahl
+	 */
 	public void setHaeuseranzahl(int haeuseranzahl){
 		this.haeuseranzahl = haeuseranzahl;
 	}
 	
+	/**
+	 * setzt den Preis für ein Haus neu
+	 * 
+	 * @param hauspreis
+	 */
 	public void setHauspreis(int hauspreis){
 		this.hauspreis = hauspreis;
 	}
