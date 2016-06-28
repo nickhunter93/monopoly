@@ -153,7 +153,6 @@ public class Spielfenster {
 //			monopoly.kaufStrasse(player);
 //			player.setSpielerPosition(monopoly.getLos());
 //		} catch (GehaltException e2) {
-//			// TODO Auto-generated catch block
 //			e2.printStackTrace();
 //		}
 		// Info-TextAreas mit sich anpassenden Infos
@@ -272,7 +271,6 @@ public class Spielfenster {
 	                    frame.setLocationRelativeTo(null);
 	                    frame.setVisible(true);
 					} catch (IOException e2) {
-						// TODO Auto-generated catch block
 						e2.printStackTrace();
 					}
 					
@@ -350,20 +348,20 @@ public class Spielfenster {
 //					// try {
 //					// monopoly.kaufStrasse(spieler);
 //					// } catch (GehaltException e1) {
-//					// // TODO Auto-generated catch block
 //					// e1.printStackTrace();
 //					// }
 //				}
 			}                                                       
 		});
-		sP.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent me) {
-				// me.getX()/100;
-				System.out.println("\"pos " + Math.round((double) me.getX() / sP.getWidth() * 100) / 100.0 + "al "
-						+ Math.round((double) me.getY() / sP.getHeight() * 100) / 100.0 + "al\"");
-
-			}
-		});
+//		sP.addMouseListener(new MouseAdapter() {
+//			public void mouseClicked(MouseEvent me) {
+//				// me.getX()/100;
+//				System.out.println("\"pos " + Math.round((double) me.getX() / sP.getWidth() * 100) / 100.0 + "al "
+//						+ Math.round((double) me.getY() / sP.getHeight() * 100) / 100.0 + "al\"");
+//
+//			}
+//		});
+		
 		// ActionListener fuer den Haus-bauen-Button
 		sBP.getButton2().addActionListener(e -> {
 			spiel.remove(sBP);
@@ -443,7 +441,6 @@ public class Spielfenster {
 					try {
 						monopoly.switchHypothek(position);
 					} catch (GehaltException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					spiel.remove(hyFenster);
@@ -466,7 +463,6 @@ public class Spielfenster {
 					try {
 						monopoly.switchHypothek(position);
 					} catch (GehaltException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					spiel.remove(hyFenster);
@@ -510,6 +506,10 @@ public class Spielfenster {
 		});
 	}
 
+	/**
+	 * Methode zum Hinzufügen der Figurenbilder
+	 * @param zugweite
+	 */
 	public void bildHinzu(int zugweite) {
 		int zug = zugweite;
 
@@ -770,6 +770,9 @@ public class Spielfenster {
 
 	}
 
+	/**
+	 * Methode zum löschen der Figurenbilder
+	 */
 	public void bildWeg() {
 		Vector<Spieler> spielerliste = monopoly.getAllSpieler();
 
