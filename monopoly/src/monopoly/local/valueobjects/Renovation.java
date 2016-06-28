@@ -8,28 +8,42 @@ public class Renovation implements Aktion, Serializable {
 	
 
 	private Monopoly monopoly;
+	private String str;
 
-	public Renovation(Monopoly monopoly) {
+	/**
+	 * Konstruktor der Klasse Renovation
+	 * implemtiert Aktion
+	 * 
+	 * @param monopoly
+	 */
+	public Renovation(Monopoly monopoly, String str) {
 		this.monopoly = monopoly;
-		// TODO Auto-generated constructor stub
+		this.str = str;
 	}
 
+	/**
+	 * Methode zum Ausführen der Renovieren-Aktion 
+	 */
 	public void ausfuehren() {
 		int hausbetrag = 500;
 		int hotelbetrag = 2000;
-		if(monopoly.getYourStreets(monopoly.getTurn().getWerIstDran()) != null){
-			for(Strasse strasse : monopoly.getYourStreets(monopoly.getTurn().getWerIstDran())){
+		Spieler spieler = monopoly.getTurn().getWerIstDran();
+		if(monopoly.getYourStreets(spieler) != null){
+			for(Strasse strasse : monopoly.getYourStreets(spieler)){
 				if(strasse.getHaeuseranzahl() == 5){
-					monopoly.getTurn().getWerIstDran().setSpielerBudget(monopoly.getTurn().getWerIstDran().getSpielerBudget() - hotelbetrag);
+					spieler.setSpielerBudget(spieler.getSpielerBudget() - hotelbetrag);
 				} else{
-					monopoly.getTurn().getWerIstDran().setSpielerBudget(monopoly.getTurn().getWerIstDran().getSpielerBudget() - (hausbetrag * strasse.getHaeuseranzahl()));
+					spieler.setSpielerBudget(spieler.getSpielerBudget() - (hausbetrag * strasse.getHaeuseranzahl()));
 				}
 			}
 		}
 	}
 	
+	/**
+	 * gibt den String der Aktion zurück
+	 */
 	public String toString(){
-		return "Lasse alle Deine Häuser renovieren.\nZahle an die Bank für jedes Haus 500€, für jedes Hotel 2000€.";
+		return str;
 	}
 
 }

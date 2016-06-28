@@ -9,23 +9,37 @@ import monopoly.local.domain.Monopoly;
 public class Birthday implements Aktion, Serializable {
 	
 private Monopoly monopoly;
-	public Birthday(Monopoly monopoly) {
+private String str;
+
+/**
+ * Konstruktor der Klasse Birthday
+ * implementiert Aktion 
+ */
+	public Birthday(Monopoly monopoly, String str) {
 		this.monopoly = monopoly;
-		// TODO Auto-generated constructor stub
+		this.str = str;
 	}
 
+	/**
+	 * Methode für das Ausführen der Kartenaktion Geburtstag 
+	 */
 	public void ausfuehren() {
+Spieler spieler = monopoly.getTurn().getWerIstDran();
+		
 		for(Spieler s : monopoly.getAllSpieler()){
-			if(s.getSpielerNummer() == monopoly.getTurn().getWerIstDran().getSpielerNummer()){
-				monopoly.getTurn().getWerIstDran().setSpielerBudget(monopoly.getTurn().getWerIstDran().getSpielerBudget());
+			if(s.getSpielerNummer() == spieler.getSpielerNummer()){
+				spieler.setSpielerBudget(spieler.getSpielerBudget());
 			} else {
 			s.setSpielerBudget(s.getSpielerBudget() - 2000);
-			monopoly.getTurn().getWerIstDran().setSpielerBudget(monopoly.getTurn().getWerIstDran().getSpielerBudget() + 2000);
+			spieler.setSpielerBudget(spieler.getSpielerBudget() + 2000);
 			}
 		}
 	}
 
+	/**
+	 * gibt den String der Aktion zurück
+	 */
 	public String toString(){
-		return ""+monopoly.getTurn().getWerIstDran()+" hat Geburtstag. \nJeder Spieler zahlt ihm 2000 €.";
+		return str;
 	}
 }

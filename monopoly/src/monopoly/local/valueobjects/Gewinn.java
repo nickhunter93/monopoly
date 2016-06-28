@@ -10,17 +10,30 @@ public class Gewinn implements Aktion, Serializable {
 	private Monopoly monopoly;
 	private String str;
 	
+	/**
+	 * Konstruktor der Klasse Gewinn 
+	 * implementiert das Interface Aktion 
+	 * 
+	 * @param betrag: Betrag den man gewinnt 
+	 * @param str: Beschreibung der Aktion
+	 */
 	public Gewinn(Monopoly monopoly, int betrag,String str) {
 		this.betrag = betrag;
 		this.monopoly = monopoly;
 		this.str = str;
-		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * Methode zum Ausführen der Aktion Gewinn
+	 */
 	public void ausfuehren() {
-		monopoly.getTurn().getWerIstDran().setSpielerBudget(monopoly.getTurn().getWerIstDran().getSpielerBudget() + betrag);
+		Spieler spieler = monopoly.getTurn().getWerIstDran();
+		spieler.setSpielerBudget(spieler.getSpielerBudget() + betrag);
 	}
 	
+	/**
+	 * gibt den String der Aktion zurück
+	 */
 	public String toString(){
 		return str;
 	}

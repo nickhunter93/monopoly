@@ -9,22 +9,36 @@ public class FeldMitLos implements Aktion, Serializable {
 	private Feld target;
 	private Monopoly monopoly;
 	private String str;
-	
+
+	/**
+	 * Konstruktor der Klasse FeldMitLos
+	 * implementiert die Klasse Aktion
+	 * 
+	 * @param monopoly
+	 * @param target
+	 */
 	public FeldMitLos(Monopoly monopoly, Feld target,String str) {
 		this.monopoly = monopoly;
 		this.target = target;
 		this.str = str;
-		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Methode zum ausführen um einen Spieler auf ein Feld zu setzen
+	 * Spieler kommt über Los 
+	 */
 	public void ausfuehren() {
-		Feld current = monopoly.getTurn().getWerIstDran().getSpielerPosition();
-		monopoly.getTurn().getWerIstDran().setSpielerPosition(target);
+		Spieler spieler = monopoly.getTurn().getWerIstDran();
+		Feld current = spieler.getSpielerPosition();
+		spieler.setSpielerPosition(target);
 		if(current.getNummer() >= target.getNummer()){
-			monopoly.getTurn().getWerIstDran().setSpielerBudget(monopoly.getTurn().getWerIstDran().getSpielerBudget() + 4000);
+			spieler.setSpielerBudget(spieler.getSpielerBudget() + 4000);
 		}
 	}
 	
+	/**
+	 * gibt den String der Aktion zurück
+	 */
 	public String toString(){
 		return str;
 	}

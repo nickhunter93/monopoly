@@ -25,10 +25,11 @@ public class Menue {
 	
 	/**
 	 * startet eine Schleife die das Auswahlmen� auf der Konsole ausgibt und die Eingaben des 
-	 * Spielers lie�t 
-	 * case 1: f�gt wenn es m�glich ist ein Spieler hinzu 
-	 * case 2: l�scht wenn es m�glich ist einen Spieler
-	 * case 3: startet ein neues Spiel
+	 * Spielers ließt 
+	 * case 1: fügt wenn es möglich ist ein Spieler hinzu 
+	 * case 2: löscht wenn es möglich ist einen Spieler
+	 * case 3: startet wenn es möglich ist ein neues Spiel
+	 * case 4: sartet den ausgewählten Speicherstand 
 	 */
 	public void menueOefnen(){
 		boolean schleife = true;
@@ -113,7 +114,7 @@ public class Menue {
 				SpielStart spiel = new SpielStart(monopoly);
 				spiel.start(true);
 			}else{
-				System.out.println("Es gibt nicht gen�gend Spieler (min. 2).");
+				System.out.println("Es gibt nicht genügend Spieler (min. 2).");
 			}
 			break;
 			
@@ -131,12 +132,11 @@ public class Menue {
 					SpielStart spiel = new SpielStart(monopoly);
 					spiel.start(false);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
 			break;
-			default:	System.out.println("Keine G�ltige Auswahl.");
+			default:	System.out.println("Keine Gültige Auswahl.");
 			}
 		}
 	}

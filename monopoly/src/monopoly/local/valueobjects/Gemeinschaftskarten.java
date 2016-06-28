@@ -10,19 +10,28 @@ public class Gemeinschaftskarten extends Deck implements Serializable {
 	
 private Vector<Aktion> deck;
 private Monopoly monopoly;
-	
+
+/**
+* Konstruktor der Klasse Gemeinschaftskarten 
+* erbt von der Klasse Deck  
+* 
+* @param monopoly
+*/
 	public Gemeinschaftskarten(Monopoly monopoly){
 		this.monopoly = monopoly;
 		deck  = new Vector<Aktion>();
 	}
 
 	@Override
+	/**
+	 * Methode zum erstellen des Decks
+	 */
 	public void deckMischen() {
 		
 		//POSITIV
 		
 		//Es ist dein Geburtstag. Ziehe von jedem Spieler DM 2000 ein.
-		deck.add(new Birthday(monopoly));
+		deck.add(new Birthday(monopoly, "Es ist dein Geburtstag. Ziehe von jedem Spieler 2000€ ein."));
 		//Aus Lagerverkäufen erhält Du DM 100.
 		deck.add(new Gewinn(monopoly, 100,"Aus Lagerverkäufen erhältst du 100 €."));
 		//Du erbst DM 2000.
@@ -34,7 +43,7 @@ private Monopoly monopoly;
 		//Rücke vor bis auf Los.
 		deck.add(new FeldOhneLos(monopoly, monopoly.getSpielfeld()[0],"Rücke vor bis auf Los.\nZiehe keine 2000€ ein."));
 		//Du kommst aus dem Gefängnis frei.
-		deck.add(new GefaengnisFrei(monopoly));
+		deck.add(new GefaengnisFrei(monopoly, "Sie kommen aus dem Gefängnis frei."));
 		//Bank-Irrtum zu deinen Gunsten. Ziehe DM 4000 ein.
 		deck.add(new Gewinn(monopoly, 4000,"Bank-Irrtum zu deinen Gunsten.\nZiehe 4000 € ein."));
 		//Die Jahresrente wird fällig. Ziehe DM 2000 ein.
@@ -58,13 +67,16 @@ private Monopoly monopoly;
 		deck.add(new Zahlung(monopoly, 100,"Arzt-Kosten.\nZahle 100€."));
 	}
 
-	@Override
+	@Override	
+	/**
+	 * Methode zum ziehen einer Karte
+	 * Deck wird nach dem Ziehen gemischt
+	 */
 	public Aktion karteZiehen() {
 		if(deck.size() == 0){
 			deckMischen();
 		}
 		deckMischen();
-		// TODO Auto-generated method stub
 		Aktion aktion = deck.remove((int) Math.floor(Math.random() * 15));
 		return aktion;
 	}

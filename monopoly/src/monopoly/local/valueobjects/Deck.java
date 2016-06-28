@@ -6,6 +6,9 @@ import monopoly.local.domain.Monopoly;
 
 public abstract class Deck implements Serializable {
 
+	/**
+	 * Konstruktor der Klasse Deck
+	 */
 	public Deck(){
 		
 	}

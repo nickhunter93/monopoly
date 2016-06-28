@@ -24,10 +24,18 @@ public class PersistenzLaden implements Serializable{
 	private Monopoly monopoly;
 	private BufferedReader laden;
 	private String filename;
+	
+	/**
+	 * Konstruktor der Klasse PersistenzLaden
+	 */
 	public PersistenzLaden(){
 		
 	}
 	
+	/**
+	 * 
+	 * @return: gibt einen Vektor mit allen Namen der Speicherstände zurück 
+	 */
 	public Vector<String> loadSaveFiles(){
 		Vector<String> savefiles = new Vector<String>();
 		String save;
@@ -44,6 +52,12 @@ public class PersistenzLaden implements Serializable{
 		}
 	}
 	
+	/**
+	 * Methode zum Laden eines Speicherstandes
+	 * 
+	 * @param filename: Speicherstand der geladen werden soll
+	 * @return
+	 */
 	public Monopoly loadAll(String filename){
 		try {
 			monopoly = new Monopoly();
@@ -67,6 +81,12 @@ public class PersistenzLaden implements Serializable{
 		
 	}
 	
+	/**
+	 * Methode zum Laden der Phase
+	 * 
+	 * @return
+	 * @throws IOException
+	 */
 	private Phase loadPhase() throws IOException {
 		laden = new BufferedReader(new FileReader(filename+"Turn"));
 		laden.readLine();
@@ -92,6 +112,12 @@ public class PersistenzLaden implements Serializable{
 		return phase;
 	}
 
+	/**
+	 * Methode zum Laden des Spielers der aktuell dran ist 
+	 * 
+	 * @return
+	 * @throws IOException
+	 */
 	private int loadActivePlayer() throws IOException {
 		laden = new BufferedReader(new FileReader(filename+"Turn"));
 		int spielernummer = Integer.parseInt(laden.readLine());
@@ -100,6 +126,13 @@ public class PersistenzLaden implements Serializable{
 		return spielernummer;
 	}
 
+	/**
+	 * Methode zum Laden aller Spieler
+	 *  
+	 * @param feld
+	 * @return
+	 * @throws IOException
+	 */
 	public Vector<Spieler> loadSpieler(Feld[] feld) throws IOException{
 		
 		laden = new BufferedReader(new FileReader(filename+"Spieler.txt"));
@@ -120,6 +153,13 @@ public class PersistenzLaden implements Serializable{
 		
 	}
 	
+	/**
+	 * Methode zum Laden des aktuellen Spielfeldes 
+	 * 
+	 * @param spielerListe
+	 * @param feld
+	 * @throws IOException
+	 */
 	public void loadField(Vector<Spieler> spielerListe,Feld[] feld)throws IOException{
 		laden = new BufferedReader(new FileReader(filename+"Feld.txt"));
 		laden.readLine();
@@ -175,6 +215,13 @@ public class PersistenzLaden implements Serializable{
 		laden.close();
 	}
 	
+	/**
+	 * Methode zum Laden des Defaultfeldes
+	 * 
+	 * @param monopoly
+	 * @return
+	 * @throws IOException
+	 */
 	public Feld[] loadDefaulField(Monopoly monopoly)throws IOException{
 		laden = new BufferedReader(new FileReader("defaultFeld.txt"));
 		Feld[] feld = new Feld[40];
