@@ -13,11 +13,19 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.Mixer;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -57,6 +65,11 @@ public class Spielfenster {
 	private SpeichernFenster speFenster;
 	private BufferedImage img;
 
+//	public static Mixer mixer;
+//	public static Clip clip;
+	private Mixer mixer;
+	private Clip clip;
+	
 	private Vector<Spieler> spielerliste;
 
 	Spieler player;
@@ -186,7 +199,39 @@ public class Spielfenster {
 //					JOptionPane dice = new JOptionPane();
 //					String eyes = "Sie haben eine "+zugweite+" gewürfelt";
 //					dice.showMessageDialog(spiel, eyes);
+					
+					
+					Mixer.Info[] mixInfos = AudioSystem.getMixerInfo();
+
+					mixer = AudioSystem.getMixer(mixInfos[0]);
+					DataLine.Info dataInfo = new DataLine.Info(Clip.class, null);
+					try{
+						clip = (Clip)mixer.getLine(dataInfo);
+					} catch(LineUnavailableException lue){
+						lue.printStackTrace();
+					}
+					
+					try{
+						URL soundURL = Spielfenster.class.getResource("/images/sounds/dice.wav");
+						AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundURL);
+						clip.open(audioStream);
+					} catch(LineUnavailableException lue){
+						lue.printStackTrace();
+					} catch(UnsupportedAudioFileException uafe){
+						uafe.printStackTrace();
+					} catch(IOException ioe){
+						ioe.printStackTrace();
+					}
+					
+					clip.start();
 //					
+//					do{
+//						try {
+//							Thread.sleep(50);
+//						} catch(InterruptedException ie){
+//							ie.printStackTrace();
+//						}
+//					} while (clip.isActive());
 					
 					try {
 						switch(zugweite){
@@ -218,9 +263,6 @@ public class Spielfenster {
 	                    JDialog frame = new JDialog(spiel, "Würfel");
         
 	                    frame.setContentPane(new JLabel(new ImageIcon(img)));
-//	                    frame.setLayout(new GridBagLayout());
-//	                    GridBagConstraints gbc = new GridBagConstraints();
-//	                    gbc.gridwidth = GridBagConstraints.REMAINDER;
 	                    
 //	                    frame.add(new JLabel("Sie haben eine "+zugweite+" gewürfelt"), gbc);
 	                    
