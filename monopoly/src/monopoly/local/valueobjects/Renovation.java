@@ -7,20 +7,29 @@ public class Renovation implements Aktion {
 
 	private Monopoly monopoly;
 
+	/**
+	 * Konstruktor der Klasse Renovation
+	 * implemtiert Aktion
+	 * 
+	 * @param monopoly
+	 */
 	public Renovation(Monopoly monopoly) {
 		this.monopoly = monopoly;
-		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Methode zum Ausführen der Renovieren-Aktion 
+	 */
 	public void ausfuehren() {
 		int hausbetrag = 500;
 		int hotelbetrag = 2000;
+		Spieler spieler = monopoly.getTurn().getWerIstDran();
 		
-		for(Strasse strasse : monopoly.getYourStreets(monopoly.getTurn().getWerIstDran())){
+		for(Strasse strasse : monopoly.getYourStreets(spieler)){
 			if(strasse.getHaeuseranzahl() == 5){
-				monopoly.getTurn().getWerIstDran().setSpielerBudget(monopoly.getTurn().getWerIstDran().getSpielerBudget() - hotelbetrag);
+				spieler.setSpielerBudget(spieler.getSpielerBudget() - hotelbetrag);
 			} else{
-				monopoly.getTurn().getWerIstDran().setSpielerBudget(monopoly.getTurn().getWerIstDran().getSpielerBudget() - (hausbetrag * strasse.getHaeuseranzahl()));
+				spieler.setSpielerBudget(spieler.getSpielerBudget() - (hausbetrag * strasse.getHaeuseranzahl()));
 			}
 		}
 	}
