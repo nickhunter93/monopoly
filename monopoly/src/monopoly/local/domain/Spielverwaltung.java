@@ -106,7 +106,7 @@ public class Spielverwaltung {
 	}
 
 	/**
-	 * setzt den Wert der Hypothek einer Stra�e neu durch den Aufruf der
+	 * setzt den Wert der Hypothek einer Straße neu durch den Aufruf der
 	 * switchHypthek-Funktion in der Klasse Spielfeld
 	 */
 	public String switchHypothek(int position) throws GehaltException {
@@ -145,9 +145,9 @@ public class Spielverwaltung {
 		}
 
 	/**
-	 * 
+	 * Methode zum Miete zahlen auf einer Straße
 	 * @param player
-	 * @return: gibt den Mietpreis der Stra�e zur�ck auf welcher der Spieler
+	 * @return: gibt den Mietpreis der Straße zurück auf welcher der Spieler
 	 *          sich befindet
 	 */
 	public int miete(Spieler spieler) {
@@ -407,7 +407,7 @@ public class Spielverwaltung {
 	}
 
 	/**
-	 * @return: gibt eine zuf�llige int Zahl zwischen 1 und 6 aus
+	 * @return: gibt eine zufällige int Zahl zwischen 1 und 6 aus
 	 */
 	public int wuerfeln() {
 		int zahl;
@@ -429,10 +429,17 @@ public class Spielverwaltung {
 		}
 	}
 
+	/**
+	 * 
+	 * @return: gibt den aktuellen Turn zurück
+	 */
 	public Turn getTurn() {
 		return aktuellerTurn;
 	}
 
+	/**
+	 * schickt einen Spieler in die nächste Phase 
+	 */
 	public void nextTurn() {
 		if (aktuellerTurn.phase == Phase.End) {
 			aktuellerTurn.werIstDran = spieler.reihenfolge();// index
@@ -442,6 +449,10 @@ public class Spielverwaltung {
 		}
 	}
 
+	/**
+	 * 
+	 *
+	 */
 	public enum Phase {
 
 		JailCheck, Dice, Passiv, End;
@@ -457,10 +468,16 @@ public class Spielverwaltung {
 		private Spieler werIstDran;
 		private Phase phase;
 
+		/**
+		 * Konstruktor der Klasse Turn 
+		 */
 		public Turn() {
 			// phase = Phase.JailCheck;
 		}
 
+		/**
+		 * startet die Phasenzählung 
+		 */
 		// int phase; // - enum Verwendung
 		public void initialisiere(boolean gamestart) {
 			if (gamestart) {
@@ -469,26 +486,50 @@ public class Spielverwaltung {
 			}
 		}
 
+		/**
+		 * 
+		 * @return: gibt den aktuellen Spieler zurück
+		 */
 		public Spieler getWerIstDran() {
 			return this.werIstDran;
 		}
 
+		/**
+		 * setzt den aktuellen Spieler neu
+		 * 
+		 * @param werIstDran
+		 */
 		public void setWerIstDran(Spieler werIstDran) {
 			this.werIstDran = werIstDran;
 		}
 
+		/**
+		 * 
+		 * @return: gibt die aktuelle Phase zurück
+		 */
 		public Phase getPhase() {
 			return this.phase;
 		}
 
+		/**
+		 * setzt die Phase des Spielers neu
+		 * 
+		 * @param phase
+		 */
 		public void setPhase(Phase phase) {
 			this.phase = phase;
 		}
 
+		/**
+		 * setzt den Spieler in die neue Phase
+		 */
 		public void nextPhase() {
 			this.phase = phase.next();
 		}
 
+		/**
+		 * beendet den Zug wenn man ins Gefängnis gekommen ist 
+		 */
 		public void Jailed() {
 			this.phase = Phase.End;
 		}

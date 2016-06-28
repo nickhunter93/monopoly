@@ -10,10 +10,10 @@ public class Spielerverwaltung {
 	private Jail jail;
 	private ToJail toJail;
 	private Vector<Spieler> spielerListe = new Vector<Spieler>();
+	
 	/**
 	 * Konstruktor der Klasse Spielerverwaltung
 	 */
-
 	public Spielerverwaltung(){
 		reihenfolge = -1;
 	}
@@ -25,6 +25,10 @@ public class Spielerverwaltung {
 		return spielerListe;
 	}
 	
+	/**
+	 * setzt den Spielervektor neu 
+	 * @param spielerListe
+	 */
 	public void setAllSpieler(Vector<Spieler> spielerListe){
 		this.spielerListe = spielerListe;
 	}
@@ -37,7 +41,7 @@ public class Spielerverwaltung {
 	}
 	
 	/**
-	 * f�gt einen Spieler der spielerListe hinzu 
+	 * fügt einen Spieler der spielerListe hinzu 
 	 * 
 	 * @return
 	 */
@@ -57,7 +61,7 @@ public class Spielerverwaltung {
 	
 	/**
 	 * entfernt einen Spieler anhand seiner spielerNummer aus der spielerListe
-	 * und l�sst die n�chten Spieler aufr�cken die hinter ihm in der Liste standen
+	 * und lässt die nächten Spieler aufrücken die hinter ihm in der Liste standen
 	 * 
 	 * @param playerNumber
 	 * @return
@@ -75,10 +79,10 @@ public class Spielerverwaltung {
 	}
 	
 	/**
-	 * 
+	 * Methode zum Miete zahlen 
 	 * @param miete: Geldbetrag den der Spieler zahlen muss
-	 * @param vermieter: Spieler der das Geld erh�lt
-	 * @param mieter: SPieler der das Geld zahlt
+	 * @param vermieter: Spieler der das Geld erhält
+	 * @param mieter: Spieler der das Geld zahlt
 	 */
 	public void mieteZahlen(int miete, Spieler vermieter, Spieler mieter){
 		if(vermieter.getSpielerNummer() != 99)
