@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Vector;
 
 import monopoly.local.domain.Monopoly;
@@ -19,7 +20,7 @@ import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Strasse;
 import monopoly.local.valueobjects.ToJail;
 
-public class PersistenzLaden {
+public class PersistenzLaden implements Serializable{
 	private Monopoly monopoly;
 	private BufferedReader laden;
 	private String filename;

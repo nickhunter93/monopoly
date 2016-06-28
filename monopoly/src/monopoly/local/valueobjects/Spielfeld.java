@@ -1,12 +1,13 @@
 package monopoly.local.valueobjects;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Vector;
 
 import monopoly.local.domain.Monopoly;
 import monopoly.local.persistenz.PersistenzLaden;
 
-public class Spielfeld {
+public class Spielfeld implements Serializable {
 	private Feld[] feld;
 	private int fieldSize = 36;
 	

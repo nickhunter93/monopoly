@@ -1,10 +1,11 @@
 package monopoly.local.valueobjects;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import monopoly.local.domain.Monopoly;
 
-public class Ereigniskarten extends Deck {
+public class Ereigniskarten extends Deck implements Serializable{
 
 private Vector<Aktion> deck;
 private Monopoly monopoly;

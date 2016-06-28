@@ -1,10 +1,15 @@
 package monopoly.local.domain;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.util.Vector;
 
+import ServerPacket.GameEventListener;
+import ServerPacket.ServerRemote;
 import monopoly.local.domain.Spielverwaltung.Turn;
 import monopoly.local.domain.exceptions.GehaltException;
 import monopoly.local.domain.exceptions.HausbauException;
+import monopoly.local.domain.exceptions.PlayerException;
 import monopoly.local.persistenz.PersistenzLaden;
 import monopoly.local.persistenz.PersistenzSpeichern;
 import monopoly.local.ui.cui.SpielStart;
@@ -14,7 +19,7 @@ import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Spielfeld;
 import monopoly.local.valueobjects.Strasse;
 
-public class Monopoly {
+public class Monopoly implements ServerRemote, Serializable{
 
 	private PersistenzLaden pmLaden;
 	private PersistenzSpeichern pmSpeichern;
@@ -150,5 +155,20 @@ public class Monopoly {
 	
 	public boolean getHypothek(int position){
 		return logik.getHypothek(position);
+	}
+
+	@Override
+	public void addGameEventListener(GameEventListener listener) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addPlayer(Spieler p) throws RemoteException,PlayerException {
+		if (spieler.getAllSpieler().size() < 6){
+			spieler.beitreten(p);
+		}else{
+			throw new PlayerException(p);
+		}
 	}
 }

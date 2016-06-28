@@ -127,6 +127,10 @@ public class MenueHauptPanel {
 	public JButton getmButton3() {
 		return mButton3;
 	}
+
+	public JButton getmButton4() {
+		return mButton4;
+	}
 	
 //	public void setmButton3(JButton mButton3) {
 //		this.mButton3 = mButton3;

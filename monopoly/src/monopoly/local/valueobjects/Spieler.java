@@ -1,8 +1,9 @@
 package monopoly.local.valueobjects;
 
 import java.awt.Image;
+import java.io.Serializable;
 
-public class Spieler {
+public class Spieler implements Serializable {
 	
 	private String spielerName;
 	private Feld spielerPosition;

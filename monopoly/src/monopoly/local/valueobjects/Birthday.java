@@ -1,10 +1,12 @@
 package monopoly.local.valueobjects;
 
 
+import java.io.Serializable;
+
 import monopoly.local.domain.Monopoly;
 
 
-public class Birthday implements Aktion {
+public class Birthday implements Aktion, Serializable {
 	
 private Monopoly monopoly;
 	public Birthday(Monopoly monopoly) {

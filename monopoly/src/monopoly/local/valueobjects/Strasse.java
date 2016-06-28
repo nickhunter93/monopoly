@@ -1,10 +1,11 @@
 package monopoly.local.valueobjects;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import monopoly.local.domain.exceptions.HausbauException;
 
-public class Strasse extends Feld {
+public class Strasse extends Feld implements Serializable {
 	
 	private int kaufpreis, mietpreis, haeuseranzahl,hauspreis;
 	private boolean hypothek;

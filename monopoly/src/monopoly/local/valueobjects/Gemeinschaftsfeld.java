@@ -1,8 +1,10 @@
 package monopoly.local.valueobjects;
 
+import java.io.Serializable;
+
 import monopoly.local.domain.Monopoly;
 
-public class Gemeinschaftsfeld extends Feld{
+public class Gemeinschaftsfeld extends Feld implements Serializable{
 
 	private Spieler besitzer = new Spieler("Bank", 98, null, -1);
 	private Gemeinschaftskarten deck; 

@@ -1,5 +1,7 @@
 package monopoly.local.valueobjects;
 
+import java.io.Serializable;
+
 //public class Feld<T> {
 //	
 //	private T inhalt;
@@ -17,7 +19,7 @@ package monopoly.local.valueobjects;
 //	}
 //}
 
-public class Feld {
+public class Feld implements Serializable{
 	
 	protected String name;
 	protected int nummer;

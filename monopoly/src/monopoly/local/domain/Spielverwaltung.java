@@ -3,6 +3,9 @@ package monopoly.local.domain;
 import monopoly.local.valueobjects.Aktion;
 import monopoly.local.valueobjects.Ereignisfeld;
 import monopoly.local.valueobjects.Ereigniskarten;
+
+import java.io.Serializable;
+
 import monopoly.local.domain.exceptions.GehaltException;
 import monopoly.local.domain.exceptions.HausbauException;
 import monopoly.local.valueobjects.Feld;
@@ -13,7 +16,7 @@ import monopoly.local.valueobjects.Spielfeld;
 import monopoly.local.valueobjects.Strasse;
 import monopoly.local.valueobjects.ToJail;
 
-public class Spielverwaltung {
+public class Spielverwaltung implements Serializable{
 	private Spielfeld feld;
 	private Spielerverwaltung spieler;
 	private Ereigniskarten ereignisKarten;
@@ -452,7 +455,7 @@ public class Spielverwaltung {
 		}
 	};
 
-	public class Turn {
+	public class Turn implements Serializable{
 
 		private Spieler werIstDran;
 		private Phase phase;

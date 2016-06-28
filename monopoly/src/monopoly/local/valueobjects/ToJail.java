@@ -1,6 +1,8 @@
 package monopoly.local.valueobjects;
 
-public class ToJail extends Feld {
+import java.io.Serializable;
+
+public class ToJail extends Feld implements Serializable {
 
 	private Jail jail;
 	private Spieler besitzer = new Spieler("Bank", 98, null, -1);

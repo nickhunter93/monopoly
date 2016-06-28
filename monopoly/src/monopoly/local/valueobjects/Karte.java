@@ -1,6 +1,8 @@
 package monopoly.local.valueobjects;
 
-public class Karte {
+import java.io.Serializable;
+
+public class Karte implements Serializable{
 	
 	private int id;
 	private String beschreibung, titel;

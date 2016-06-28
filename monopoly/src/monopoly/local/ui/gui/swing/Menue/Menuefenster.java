@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -16,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import monopoly.client.SpielfensterClient;
 import monopoly.local.domain.Monopoly;
 import monopoly.local.ui.gui.swing.Spielfenster;
 import monopoly.local.valueobjects.Spieler;
@@ -100,6 +102,18 @@ public class Menuefenster {
 				mLaden();
 			}
 		});
+		
+		hauptPanel.getmButton4().addActionListener(e -> {
+			try {
+				@SuppressWarnings("unused")
+				SpielfensterClient spFenster = new SpielfensterClient();				
+				menue.dispose();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+
 		
 		menue.setSize(600, 600);
 		menue.setVisible(true);
@@ -210,6 +224,7 @@ public class Menuefenster {
 				mInit();
 			}
 		});
+		
 		
 		menue.validate();
 		menue.setSize(600, 600);

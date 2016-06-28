@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Vector;
 
 import com.sun.corba.se.impl.orbutil.ObjectWriter;
@@ -18,7 +19,7 @@ import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Strasse;
 import monopoly.local.valueobjects.ToJail;
 
-public class PersistenzSpeichern {
+public class PersistenzSpeichern implements Serializable{
 	private BufferedWriter speicher;
 	private String filename;
 

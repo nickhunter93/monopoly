@@ -1,8 +1,10 @@
 package monopoly.local.valueobjects;
 
+import java.io.Serializable;
+
 import monopoly.local.domain.Monopoly;
 
-public class FeldMitLos implements Aktion {
+public class FeldMitLos implements Aktion, Serializable {
 	
 	private Feld target;
 	private Monopoly monopoly;

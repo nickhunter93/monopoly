@@ -1,8 +1,10 @@
 package monopoly.local.valueobjects;
 
+import java.io.Serializable;
+
 import monopoly.local.domain.Monopoly;
 
-public class Gewinn implements Aktion {
+public class Gewinn implements Aktion, Serializable {
 	
 	private int betrag;
 	private Monopoly monopoly;

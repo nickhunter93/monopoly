@@ -1,11 +1,12 @@
 package monopoly.local.domain;
+import java.io.Serializable;
 import java.util.Vector;
 
 import monopoly.local.valueobjects.Jail;
 import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.ToJail;
 
-public class Spielerverwaltung {
+public class Spielerverwaltung implements Serializable{
 	private int reihenfolge;
 	private Jail jail;
 	private ToJail toJail;
