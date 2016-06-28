@@ -233,49 +233,6 @@ public class Spielfenster {
 //						}
 //					} while (clip.isActive());
 					
-					try {
-						switch(zugweite){
-							case 1 :
-								img = ImageIO.read(new File("images/dice1.jpg"));
-							break;
-							
-							case 2 :
-								img = ImageIO.read(new File("images/dice2.jpg"));
-							break;
-							
-							case 3 :
-								img = ImageIO.read(new File("images/dice3.jpg"));
-							break;
-							
-							case 4 :
-								img = ImageIO.read(new File("images/dice4.jpg"));
-							break;
-							
-							case 5 :
-								img = ImageIO.read(new File("images/dice5.jpg"));
-							break;
-							
-							case 6 :
-								img = ImageIO.read(new File("images/dice6.jpg"));
-						
-						}
-
-	                    JDialog frame = new JDialog(spiel, "Würfel");
-        
-	                    frame.setContentPane(new JLabel(new ImageIcon(img)));
-	                    
-//	                    frame.add(new JLabel("Sie haben eine "+zugweite+" gewürfelt"), gbc);
-	                    
-	                    frame.setSize(300, 300);
-	                    frame.setModal(true);
-	                    frame.setResizable(false);
-	                    frame.setLocationRelativeTo(null);
-	                    frame.setVisible(true);
-					} catch (IOException e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
-					}
-					
 					
 					
 					Spieler spieler = monopoly.getTurn().getWerIstDran();
