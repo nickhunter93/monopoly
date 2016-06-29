@@ -24,8 +24,7 @@ public class MonopolyGUI {
 	}
 	
 	/**
-	 * zum Probieren und bauen der GUI
-	 * wird sp�ter geloescht oder verschoben
+	 * startet die GUI
 	 */
 	public static void main(String[] args){
 		MonopolyGUI monopolyGUI = new MonopolyGUI();

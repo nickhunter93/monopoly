@@ -1,7 +1,8 @@
 package monopoly.local.valueobjects;
 
+import java.io.Serializable;
 
-public class Ereignis {
+public class Ereignis implements Serializable {
 
 	private Jail jail;
 	

@@ -1,10 +1,20 @@
 package monopoly.local.ui.gui.swing;
 
 public class SpielerPosition {
+	
+	/**
+	 * Konstruktor der Klasse SpielerPosition
+	 */
 	public SpielerPosition() {
 
 	}
 
+	/**
+	 * Methode zum Positionieren der Spieler auf dem Spielfeld
+	 * @param feldnummer
+	 * @param spielernummer
+	 * @return
+	 */
 	public String getSpielerPosition(int feldnummer, int spielernummer) {
 		switch (feldnummer) {
 		case 0:

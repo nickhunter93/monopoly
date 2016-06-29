@@ -32,10 +32,22 @@ public class MenuePanel extends JPanel{
 		iBild = mBildIcon.getImage();
 
 	}
+	
+	/**
+	 * setzt die Breite neu
+	 * 
+	 * @param b
+	 */
 	public void setB(int b){
 		if(!(b <= 0))
 		this.b = b;
 	}
+	
+	/**
+	 * setzt die Höhe neu
+	 * 
+	 * @param h
+	 */
 	public void setH(int h){
 		if(!(h <= 0))
 		this.h = h;

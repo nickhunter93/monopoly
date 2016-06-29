@@ -1,21 +1,42 @@
 package monopoly.local.valueobjects;
 
+import java.io.Serializable;
+
 import monopoly.local.domain.Monopoly;
 
-public class FeldOhneLos implements Aktion {
+public class FeldOhneLos implements Aktion, Serializable {
 
 	private Feld target;
 	private Monopoly monopoly;
+	private String str;
 	
-	public FeldOhneLos(Monopoly monopoly, Feld target) {
+	/**
+	 * Konstruktor der Klasse FeldOhneLos
+	 * implementiert die Klasse Aktion
+	 * 
+	 * @param monopoly
+	 * @param target
+	 */
+	public FeldOhneLos(Monopoly monopoly, Feld target,String str) {
 		this.target = target;
 		this.monopoly = monopoly;
-		// TODO Auto-generated constructor stub
+		this.str = str;
 	}
 
+	/**
+	 * Methode zum ausführen um einen Spieler auf ein Feld zu setzen
+	 * Spieler kommt nicht über Los/ darf das Geld nicht einziehen wenn er über Los kommt
+	 */
 	public void ausfuehren() {
 		monopoly.getTurn().getWerIstDran().setSpielerPosition(target);
 //		ereignis.aufFeldOhneLos(spieler, spielfeld.getSpielfeld()[7]);		
+	}
+	
+	/**
+	 * gibt den String der Aktion zurück
+	 */
+	public String toString(){
+		return str;
 	}
 
 }

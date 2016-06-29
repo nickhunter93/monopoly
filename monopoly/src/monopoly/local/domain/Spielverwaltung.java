@@ -3,6 +3,9 @@ package monopoly.local.domain;
 import monopoly.local.valueobjects.Aktion;
 import monopoly.local.valueobjects.Ereignisfeld;
 import monopoly.local.valueobjects.Ereigniskarten;
+
+import java.io.Serializable;
+
 import monopoly.local.domain.exceptions.GehaltException;
 import monopoly.local.domain.exceptions.HausbauException;
 import monopoly.local.valueobjects.Feld;
@@ -13,7 +16,7 @@ import monopoly.local.valueobjects.Spielfeld;
 import monopoly.local.valueobjects.Strasse;
 import monopoly.local.valueobjects.ToJail;
 
-public class Spielverwaltung {
+public class Spielverwaltung implements Serializable{
 	private Spielfeld feld;
 	private Spielerverwaltung spieler;
 	private Ereigniskarten ereignisKarten;
@@ -106,7 +109,7 @@ public class Spielverwaltung {
 	}
 
 	/**
-	 * setzt den Wert der Hypothek einer Stra�e neu durch den Aufruf der
+	 * setzt den Wert der Hypothek einer Straße neu durch den Aufruf der
 	 * switchHypthek-Funktion in der Klasse Spielfeld
 	 */
 	public String switchHypothek(int position) throws GehaltException {
@@ -145,9 +148,9 @@ public class Spielverwaltung {
 		}
 
 	/**
-	 * 
+	 * Methode zum Miete zahlen auf einer Straße
 	 * @param player
-	 * @return: gibt den Mietpreis der Stra�e zur�ck auf welcher der Spieler
+	 * @return: gibt den Mietpreis der Straße zurück auf welcher der Spieler
 	 *          sich befindet
 	 */
 	public int miete(Spieler spieler) {
@@ -173,19 +176,36 @@ public class Spielverwaltung {
 		if (position instanceof Ereignisfeld) {
 			miete = 0;
 			Ereignisfeld ereignis = (Ereignisfeld) position;
-			Aktion aktion = ereignis.getEreignis();
-			aktion.ausfuehren();
+			//Aktion aktion = ereignis.getEreignis();
+			//aktion.ausfuehren();
 		}
 		if (position instanceof Gemeinschaftsfeld) {
 			miete = 0;
 
 			Gemeinschaftsfeld ereignis = (Gemeinschaftsfeld) position;
-			Aktion aktion = ereignis.getEreignis();
-			aktion.ausfuehren();
+			//Aktion aktion = ereignis.getEreignis();
+			//aktion.ausfuehren();
 		}
 		return miete;
 	}
-
+	
+	public String ereignisausführen(Spieler spieler){
+		Strasse strasse = null;
+		Feld position = spieler.getSpielerPosition();
+		if(position instanceof Ereignisfeld){
+			Ereignisfeld ereignis = (Ereignisfeld) position;
+			Aktion aktion = ereignis.getEreignis();
+			aktion.ausfuehren();
+			return aktion.toString();
+		}
+		if(position instanceof Gemeinschaftsfeld){
+			Gemeinschaftsfeld ereignis = (Gemeinschaftsfeld) position;
+			Aktion aktion = ereignis.getEreignis();
+			aktion.ausfuehren();
+			return aktion.toString();
+		}
+		return null;
+	}
 	/**
 	 * 
 	 * @param spieler
@@ -322,19 +342,20 @@ public class Spielverwaltung {
 			}
 			if (test) {
 				int budget = spieler.getSpielerBudget();
-				if (strasse.getHaeuseranzahl() < 4) {
-					strasse.setHaeuseranzahl(strasse.getHaeuseranzahl() + 1);
+				if (strasse.getHaeuseranzahl() <= 4) {
 					if (strasse.getHaeuseranzahl() < 4) {
 						if (budget - strasse.getHauspreis() >= 0) {
 							spieler.setSpielerBudget(budget - strasse.getHauspreis());
+							strasse.setHaeuseranzahl(strasse.getHaeuseranzahl() + 1);
 						} else {
 							throw new GehaltException(spieler);
 						}
 					} else {
 						if ((budget - (2 * strasse.getHauspreis())) >= 0) {
 							spieler.setSpielerBudget(budget - (2 * strasse.getHauspreis()));
+							strasse.setHaeuseranzahl(strasse.getHaeuseranzahl() + 1);
 						} else {
-							throw new HausbauException(spieler, getSpielfeld()[position]);
+							throw new GehaltException(spieler);
 						}
 					}
 				} else {
@@ -389,7 +410,7 @@ public class Spielverwaltung {
 	}
 
 	/**
-	 * @return: gibt eine zuf�llige int Zahl zwischen 1 und 6 aus
+	 * @return: gibt eine zufällige int Zahl zwischen 1 und 6 aus
 	 */
 	public int wuerfeln() {
 		int zahl;
@@ -411,10 +432,17 @@ public class Spielverwaltung {
 		}
 	}
 
+	/**
+	 * 
+	 * @return: gibt den aktuellen Turn zurück
+	 */
 	public Turn getTurn() {
 		return aktuellerTurn;
 	}
 
+	/**
+	 * schickt einen Spieler in die nächste Phase 
+	 */
 	public void nextTurn() {
 		if (aktuellerTurn.phase == Phase.End) {
 			aktuellerTurn.werIstDran = spieler.reihenfolge();// index
@@ -424,6 +452,10 @@ public class Spielverwaltung {
 		}
 	}
 
+	/**
+	 * 
+	 *
+	 */
 	public enum Phase {
 
 		JailCheck, Dice, Passiv, End;
@@ -434,15 +466,21 @@ public class Spielverwaltung {
 		}
 	};
 
-	public class Turn {
+	public class Turn implements Serializable{
 
 		private Spieler werIstDran;
 		private Phase phase;
 
+		/**
+		 * Konstruktor der Klasse Turn 
+		 */
 		public Turn() {
 			// phase = Phase.JailCheck;
 		}
 
+		/**
+		 * startet die Phasenzählung 
+		 */
 		// int phase; // - enum Verwendung
 		public void initialisiere(boolean gamestart) {
 			if (gamestart) {
@@ -451,26 +489,50 @@ public class Spielverwaltung {
 			}
 		}
 
+		/**
+		 * 
+		 * @return: gibt den aktuellen Spieler zurück
+		 */
 		public Spieler getWerIstDran() {
 			return this.werIstDran;
 		}
 
+		/**
+		 * setzt den aktuellen Spieler neu
+		 * 
+		 * @param werIstDran
+		 */
 		public void setWerIstDran(Spieler werIstDran) {
 			this.werIstDran = werIstDran;
 		}
 
+		/**
+		 * 
+		 * @return: gibt die aktuelle Phase zurück
+		 */
 		public Phase getPhase() {
 			return this.phase;
 		}
 
+		/**
+		 * setzt die Phase des Spielers neu
+		 * 
+		 * @param phase
+		 */
 		public void setPhase(Phase phase) {
 			this.phase = phase;
 		}
 
+		/**
+		 * setzt den Spieler in die neue Phase
+		 */
 		public void nextPhase() {
 			this.phase = phase.next();
 		}
 
+		/**
+		 * beendet den Zug wenn man ins Gefängnis gekommen ist 
+		 */
 		public void Jailed() {
 			this.phase = Phase.End;
 		}

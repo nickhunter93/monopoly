@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Vector;
 
 import com.sun.corba.se.impl.orbutil.ObjectWriter;
@@ -18,13 +19,25 @@ import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Strasse;
 import monopoly.local.valueobjects.ToJail;
 
-public class PersistenzSpeichern {
+public class PersistenzSpeichern implements Serializable{
 	private BufferedWriter speicher;
 	private String filename;
 
+	/**
+	 * Konstruktor der Klasse PersistenzSpeichern  
+	 */
 	public PersistenzSpeichern(){
 	}
 
+	/**
+	 * Methode zum Speichern des aktuellen Spieles 
+	 * 
+	 * @param spielerListe
+	 * @param spielfeld
+	 * @param turn
+	 * @param filename
+	 * @return
+	 */
 	public boolean saveAll(Vector<Spieler> spielerListe, Feld[] spielfeld,Turn turn,String filename){
 		try{
 			this.filename = filename;
@@ -39,6 +52,11 @@ public class PersistenzSpeichern {
 		}
 	}
 
+	/**
+	 * Methode zum Speicher des Dateinamens
+	 * 
+	 * @throws IOException
+	 */
 	private void saveFilenames()throws IOException {
 		speicher = new BufferedWriter(new FileWriter("savefiles",true));
 		Vector<String> savefiles = new PersistenzLaden().loadSaveFiles();
@@ -55,6 +73,12 @@ public class PersistenzSpeichern {
 		speicher.close();
 	}
 
+	/**
+	 * Methode zum Speicher der aktuellen Phase 
+	 * 
+	 * @param turn
+	 * @throws IOException
+	 */
 	private void saveTurn(Turn turn)throws IOException {
 		speicher = new BufferedWriter(new FileWriter(filename+"Turn"));
 		turn.getWerIstDran();
@@ -79,6 +103,12 @@ public class PersistenzSpeichern {
 		speicher.close();
 	}
 
+	/**
+	 * Methode zum Speichern der Spieler 
+	 * 
+	 * @param spielerListe
+	 * @throws IOException
+	 */
 	public void saveSpieler(Vector<Spieler> spielerListe) throws IOException{
 		speicher = new BufferedWriter(new FileWriter(filename+"Spieler.txt"));
 		int anzahl = spielerListe.size();
@@ -99,6 +129,12 @@ public class PersistenzSpeichern {
 
 	}
 
+	/**
+	 * Methode zum Speichern des Defaultfeldes
+	 * 
+	 * @param spielfeld
+	 * @throws IOException
+	 */
 	public void saveDefaultFeld(Feld[] spielfeld) throws IOException{
 		speicher = new BufferedWriter(new FileWriter("defaultFeld.txt"));
 		speicher.newLine();
@@ -166,6 +202,12 @@ public class PersistenzSpeichern {
 		speicher.close();
 	}
 	
+	/**
+	 * Methode zum Speichern des aktuellen Feldes
+	 * 
+	 * @param spielfeld
+	 * @throws IOException
+	 */
 	public void saveFeld(Feld[] spielfeld) throws IOException{
 		speicher = new BufferedWriter(new FileWriter(filename+"Feld.txt"));
 		speicher.newLine();

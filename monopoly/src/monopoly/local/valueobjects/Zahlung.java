@@ -1,29 +1,42 @@
 package monopoly.local.valueobjects;
 
+import java.io.Serializable;
+
 import monopoly.local.domain.Monopoly;
 
-public class Zahlung implements Aktion {
+public class Zahlung implements Aktion, Serializable {
 	
 	private int betrag;
 	private Monopoly monopoly;
+	private String str;
 
-	public Zahlung(Monopoly monopoly, int betrag) {
+	/**
+	 * Konstruktor der Klasse Zahlung 
+	 * implementiert die Klasse Aktion
+	 * 
+	 * @param betrag: Betrag der gezahlt werden soll
+	 * @param str: Beschreibung der Aktion 
+	 */
+	public Zahlung(Monopoly monopoly, int betrag, String str) {
 		this.betrag = betrag;
 		this.monopoly = monopoly;
-		// TODO Auto-generated constructor stub
+		this.str = str;
 	}
 	
-	public int getBetrag(){
-		return this.betrag;
+	/**
+	 * Methode zum Ausführen der Aktion Zahlung
+	 */
+	public void ausfuehren() {
+		Spieler spieler = monopoly.getTurn().getWerIstDran();
+		spieler.setSpielerBudget(spieler.getSpielerBudget() - betrag);
 	}
 	
-	public void setBetrag(int betrag){
-		this.betrag = betrag;
+	/**
+	 * gibt den String der Aktion zurück 
+	 */
+	public String toString(){
+		return str;
 	}
 
-	public void ausfuehren() {
-		betrag = monopoly.getTurn().getWerIstDran().getSpielerBudget() + betrag;
-	}
-	
 
 }

@@ -36,18 +36,32 @@ public class SpielStart {
 	}
 
 	/**
-	 * startet die Spielschleife die das Auswahlmenï¿½ im Spiel auf der Konsole
-	 * ausgibt und die Ausgaben des Spielers lieï¿½t das Spiel wird beendet wenn
+	 * startet die Spielschleife die das Auswahlmenü im Spiel auf der Konsole
+	 * ausgibt und die Ausgaben des Spielers ließt das Spiel wird beendet wenn
 	 * alle bis auf ein Spieler pleite sind, der Gewinner wird auf der Konsole
 	 * ausgegeben
 	 * 
-	 * case 1: der Spieler wï¿½rfelt und wird um die Augenzahl weiter gesetzt,
-	 * ist die Straï¿½e kï¿½uflich kann der Spieler entscheiden ob er die
-	 * Straï¿½e kaufen mï¿½chte, ist die Straï¿½e bereits verkauft zahlt der
-	 * Spieler Miete case 2: der Spieler baut wenn es mï¿½glich ist ein Haus auf
-	 * einer Straï¿½e und kann wenn es mï¿½glich ist seine Runde vortsetzen case
-	 * 3: der Spieler nimmt wenn es mï¿½glich ist eine Hypothek auf und setzt
-	 * wenn es mï¿½glich ist seine Runde fort
+	 * case JAILCHECK: der Spieler darf ein Mal würfeln, 
+	 * wenn er eine 6 gewürfelt hat kommt er aus dem Gefängnis frei,
+	 * wenn nicht ist seine Runde beendet
+	 * 
+	 * case DIECE: 	case 1: der Spieler würfelt und wird um die Augenzahl weiter gesetzt,
+	 * ist die Straße käuflich kann der Spieler entscheiden ob er die
+	 * Straße kaufen möchte, ist die Straße bereits verkauft zahlt der
+	 * Spieler Miete 
+	 * case 2: der Spieler baut wenn es möglich ist ein Haus auf
+	 * einer Straße und kann wenn es möglich ist seine Runde vortsetzen 
+	 * case 3: der Spieler nimmt wenn es möglich ist eine Hypothek auf und setzt
+	 * wenn es möglich ist seine Runde fort 
+	 * case 4: Spiel speichern 
+	 * 
+	 * case PASSIV: der Spieler kann eine Straße kaufen wenn sie nicht schon verkauft wurde,
+	 * wurde die Straße bereits verkauft muss der Spieler ggf. Miete zahlen,
+	 * es wird auf der Konsole ausgegeben auf welchen Feld man sich befindet
+	 * 
+	 * case END: wie case DICE
+	 * 
+	 * nach dem Ende jeder Runde wird geprüft ob ein Spieler pleite ist 
 	 */
 	public void start(boolean gamestart) {
 		BufferedReader eingabe = new BufferedReader(new InputStreamReader(System.in));
@@ -128,7 +142,7 @@ public class SpielStart {
 
 						int anzahl = monopoly.wuerfel();
 						wuerfelAnzeigen(anzahl);						
-						monopoly.move(spieler, 1);
+						monopoly.move(spieler, anzahl);
 						roundLoop = false;
 
 						break;
@@ -612,7 +626,7 @@ public class SpielStart {
 	}
 
 	/**
-	 * gibt die gewï¿½rfelte Zahl auf der Konsole aus
+	 * gibt die gewürfelte Zahl auf der Konsole aus
 	 */
 	public int wuerfelAnzeigen(int zahl) {
 		switch (zahl) {

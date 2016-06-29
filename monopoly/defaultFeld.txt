@@ -31,7 +31,7 @@ f
 Einkommensteuer
 4
 0
--2000
+2000
 0
 f
 250
@@ -55,17 +55,17 @@ f
 250
 99
 
-Ereignisfeld
-7
-
 Elisenstraße
-8
+7
 100
 50
 0
 f
 250
 99
+
+Ereignisfeld
+8
 
 Poststraße
 9
@@ -297,7 +297,7 @@ f
 Zusatzsteuer
 38
 0
--2000
+2000
 0
 f
 250

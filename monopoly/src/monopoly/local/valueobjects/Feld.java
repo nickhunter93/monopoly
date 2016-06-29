@@ -1,5 +1,7 @@
 package monopoly.local.valueobjects;
 
+import java.io.Serializable;
+
 //public class Feld<T> {
 //	
 //	private T inhalt;
@@ -17,7 +19,7 @@ package monopoly.local.valueobjects;
 //	}
 //}
 
-public class Feld {
+public class Feld implements Serializable{
 	
 	protected String name;
 	protected int nummer;
@@ -63,15 +65,22 @@ public class Feld {
 		this.nummer = nummer;
 	}
 	
+	/**
+	 * Methode die den Besitzer eines Feldes neu setzt
+	 * 
+	 * @param spieler: Spieler dem das Feld gehören soll
+	 */
 	public void setBesitzer(Spieler spieler){
 		besitzer = spieler;
 	}
 	
+	/**
+	 * 
+	 * @return: gibt den Besitzer eines Feldes zurück
+	 */
 	public Spieler getBesitzer(){
 		return this.besitzer;
 	}
-	
-	
 	
 	/**
 	 * Methode die bestimmt wann ein Feld gleich ist
