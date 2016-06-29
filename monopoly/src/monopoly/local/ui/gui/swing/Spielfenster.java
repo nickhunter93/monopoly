@@ -3,24 +3,41 @@ package monopoly.local.ui.gui.swing;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.Mixer;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import monopoly.local.domain.Monopoly;
 import monopoly.local.domain.Spielverwaltung.Phase;
@@ -28,7 +45,9 @@ import monopoly.local.domain.Spielverwaltung.Turn;
 import monopoly.local.domain.exceptions.GehaltException;
 import monopoly.local.domain.exceptions.HausbauException;
 import monopoly.local.ui.gui.swing.Menue.Menuefenster;
+import monopoly.local.valueobjects.Ereignisfeld;
 import monopoly.local.valueobjects.Feld;
+import monopoly.local.valueobjects.Gemeinschaftsfeld;
 import monopoly.local.valueobjects.Spieler;
 import monopoly.local.valueobjects.Strasse;
 import net.miginfocom.swing.MigLayout;
@@ -44,7 +63,13 @@ public class Spielfenster {
 	private HausFenster haFenster;
 	private HypothekFenster hyFenster;
 	private SpeichernFenster speFenster;
+	private BufferedImage img;
 
+//	public static Mixer mixer;
+//	public static Clip clip;
+	private Mixer mixer;
+	private Clip clip;
+	
 	private Vector<Spieler> spielerliste;
 
 	Spieler player;
@@ -116,16 +141,20 @@ public class Spielfenster {
 		spiel.setVisible(true);
 		turn = monopoly.getTurn();
 		player = turn.getWerIstDran();
-		player.setSpielerPosition(monopoly.getSpielfeld()[1]);
-		try {
-			monopoly.kaufStrasse(player);
-			player.setSpielerPosition(monopoly.getSpielfeld()[3]);
-			monopoly.kaufStrasse(player);
-			player.setSpielerPosition(monopoly.getLos());
-		} catch (GehaltException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
+		//sIP.getJTextArea().setText(""+turn.getPhase()+"\n"+player.getSpielerPosition());
+
+		//sIP2.getJTextArea().setText("Name :"+player.getSpielerName()+"\nGehalt : "+player.getSpielerBudget()+
+		//		"\nPosition : "+player.getSpielerPosition().getName());
+
+//		player.setSpielerPosition(monopoly.getSpielfeld()[1]);
+//		try {
+//			monopoly.kaufStrasse(player);
+//			player.setSpielerPosition(monopoly.getSpielfeld()[3]);
+//			monopoly.kaufStrasse(player);
+//			player.setSpielerPosition(monopoly.getLos());
+//		} catch (GehaltException e2) {
+//			e2.printStackTrace();
+//		}
 		// Info-TextAreas mit sich anpassenden Infos
 		// sIP2.getSTextArea().setText(monopoly.getStrasseName(spieler) +
 		// monopoly.getHaeuseranzahl(position) + monopoly.get);
@@ -166,6 +195,87 @@ public class Spielfenster {
 					break;
 				case Dice:
 					int zugweite = monopoly.wuerfel();
+//					JOptionPane dice = new JOptionPane();
+//					String eyes = "Sie haben eine "+zugweite+" gewürfelt";
+//					dice.showMessageDialog(spiel, eyes);
+					
+					
+					Mixer.Info[] mixInfos = AudioSystem.getMixerInfo();
+
+					mixer = AudioSystem.getMixer(mixInfos[0]);
+					DataLine.Info dataInfo = new DataLine.Info(Clip.class, null);
+					try{
+						clip = (Clip)mixer.getLine(dataInfo);
+					} catch(LineUnavailableException lue){
+						lue.printStackTrace();
+					}
+					
+					try{
+						URL soundURL = Spielfenster.class.getResource("/images/sounds/dice.wav");
+						AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundURL);
+						clip.open(audioStream);
+					} catch(LineUnavailableException lue){
+						lue.printStackTrace();
+					} catch(UnsupportedAudioFileException uafe){
+						uafe.printStackTrace();
+					} catch(IOException ioe){
+						ioe.printStackTrace();
+					}
+					
+					clip.start();
+//					
+//					do{
+//						try {
+//							Thread.sleep(50);
+//						} catch(InterruptedException ie){
+//							ie.printStackTrace();
+//						}
+//					} while (clip.isActive());
+					
+					try {
+						switch(zugweite){
+							case 1 :
+								img = ImageIO.read(new File("images/dice1.jpg"));
+							break;
+							
+							case 2 :
+								img = ImageIO.read(new File("images/dice2.jpg"));
+							break;
+							
+							case 3 :
+								img = ImageIO.read(new File("images/dice3.jpg"));
+							break;
+							
+							case 4 :
+								img = ImageIO.read(new File("images/dice4.jpg"));
+							break;
+							
+							case 5 :
+								img = ImageIO.read(new File("images/dice5.jpg"));
+							break;
+							
+							case 6 :
+								img = ImageIO.read(new File("images/dice6.jpg"));
+						
+						}
+
+	                    JDialog frame = new JDialog(spiel, "Würfel");
+        
+	                    frame.setContentPane(new JLabel(new ImageIcon(img)));
+	                    
+//	                    frame.add(new JLabel("Sie haben eine "+zugweite+" gewürfelt"), gbc);
+	                    
+	                    frame.setSize(300, 300);
+	                    frame.setModal(true);
+	                    frame.setResizable(false);
+	                    frame.setLocationRelativeTo(null);
+	                    frame.setVisible(true);
+					} catch (IOException e2) {
+						e2.printStackTrace();
+					}
+					
+					
+					
 					Spieler spieler = monopoly.getTurn().getWerIstDran();
 					monopoly.move(spieler, zugweite);
 					bildWeg();
@@ -197,6 +307,8 @@ public class Spielfenster {
 						}
 					}else if(besitzer.getSpielerNummer() != player.getSpielerNummer()){
 						monopoly.miete(player);
+						if(player.getSpielerPosition() instanceof Ereignisfeld || player.getSpielerPosition() instanceof Gemeinschaftsfeld)
+						JOptionPane.showConfirmDialog(spiel,monopoly.ereignisausführen(player), "Karte gezogen!", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
 					}
 					monopoly.nextTurn();
 					turn = monopoly.getTurn();
@@ -236,78 +348,73 @@ public class Spielfenster {
 //					// try {
 //					// monopoly.kaufStrasse(spieler);
 //					// } catch (GehaltException e1) {
-//					// // TODO Auto-generated catch block
 //					// e1.printStackTrace();
 //					// }
 //				}
 			}                                                       
 		});
-		sP.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent me) {
-				// me.getX()/100;
-				System.out.println("\"pos " + Math.round((double) me.getX() / sP.getWidth() * 100) / 100.0 + "al "
-						+ Math.round((double) me.getY() / sP.getHeight() * 100) / 100.0 + "al\"");
-
-			}
-		});
+//		sP.addMouseListener(new MouseAdapter() {
+//			public void mouseClicked(MouseEvent me) {
+//				// me.getX()/100;
+//				System.out.println("\"pos " + Math.round((double) me.getX() / sP.getWidth() * 100) / 100.0 + "al "
+//						+ Math.round((double) me.getY() / sP.getHeight() * 100) / 100.0 + "al\"");
+//
+//			}
+//		});
+		
 		// ActionListener fuer den Haus-bauen-Button
-		sBP.getButton2().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				spiel.remove(sBP);
-				spiel.add(haFenster, "cell 1 0, push, grow, shrink");
-				haFenster.refreshList();
-				spiel.repaint();
-				spiel.revalidate();
-			}
+		sBP.getButton2().addActionListener(e -> {
+			spiel.remove(sBP);
+			spiel.add(haFenster, "cell 1 0, push, grow, shrink");
+			haFenster.refreshList();
+			spiel.repaint();
+			spiel.revalidate();
 		});
 
 		// ActionListener fuer den Hypothek-aufnehmen-Button
-		sBP.getButton3().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				spiel.remove(sBP);
-				spiel.add(hyFenster, "cell 1 0, push, grow, shrink");
-				spiel.repaint();
-				spiel.revalidate();
-			}
+		sBP.getButton3().addActionListener(e -> {
+			spiel.remove(sBP);
+			spiel.add(hyFenster, "cell 1 0, push, grow, shrink");
+			hyFenster.refreshList();
+			spiel.repaint();
+			spiel.revalidate();
 		});
 
 		// ActionListener fuer den speichern-Button
-		sBP.getButton4().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// monopoly.saveAll();
-				spiel.remove(sBP);
-				spiel.add(speFenster, "cell 1 0, pushx, growx, shrinkx");
-				spiel.repaint();
-				spiel.revalidate();
-				// JOptionPane.showMessageDialog(spiel, "Eggs are not supposed
-				// to be green.");
-			}
+		sBP.getButton4().addActionListener(e -> {
+			spiel.remove(sBP);
+			spiel.add(speFenster, "cell 1 0, pushx, growx, shrinkx");
+			spiel.repaint();
+			spiel.revalidate();
+			// JOptionPane.showMessageDialog(spiel, "Eggs are not supposed
+			// to be green.");
 		});
-
-		// ActionListener für den bauen-Button
-		haFenster.getHaButton().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Spieler spieler = monopoly.getTurn().getWerIstDran();
-				int position = spieler.getSpielerPosition().getNummer();
-				if (!haFenster.getHaListe().isSelectionEmpty()) {
-					try {
-						monopoly.bauHaus(position, spieler);
-					} catch (HausbauException e1) {
-						JOptionPane.showMessageDialog(spiel, e1.getMessage());
-					} catch (GehaltException e1) {
-						JOptionPane.showMessageDialog(spiel, e1.getMessage());
+		haFenster.getHaListe().addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if(e.getValueIsAdjusting()){
+					if(!haFenster.getHaListe().isSelectionEmpty()){
+						int nummer = haFenster.getHaListe().getSelectedIndex();
+						Strasse[] strassen = monopoly.getYourStreets(monopoly.getTurn().getWerIstDran());
+						Strasse strasse = strassen[nummer];
+						haFenster.getHaHausAnz().setText(strasse.getHaeuseranzahl()+"");
 					}
-					spiel.remove(haFenster);
-					spiel.add(sBP, "cell 1 0, push, grow, shrink");
-					spiel.repaint();
-					spiel.revalidate();
 				}
 			}
 		});
-
-		// ActionListener fuer den zurueck-Button
-		haFenster.getHaButton2().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		// ActionListener für den bauen-Button
+		haFenster.getHaButton().addActionListener(e -> {
+			Spieler spieler = monopoly.getTurn().getWerIstDran();
+			if (!haFenster.getHaListe().isSelectionEmpty()) {
+				try {
+					Feld feld = monopoly.getYourStreets(spieler)[haFenster.getHaListe().getSelectedIndex()];
+					monopoly.bauHaus(feld.getNummer(), spieler);
+				} catch (HausbauException e11) {
+					JOptionPane.showMessageDialog(spiel, e11.getMessage());
+				} catch (GehaltException e12) {
+					JOptionPane.showMessageDialog(spiel, e12.getMessage());
+				}
 				spiel.remove(haFenster);
 				spiel.add(sBP, "cell 1 0, push, grow, shrink");
 				spiel.repaint();
@@ -315,88 +422,94 @@ public class Spielfenster {
 			}
 		});
 
+		// ActionListener fuer den zurueck-Button
+		haFenster.getHaButton2().addActionListener(e -> {
+			spiel.remove(haFenster);
+			spiel.add(sBP, "cell 1 0, push, grow, shrink");
+			spiel.repaint();
+			spiel.revalidate();
+		});
+
 		// ActionListener fuer den aufnehmen-Button
-		hyFenster.getHyButton1().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// if hypothek == false -->if(monopoly.getHypothek == false){
-				// }
-				Spieler spieler = monopoly.getTurn().getWerIstDran();
-				int position = spieler.getSpielerPosition().getNummer();
-				if (!hyFenster.getHyListe().isSelectionEmpty()) {
-					if (monopoly.getHypothek(position) == false) {
-						try {
-							monopoly.switchHypothek(position);
-						} catch (GehaltException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-						spiel.remove(hyFenster);
-						spiel.add(sBP, "cell 1 0, push, grow, shrink");
-						spiel.repaint();
-						spiel.revalidate();
-						JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
+		hyFenster.getHyButton1().addActionListener(e -> {
+			// if hypothek == false -->if(monopoly.getHypothek == false){
+			// }
+			Spieler spieler = monopoly.getTurn().getWerIstDran();
+			int position = spieler.getSpielerPosition().getNummer();
+			if (!hyFenster.getHyListe().isSelectionEmpty()) {
+				if (monopoly.getHypothek(position) == false) {
+					try {
+						monopoly.switchHypothek(position);
+					} catch (GehaltException e1) {
+						e1.printStackTrace();
 					}
+					spiel.remove(hyFenster);
+					spiel.add(sBP, "cell 1 0, push, grow, shrink");
+					spiel.repaint();
+					spiel.revalidate();
+					sIP2.getJTextArea().setText("Name :"+player.getSpielerName()+"\nGehalt : "+player.getSpielerBudget()+
+							"\nPosition : "+player.getSpielerPosition().getName());
 				}
 			}
 		});
 
 		// ActionListener fuer den abbezahlen-Button
-		hyFenster.getHyButton2().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// if hypothek == true --> if(monopoly.getHypothek == true){
-				// monopoly.switchHypothek(position);}
-				if (!hyFenster.getHyListe().isSelectionEmpty()) {
-					// if(){
-					Spieler spieler = monopoly.getTurn().getWerIstDran();
-					int position = spieler.getSpielerPosition().getNummer();
-					// monopoly.switchHypothek(position);
-					// spiel.remove(hyFenster);
-					// spiel.add(sBP, "cell 1 0, push, grow, shrink");
-					// spiel.repaint();
-					// spiel.revalidate();
-					JOptionPane.showMessageDialog(spiel, "Eggs are not supposed to be green.");
-					// }
+		hyFenster.getHyButton2().addActionListener(e -> {
+			// if hypothek == true --> if(monopoly.getHypothek == true){
+			// monopoly.switchHypothek(position);}
+			int position = player.getSpielerPosition().getNummer();
+			if (!hyFenster.getHyListe().isSelectionEmpty()) {
+				if (monopoly.getHypothek(position) == true) {
+					try {
+						monopoly.switchHypothek(position);
+					} catch (GehaltException e1) {
+						e1.printStackTrace();
+					}
+					spiel.remove(hyFenster);
+					spiel.add(sBP, "cell 1 0, push, grow, shrink");
+					spiel.repaint();
+					spiel.revalidate();
+					sIP2.getJTextArea().setText("Name :"+player.getSpielerName()+"\nGehalt : "+player.getSpielerBudget()+
+							"\nPosition : "+player.getSpielerPosition().getName());
 				}
 			}
 		});
 
 		// ActionListener fuer den zurueck-Button
-		hyFenster.getHyButton3().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				spiel.remove(hyFenster);
-				spiel.add(sBP, "cell 1 0, push, grow, shrink");
-				spiel.repaint();
-				spiel.revalidate();
-			}
+		hyFenster.getHyButton3().addActionListener(e -> {
+			spiel.remove(hyFenster);
+			spiel.add(sBP, "cell 1 0, push, grow, shrink");
+			spiel.repaint();
+			spiel.revalidate();
 		});
 
 		// ActionListener fuer den speichern-Button
-		speFenster.getSfButton().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String datei = speFenster.getDatName().getText();
-				monopoly.saveAll(datei);
-				// zurueck zum Hauptmenue
-				JOptionPane.showMessageDialog(spiel, "Speichern erfolgreich");
-				// Spielfenster spFenster = new Spielfenster(monopoly);
-				// spFenster.sInit();
-				// menue.dispose();
-				Menuefenster mFenster = new Menuefenster();
-				mFenster.mSetVisible();
-				spiel.dispose();
-			}
+		speFenster.getSfButton().addActionListener(e -> {
+			String datei = speFenster.getDatName().getText();
+			monopoly.saveAll(datei);
+			// zurueck zum Hauptmenue
+			JOptionPane.showMessageDialog(spiel, "Speichern erfolgreich");
+			// Spielfenster spFenster = new Spielfenster(monopoly);
+			// spFenster.sInit();
+			// menue.dispose();
+			Menuefenster mFenster = new Menuefenster();
+			mFenster.mSetVisible();
+			spiel.dispose();
 		});
 
 		// ActionListener fuer den zurueck-Button
-		speFenster.getSfButton2().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				spiel.remove(speFenster);
-				spiel.add(sBP, "cell 1 0, push, grow, shrink");
-				spiel.repaint();
-				spiel.revalidate();
-			}
+		speFenster.getSfButton2().addActionListener(e -> {
+			spiel.remove(speFenster);
+			spiel.add(sBP, "cell 1 0, push, grow, shrink");
+			spiel.repaint();
+			spiel.revalidate();
 		});
 	}
 
+	/**
+	 * Methode zum Hinzufügen der Figurenbilder
+	 * @param zugweite
+	 */
 	public void bildHinzu(int zugweite) {
 		int zug = zugweite;
 
@@ -657,6 +770,9 @@ public class Spielfenster {
 
 	}
 
+	/**
+	 * Methode zum löschen der Figurenbilder
+	 */
 	public void bildWeg() {
 		Vector<Spieler> spielerliste = monopoly.getAllSpieler();
 
