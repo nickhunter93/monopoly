@@ -72,36 +72,36 @@ public class Spielfenster {
 	
 	private Vector<Spieler> spielerliste;
 
-	Spieler player;
-	Spieler spieler;
-	Spieler spieler1;
-	Spieler spieler2;
-	Spieler spieler3;
-	Spieler spieler4;
-	Spieler spieler5;
+	private Spieler player;
+	private Spieler spieler;
+	private Spieler spieler1;
+	private Spieler spieler2;
+	private Spieler spieler3;
+	private Spieler spieler4;
+	private Spieler spieler5;
 
-	Spielfigur figur;
-	Spielfigur figur1;
-	Spielfigur figur2;
-	Spielfigur figur3;
-	Spielfigur figur4;
-	Spielfigur figur5;
+	private Spielfigur figur;
+	private Spielfigur figur1;
+	private Spielfigur figur2;
+	private Spielfigur figur3;
+	private Spielfigur figur4;
+	private Spielfigur figur5;
 
-	int spPosition;
-	int spPosition1;
-	int spPosition2;
-	int spPosition3;
-	int spPosition4;
-	int spPosition5;
+	private int spPosition;
+	private int spPosition1;
+	private int spPosition2;
+	private int spPosition3;
+	private int spPosition4;
+	private int spPosition5;
 
-	int spNummer;
-	int spNummer1;
-	int spNummer2;
-	int spNummer3;
-	int spNummer4;
-	int spNummer5;
+	private int spNummer;
+	private int spNummer1;
+	private int spNummer2;
+	private int spNummer3;
+	private int spNummer4;
+	private int spNummer5;
 
-	Turn turn;
+	private Turn turn;
 
 	/**
 	 * Konstruktor der Klasse Spielfenster ein neuer JFrame wird erstellt und
