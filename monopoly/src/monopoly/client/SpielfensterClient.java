@@ -111,7 +111,7 @@ public class SpielfensterClient extends UnicastRemoteObject implements GameEvent
 			// create and register new player
 						String name = JOptionPane.showInputDialog(spiel, "Enter your name:", "Add player", JOptionPane.QUESTION_MESSAGE);
 						int spielernummer = server.getAllSpieler().size();
-						player = new Spieler(name,spielernummer+1,server.getLos(),2000);
+						player = new Spieler(name,spielernummer+1,server.getSpielfeld()[1],2000);
 						try {
 							server.addPlayer(player);
 						} catch (PlayerException e) {
@@ -231,6 +231,8 @@ public class SpielfensterClient extends UnicastRemoteObject implements GameEvent
 				case Dice:
 					int zugweite = server.wuerfel();
 					server.move(server.getTurn().getWerIstDran(), zugweite);
+					player = turn.getWerIstDran();
+					spielerliste = server.getAllSpieler();
 					bildWeg();
 					bildHinzu(0);
 					server.nextTurn();
